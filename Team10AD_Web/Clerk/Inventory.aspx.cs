@@ -20,7 +20,7 @@ namespace Team10AD_Web.Clerk
                 Category=x.Category,
                 Description=x.Description}).ToList();
             dgvCatalogue.DataBind();
-           
+          
         }
     }
 }

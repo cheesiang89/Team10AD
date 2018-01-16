@@ -178,7 +178,10 @@
     <Content Include="Employee\DepartmentRequsition.aspx" />
     <Content Include="Employee\DepartmentRequsitionDetail.aspx" />
     <Content Include="Employee\DelegateApproval.aspx" />
+    <Content Include="Employee\DisbursementDetails.aspx" />
     <Content Include="Employee\RequisitionCart.aspx" />
+    <Content Include="Employee\RequisitionDetails.aspx" />
+    <Content Include="Employee\RequisitionStatus.aspx" />
     <Content Include="Employee\SelectCollection.aspx" />
     <Content Include="Sample\About.aspx" />
     <Content Include="Account\Login.aspx" />
@@ -467,6 +470,13 @@
     <Compile Include="Employee\DelegateApproval.aspx.designer.cs">
       <DependentUpon>DelegateApproval.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Employee\DisbursementDetails.aspx.cs">
+      <DependentUpon>DisbursementDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Employee\DisbursementDetails.aspx.designer.cs">
+      <DependentUpon>DisbursementDetails.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Employee\Employee.Master.cs">
       <DependentUpon>Employee.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -480,6 +490,20 @@
     </Compile>
     <Compile Include="Employee\RequisitionCart.aspx.designer.cs">
       <DependentUpon>RequisitionCart.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Employee\RequisitionDetails.aspx.cs">
+      <DependentUpon>RequisitionDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Employee\RequisitionDetails.aspx.designer.cs">
+      <DependentUpon>RequisitionDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Employee\RequisitionStatus.aspx.cs">
+      <DependentUpon>RequisitionStatus.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Employee\RequisitionStatus.aspx.designer.cs">
+      <DependentUpon>RequisitionStatus.aspx</DependentUpon>
     </Compile>
     <Compile Include="Employee\SelectCollection.aspx.cs">
       <DependentUpon>SelectCollection.aspx</DependentUpon>
