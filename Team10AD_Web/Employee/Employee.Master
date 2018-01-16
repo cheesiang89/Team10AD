@@ -1,0 +1,122 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Employee.master.cs" Inherits="Team10AD_Web.Employee.Employee" %>
+
+<!DOCTYPE html>
+<html>
+<head runat="server">
+    <title><%: Page.Title %> </title>
+    <%-- MetaInfo --%>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <%-- For Header Icon --%>
+    <link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <!-- Bootstrap Css -->
+    <link href="/Content/css/bootstrap.min.css" type="text/css" rel="Stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/Content/css/animate.css" />
+    <link rel="stylesheet" type="text/css" href="/Content/css/style.css" />
+    <link href="/Content/css/default.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
+        rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="/Content/css/site.css" />
+    <%-- For Header Content in Child Pages --%>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+    <form id="form1" runat="server">
+
+        <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header page-scroll">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <a class="navbar-brand" href="#">
+                        <h1>Bootstrap</h1>
+                    </a>
+                </div>
+                <%-- Menu --%>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                  <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                    <ul class="nav navbar-nav">
+                        <li ><a href="#">Browse Catalogue</a></li>
+                         <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Requisition <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Requisition Cart</a></li>
+                                <li><a href="#">Requisition Status</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Collection <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Disbursement List</a></li>
+                                <li><a href="#">Collection Point</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Department Admin <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Delegate Authority</a></li>
+                                <li><a href="#">Assign Representative</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Logout</a></li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+
+                <!-- /.container -->
+        </nav>
+        <!-- Section: intro -->
+        <section id="intro" class="intro">
+            <div class="slogan">
+                <%--<h2>WELCOME TO <span class="text_color">Bootstrap</span> </h2>
+			<h4>Bootstrap is the most popular HTML, CSS, and JS framework
+            <br />
+             for developing responsive, mobile first projects on the web.
+            </h4>--%>
+            </div>
+        </section>
+        <%-- For Body Content in Child Pages --%>
+        <section id="feature">
+            <div class="container">
+                <div class="center wow fadeInDown">
+                     <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+            </div>
+        </section>
+        <%--For Footer --%>
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-lg-12">
+                        <div class="wow shake" data-wow-delay="0.4s">
+                            <div class="page-scroll marginbot-30">
+                                <a href="#intro" id="totop" class="btn btn-circle">
+                                    <i class="fa fa-angle-double-up animated"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <p>&copy;Copyright 2015 - aspxtemplates. All rights reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Core JavaScript Files -->
+        <script src="/Scripts/Template/jquery.min.js" type="text/javascript"></script>
+        <script src="/Scripts/Template/bootstrap.min.js" type="text/javascript"></script>
+        <script src="/Scripts/Template/jquery.easing.min.js" type="text/javascript"></script>
+        <script src="/Scripts/Template/jquery.scrollTo.js" type="text/javascript"></script>
+        <script src="/Scripts/Template/wow.min.js"></script>
+        <!-- Custom Theme JavaScript -->
+        <script src="/Scripts/Template/custom.js" type="text/javascript"></script>
+        <script src="/Scripts/script.js" type="text/javascript"></script>
+    </form>
+</body>
+</html>
+
