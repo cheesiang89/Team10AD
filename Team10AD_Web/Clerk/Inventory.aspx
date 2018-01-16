@@ -3,7 +3,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Inventory    </h2>
-    <asp:GridView ID="dgvCatalogue" runat="server">
+    <asp:GridView ID="dgvCatalogue" runat="server" AllowPaging="true" OnPageIndexChanging="dgvCatalogue_PageIndexChanging" >
         </asp:GridView>
 
  

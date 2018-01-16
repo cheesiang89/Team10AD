@@ -20,7 +20,20 @@ namespace Team10AD_Web.Clerk
                 Category=x.Category,
                 Description=x.Description}).ToList();
             dgvCatalogue.DataBind();
-          
+            dgvCatalogue.AllowPaging = true;
+
+        }
+
+        protected void dgvCatalogue_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            dgvCatalogue.PageIndex = e.NewPageIndex;
+            dgvCatalogue.DataSource = m.Catalogues.Select(
+                    x => new {
+                        ItemCode = x.ItemCode,
+                        Category = x.Category,
+                        Description = x.Description
+                    }).ToList();
+            dgvCatalogue.DataBind();
         }
     }
 }
