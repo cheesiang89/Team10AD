@@ -135,9 +135,16 @@
     <Content Include="Content\css\site.css" />
     <Content Include="Employee\AssignRepresentative.aspx" />
     <Content Include="Employee\CataloguePage.aspx" />
+
+    <Content Include="Employee\DepartmentDetail.aspx" />
+    <Content Include="Employee\DepartmentRequisitionHistory.aspx" />
+    <Content Include="Employee\DepartmentRequsition.aspx" />
+    <Content Include="Employee\DepartmentRequsitionDetail.aspx" />
+
     <Content Include="Employee\DelegateApproval.aspx" />
     <Content Include="Employee\RequisitionCart.aspx" />
     <Content Include="Employee\SelectCollection.aspx" />
+
     <Content Include="Sample\About.aspx" />
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Manage.aspx" />
@@ -412,6 +419,33 @@
     <Compile Include="Employee\CataloguePage.aspx.designer.cs">
       <DependentUpon>CataloguePage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Employee\DepartmentDetail.aspx.cs">
+      <DependentUpon>DepartmentDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Employee\DepartmentDetail.aspx.designer.cs">
+      <DependentUpon>DepartmentDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Employee\DepartmentRequisitionHistory.aspx.cs">
+      <DependentUpon>DepartmentRequisitionHistory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Employee\DepartmentRequisitionHistory.aspx.designer.cs">
+      <DependentUpon>DepartmentRequisitionHistory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Employee\DepartmentRequsition.aspx.cs">
+      <DependentUpon>DepartmentRequsition.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Employee\DepartmentRequsition.aspx.designer.cs">
+      <DependentUpon>DepartmentRequsition.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Employee\DepartmentRequsitionDetail.aspx.cs">
+      <DependentUpon>DepartmentRequsitionDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Employee\DepartmentRequsitionDetail.aspx.designer.cs">
+      <DependentUpon>DepartmentRequsitionDetail.aspx</DependentUpon>
     <Compile Include="Employee\DelegateApproval.aspx.cs">
       <DependentUpon>DelegateApproval.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
