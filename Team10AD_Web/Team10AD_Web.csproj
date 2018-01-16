@@ -446,6 +446,7 @@
     </Compile>
     <Compile Include="Employee\DepartmentRequsitionDetail.aspx.designer.cs">
       <DependentUpon>DepartmentRequsitionDetail.aspx</DependentUpon>
+	  </Compile>
     <Compile Include="Employee\DelegateApproval.aspx.cs">
       <DependentUpon>DelegateApproval.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
