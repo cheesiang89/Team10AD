@@ -117,6 +117,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Clerk\DepartmentDetail.aspx" />
     <Content Include="Clerk\DepartmentList.aspx" />
     <Content Include="Clerk\DisbursementList.aspx" />
     <Content Include="Clerk\Inventory.aspx" />
@@ -327,6 +328,7 @@
     <Compile Include="App_Code\Model\Supplier.cs" />
     <Compile Include="App_Code\Model\SupplierDetail.cs" />
     <Compile Include="App_Code\Model\Team10ADModel.cs" />
+    <Compile Include="App_Code\XpBizLogic.cs" />
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Clerk\Clerk.Master.cs">
@@ -335,6 +337,13 @@
     </Compile>
     <Compile Include="Clerk\Clerk.Master.designer.cs">
       <DependentUpon>Clerk.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Clerk\DepartmentDetail.aspx.cs">
+      <DependentUpon>DepartmentDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Clerk\DepartmentDetail.aspx.designer.cs">
+      <DependentUpon>DepartmentDetail.aspx</DependentUpon>
     </Compile>
     <Compile Include="Clerk\DepartmentList.aspx.cs">
       <DependentUpon>DepartmentList.aspx</DependentUpon>
