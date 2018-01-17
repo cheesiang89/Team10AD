@@ -32,5 +32,13 @@ namespace Team10AD_Web.App_Code
                 return emp.DepartmentCode;
             }
         }
+
+        public static List<Requisition> RequisitionList()
+        {
+            using (Team10ADModel context = new Team10ADModel())
+            {
+                return context.Requisitions.ToList();
+            }
+        }
     }
 }

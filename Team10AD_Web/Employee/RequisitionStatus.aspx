@@ -3,5 +3,13 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
       <h2>Requisition Status</h2>
-    <asp:GridView ID="dgvReqStatus" runat="server"></asp:GridView>
+    <asp:GridView ID="dgvReqStatus" runat="server" AutoGenerateColumns="False" OnRowCommand="dgvReqStatus_RowCommand">
+        <Columns>
+            <asp:BoundField DataField="Name" HeaderText="Employee Name" />
+            <asp:BoundField DataField="RequisitionDate" HeaderText="Date" />
+            <asp:BoundField DataField="Status" HeaderText="Status" />
+            <asp:ButtonField ButtonType="Button" CommandName="Details" Text="Details" />
+            <asp:ButtonField ButtonType="Button" CommandName="Cancel" Text="Cancel" />
+        </Columns>
+      </asp:GridView>
 </asp:Content>
