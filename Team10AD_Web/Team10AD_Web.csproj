@@ -329,6 +329,7 @@
     <Compile Include="App_Code\Model\SupplierDetail.cs" />
     <Compile Include="App_Code\Model\Team10ADModel.cs" />
     <Compile Include="App_Code\XpBizLogic.cs" />
+    <Compile Include="App_Code\RayBizLogic.cs" />
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Clerk\Clerk.Master.cs">
