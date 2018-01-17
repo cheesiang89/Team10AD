@@ -7,11 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Team10AD_Web
-{
-
-
-    public partial class ViewSwitcher
-    {
+namespace Team10AD_Web {
+    
+    
+    public partial class ViewSwitcher {
     }
 }
