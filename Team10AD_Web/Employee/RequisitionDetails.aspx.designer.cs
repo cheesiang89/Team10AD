@@ -10,33 +10,51 @@
 namespace Team10AD_Web.Employee {
     
     
-    public partial class CataloguePage {
+    public partial class RequisitionDetails {
         
         /// <summary>
-        /// txtBoxSearch control.
+        /// lblEmName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtBoxSearch;
+        protected global::System.Web.UI.WebControls.Label lblEmName;
         
         /// <summary>
-        /// btnSearch control.
+        /// txtBoxEmName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSearch;
+        protected global::System.Web.UI.WebControls.TextBox txtBoxEmName;
         
         /// <summary>
-        /// dgvCatalogue control.
+        /// lblStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView dgvCatalogue;
+        protected global::System.Web.UI.WebControls.Label lblStatus;
+        
+        /// <summary>
+        /// txtBoxStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtBoxStatus;
+        
+        /// <summary>
+        /// dgvReqDetails control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView dgvReqDetails;
     }
 }

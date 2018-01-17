@@ -7,18 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Team10AD_Web.Clerk {
+namespace Team10AD_Web.Employee {
     
     
-    public partial class Inventory {
+    public partial class RequisitionStatus {
         
         /// <summary>
-        /// dgvCatalogue control.
+        /// dgvReqStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView dgvCatalogue;
+        protected global::System.Web.UI.WebControls.GridView dgvReqStatus;
     }
 }
