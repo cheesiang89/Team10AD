@@ -28,5 +28,10 @@ namespace Team10AD_Web
             // Code that runs when an unhandled error occurs
 
         }
+
+        void Session_Start(object sender, EventArgs e)
+        {
+            Session["departmentdetail"] = "";
+        }
     }
 }
