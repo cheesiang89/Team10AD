@@ -33,5 +33,6 @@ namespace Team10AD_Web.Clerk
             dgvCatalogue.DataBind();
             dgvCatalogue.AllowPaging = true;
         }
+
     }
 }
