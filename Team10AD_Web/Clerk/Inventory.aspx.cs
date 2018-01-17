@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Team10AD_Web;
 using Team10AD_Web.App_Code.Model;
+using Team10AD_Web.App_Code;
 
 namespace Team10AD_Web.Clerk
 {
@@ -34,6 +35,13 @@ namespace Team10AD_Web.Clerk
                         Description = x.Description
                     }).ToList();
             dgvCatalogue.DataBind();
+        }
+
+        protected void SearchBtn_Click(object sender, EventArgs e)
+        {
+            dgvCatalogue.DataSource = BusinessLogic.SearchCatalogue(SearchBox.Text);
+            dgvCatalogue.DataBind();
+            dgvCatalogue.AllowPaging = true;
         }
     }
 }
