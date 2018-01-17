@@ -120,7 +120,6 @@
     <Content Include="Clerk\DepartmentList.aspx" />
     <Content Include="Clerk\DisbursementList.aspx" />
     <Content Include="Clerk\Inventory.aspx" />
-    <Content Include="Clerk\Login.aspx" />
     <Content Include="Clerk\OrderTrend.aspx" />
     <Content Include="Clerk\PurchaseOrder.aspx" />
     <Content Include="Clerk\RequisitionDetail.aspx" />
@@ -357,13 +356,6 @@
     </Compile>
     <Compile Include="Clerk\Inventory.aspx.designer.cs">
       <DependentUpon>Inventory.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Clerk\Login.aspx.cs">
-      <DependentUpon>Login.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Clerk\Login.aspx.designer.cs">
-      <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Clerk\OrderTrend.aspx.cs">
       <DependentUpon>OrderTrend.aspx</DependentUpon>
