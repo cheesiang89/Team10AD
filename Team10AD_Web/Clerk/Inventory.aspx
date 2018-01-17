@@ -6,8 +6,11 @@
         
     </h2>
     <asp:TextBox ID="SearchBox" runat="server" Width="220px">Search by category/description</asp:TextBox><asp:Button ID="SearchBtn" runat="server" Text="Search" OnClick="SearchBtn_Click" />
-    <asp:GridView ID="dgvCatalogue" runat="server" AllowPaging="true" OnPageIndexChanging="dgvCatalogue_PageIndexChanging" >
+    <asp:GridView ID="dgvCatalogue" runat="server" AllowPaging="True" OnPageIndexChanging="dgvCatalogue_PageIndexChanging" AutoGenerateColumns="False" >
+        <Columns>
+            <asp:BoundField DataField="Category" HeaderText="Category" />
+            <asp:BoundField DataField="Description" HeaderText="Description" />
+            <asp:BoundField DataField="UnitOfMeasure" HeaderText="Unit of Measure" />
+        </Columns>
         </asp:GridView>
-
- 
 </asp:Content>

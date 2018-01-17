@@ -307,7 +307,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Code\BusinessLogic.cs" />
     <Compile Include="App_Code\Model\Catalogue.cs" />
     <Compile Include="App_Code\Model\CollectionPoint.cs" />
     <Compile Include="App_Code\Model\Department.cs" />
@@ -328,6 +327,7 @@
     <Compile Include="App_Code\Model\Supplier.cs" />
     <Compile Include="App_Code\Model\SupplierDetail.cs" />
     <Compile Include="App_Code\Model\Team10ADModel.cs" />
+    <Compile Include="App_Code\RayBizLogic.cs" />
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Clerk\Clerk.Master.cs">

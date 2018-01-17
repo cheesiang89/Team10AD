@@ -15,31 +15,21 @@ namespace Team10AD_Web.Clerk
         private Team10ADModel m = new Team10ADModel();
         protected void Page_Load(object sender, EventArgs e)
         {
-            dgvCatalogue.DataSource = m.Catalogues.Select(
-                x => new {
-                    ItemCode = x.ItemCode,
-                Category=x.Category,
-                Description=x.Description}).ToList();
+            dgvCatalogue.DataSource = RayBizLogic.CatalogueList();
             dgvCatalogue.DataBind();
             dgvCatalogue.AllowPaging = true;
-
         }
 
         protected void dgvCatalogue_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             dgvCatalogue.PageIndex = e.NewPageIndex;
-            dgvCatalogue.DataSource = m.Catalogues.Select(
-                    x => new {
-                        ItemCode = x.ItemCode,
-                        Category = x.Category,
-                        Description = x.Description
-                    }).ToList();
+            dgvCatalogue.DataSource = RayBizLogic.CatalogueList();
             dgvCatalogue.DataBind();
         }
 
         protected void SearchBtn_Click(object sender, EventArgs e)
         {
-            dgvCatalogue.DataSource = BusinessLogic.SearchCatalogue(SearchBox.Text);
+            dgvCatalogue.DataSource = RayBizLogic.SearchCatalogue(SearchBox.Text);
             dgvCatalogue.DataBind();
             dgvCatalogue.AllowPaging = true;
         }
