@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -32,5 +33,42 @@ namespace Team10AD_Web.App_Code
                 return emp.DepartmentCode;
             }
         }
+
+        public static int EmployeeId(string email)
+        {
+            using (Team10ADModel context = new Team10ADModel())
+            {
+                Model.Employee emp = context.Employees.Where(x => x.Email == email).First();
+                return emp.EmployeeID;
+            }
+        }
+
+        public static Model.Employee EmployeeObjById(int id)
+        {
+            using (Team10ADModel context = new Team10ADModel())
+            {
+                Model.Employee emp = context.Employees.Where(x => x.EmployeeID == id).First();
+                return emp;
+            }
+        }
+
+        public static List<Requisition> RequisitionList()
+        {
+            using (Team10ADModel context = new Team10ADModel())
+            {
+                return context.Requisitions.ToList();
+            }
+        }
+
+        public static Requisition GetRequisitionById(string id)
+        {
+            int reqid = Convert.ToInt32(id);
+            using (Team10ADModel context = new Team10ADModel())
+            {
+                Requisition req = context.Requisitions.Where(x => x.RequisitionID == reqid).First();
+                return req;
+            }
+        }
+
     }
 }

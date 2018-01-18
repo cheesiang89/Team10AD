@@ -45,8 +45,8 @@ namespace Team10AD_Web.Employee
                 GridViewRow row = dgvCatalogue.Rows[index];
                 string itemCode = row.Cells[0].Text.ToString();
                 // lblTest.Text = itemCode;
-                populatePopup(itemCode);
-                popup.ShowPopupWindow();
+                //populatePopup(itemCode);
+                //popup.ShowPopupWindow();
             }
 
          }
@@ -76,15 +76,15 @@ namespace Team10AD_Web.Employee
             Page.Validate();
             if (Page.IsValid)
             {
-                popup.HidePopupWindow();
+                //popup.HidePopupWindow();
             }
             
         }
         protected void populatePopup(string itemCode)
         {
-            lblCategory.Text = m.Catalogues.Where(x => x.ItemCode == itemCode).Select(x => x.Category).First().ToString();
-            lblDescription.Text = m.Catalogues.Where(x => x.ItemCode == itemCode).Select(x => x.Description).First().ToString();
-            lblUOM.Text = m.Catalogues.Where(x => x.ItemCode == itemCode).Select(x => x.UnitOfMeasure).First().ToString();
+            //lblCategory.Text = m.Catalogues.Where(x => x.ItemCode == itemCode).Select(x => x.Category).First().ToString();
+            //lblDescription.Text = m.Catalogues.Where(x => x.ItemCode == itemCode).Select(x => x.Description).First().ToString();
+            //lblUOM.Text = m.Catalogues.Where(x => x.ItemCode == itemCode).Select(x => x.UnitOfMeasure).First().ToString();
         }
         protected void saveToCart(string itemCode)
         {

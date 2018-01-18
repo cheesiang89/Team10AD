@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="Catalogue" Language="C#"  AutoEventWireup="true" MasterPageFile="~/Employee/Employee.Master" CodeBehind="CataloguePage.aspx.cs" Inherits="Team10AD_Web.Employee.CataloguePage" %>
-<%@ Register Assembly="ASP.Web.UI.PopupControl" Namespace="ASP.Web.UI.PopupControl" TagPrefix="ASPP" %>
+<%--<%@ Register Assembly="ASP.Web.UI.PopupControl" Namespace="ASP.Web.UI.PopupControl" TagPrefix="ASPP" %>--%>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -32,7 +32,7 @@
 
 
 
-    <ASPP:PopupPanel HeaderText="" ID="popup" runat="server" >
+    <%--<ASPP:PopupPanel HeaderText="" ID="popup" runat="server" >
             <PopupWindow runat="server" >
                 <ASPP:PopupWindow ID="PopupWindow1" runat="server">
                   <div align="center" style="width: 500px; height:150px">
@@ -72,7 +72,7 @@
                                 <asp:RangeValidator ID="validRange" runat="server" 
                                     ErrorMessage="Must be positive value" ControlToValidate="txtQuantity" MinimumValue="0" 
                                     SetFocusOnError="False" MaximumValue="100"></asp:RangeValidator>--%>
-                               <asp:ValidationSummary runat="server" ID="vSummary" ValidationGroup="vNumOnly" DisplayMode="BulletList" /></td> 
+                       <%--        <asp:ValidationSummary runat="server" ID="vSummary" ValidationGroup="vNumOnly" DisplayMode="BulletList" /></td> 
                         </tr>
                         <tr>
                             <td>
@@ -86,7 +86,7 @@
                 </ASPP:PopupWindow>
             </PopupWindow>
         </ASPP:PopupPanel>
-    
+    --%>
     
     
     
