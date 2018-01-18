@@ -43,7 +43,7 @@ namespace Team10AD_Web.Employee
                 {
                     App_Code.Model.Requisition req = context.Requisitions.Where(x => x.RequisitionID == reqid).First();
                     req.Status = "Cancelled";
-                    
+                    context.SaveChanges();
                 }
                 Response.Redirect("RequisitionStatus.aspx");
             }
