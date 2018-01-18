@@ -33,17 +33,21 @@ namespace Team10AD_Web.Employee
             dgvCatalogue.DataSource = m.Catalogues.ToList();
             dgvCatalogue.DataBind();
         }
+
         
      
         protected void saveToCart(string itemCode)
+
         {
             Page.Validate();
             if (Page.IsValid)
             {
+
                 List<string> cart = (List<string>)Session["requisitionCart"];
                 cart.Add(itemCode);
                // popup.HidePopupWindow();
             }
+
 
         }
 

@@ -1,3 +1,4 @@
+
 ﻿<%@ Page Title="Catalogue" Language="C#" AutoEventWireup="true" MasterPageFile="~/Employee/Employee.Master" CodeBehind="CataloguePage.aspx.cs" Inherits="Team10AD_Web.Employee.CataloguePage" %>
 
 
@@ -37,6 +38,7 @@
 
         </Columns>
     </asp:GridView>
+
 
     <asp:Button ID="btnTest" runat="server" Text="Test" OnClick="btnTest_Click" />
 
@@ -91,5 +93,6 @@
             });
         });
     </script>
+
 </asp:Content>
 
