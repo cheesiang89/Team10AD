@@ -31,6 +31,9 @@ namespace Team10AD_Web
 
         void Session_Start(object sender, EventArgs e)
         {
+            Session["requisitionCart"] = new List<string>();
+            Session["departmentdetail"] = "";
+            Session["Supplier"] = "";
             //Stores employee id to pass to detail page
             Session["employeeid"] = null;
             //Stores department id to pass to detail page
