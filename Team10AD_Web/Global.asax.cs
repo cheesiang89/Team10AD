@@ -32,6 +32,7 @@ namespace Team10AD_Web
         void Session_Start(object sender, EventArgs e)
         {
             Session["departmentdetail"] = "";
+            Session["Supplier"] = "";
         }
     }
 }
