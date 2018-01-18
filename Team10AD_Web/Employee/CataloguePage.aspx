@@ -1,7 +1,4 @@
-
-﻿<%@ Page Title="Catalogue" Language="C#" AutoEventWireup="true" MasterPageFile="~/Employee/Employee.Master" CodeBehind="CataloguePage.aspx.cs" Inherits="Team10AD_Web.Employee.CataloguePage" %>
-
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Employee/Employee.Master" AutoEventWireup="true" CodeBehind="CataloguePage.aspx.cs" Inherits="Team10AD_Web.Employee.CataloguePage" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 
@@ -14,7 +11,7 @@
     <asp:Label runat="server" ID="lblTest" Text=""></asp:Label>
 
     <asp:GridView ID="dgvCatalogue" runat="server" AllowPaging="True" OnPageIndexChanging="dgvCatalogue_PageIndexChanging"
-        AutoGenerateColumns="False" OnRowCommand="dgvCatalogue_RowCommand">
+        AutoGenerateColumns="False">
         <Columns>
 
             <asp:BoundField DataField="Category" HeaderText="Category" ItemStyle-CssClass="Category"></asp:BoundField>
@@ -73,7 +70,7 @@
 
     <link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/themes/start/jquery-ui.css"
         rel="stylesheet" type="text/css" />
-    <script type="text/javascript">   
+    <script type="text/javascript">
         $(document).ready(function () {
             $(document).on("click", "[id*=btnAdd]", function () {
                 $("#MainContent_lblCategory").html($(".Category", $(this).closest("tr")).html());
@@ -93,6 +90,4 @@
             });
         });
     </script>
-
 </asp:Content>
-

@@ -177,7 +177,6 @@
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="Employee\AssignRepresentative.aspx" />
-    <Content Include="Employee\CataloguePage.aspx" />
     <Content Include="Employee\DepartmentDetail.aspx" />
     <Content Include="Employee\DepartmentRequisitionHistory.aspx" />
     <Content Include="Employee\DepartmentRequsition.aspx" />
@@ -189,6 +188,7 @@
     <Content Include="Employee\RequisitionDetails.aspx" />
     <Content Include="Employee\RequisitionStatus.aspx" />
     <Content Include="Employee\SelectCollection.aspx" />
+    <Content Include="Employee\CataloguePage.aspx" />
     <Content Include="Sample\About.aspx" />
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Manage.aspx" />
@@ -445,13 +445,6 @@
     <Compile Include="Employee\AssignRepresentative.aspx.designer.cs">
       <DependentUpon>AssignRepresentative.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Employee\CataloguePage.aspx.cs">
-      <DependentUpon>CataloguePage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Employee\CataloguePage.aspx.designer.cs">
-      <DependentUpon>CataloguePage.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Employee\DepartmentDetail.aspx.cs">
       <DependentUpon>DepartmentDetail.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -528,6 +521,13 @@
     </Compile>
     <Compile Include="Employee\SelectCollection.aspx.designer.cs">
       <DependentUpon>SelectCollection.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Employee\CataloguePage.aspx.cs">
+      <DependentUpon>CataloguePage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Employee\CataloguePage.aspx.designer.cs">
+      <DependentUpon>CataloguePage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Sample\About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
