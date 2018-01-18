@@ -49,22 +49,13 @@ namespace Team10AD_Web.Employee {
         protected global::System.Web.UI.WebControls.GridView dgvCatalogue;
         
         /// <summary>
-        /// popup control.
+        /// btnTest control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::ASP.Web.UI.PopupControl.PopupPanel popup;
-        
-        /// <summary>
-        /// PopupWindow1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::ASP.Web.UI.PopupControl.PopupWindow PopupWindow1;
+        protected global::System.Web.UI.WebControls.Button btnTest;
         
         /// <summary>
         /// lblCategory control.
@@ -94,30 +85,21 @@ namespace Team10AD_Web.Employee {
         protected global::System.Web.UI.WebControls.Label lblUOM;
         
         /// <summary>
-        /// txtQuantity control.
+        /// TextBox1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtQuantity;
+        protected global::System.Web.UI.WebControls.TextBox TextBox1;
         
         /// <summary>
-        /// vSummary control.
+        /// ScriptManagerProxy1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ValidationSummary vSummary;
-        
-        /// <summary>
-        /// btnConfirm control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnConfirm;
+        protected global::System.Web.UI.ScriptManagerProxy ScriptManagerProxy1;
     }
 }
