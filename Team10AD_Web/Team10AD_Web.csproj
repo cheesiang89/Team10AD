@@ -126,13 +126,13 @@
     <Content Include="Clerk\DisbursementList.aspx" />
     <Content Include="Clerk\Inventory.aspx" />
     <Content Include="Clerk\OrderTrend.aspx" />
-    <Content Include="Clerk\PurchaseOrder.aspx" />
-    <Content Include="Clerk\RequisitionDetail.aspx" />
+    <Content Include="Clerk\PurchaseOrderPage.aspx" />
+    <Content Include="Clerk\RequisitionDetailPage.aspx" />
     <Content Include="Clerk\RequisitionRecord.aspx" />
     <Content Include="Clerk\RequisitionTrend.aspx" />
     <Content Include="Clerk\RetrievalList.aspx" />
     <Content Include="Clerk\StockFlow.aspx" />
-    <Content Include="Clerk\SupplierDetail.aspx" />
+    <Content Include="Clerk\SupplierDetailPage.aspx" />
     <Content Include="Clerk\SupplierList.aspx" />
     <Content Include="Content\css\site.css" />
     <Content Include="Content\themes\base\accordion.css" />
@@ -176,19 +176,19 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
-    <Content Include="Employee\AssignRepresentative.aspx" />
-    <Content Include="Employee\DepartmentDetail.aspx" />
-    <Content Include="Employee\DepartmentRequisitionHistory.aspx" />
-    <Content Include="Employee\DepartmentRequsition.aspx" />
-    <Content Include="Employee\DepartmentRequsitionDetail.aspx" />
-    <Content Include="Employee\DelegateApproval.aspx" />
-    <Content Include="Employee\DisbursementDetails.aspx" />
-    <Content Include="Employee\OldCode.txt" />
-    <Content Include="Employee\RequisitionCart.aspx" />
-    <Content Include="Employee\RequisitionDetails.aspx" />
-    <Content Include="Employee\RequisitionStatus.aspx" />
-    <Content Include="Employee\SelectCollection.aspx" />
-    <Content Include="Employee\CataloguePage.aspx" />
+    <Content Include="EmployeePage\AssignRepresentative.aspx" />
+    <Content Include="EmployeePage\CataloguePage.aspx" />
+    <Content Include="EmployeePage\DelegateApproval.aspx" />
+    <Content Include="EmployeePage\DepartmentDetail.aspx" />
+    <Content Include="EmployeePage\DepartmentRequisitionHistory.aspx" />
+    <Content Include="EmployeePage\DepartmentRequisition.aspx" />
+    <Content Include="EmployeePage\DepartmentRequisitionDetail.aspx" />
+    <Content Include="EmployeePage\DisbursementDetailsPage.aspx" />
+    <Content Include="EmployeePage\OldCode.txt" />
+    <Content Include="EmployeePage\RequisitionCart.aspx" />
+    <Content Include="EmployeePage\RequisitionDetailsPage.aspx" />
+    <Content Include="EmployeePage\RequisitionStatus.aspx" />
+    <Content Include="EmployeePage\SelectCollection.aspx" />
     <Content Include="Sample\About.aspx" />
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Manage.aspx" />
@@ -225,6 +225,8 @@
     <Content Include="Content\img\team\1.png" />
     <Content Include="Content\img\team\2.png" />
     <Content Include="Content\img\team\3.png" />
+    <Content Include="EmployeePage\Employee.Master" />
+    <Content Include="EmployeePage\Web.config" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />
     <Content Include="Scripts\jquery-1.12.4.min.js" />
@@ -281,10 +283,8 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Old\Employee.sitemap" />
-    <Content Include="Employee\Employee.Master" />
     <Content Include="Clerk\Clerk.Master" />
     <Content Include="Clerk\Web.config" />
-    <Content Include="Employee\Web.config" />
     <Content Include="Scripts\jquery-1.12.4.min.map" />
     <None Include="Scripts\Template\jquery-1.8.2.intellisense.js" />
     <Content Include="Sample\Sample1.aspx" />
@@ -382,19 +382,19 @@
     <Compile Include="Clerk\OrderTrend.aspx.designer.cs">
       <DependentUpon>OrderTrend.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Clerk\PurchaseOrder.aspx.cs">
-      <DependentUpon>PurchaseOrder.aspx</DependentUpon>
+    <Compile Include="Clerk\PurchaseOrderPage.aspx.cs">
+      <DependentUpon>PurchaseOrderPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Clerk\PurchaseOrder.aspx.designer.cs">
-      <DependentUpon>PurchaseOrder.aspx</DependentUpon>
+    <Compile Include="Clerk\PurchaseOrderPage.aspx.designer.cs">
+      <DependentUpon>PurchaseOrderPage.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Clerk\RequisitionDetail.aspx.cs">
-      <DependentUpon>RequisitionDetail.aspx</DependentUpon>
+    <Compile Include="Clerk\RequisitionDetailPage.aspx.cs">
+      <DependentUpon>RequisitionDetailPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Clerk\RequisitionDetail.aspx.designer.cs">
-      <DependentUpon>RequisitionDetail.aspx</DependentUpon>
+    <Compile Include="Clerk\RequisitionDetailPage.aspx.designer.cs">
+      <DependentUpon>RequisitionDetailPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Clerk\RequisitionRecord.aspx.cs">
       <DependentUpon>RequisitionRecord.aspx</DependentUpon>
@@ -424,12 +424,12 @@
     <Compile Include="Clerk\StockFlow.aspx.designer.cs">
       <DependentUpon>StockFlow.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Clerk\SupplierDetail.aspx.cs">
-      <DependentUpon>SupplierDetail.aspx</DependentUpon>
+    <Compile Include="Clerk\SupplierDetailPage.aspx.cs">
+      <DependentUpon>SupplierDetailPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Clerk\SupplierDetail.aspx.designer.cs">
-      <DependentUpon>SupplierDetail.aspx</DependentUpon>
+    <Compile Include="Clerk\SupplierDetailPage.aspx.designer.cs">
+      <DependentUpon>SupplierDetailPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Clerk\SupplierList.aspx.cs">
       <DependentUpon>SupplierList.aspx</DependentUpon>
@@ -438,96 +438,96 @@
     <Compile Include="Clerk\SupplierList.aspx.designer.cs">
       <DependentUpon>SupplierList.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Employee\AssignRepresentative.aspx.cs">
+    <Compile Include="EmployeePage\AssignRepresentative.aspx.cs">
       <DependentUpon>AssignRepresentative.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Employee\AssignRepresentative.aspx.designer.cs">
+    <Compile Include="EmployeePage\AssignRepresentative.aspx.designer.cs">
       <DependentUpon>AssignRepresentative.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Employee\DepartmentDetail.aspx.cs">
-      <DependentUpon>DepartmentDetail.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Employee\DepartmentDetail.aspx.designer.cs">
-      <DependentUpon>DepartmentDetail.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Employee\DepartmentRequisitionHistory.aspx.cs">
-      <DependentUpon>DepartmentRequisitionHistory.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Employee\DepartmentRequisitionHistory.aspx.designer.cs">
-      <DependentUpon>DepartmentRequisitionHistory.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Employee\DepartmentRequsition.aspx.cs">
-      <DependentUpon>DepartmentRequsition.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Employee\DepartmentRequsition.aspx.designer.cs">
-      <DependentUpon>DepartmentRequsition.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Employee\DepartmentRequsitionDetail.aspx.cs">
-      <DependentUpon>DepartmentRequsitionDetail.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Employee\DepartmentRequsitionDetail.aspx.designer.cs">
-      <DependentUpon>DepartmentRequsitionDetail.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Employee\DelegateApproval.aspx.cs">
-      <DependentUpon>DelegateApproval.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Employee\DelegateApproval.aspx.designer.cs">
-      <DependentUpon>DelegateApproval.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Employee\DisbursementDetails.aspx.cs">
-      <DependentUpon>DisbursementDetails.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Employee\DisbursementDetails.aspx.designer.cs">
-      <DependentUpon>DisbursementDetails.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Employee\Employee.Master.cs">
-      <DependentUpon>Employee.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Employee\Employee.Master.designer.cs">
-      <DependentUpon>Employee.Master</DependentUpon>
-    </Compile>
-    <Compile Include="Employee\RequisitionCart.aspx.cs">
-      <DependentUpon>RequisitionCart.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Employee\RequisitionCart.aspx.designer.cs">
-      <DependentUpon>RequisitionCart.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Employee\RequisitionDetails.aspx.cs">
-      <DependentUpon>RequisitionDetails.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Employee\RequisitionDetails.aspx.designer.cs">
-      <DependentUpon>RequisitionDetails.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Employee\RequisitionStatus.aspx.cs">
-      <DependentUpon>RequisitionStatus.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Employee\RequisitionStatus.aspx.designer.cs">
-      <DependentUpon>RequisitionStatus.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Employee\SelectCollection.aspx.cs">
-      <DependentUpon>SelectCollection.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Employee\SelectCollection.aspx.designer.cs">
-      <DependentUpon>SelectCollection.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Employee\CataloguePage.aspx.cs">
+    <Compile Include="EmployeePage\CataloguePage.aspx.cs">
       <DependentUpon>CataloguePage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Employee\CataloguePage.aspx.designer.cs">
+    <Compile Include="EmployeePage\CataloguePage.aspx.designer.cs">
       <DependentUpon>CataloguePage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeePage\DelegateApproval.aspx.cs">
+      <DependentUpon>DelegateApproval.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmployeePage\DelegateApproval.aspx.designer.cs">
+      <DependentUpon>DelegateApproval.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeePage\DepartmentDetail.aspx.cs">
+      <DependentUpon>DepartmentDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmployeePage\DepartmentDetail.aspx.designer.cs">
+      <DependentUpon>DepartmentDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeePage\DepartmentRequisitionHistory.aspx.cs">
+      <DependentUpon>DepartmentRequisitionHistory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmployeePage\DepartmentRequisitionHistory.aspx.designer.cs">
+      <DependentUpon>DepartmentRequisitionHistory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeePage\DepartmentRequisition.aspx.cs">
+      <DependentUpon>DepartmentRequisition.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmployeePage\DepartmentRequisition.aspx.designer.cs">
+      <DependentUpon>DepartmentRequisition.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeePage\DepartmentRequisitionDetail.aspx.cs">
+      <DependentUpon>DepartmentRequisitionDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmployeePage\DepartmentRequisitionDetail.aspx.designer.cs">
+      <DependentUpon>DepartmentRequisitionDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeePage\DisbursementDetailsPage.aspx.cs">
+      <DependentUpon>DisbursementDetailsPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmployeePage\DisbursementDetailsPage.aspx.designer.cs">
+      <DependentUpon>DisbursementDetailsPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeePage\Employee.Master.cs">
+      <DependentUpon>Employee.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmployeePage\Employee.Master.designer.cs">
+      <DependentUpon>Employee.Master</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeePage\RequisitionCart.aspx.cs">
+      <DependentUpon>RequisitionCart.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmployeePage\RequisitionCart.aspx.designer.cs">
+      <DependentUpon>RequisitionCart.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeePage\RequisitionDetailsPage.aspx.cs">
+      <DependentUpon>RequisitionDetailsPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmployeePage\RequisitionDetailsPage.aspx.designer.cs">
+      <DependentUpon>RequisitionDetailsPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeePage\RequisitionStatus.aspx.cs">
+      <DependentUpon>RequisitionStatus.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmployeePage\RequisitionStatus.aspx.designer.cs">
+      <DependentUpon>RequisitionStatus.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeePage\SelectCollection.aspx.cs">
+      <DependentUpon>SelectCollection.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmployeePage\SelectCollection.aspx.designer.cs">
+      <DependentUpon>SelectCollection.aspx</DependentUpon>
     </Compile>
     <Compile Include="Sample\About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>

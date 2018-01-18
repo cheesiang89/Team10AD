@@ -38,7 +38,7 @@ namespace Team10AD_Web.Clerk
                 string supplierCode = gvRow.Cells[0].Text;
                 Supplier supplier = b.GetSupplier(supplierCode);
                 Session["Supplier"] = supplier;
-                Response.Redirect("SupplierDetail.aspx");
+                Response.Redirect("SupplierDetailPage.aspx");
             }
         }
         }
