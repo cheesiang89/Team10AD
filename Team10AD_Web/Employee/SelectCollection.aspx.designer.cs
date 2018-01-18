@@ -13,6 +13,15 @@ namespace Team10AD_Web.Employee {
     public partial class SelectCollection {
         
         /// <summary>
+        /// lblSelection control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSelection;
+        
+        /// <summary>
         /// rdoBtnSelectCollection control.
         /// </summary>
         /// <remarks>

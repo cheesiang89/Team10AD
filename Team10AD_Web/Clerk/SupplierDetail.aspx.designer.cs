@@ -7,27 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Team10AD_Web.Employee {
+namespace Team10AD_Web.Clerk {
     
     
-    public partial class DepartmentDetail {
+    public partial class SupplierDetails {
         
         /// <summary>
-        /// txtBoxRepName control.
+        /// dvSupplierDetail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtBoxRepName;
-        
-        /// <summary>
-        /// txtBoxCollectionPt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtBoxCollectionPt;
+        protected global::System.Web.UI.WebControls.DetailsView dvSupplierDetail;
     }
 }

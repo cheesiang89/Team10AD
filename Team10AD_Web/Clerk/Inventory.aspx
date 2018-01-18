@@ -2,6 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+
     <h2>Inventory    
         
     </h2>
@@ -11,6 +12,7 @@
             <asp:BoundField DataField="Category" HeaderText="Category" />
             <asp:BoundField DataField="Description" HeaderText="Description" />
             <asp:BoundField DataField="UnitOfMeasure" HeaderText="Unit of Measure" />
+
         </Columns>
         </asp:GridView>
 </asp:Content>

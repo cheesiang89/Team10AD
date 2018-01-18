@@ -49,6 +49,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ASP.Web.UI.PopupControl">
+      <HintPath>..\..\..\..\09. Self improvement\Studies\ISS Graduate Diploma\Lectures\Assignment\CA06-ADProject\Extras\PopupExample\PopupExample\Bin\ASP.Web.UI.PopupControl.dll</HintPath>
+    </Reference>
     <Reference Include="AspNet.ScriptManager.jQuery, Version=1.12.4.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\AspNet.ScriptManager.jQuery.1.12.4\lib\net45\AspNet.ScriptManager.jQuery.dll</HintPath>
     </Reference>
@@ -128,6 +131,7 @@
     <Content Include="Clerk\RequisitionTrend.aspx" />
     <Content Include="Clerk\RetrievalList.aspx" />
     <Content Include="Clerk\StockFlow.aspx" />
+    <Content Include="Clerk\SupplierDetail.aspx" />
     <Content Include="Clerk\SupplierList.aspx" />
     <Content Include="Content\css\site.css" />
     <Content Include="Content\themes\base\accordion.css" />
@@ -179,6 +183,7 @@
     <Content Include="Employee\DepartmentRequsitionDetail.aspx" />
     <Content Include="Employee\DelegateApproval.aspx" />
     <Content Include="Employee\DisbursementDetails.aspx" />
+    <Content Include="Employee\OldCode.txt" />
     <Content Include="Employee\RequisitionCart.aspx" />
     <Content Include="Employee\RequisitionDetails.aspx" />
     <Content Include="Employee\RequisitionStatus.aspx" />
@@ -329,6 +334,7 @@
     <Compile Include="App_Code\Model\Supplier.cs" />
     <Compile Include="App_Code\Model\SupplierDetail.cs" />
     <Compile Include="App_Code\Model\Team10ADModel.cs" />
+    <Compile Include="App_Code\PurvaBizLogic.cs" />
     <Compile Include="App_Code\XpBizLogic.cs" />
     <Compile Include="App_Code\RayBizLogic.cs" />
     <Compile Include="App_Start\AuthConfig.cs" />
@@ -416,6 +422,13 @@
     </Compile>
     <Compile Include="Clerk\StockFlow.aspx.designer.cs">
       <DependentUpon>StockFlow.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Clerk\SupplierDetail.aspx.cs">
+      <DependentUpon>SupplierDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Clerk\SupplierDetail.aspx.designer.cs">
+      <DependentUpon>SupplierDetail.aspx</DependentUpon>
     </Compile>
     <Compile Include="Clerk\SupplierList.aspx.cs">
       <DependentUpon>SupplierList.aspx</DependentUpon>
@@ -618,6 +631,9 @@
   <ItemGroup>
     <Content Include="Account\Web.config" />
     <Content Include="Old\Site.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

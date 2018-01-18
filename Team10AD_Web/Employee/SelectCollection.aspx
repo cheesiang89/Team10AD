@@ -4,6 +4,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Only representative can make changes to this page</h2>
     <h2>Select Collection Point</h2>
+    <asp:Label ID="lblSelection" runat="server" Text="Label" Visible="False"></asp:Label>
     <asp:RadioButtonList ID="rdoBtnSelectCollection" runat="server" AutoPostBack="True" OnSelectedIndexChanged="rdoBtnSelectCollection_SelectedIndexChanged">
         <asp:ListItem Value="1">Administration Building (9:30 am)</asp:ListItem>
         <asp:ListItem Value="2">Management School (11:00 am)</asp:ListItem>

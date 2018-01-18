@@ -1,0 +1,68 @@
+﻿<%--Old code--%>
+
+<%--
+        <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="true">
+    </asp:ScriptManager>
+    <asp:Panel ID="detailPanel" runat="server" BackColor="White"
+            Style="display: none; text-align: center; vertical-align: middle;"
+            Width="300" Height="150">
+
+            <table width="100%" cellspacing="4">
+                <tr style="background-color: #33CC66">
+                    <td colspan="2" align="center">Store Details</td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        <asp:Button ID="btnOK" CommandName="OK" runat="server" Text="OK" OnClick="btnOK_Click" />
+                    </td>
+                    <td>
+                        <asp:Button ID="btnCancel" runat="server" Text="Cancel" />
+                    </td>
+                </tr>
+
+            </table>
+        </asp:Panel>
+      <asp:Button ID="modelPopup" runat="server" Style="display: none" />
+        <asp:ModalPopupExtender ID="ModalPopupExtender1" runat="server" TargetControlID="modelPopup" PopupControlID="detailPanel"
+            PopupDragHandleControlID="detailPanel" BackgroundCssClass="tableBackground" CancelControlID="btnCancel" Y="10" X="10">
+        </asp:ModalPopupExtender>
+--%>
+
+<
+
+<%--    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/jquery-ui.js" type="text/javascript"></script>
+<link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/themes/start/jquery-ui.css"
+    rel="stylesheet" type="text/css" />
+    <script type="text/javascript">   
+        $(document).ready(function () {
+            $(document).on("click", "[id*=btnAdd]", function () {
+                $("#lblItemCode").html($(".ItemCode", $(this).closest("tr")).html());
+                $("#lblCategory").html($(".Category", $(this).closest("tr")).html());
+                $("#lblDescription").html($(".Description", $(this).closest("tr")).html());
+                $("#dialog").dialog({
+                    title: "View Details",
+                    buttons: {
+                        Ok: function () {
+                            $(this).dialog('close');
+                        }
+                    },
+                    modal: true
+                });
+                return false;
+            });
+        });
+</script>--%> 
+
+<%--    <div id="dialog" style="display: none">
+              <b>Item Code</b><asp:Label ID="lblItemCode" runat="server"></asp:Label>   
+        <br />
+            <b>Category</b><asp:Label ID="lblCategory" runat="server"></asp:Label> 
+           <br />
+            <b>Description</b> <asp:Label ID="lblDescription" runat="server"></asp:Label>  
+          <br />
+            <b>Min Order</b><asp:Label ID="lblMinOrder" runat="server"></asp:Label> 
+            <br/>
+         <asp:Button ID="btnConfirm" CommandName="Confirm" runat="server" Text="Add" />
+
+    </div>--%>

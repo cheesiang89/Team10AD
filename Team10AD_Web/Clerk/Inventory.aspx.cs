@@ -15,7 +15,9 @@ namespace Team10AD_Web.Clerk
         private Team10ADModel m = new Team10ADModel();
         protected void Page_Load(object sender, EventArgs e)
         {
+
             dgvCatalogue.DataSource = RayBizLogic.CatalogueList();
+
             dgvCatalogue.DataBind();
             dgvCatalogue.AllowPaging = true;
         }
@@ -23,7 +25,9 @@ namespace Team10AD_Web.Clerk
         protected void dgvCatalogue_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             dgvCatalogue.PageIndex = e.NewPageIndex;
+
             dgvCatalogue.DataSource = RayBizLogic.CatalogueList();
+
             dgvCatalogue.DataBind();
         }
 
