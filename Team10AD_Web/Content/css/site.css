@@ -1,3 +1,12 @@
 ﻿/*Put custom CSS here*/
-body {
+
+.tableBackground {
+    background-color: #ADADAD;
+    filter: Alpha(Opacity=70);
+    opacity: 0.70;
+    -moz-opacity: 0.70;
+}
+
+table.wide-table {
+    width: 100%;
 }
