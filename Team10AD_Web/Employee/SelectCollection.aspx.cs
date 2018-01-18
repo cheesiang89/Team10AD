@@ -17,8 +17,8 @@ namespace Team10AD_Web.Employee
             {
                 //Employee emp = (Employee)Session["Employee"];
                 //int employeeID = b.GetEmployee();
-                int pointID = b.ShowCollectionPoint(61);
-                rdoBtnSelectCollection.Items.FindByValue(pointID.ToString()).Selected = true;           
+                int pointID = b.ShowCollectionPointID(61);
+                rdoBtnSelectCollection.Items.FindByValue(pointID.ToString()).Selected = true;
             }
         }
 
@@ -31,7 +31,9 @@ namespace Team10AD_Web.Employee
             try
             {
                 b.SelectCollection(pointID);
-                
+                lblSelection.Visible = true;
+                lblSelection.Text = b.ShowCollectionPointName(61) + " is successfully selected!";
+
             }
             catch (Exception exp)
             {
