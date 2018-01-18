@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Team10AD_Web {
+namespace Team10AD_Web.Employee {
     
     
     public partial class DepartmentDetail {

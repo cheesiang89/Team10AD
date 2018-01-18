@@ -10,15 +10,15 @@
 namespace Team10AD_Web.Clerk {
     
     
-    public partial class DepartmentList {
+    public partial class SupplierDetails {
         
         /// <summary>
-        /// dgvDeptList control.
+        /// dvSupplierDetail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView dgvDeptList;
+        protected global::System.Web.UI.WebControls.DetailsView dvSupplierDetail;
     }
 }

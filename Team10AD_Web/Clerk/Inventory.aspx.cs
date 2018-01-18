@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Team10AD_Web;
 using Team10AD_Web.App_Code.Model;
+using Team10AD_Web.App_Code;
 
 namespace Team10AD_Web.Clerk
 {
@@ -14,26 +15,28 @@ namespace Team10AD_Web.Clerk
         private Team10ADModel m = new Team10ADModel();
         protected void Page_Load(object sender, EventArgs e)
         {
-            dgvCatalogue.DataSource = m.Catalogues.ToList();
+
+            dgvCatalogue.DataSource = RayBizLogic.CatalogueList();
+
             dgvCatalogue.DataBind();
             dgvCatalogue.AllowPaging = true;
-
         }
 
         protected void dgvCatalogue_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             dgvCatalogue.PageIndex = e.NewPageIndex;
-            //OLD: Dynamic bind data
-            //dgvCatalogue.DataSource = m.Catalogues.Select(
-            //        x => new {
-            //            ItemCode = x.ItemCode,
-            //            Category = x.Category,
-            //            Description = x.Description
-            //                  }).ToList();
 
-            //NEW: Select fields to bind in the xml
-            dgvCatalogue.DataSource = m.Catalogues.ToList();
+            dgvCatalogue.DataSource = RayBizLogic.CatalogueList();
+
             dgvCatalogue.DataBind();
         }
+
+        protected void SearchBtn_Click(object sender, EventArgs e)
+        {
+            dgvCatalogue.DataSource = RayBizLogic.SearchCatalogue(SearchBox.Text);
+            dgvCatalogue.DataBind();
+            dgvCatalogue.AllowPaging = true;
+        }
+
     }
 }
