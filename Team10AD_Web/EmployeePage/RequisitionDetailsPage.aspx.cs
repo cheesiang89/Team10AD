@@ -14,18 +14,20 @@ namespace Team10AD_Web.EmployeePage
         protected void Page_Load(object sender, EventArgs e)
         {
             Team10ADModel context = new Team10ADModel();
-            string requisitionid = (string)Session["requisitiondetail"];
-            int reqid = Convert.ToInt32(requisitionid);
-            Requisition req = RayBizLogic.GetRequisitionById(requisitionid);
+           
+                string requisitionid = (string)Session["requisitiondetail"];
+                int reqid = Convert.ToInt32(requisitionid);
+                Requisition req = RayBizLogic.GetRequisitionById(requisitionid);
 
-            var qry = from r in context.RequisitionDetails where r.RequisitionID == reqid select new { r.Catalogue.Description, r.QuantityRequested, r.Catalogue.UnitOfMeasure };
-            dgvRequisitionDetail.DataSource = qry.ToList();
-            dgvRequisitionDetail.DataBind();
-            dgvRequisitionDetail.AllowPaging = true;
+                var qry = from r in context.RequisitionDetails where r.RequisitionID == reqid select new { r.Catalogue.Description, r.QuantityRequested, r.Catalogue.UnitOfMeasure };
+                dgvRequisitionDetail.DataSource = qry.ToList();
+                dgvRequisitionDetail.DataBind();
+                dgvRequisitionDetail.AllowPaging = true;
 
-            App_Code.Model.Employee emp = context.Employees.Where(x => x.EmployeeID == req.RequestorID).First();
-            NameTextBox.Text = emp.Name;
-            StatusTextBox.Text = req.Status;
+                App_Code.Model.Employee emp = context.Employees.Where(x => x.EmployeeID == req.RequestorID).First();
+                NameTextBox.Text = emp.Name;
+                StatusTextBox.Text = req.Status;
+            
         }
     }
 }

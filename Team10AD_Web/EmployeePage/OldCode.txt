@@ -168,3 +168,24 @@
 
             //ScriptManager.RegisterStartupScript(Page, typeof(Page), "OpenWindow", "window.open('Test.aspx');", true);
         }
+
+		 <div align="center" style="width: 500px; height: 300px">
+                <asp:Label ID="lblSubtitle1" runat="server" Font-Bold="True" Font-Size="Medium">Approval authority is to be delegated to </asp:Label>
+                <asp:Label ID="lblApprover" runat="server" Font-Bold="True" Font-Size="Medium" ForeColor="Red"></asp:Label>
+                <asp:Label ID="lblSubtitle2" runat="server" Text=" from:" Font-Bold="True" Font-Size="Medium"></asp:Label>
+                <br />
+                <br />
+                <asp:Label ID="lblStartDate" runat="server" Font-Bold="True">Start Date:</asp:Label>
+                <asp:TextBox ID="txtStartDate" runat="server" TextMode="Date"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="validRequiredStartDate" runat="server" ErrorMessage="This field must be selected." ControlToValidate="txtStartDate" ></asp:RequiredFieldValidator>
+                <br />
+                <br />
+                <asp:Label ID="lblEndDate" runat="server" Font-Bold="True">End Date:</asp:Label>
+                <asp:TextBox ID="txtEndDate" runat="server" TextMode="Date"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="validRequiredEndDate" runat="server" ErrorMessage="This field must be selected" ControlToValidate="txtEndDate" ></asp:RequiredFieldValidator>
+                <br />
+                <br />
+                <br />
+                <br />
+                <asp:Button ID="btnConfirm" runat="server" Text="Confirm" Font-Bold="True" ForeColor="White" BackColor="#009933" OnClick="btnConfirm_Click" />&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<asp:Button ID="btnCancel" runat="server" Text="Cancel" BackColor="Red" ForeColor="White" Font-Bold="True" OnClick="btnCancel_Click" CausesValidation="False" />
+            </div>

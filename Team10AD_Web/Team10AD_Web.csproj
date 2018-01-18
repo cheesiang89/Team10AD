@@ -315,6 +315,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Code\BusinessLogic.cs" />
+    <Compile Include="App_Code\BusinessLogic_Sam.cs" />
     <Compile Include="App_Code\Model\Catalogue.cs" />
     <Compile Include="App_Code\Model\CollectionPoint.cs" />
     <Compile Include="App_Code\Model\Department.cs" />
