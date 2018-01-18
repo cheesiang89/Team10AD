@@ -17,7 +17,7 @@ namespace Team10AD_Web.Employee
             {
                 //Employee emp = (Employee)Session["Employee"];
                 //int employeeID = b.GetEmployee();
-                int pointID = b.ShowCollectionPoint(61);
+                int pointID = b.ShowCollectionPointID(61);
                 rdoBtnSelectCollection.Items.FindByValue(pointID.ToString()).Selected = true;           
             }
         }
