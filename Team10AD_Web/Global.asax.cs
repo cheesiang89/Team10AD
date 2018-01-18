@@ -31,7 +31,12 @@ namespace Team10AD_Web
 
         void Session_Start(object sender, EventArgs e)
         {
-            Session["departmentdetail"] = "";
+            //Stores employee id to pass to detail page
+            Session["employeeid"] = null;
+            //Stores department id to pass to detail page
+            Session["departmentid"] = "";
+            //Stores requisition id to pass to requisition detail page
+            Session["requisitiondetail"] = "";
         }
     }
 }
