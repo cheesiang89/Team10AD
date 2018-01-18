@@ -28,12 +28,17 @@ namespace Team10AD_Web
             // Code that runs when an unhandled error occurs
 
         }
+
         void Session_Start(object sender, EventArgs e)
         { // start of Session
             Session["requisitionCart"] = new List<string>();
+            Session["departmentdetail"] = "";
+            Session["Supplier"] = "";
         }
+        
         void Session_End(object sender, EventArgs e)
         {
+
         }
     }
 }
