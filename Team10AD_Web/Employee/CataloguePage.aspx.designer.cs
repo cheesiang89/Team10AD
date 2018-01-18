@@ -47,7 +47,6 @@ namespace Team10AD_Web.Employee {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView dgvCatalogue;
-
         
         /// <summary>
         /// btnTest control.
@@ -102,6 +101,5 @@ namespace Team10AD_Web.Employee {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.ScriptManagerProxy ScriptManagerProxy1;
-
     }
 }

@@ -15,7 +15,7 @@ namespace Team10AD_Web.Employee
     public partial class CataloguePage : System.Web.UI.Page
     {
         private Team10ADModel m = new Team10ADModel();
-      
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -34,8 +34,8 @@ namespace Team10AD_Web.Employee
             dgvCatalogue.DataBind();
         }
 
-        
-     
+
+
         protected void saveToCart(string itemCode)
 
         {
@@ -45,7 +45,7 @@ namespace Team10AD_Web.Employee
 
                 List<string> cart = (List<string>)Session["requisitionCart"];
                 cart.Add(itemCode);
-               // popup.HidePopupWindow();
+                // popup.HidePopupWindow();
             }
 
 
