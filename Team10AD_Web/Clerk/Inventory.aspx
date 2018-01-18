@@ -9,10 +9,15 @@
     <asp:TextBox ID="SearchBox" placeholder="Search by category/description" runat="server" Width="220px"></asp:TextBox><asp:Button ID="SearchBtn" runat="server" Text="Search" OnClick="SearchBtn_Click" />
     <asp:GridView ID="dgvCatalogue" runat="server" AllowPaging="True" OnPageIndexChanging="dgvCatalogue_PageIndexChanging" AutoGenerateColumns="False" >
         <Columns>
+            <asp:BoundField DataField="ItemCode" HeaderText="Item Code" />
             <asp:BoundField DataField="Category" HeaderText="Category" />
             <asp:BoundField DataField="Description" HeaderText="Description" />
+            <asp:BoundField DataField="ReorderLevel" HeaderText="Reorder Level" />
+            <asp:BoundField DataField="MinimumOrderQuantity" HeaderText="Reorder Qty" />
+            <asp:BoundField DataField="BalanceQuantity" HeaderText="Existing Qty" />
             <asp:BoundField DataField="UnitOfMeasure" HeaderText="Unit of Measure" />
-
+            <asp:BoundField DataField="Location" HeaderText="Location" />
+            <asp:ButtonField ButtonType="Button" CommandName="Details" Text="Details" />
         </Columns>
         </asp:GridView>
 </asp:Content>
