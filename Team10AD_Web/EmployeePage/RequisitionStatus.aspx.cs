@@ -15,10 +15,7 @@ namespace Team10AD_Web.EmployeePage
         {
             if (!IsPostBack)
             {
-                string deptcode = RayBizLogic.DepartmentId("ling@LogicUniversity");
-                Session["departmentcode"] = deptcode;
-                int empid = RayBizLogic.EmployeeId("ling@LogicUniversity");
-                Session["employeeid"] = empid;
+                string deptcode = (string)Session["departmentcode"];
                 Team10ADModel context = new Team10ADModel();
                 var qry = from r in context.Requisitions where r.Employee.DepartmentCode == deptcode select new { r.Employee.Name, r.RequisitionDate, r.Status, r.RequisitionID, r.Employee.EmployeeID };
                 dgvReqStatus.DataSource = qry.ToList();
