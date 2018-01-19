@@ -1,8 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/EmployeePage/Employee.Master" AutoEventWireup="true" CodeBehind="DisbursementDetailsPage.aspx.cs" Inherits="Team10AD_Web.EmployeePage.DisbursementDetailsPage" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Clerk/Clerk.Master" AutoEventWireup="true" CodeBehind="DisbursementDetailsPage.aspx.cs" Inherits="Team10AD_Web.Clerk.DisbursementDetailsPage" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-       <h2>Disbursement Details</h2>
+     <h2>Disbursement Details</h2>
     <asp:Label ID="lblDisList1" runat="server" Text="Disbursement List:"></asp:Label>
     <asp:Label ID="lblDisList2" runat="server"></asp:Label>
     <br />

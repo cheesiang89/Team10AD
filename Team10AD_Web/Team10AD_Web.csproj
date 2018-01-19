@@ -123,6 +123,7 @@
   <ItemGroup>
     <Content Include="Clerk\DepartmentDetail.aspx" />
     <Content Include="Clerk\DepartmentList.aspx" />
+    <Content Include="Clerk\DisbursementDetailsPage.aspx" />
     <Content Include="Clerk\DisbursementList.aspx" />
     <Content Include="Clerk\Inventory.aspx" />
     <Content Include="Clerk\OrderTrend.aspx" />
@@ -365,6 +366,13 @@
     </Compile>
     <Compile Include="Clerk\DepartmentList.aspx.designer.cs">
       <DependentUpon>DepartmentList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Clerk\DisbursementDetailsPage.aspx.cs">
+      <DependentUpon>DisbursementDetailsPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Clerk\DisbursementDetailsPage.aspx.designer.cs">
+      <DependentUpon>DisbursementDetailsPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Clerk\DisbursementList.aspx.cs">
       <DependentUpon>DisbursementList.aspx</DependentUpon>
