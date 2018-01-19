@@ -13,22 +13,22 @@ namespace Team10AD_Web.Clerk {
     public partial class RequisitionDetailPage {
         
         /// <summary>
-        /// EmployeeName control.
+        /// ReqID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label EmployeeName;
+        protected global::System.Web.UI.WebControls.Label ReqID;
         
         /// <summary>
-        /// NameTextBox control.
+        /// ReqIDTextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox NameTextBox;
+        protected global::System.Web.UI.WebControls.TextBox ReqIDTextBox;
         
         /// <summary>
         /// Status control.
@@ -49,6 +49,96 @@ namespace Team10AD_Web.Clerk {
         protected global::System.Web.UI.WebControls.TextBox StatusTextBox;
         
         /// <summary>
+        /// DeptName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label DeptName;
+        
+        /// <summary>
+        /// DeptNameTextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox DeptNameTextBox;
+        
+        /// <summary>
+        /// DeptCode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label DeptCode;
+        
+        /// <summary>
+        /// DeptCodeTextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox DeptCodeTextBox;
+        
+        /// <summary>
+        /// EmployeeName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label EmployeeName;
+        
+        /// <summary>
+        /// NameTextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox NameTextBox;
+        
+        /// <summary>
+        /// EmployeePhone control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label EmployeePhone;
+        
+        /// <summary>
+        /// EmployeePhoneTextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox EmployeePhoneTextBox;
+        
+        /// <summary>
+        /// Email control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Email;
+        
+        /// <summary>
+        /// EmailTextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox EmailTextBox;
+        
+        /// <summary>
         /// dgvRequisitionDetail control.
         /// </summary>
         /// <remarks>
@@ -56,14 +146,5 @@ namespace Team10AD_Web.Clerk {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView dgvRequisitionDetail;
-        
-        /// <summary>
-        /// CancelButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button CancelButton;
     }
 }
