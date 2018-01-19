@@ -8,28 +8,21 @@
     <asp:TextBox ID="txtBoxSearch" runat="server">Search by category/desc</asp:TextBox>
     <asp:Button ID="btnSearch" runat="server" Text="Search" />
     <br />
-    <asp:Label runat="server" ID="lblTest" Text=""></asp:Label>
+    <asp:Label runat="server" ID="lblTest" Text="Test"></asp:Label>
 
     <asp:GridView ID="dgvCatalogue" runat="server" AllowPaging="True" OnPageIndexChanging="dgvCatalogue_PageIndexChanging"
-        AutoGenerateColumns="False">
+        AutoGenerateColumns="False" OnRowCommand="dgvCatalogue_RowCommand">
         <Columns>
+            
 
+             <asp:BoundField DataField="ItemCode" HeaderText="Item Code" HeaderStyle-CssClass="hiddencol" ItemStyle-CssClass="ItemCode hidden" ></asp:BoundField>
             <asp:BoundField DataField="Category" HeaderText="Category" ItemStyle-CssClass="Category"></asp:BoundField>
             <asp:BoundField DataField="Description" HeaderText="Description" ItemStyle-CssClass="Description"></asp:BoundField>
             <asp:BoundField DataField="UnitOfMeasure" HeaderText="Unit of Measure" ItemStyle-CssClass="UnitOfMeasure"></asp:BoundField>
 
-            <%-- Hidden fields--%>
-            <asp:TemplateField Visible="False">
-                <ItemTemplate>
-                    <asp:Label ID="lblItemCode" runat="server" Text='<%# Bind("ItemCode") %>'></asp:Label>
-                </ItemTemplate>
-                <ItemStyle CssClass="ItemCode" />
-            </asp:TemplateField>
-
-            <%--  --%>
             <asp:TemplateField ShowHeader="False">
                 <ItemTemplate>
-                    <asp:LinkButton ID="btnAdd" runat="server" Text="Add" />
+                    <asp:LinkButton ID="btnAdd" runat="server" Text="Add" CommandName="Add"  CommandArgument='<%# Container.DataItemIndex %>'/>
                 </ItemTemplate>
             </asp:TemplateField>
 
@@ -47,14 +40,19 @@
         <br />
         <b>Unit of Measure</b><asp:Label ID="lblUOM" runat="server"></asp:Label>
         <br />
-        <b>Quantity</b><asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
-        <br />
+        <b>Quantity</b>
+       <div id="np">
+              <input type="text" ID="txtInputQty">
+             </div>
 
         <br />
-
+        <asp:Label ID="lblItemCode" runat="server" CSSClass="hidden"></asp:Label>
     </div>
 
-    <asp:ScriptManagerProxy ID="ScriptManagerProxy1" runat="server">
+</asp:Content>
+
+<%-- Old- For custom script --%>
+<%--    <asp:ScriptManagerProxy ID="ScriptManagerProxy1" runat="server">
         <Scripts>
             <asp:ScriptReference Path="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" />
         </Scripts>
@@ -64,30 +62,7 @@
         <Scripts>
             <asp:ScriptReference Path="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" />
         </Scripts>
-    </asp:ScriptManagerProxy>
-
-
-
-    <link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/themes/start/jquery-ui.css"
-        rel="stylesheet" type="text/css" />
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $(document).on("click", "[id*=btnAdd]", function () {
-                $("#MainContent_lblCategory").html($(".Category", $(this).closest("tr")).html());
-                $("#MainContent_lblDescription").html($(".Description", $(this).closest("tr")).html());
-                $("#MainContent_lblUOM").html($(".UnitOfMeasure", $(this).closest("tr")).html());
-                $("#dialog").dialog({
-                    title: "View Details",
-                    buttons: {
-                        Ok: function () {
-                            $(this).dialog('close');
-                        }
-                    },
-                    modal: true
-                });
-                //  window.alert($(".Category", $(this).closest("tr")).html());
-                return false;
-            });
-        });
-    </script>
-</asp:Content>
+        <Scripts>
+           <asp:ScriptReference Path="/Scripts/script.js" />
+        </Scripts>
+    </asp:ScriptManagerProxy>--%>
