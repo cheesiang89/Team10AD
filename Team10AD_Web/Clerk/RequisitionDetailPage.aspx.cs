@@ -14,7 +14,28 @@ namespace Team10AD_Web.Clerk
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                Team10ADModel context = new Team10ADModel();
+                string requisitionid = (string)Session["requisitiondetail"];
+                int reqid = Convert.ToInt32(requisitionid);
+                Requisition req = RayBizLogic.GetRequisitionById(requisitionid);
 
+                var qry = from r in context.RequisitionDetails where r.RequisitionID == reqid select new { r.ItemCode ,r.Catalogue.Description, r.QuantityRequested, r.QuantityRetrieved };
+                dgvRequisitionDetail.DataSource = qry.ToList();
+                dgvRequisitionDetail.DataBind();
+                dgvRequisitionDetail.AllowPaging = true;
+
+                App_Code.Model.Employee emp = context.Employees.Where(x => x.EmployeeID == req.RequestorID).First();
+                App_Code.Model.Department dept = context.Departments.Where(x => x.DepartmentCode == emp.DepartmentCode).First();
+                ReqIDTextBox.Text = req.RequisitionID.ToString();
+                StatusTextBox.Text = req.Status;
+                DeptNameTextBox.Text = dept.DepartmentName;
+                DeptCodeTextBox.Text = dept.DepartmentCode;
+                NameTextBox.Text = emp.Name;
+                EmployeePhoneTextBox.Text = emp.Phone.ToString();
+                EmailTextBox.Text = emp.Email;
+            }
         }
     }
 }
