@@ -41,13 +41,17 @@
         <b>Unit of Measure</b><asp:Label ID="lblUOM" runat="server"></asp:Label>
         <br />
         <b>Quantity</b>
+        <%-- Use number spinner: Note that default <input> created has no ID." --%>
        <div id="np">
-              <input type="text" ID="txtInputQty">
+              <%-- <asp:TextBox ID="txtInputQty" runat="server"></asp:TextBox>--%>
+             
              </div>
 
         <br />
         <asp:Label ID="lblItemCode" runat="server" CSSClass="hidden"></asp:Label>
     </div>
+
+
 
 </asp:Content>
 

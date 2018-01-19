@@ -11,7 +11,7 @@ namespace Team10AD_Web.EmployeePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            //Get json data to make table
         }
     }
 }
