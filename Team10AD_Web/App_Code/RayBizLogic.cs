@@ -88,11 +88,26 @@ namespace Team10AD_Web.App_Code
             }
         }
 
-        public static void GenerateRetrievalList(List<RequisitionDetail> reqlist, int clerkid)
+        public static void GenerateRetrievalList(List<RequisitionDetail> reqlist, ArrayList reqIdList, int clerkid)
         {
             using (Team10ADModel context = new Team10ADModel())
             {
                 List<RetrievalDetail> retrievallist = new List<RetrievalDetail>();
+
+                //Creating a new retrieval record
+                Retrieval retrievalnew = new Retrieval();
+                retrievalnew.RetrievalDate = DateTime.Now;
+                retrievalnew.StoreStaffID = clerkid;
+                retrievalnew.Status = "Unretrieved";
+                context.Retrievals.Add(retrievalnew);
+                context.SaveChanges();
+
+                Retrieval retrievalnew2 = context.Retrievals.OrderByDescending(x => x.RetrievalID).First();
+
+                foreach (ArrayList al in reqIdList)
+                {
+                    //For putting data into requisition set
+                }
 
                 foreach (RequisitionDetail requisition in reqlist)
                 {
@@ -112,6 +127,7 @@ namespace Team10AD_Web.App_Code
                     if (itemcounter == 0)
                     {
                         RetrievalDetail ret = new RetrievalDetail();
+                        ret.RetrievalID = retrievalnew2.RetrievalID;
                         ret.ItemCode = requisition.ItemCode;
                         ret.RequestedQuantity = requisition.QuantityRequested;
                         retrievallist.Add(ret);
@@ -119,30 +135,17 @@ namespace Team10AD_Web.App_Code
 
                 }
 
-                //Counter to check that there is new entries being saved
-                int reqdetailcounter = 0;
                 //Saving the retrieval detail list into database
                 foreach (RetrievalDetail retrieval in retrievallist)
                 {
-                    reqdetailcounter++;
                     context.RetrievalDetails.Add(retrieval);
-                    context.SaveChanges();
-                }
-
-                if (reqdetailcounter > 0)
-                {
-                    //Saving a corresponding retrieval record into database
-                    Retrieval retrievalnew = new Retrieval();
-                    retrievalnew.RetrievalDate = DateTime.Now;
-                    retrievalnew.StoreStaffID = clerkid;
-                    retrievalnew.Status = "Unretrieved";
-                    context.Retrievals.Add(retrievalnew);
                     context.SaveChanges();
                 }
 
             }
 
             //Havent check the quantity to make sure not complete
+            //Havent enable partial retrieval based on balance quantity of items
         }
     }
 }
