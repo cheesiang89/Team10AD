@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Team10AD_Web.EmployeePage {
+namespace Team10AD_Web.Clerk {
     
     
     public partial class DisbursementDetailsPage {
