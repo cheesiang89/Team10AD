@@ -70,5 +70,14 @@ namespace Team10AD_Web.App_Code
             }
         }
 
+        public static void CancelRequisition(int reqid)
+        {
+            using (Team10ADModel context = new Team10ADModel())
+            {
+                App_Code.Model.Requisition req = context.Requisitions.Where(x => x.RequisitionID == reqid).First();
+                req.Status = "Cancelled";
+                context.SaveChanges();
+            }
+        }
     }
 }

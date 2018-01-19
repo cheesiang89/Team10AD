@@ -26,7 +26,15 @@ namespace Team10AD_Web.Clerk
         {
             dgvCatalogue.PageIndex = e.NewPageIndex;
 
-            dgvCatalogue.DataSource = RayBizLogic.CatalogueList();
+            if (SearchBox.Text == "")
+            {
+                dgvCatalogue.DataSource = RayBizLogic.CatalogueList();
+            }
+            else
+            {
+                dgvCatalogue.DataSource = RayBizLogic.SearchCatalogue(SearchBox.Text);
+            }
+
 
             dgvCatalogue.DataBind();
         }
