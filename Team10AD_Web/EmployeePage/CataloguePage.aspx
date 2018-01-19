@@ -15,7 +15,7 @@
         <Columns>
             
 
-             <asp:BoundField DataField="ItemCode" HeaderText="Item Code" HeaderStyle-CssClass="hiddencol" ItemStyle-CssClass="ItemCode hidden" ></asp:BoundField>
+             <asp:BoundField DataField="ItemCode" HeaderText="Item Code" HeaderStyle-CssClass="hidden" ItemStyle-CssClass="ItemCode hidden" ></asp:BoundField>
             <asp:BoundField DataField="Category" HeaderText="Category" ItemStyle-CssClass="Category"></asp:BoundField>
             <asp:BoundField DataField="Description" HeaderText="Description" ItemStyle-CssClass="Description"></asp:BoundField>
             <asp:BoundField DataField="UnitOfMeasure" HeaderText="Unit of Measure" ItemStyle-CssClass="UnitOfMeasure"></asp:BoundField>

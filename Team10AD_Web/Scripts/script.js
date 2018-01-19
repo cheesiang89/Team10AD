@@ -106,31 +106,31 @@ function goCart() {
 
     // var dataForServer = encodeURIComponent(sessionStorage.getItem(myKey));
     $(document).on("click", "[id*=imgCart]", function () {
-        Service.Greeting(onSuccess);
+       // Service.Greeting(onSuccess);
        // postData();
         //window.location.href = "RequisitionCart.aspx";
         return false;
     });
 }
 function postData() {
-    var data = {};
-    data.ItemCode = "this";
-    data.Quantity = "1";
+    //var data = {};
+    //data.ItemCode = "this";
+    //data.Quantity = "1";
 
-    $.ajax({
-        url: "/Service/Service.svc/GetJSON",
-        type: "POST",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ "data": data }),
-        dataType: "json",
-        success: function (result) {
-            console.log("Success"+ result);
+    //$.ajax({
+    //    url: "/Service/Service.svc/GetJSON",
+    //    type: "POST",
+    //    contentType: "application/json; charset=utf-8",
+    //    data: JSON.stringify({ "data": data }),
+    //    dataType: "json",
+    //    success: function (result) {
+    //        console.log("Success"+ result);
             
-        },
-        error: function (error) {
-            alert("Error: " + error.Error);
-        }
-    });
+    //    },
+    //    error: function (error) {
+    //        alert("Error: " + error.Error);
+    //    }
+    //});
 }
 function onSuccess(result) {
     alert(result);
