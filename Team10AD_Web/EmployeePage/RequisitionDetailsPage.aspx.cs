@@ -13,8 +13,9 @@ namespace Team10AD_Web.EmployeePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Team10ADModel context = new Team10ADModel();
-           
+            if (!IsPostBack)
+            {
+                Team10ADModel context = new Team10ADModel();
                 string requisitionid = (string)Session["requisitiondetail"];
                 int reqid = Convert.ToInt32(requisitionid);
                 Requisition req = RayBizLogic.GetRequisitionById(requisitionid);
@@ -27,7 +28,7 @@ namespace Team10AD_Web.EmployeePage
                 App_Code.Model.Employee emp = context.Employees.Where(x => x.EmployeeID == req.RequestorID).First();
                 NameTextBox.Text = emp.Name;
                 StatusTextBox.Text = req.Status;
-            
+            }
         }
     }
 }
