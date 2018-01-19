@@ -79,5 +79,70 @@ namespace Team10AD_Web.App_Code
                 context.SaveChanges();
             }
         }
+
+        public static List<RequisitionDetail> CombineReqDetail(int id)
+        {
+            using (Team10ADModel context = new Team10ADModel())
+            {
+                return context.RequisitionDetails.Where(r => r.RequisitionID == id).ToList();
+            }
+        }
+
+        public static void GenerateRetrievalList(List<RequisitionDetail> reqlist, int clerkid)
+        {
+            using (Team10ADModel context = new Team10ADModel())
+            {
+                List<RetrievalDetail> retrievallist = new List<RetrievalDetail>();
+
+                foreach (RequisitionDetail requisition in reqlist)
+                {
+                    //Counter to check that there is no existing itemcode in the List<RequisitionDetail>
+                    int itemcounter = 0;
+                    foreach (RetrievalDetail retrieval in retrievallist)
+                    {
+                        //If itemcode exist, just increment the requested quantity
+                        if (retrieval.ItemCode == requisition.ItemCode)
+                        {
+                            itemcounter++;
+                            retrieval.RequestedQuantity += requisition.QuantityRequested;
+                        }
+                    }
+
+                    //If no existing itemcode in the List<RequisitionDetail>, create a new instance of it
+                    if (itemcounter == 0)
+                    {
+                        RetrievalDetail ret = new RetrievalDetail();
+                        ret.ItemCode = requisition.ItemCode;
+                        ret.RequestedQuantity = requisition.QuantityRequested;
+                        retrievallist.Add(ret);
+                    }
+
+                }
+
+                //Counter to check that there is new entries being saved
+                int reqdetailcounter = 0;
+                //Saving the retrieval detail list into database
+                foreach (RetrievalDetail retrieval in retrievallist)
+                {
+                    reqdetailcounter++;
+                    context.RetrievalDetails.Add(retrieval);
+                    context.SaveChanges();
+                }
+
+                if (reqdetailcounter > 0)
+                {
+                    //Saving a corresponding retrieval record into database
+                    Retrieval retrievalnew = new Retrieval();
+                    retrievalnew.RetrievalDate = DateTime.Now;
+                    retrievalnew.StoreStaffID = clerkid;
+                    retrievalnew.Status = "Unretrieved";
+                    context.Retrievals.Add(retrievalnew);
+                    context.SaveChanges();
+                }
+
+            }
+
+            //Havent check the quantity to make sure not complete
+        }
     }
 }
