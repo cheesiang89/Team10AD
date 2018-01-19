@@ -106,7 +106,7 @@ function goCart() {
 
     // var dataForServer = encodeURIComponent(sessionStorage.getItem(myKey));
     $(document).on("click", "[id*=imgCart]", function () {
-       // Service.Greeting(onSuccess);
+       Service.Greeting(onSuccess);
        // postData();
         //window.location.href = "RequisitionCart.aspx";
         return false;

@@ -9,9 +9,9 @@ using System.Text;
 
 namespace Team10AD_Web.Service
 {
-    [ServiceContract(Namespace = "Team10AD_Web.Service")]
+    [ServiceContract(Namespace = "")]
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
-    public class Service1
+    public class Service
     {
         // To use HTTP GET, add [WebGet] attribute. (Default ResponseFormat is WebMessageFormat.Json)
         // To create an operation that returns XML,
@@ -19,10 +19,10 @@ namespace Team10AD_Web.Service
         //     and include the following line in the operation body:
         //         WebOperationContext.Current.OutgoingResponse.ContentType = "text/xml";
         [OperationContract]
-        public void DoWork()
+        public string Greeting()
         {
             // Add your operation implementation here
-            return;
+            return "Hello world";
         }
 
         // Add more operations here and mark them with [OperationContract]

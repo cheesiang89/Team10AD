@@ -108,6 +108,9 @@
                                      
                             <asp:ScriptReference Path="/Scripts/Template/dpNumberPicker-2.x.js" />
                         </Scripts>
+                        <Services>
+                            <asp:ServiceReference Path="~/Service/Service.svc" />
+                        </Services>
                     </asp:ScriptManager>
                     <asp:ContentPlaceHolder ID="MainContent" runat="server">
                     </asp:ContentPlaceHolder>
