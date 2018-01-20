@@ -64,7 +64,7 @@ namespace Team10AD_Web.App_Code
             using (App_Code.Model.Team10ADModel entities = new App_Code.Model.Team10ADModel())
             {
                 int selectedApproverID = ((from x in entities.Employees where x.Name == selectedApproverName select new { x.EmployeeID }).First()).EmployeeID;
-                int pendingReqQty = (from x in entities.Requisitions where x.RequestorID == selectedApproverID select x).Count();
+                int pendingReqQty = (from x in entities.Requisitions where x.RequestorID == selectedApproverID && x.Status=="Pending" select x).Count();
                 return pendingReqQty;
             }
         }
