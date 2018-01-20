@@ -10,33 +10,51 @@
 namespace Team10AD_Web.Clerk {
     
     
-    public partial class RequestsRecords {
+    public partial class CompletedRetrievalDetailPage {
         
         /// <summary>
-        /// dgvReqList control.
+        /// RetID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView dgvReqList;
+        protected global::System.Web.UI.WebControls.Label RetID;
         
         /// <summary>
-        /// GenRetListButton control.
+        /// RetIDTextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button GenRetListButton;
+        protected global::System.Web.UI.WebControls.TextBox RetIDTextBox;
         
         /// <summary>
-        /// ReqHistButton control.
+        /// RetStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ReqHistButton;
+        protected global::System.Web.UI.WebControls.Label RetStatus;
+        
+        /// <summary>
+        /// StatusTextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox StatusTextBox;
+        
+        /// <summary>
+        /// dgvRetrievalDetail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView dgvRetrievalDetail;
     }
 }

@@ -25,6 +25,9 @@ namespace Team10AD_Web.App_Code.Model
 
         public int? StoreStaffID { get; set; }
 
+        [StringLength(50)]
+        public string Status { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GoodsReceivedRecord> GoodsReceivedRecords { get; set; }
 

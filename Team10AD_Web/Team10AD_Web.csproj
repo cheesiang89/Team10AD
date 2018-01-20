@@ -121,15 +121,19 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Clerk\CompletedRetrievalDetailPage.aspx" />
     <Content Include="Clerk\DepartmentDetail.aspx" />
     <Content Include="Clerk\DepartmentList.aspx" />
+    <Content Include="Clerk\DisbursementDetailsPage.aspx" />
     <Content Include="Clerk\DisbursementList.aspx" />
     <Content Include="Clerk\Inventory.aspx" />
     <Content Include="Clerk\OrderTrend.aspx" />
     <Content Include="Clerk\PurchaseOrderPage.aspx" />
     <Content Include="Clerk\RequisitionDetailPage.aspx" />
+    <Content Include="Clerk\RequisitionHistory.aspx" />
     <Content Include="Clerk\RequisitionRecord.aspx" />
     <Content Include="Clerk\RequisitionTrend.aspx" />
+    <Content Include="Clerk\RetrievalDetailPage.aspx" />
     <Content Include="Clerk\RetrievalList.aspx" />
     <Content Include="Clerk\StockFlow.aspx" />
     <Content Include="Clerk\SupplierDetailPage.aspx" />
@@ -352,6 +356,13 @@
     <Compile Include="Clerk\Clerk.Master.designer.cs">
       <DependentUpon>Clerk.Master</DependentUpon>
     </Compile>
+    <Compile Include="Clerk\CompletedRetrievalDetailPage.aspx.cs">
+      <DependentUpon>CompletedRetrievalDetailPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Clerk\CompletedRetrievalDetailPage.aspx.designer.cs">
+      <DependentUpon>CompletedRetrievalDetailPage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Clerk\DepartmentDetail.aspx.cs">
       <DependentUpon>DepartmentDetail.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -365,6 +376,13 @@
     </Compile>
     <Compile Include="Clerk\DepartmentList.aspx.designer.cs">
       <DependentUpon>DepartmentList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Clerk\DisbursementDetailsPage.aspx.cs">
+      <DependentUpon>DisbursementDetailsPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Clerk\DisbursementDetailsPage.aspx.designer.cs">
+      <DependentUpon>DisbursementDetailsPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Clerk\DisbursementList.aspx.cs">
       <DependentUpon>DisbursementList.aspx</DependentUpon>
@@ -401,6 +419,13 @@
     <Compile Include="Clerk\RequisitionDetailPage.aspx.designer.cs">
       <DependentUpon>RequisitionDetailPage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Clerk\RequisitionHistory.aspx.cs">
+      <DependentUpon>RequisitionHistory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Clerk\RequisitionHistory.aspx.designer.cs">
+      <DependentUpon>RequisitionHistory.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Clerk\RequisitionRecord.aspx.cs">
       <DependentUpon>RequisitionRecord.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -414,6 +439,13 @@
     </Compile>
     <Compile Include="Clerk\RequisitionTrend.aspx.designer.cs">
       <DependentUpon>RequisitionTrend.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Clerk\RetrievalDetailPage.aspx.cs">
+      <DependentUpon>RetrievalDetailPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Clerk\RetrievalDetailPage.aspx.designer.cs">
+      <DependentUpon>RetrievalDetailPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Clerk\RetrievalList.aspx.cs">
       <DependentUpon>RetrievalList.aspx</DependentUpon>
