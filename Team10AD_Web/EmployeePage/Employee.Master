@@ -1,4 +1,5 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Employee.master.cs" Inherits="Team10AD_Web.EmployeePage.Employee" %>
+
 <!DOCTYPE html>
 <html>
 <head runat="server">
@@ -92,13 +93,13 @@
                             <asp:ScriptReference Path="/Scripts/Template/bootstrap.min.js" />
                             <asp:ScriptReference Path="/Scripts/Template/jquery.easing.min.js" />
                             <asp:ScriptReference Path="/Scripts/Template/jquery.scrollTo.js" />
-                            <asp:ScriptReference Path="/Scripts/Template/wow.min.js" />
-
-
+                            <asp:ScriptReference Path="/Sc  ripts/Template/wow.min.js" />
                             <asp:ScriptReference Path="/Scripts/Template/custom.js" />
                             <asp:ScriptReference Path="/Scripts/script.js" />
                         </Scripts>
                     </asp:ScriptManager>
+                      
+
                     <asp:ContentPlaceHolder ID="MainContent" runat="server">
                     </asp:ContentPlaceHolder>
                 </div>
@@ -121,8 +122,7 @@
                 </div>
             </div>
         </footer>
-       
-    </form>
+           </form>
 </body>
 </html>
 
