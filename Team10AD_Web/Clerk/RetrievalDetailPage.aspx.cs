@@ -23,7 +23,7 @@ namespace Team10AD_Web.Clerk
 
                 if (ret.Status == "Retrieved")
                 {
-                    GenDisbursementButton.Visible = false;
+                    GenDisbursementList.Visible = false;
                 }
 
                 var qry = from r in context.RetrievalDetails where r.RetrievalID == retrievalid select new { r.ItemCode, r.Catalogue.Description, r.Catalogue.BalanceQuantity, r.RequestedQuantity };
@@ -32,6 +32,21 @@ namespace Team10AD_Web.Clerk
 
                 RetIDTextBox.Text = ret.RetrievalID.ToString();
                 StatusTextBox.Text = ret.Status;
+
+                //Saving the suggested retrieval details before user make any changes
+                List<RetrievalDetail> suggested = RayBizLogic.GetRetrievalList(retrievalid);
+                foreach (RetrievalDetail r in suggested)
+                {
+                    foreach (GridViewRow row in dgvRetrievalDetail.Rows)
+                    {
+                        TextBox retrieveqtybox = (TextBox)row.FindControl("RetrieveQty");
+                        if (r.ItemCode == row.Cells[0].Text)
+                        {
+                            r.RetrievedQuantity = Convert.ToInt32(retrieveqtybox.Text);
+                        }
+                    }
+                }
+                Session["SuggestedRetrievalDetail"] = suggested;
             }
         }
 
@@ -53,7 +68,36 @@ namespace Team10AD_Web.Clerk
 
             return retrieveqty.ToString();
         }
+
+        protected void GenDisbursementList_Click(object sender, EventArgs e)
+        {
+            Team10ADModel context = new Team10ADModel();
+            List<RetrievalDetail> suggested = (List < RetrievalDetail >) Session["SuggestedRetrievalDetail"];
+
+            string id = (string)Session["retrievaldetail"];
+            int retrievalid = Convert.ToInt32(id);
+            List<RetrievalDetail> userinput = RayBizLogic.GetRetrievalList(retrievalid);
+            foreach (RetrievalDetail r in userinput)
+            {
+                foreach (GridViewRow row in dgvRetrievalDetail.Rows)
+                {
+                    TextBox retrieveqtybox = (TextBox)row.FindControl("RetrieveQty");
+                    if (r.ItemCode == row.Cells[0].Text)
+                    {
+                        r.RetrievedQuantity = Convert.ToInt32(retrieveqtybox.Text);
+                    }
+                }
+            }
+
+            //Update retrieval and catalogue
+            RayBizLogic.UpdateRetrievalDetails(userinput);
+
+            //Generate disbursement lists
+            
+            //Update requisition
+            
+            //Check for adjustment voucher needs
+
+        }
     }
-
-
 }

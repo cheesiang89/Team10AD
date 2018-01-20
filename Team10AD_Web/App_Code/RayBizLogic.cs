@@ -190,11 +190,47 @@ namespace Team10AD_Web.App_Code
 
         public static Retrieval GetRetrievalById(int id)
         {
+            Team10ADModel context = new Team10ADModel();
+
+            Retrieval ret = context.Retrievals.Where(x => x.RetrievalID == id).First();
+            return ret;
+
+        }
+
+        public static List<RetrievalDetail> GetRetrievalList(int id)
+        {
+            Team10ADModel context = new Team10ADModel();
+
+            return context.RetrievalDetails.Where(r => r.RetrievalID == id).ToList();
+
+        }
+
+        public static void UpdateRetrievalDetails(List<RetrievalDetail> userinput)
+        {
             using (Team10ADModel context = new Team10ADModel())
             {
-                Retrieval ret = context.Retrievals.Where(x => x.RetrievalID == id).First();
-                return ret;
+                //Updating quantities in Catalogue, Retrieval and RetrievalDetail tables
+                foreach (RetrievalDetail userdetail in userinput)
+                {
+                    userdetail.QuantityAfter = userdetail.Catalogue.BalanceQuantity - userdetail.RetrievedQuantity;
+                    Catalogue item = context.Catalogues.Where(x => x.ItemCode == userdetail.ItemCode).First();
+                    item.BalanceQuantity -= userdetail.RetrievedQuantity;
+                    item.PendingRequestQuantity -= userdetail.RetrievedQuantity;
+                    context.SaveChanges();
+                }
+
+                Retrieval retrieval = GetRetrievalById(userinput[0].RetrievalID);
+                retrieval.Status = "Retrieved";
+                context.SaveChanges();
+
+                //Generate Disbursement and DisbursementDetails
+
             }
+        }
+
+        public static void GenerateAdjustmentVoucherDetails(List<RetrievalDetail> suggested, List<RetrievalDetail> userinput)
+        {
+
         }
     }
 }
