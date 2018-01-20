@@ -24,16 +24,17 @@ function showPopupCatalogueDetail() {
                 Ok: function () {
                     var itemCode = $("#MainContent_lblItemCode").html();
                    // console.log('Item code is ' + itemCode);
-                    var quantity = $(".dpui-numberPicker-input").val();
-                   // console.log('Quantity is ' + quantity);
                     var description = $("#MainContent_lblDescription").html();
                     //console.log('Description is ' + description);
+                    var quantity = $(".dpui-numberPicker-input").val();
+                   // console.log('Quantity is ' + quantity);
+                 
                     var uom = $("#MainContent_lblUOM").html();
                    // console.log('UOM is ' + uom);
                    // console.log(saveToCart(itemCode,description, quantity, uom) === true);
 
                     //Exit dialog if successful
-                    if (saveToCart(itemCode,quantity) === true) {
+                    if (saveToCart(itemCode,description,quantity,uom) === true) {
                         $(this).dialog('close');
                     }
                 },
@@ -48,7 +49,7 @@ function showPopupCatalogueDetail() {
         return false;
     });
 }
-function saveToCart(itemCode, quantity) {
+function saveToCart(itemCode, description, quantity, uom) {
     //Validation
     if (positiveInteger(quantity) === true) {
 
@@ -62,7 +63,7 @@ function saveToCart(itemCode, quantity) {
             cart = [];
         }
         //Save jSON(itemCode,quantity)
-        var product = { "itemCode": itemCode, "quantity": quantity};
+        var product = { "itemCode": itemCode, "description": description, "quantity": quantity, "uom":uom };
         var myJSON = JSON.stringify(product);
         //console.log('JSON is' + myJSON);
         cart.push(myJSON);
@@ -106,9 +107,9 @@ function goCart() {
 
     // var dataForServer = encodeURIComponent(sessionStorage.getItem(myKey));
     $(document).on("click", "[id*=imgCart]", function () {
-       Service.Greeting(onSuccess);
+      // Service.Greeting(onSuccess);
        // postData();
-        //window.location.href = "RequisitionCart.aspx";
+        window.location.href = "RequisitionCart.aspx";
         return false;
     });
 }
