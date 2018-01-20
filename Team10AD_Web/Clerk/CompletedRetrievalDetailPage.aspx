@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Clerk/Clerk.Master" AutoEventWireup="true" CodeBehind="RetrievalDetailPage.aspx.cs" Inherits="Team10AD_Web.Clerk.RetrievalDetailPage" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Clerk/Clerk.Master" AutoEventWireup="true" CodeBehind="CompletedRetrievalDetailPage.aspx.cs" Inherits="Team10AD_Web.Clerk.CompletedRetrievalDetailPage" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -13,14 +13,8 @@
         <Columns>
             <asp:BoundField DataField="ItemCode" HeaderText="Item Code" />
             <asp:BoundField DataField="Description" HeaderText="Description" />
-            <asp:BoundField DataField="BalanceQuantity" HeaderText="Current Stock" />
             <asp:BoundField DataField="RequestedQuantity" HeaderText="Quantity Requested" />
-            <asp:TemplateField HeaderText="Quantity to Retrieve">
-                <ItemTemplate>
-                    <asp:TextBox ID="RetrieveQty" runat="server" Text='<%# QtyToRetrieve((int) Eval("BalanceQuantity"),(int) Eval("RequestedQuantity")) %>'></asp:TextBox>
-                </ItemTemplate>
-            </asp:TemplateField>
+            <asp:BoundField DataField="RetrievedQuantity" HeaderText="Quantity Requested" />
         </Columns>
     </asp:GridView>
-    <asp:Button ID="GenDisbursementButton" runat="server" Text="Generate Disbursement Lists" />
 </asp:Content>

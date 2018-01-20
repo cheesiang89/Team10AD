@@ -94,6 +94,19 @@ namespace Team10AD_Web.App_Code
             }
         }
 
+        public static void ReqStatusProcessing(ArrayList reqIdList)
+        {
+            using (Team10ADModel context = new Team10ADModel())
+            {
+                foreach (int id in reqIdList)
+                {
+                    Requisition r = context.Requisitions.Where(x => x.RequisitionID == id).First();
+                    r.Status = "Processing";
+                    context.SaveChanges();
+                }
+            }
+        }
+
         public static List<RequisitionDetail> CombineReqDetail(int id)
         {
             using (Team10ADModel context = new Team10ADModel())
@@ -172,6 +185,15 @@ namespace Team10AD_Web.App_Code
             {
                 var qry = from r in context.Retrievals orderby r.Status descending select new { r.RetrievalID, r.RetrievalDate, r.Status };
                 return qry.ToList();
+            }
+        }
+
+        public static Retrieval GetRetrievalById(int id)
+        {
+            using (Team10ADModel context = new Team10ADModel())
+            {
+                Retrieval ret = context.Retrievals.Where(x => x.RetrievalID == id).First();
+                return ret;
             }
         }
     }
