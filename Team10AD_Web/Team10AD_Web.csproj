@@ -132,6 +132,7 @@
     <Content Include="Clerk\RequisitionHistory.aspx" />
     <Content Include="Clerk\RequisitionRecord.aspx" />
     <Content Include="Clerk\RequisitionTrend.aspx" />
+    <Content Include="Clerk\RetrievalDetailPage.aspx" />
     <Content Include="Clerk\RetrievalList.aspx" />
     <Content Include="Clerk\StockFlow.aspx" />
     <Content Include="Clerk\SupplierDetailPage.aspx" />
@@ -430,6 +431,13 @@
     </Compile>
     <Compile Include="Clerk\RequisitionTrend.aspx.designer.cs">
       <DependentUpon>RequisitionTrend.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Clerk\RetrievalDetailPage.aspx.cs">
+      <DependentUpon>RetrievalDetailPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Clerk\RetrievalDetailPage.aspx.designer.cs">
+      <DependentUpon>RetrievalDetailPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Clerk\RetrievalList.aspx.cs">
       <DependentUpon>RetrievalList.aspx</DependentUpon>

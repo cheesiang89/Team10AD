@@ -56,8 +56,9 @@ namespace Team10AD_Web.Clerk
             //For collecting all requisitiondetails into 1 list
             List<RequisitionDetail> rd = new List<RequisitionDetail>();
 
-            //For collecting all the requisition ids into 1 arraylist
-            ArrayList reqIdList = new ArrayList(); 
+            //For collecting all the requisition into 1 list
+            ArrayList reqIdList = new ArrayList();
+            List<Requisition> reqlist = new List<Requisition>();
 
             //For checking that at least 1 record was selected for retrieval list generation
             int checkselection = 0;
@@ -69,6 +70,8 @@ namespace Team10AD_Web.Clerk
                 {
                     int reqid = Convert.ToInt32(row.Cells[1].Text);
                     reqIdList.Add(reqid);
+                    reqlist = RayBizLogic.CombineReq(reqIdList);
+
                     List<RequisitionDetail>  templist = RayBizLogic.CombineReqDetail(reqid);
                     foreach (RequisitionDetail r in templist)
                     {
@@ -81,10 +84,18 @@ namespace Team10AD_Web.Clerk
             int clerkid = (int) Session["clerkid"];
             if (checkselection > 0)
             {
-                RayBizLogic.GenerateRetrievalList(rd, reqIdList, clerkid);
+                RayBizLogic.GenerateRetrievalList(rd, reqlist, clerkid);
             }
 
             Response.Redirect("RetrievalList.aspx");
+        }
+
+        protected void dgvReqList_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            Team10ADModel context = new Team10ADModel();
+            var qry = from r in context.Requisitions where (r.Status == "Approved" || r.Status == "Partial") select new { r.RequisitionID, r.ApprovalDate, r.Employee.Department.DepartmentName, r.Status };
+            dgvReqList.DataSource = qry.ToList();
+            dgvReqList.DataBind();
         }
     }
 }

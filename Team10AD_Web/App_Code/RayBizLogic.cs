@@ -80,6 +80,20 @@ namespace Team10AD_Web.App_Code
             }
         }
 
+        public static List<Requisition> CombineReq(ArrayList reqIdList)
+        {
+            using (Team10ADModel context = new Team10ADModel())
+            {
+                List<Requisition> reqlist = new List<Requisition>();
+                foreach (int id in reqIdList)
+                {
+                    reqlist.Add(context.Requisitions.Where(r => r.RequisitionID == id).First());
+                }
+
+                return reqlist;
+            }
+        }
+
         public static List<RequisitionDetail> CombineReqDetail(int id)
         {
             using (Team10ADModel context = new Team10ADModel())
@@ -88,7 +102,7 @@ namespace Team10AD_Web.App_Code
             }
         }
 
-        public static void GenerateRetrievalList(List<RequisitionDetail> reqlist, ArrayList reqIdList, int clerkid)
+        public static void GenerateRetrievalList(List<RequisitionDetail> reqdetaillist, List<Requisition> reqList, int clerkid)
         {
             using (Team10ADModel context = new Team10ADModel())
             {
@@ -99,17 +113,21 @@ namespace Team10AD_Web.App_Code
                 retrievalnew.RetrievalDate = DateTime.Now;
                 retrievalnew.StoreStaffID = clerkid;
                 retrievalnew.Status = "Unretrieved";
+
+                //Special bit of code to prevent Entity Framework from reinsert existing objects into database
+                //The attach keyword lets EF become aware that the data existing. It only need to ref them
+                //It prevents the entire graph from being added
                 context.Retrievals.Add(retrievalnew);
+                foreach (Requisition r in reqList)
+                {
+                    context.Requisitions.Attach(r);
+                }   
+                retrievalnew.Requisitions = reqList;
                 context.SaveChanges();
 
-                Retrieval retrievalnew2 = context.Retrievals.OrderByDescending(x => x.RetrievalID).First();
+                retrievalnew = context.Retrievals.OrderByDescending(x => x.RetrievalID).First();
 
-                foreach (ArrayList al in reqIdList)
-                {
-                    //For putting data into requisition set
-                }
-
-                foreach (RequisitionDetail requisition in reqlist)
+                foreach (RequisitionDetail requisition in reqdetaillist)
                 {
                     //Counter to check that there is no existing itemcode in the List<RequisitionDetail>
                     int itemcounter = 0;
@@ -127,7 +145,7 @@ namespace Team10AD_Web.App_Code
                     if (itemcounter == 0)
                     {
                         RetrievalDetail ret = new RetrievalDetail();
-                        ret.RetrievalID = retrievalnew2.RetrievalID;
+                        ret.RetrievalID = retrievalnew.RetrievalID;
                         ret.ItemCode = requisition.ItemCode;
                         ret.RequestedQuantity = requisition.QuantityRequested;
                         retrievallist.Add(ret);
@@ -146,6 +164,15 @@ namespace Team10AD_Web.App_Code
 
             //Havent check the quantity to make sure not complete
             //Havent enable partial retrieval based on balance quantity of items
+        }
+
+        public static object RetrievalListForGV()
+        {
+            using (Team10ADModel context = new Team10ADModel())
+            {
+                var qry = from r in context.Retrievals orderby r.Status descending select new { r.RetrievalID, r.RetrievalDate, r.Status };
+                return qry.ToList();
+            }
         }
     }
 }
