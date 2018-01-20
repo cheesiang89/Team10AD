@@ -9,11 +9,12 @@
                   <tr><th>Item Code</th><th>Description</th><th>Quantity</th><th>Unit of Measure</th><th></th></tr>
    </table>
 
-  
-    <asp:Button ID="btnSubmitRequisition" runat="server" Text="Submit Requisition" />
+   <input id="btnSubmitRequisition" type="button" value="Submit Requisition" />
+    <%--<asp:Button ID="btnSubmitRequisition" runat="server" Text="Submit Requisition" />--%>
 
     <asp:Button ID="btnEmptyCart" runat="server" Text="Empty Cart" />
 
 <script type="text/javascript" src="<%= ResolveUrl ("~/Scripts/cart.js") %>"></script>
     <asp:HiddenField ID="hiddenCart" runat="server" />
+   
 </asp:Content>

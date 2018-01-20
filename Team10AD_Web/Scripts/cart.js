@@ -20,13 +20,16 @@ $(document).ready(function () {
         addRow(obj,i);
 
     }
-
-
 });
+//Save cart
+$(document).ready(
+    saveData()
+);
+
 function addRow(obj, index) {
        $('<tr>').html(
         //"<tr>" +
-        "<td>" + obj.itemCode + "</td><td>"
+        "<td><input type=text readonly='true' id='txtItemCode" + index + "'></input></td><td>"
         + obj.description + "</td><td>"
         + "<input type=text id='txtInput"+index+"'></input></td><td>"
         //+ obj.quantity + "</td><td>"
@@ -34,6 +37,10 @@ function addRow(obj, index) {
 
     //Make quantity editable
        $('#txtInput' + index).val(obj.quantity);
+
+    //Make itemcode an input
+       $('#txtItemCode' + index).val(obj.itemCode);
+
     console.log('Quantity: ' + obj.quantity);
 
     //Add Button
@@ -47,7 +54,7 @@ function addButton(index) {
     console.log("CartTab is:" + cartTab.html());
     var tr = $('#cartTable tr').eq(index+1);
     console.log("CartRow is:" + tr.html());
-    let td = $('td:nth-child(5)');
+    let td = $('#btnDelete'+index);
     console.log("CartData is:" + td.html());
     // ADD A BUTTON.
     var button = document.createElement('input');
@@ -60,13 +67,32 @@ function addButton(index) {
 
     td.append(button);
 }
-function createButton(td) {
- 
-}
+
 // DELETE TABLE ROW.
 function removeRow(oButton) {
     var cartTab = document.getElementById('cartTable');
     cartTab.deleteRow(oButton.parentNode.parentNode.rowIndex);       // BUTTON -> TD -> TR.
+}
+
+function saveData() {
+    $(document).on("click", "[id*=btnSubmitRequisition]", function () {
+        //Iterate through rows, create JSON
+        var cartObjs = $('#cartTable');
+        var values = new Array();
+
+        // LOOP THROUGH EACH ROW OF THE TABLE.
+        for (row = 1; row < cartObjs.rows.length - 1; row++) {
+            for (c = 0; c < cartObjs.rows[row].cells.length; c++) {   // EACH CELL IN A ROW.
+
+                var element = cartObjs.rows.item(row).cells[c];
+                if (element.childNodes[0].getAttribute('type') === 'text') {
+                    values.push("'" + element.childNodes[0].value + "'");
+                }
+            }
+        }
+        console.log(values);
+        return false;
+    });
 }
 
 function deleteCart() {
