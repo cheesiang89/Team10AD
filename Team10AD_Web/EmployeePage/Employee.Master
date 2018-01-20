@@ -102,7 +102,8 @@
                             <asp:ScriptReference Path="/Scripts/Template/wow.min.js" />
                             <asp:ScriptReference Path="/Scripts/Template/custom.js" />
                             <asp:ScriptReference Path="/Scripts/script.js" />
-                              <asp:ScriptReference Path="http://code.jquery.com/jquery-1.11.1.min.js" />  
+                             <asp:ScriptReference Path="https://code.jquery.com/jquery-1.12.4.min.js" />  
+                              <%--<asp:ScriptReference Path="http://code.jquery.com/jquery-1.11.1.min.js" />  --%>
                                    <asp:ScriptReference Path="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" />
                             <asp:ScriptReference Path="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/jquery-ui.js" />
                                      

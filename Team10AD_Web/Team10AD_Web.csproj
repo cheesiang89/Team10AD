@@ -329,7 +329,7 @@
   <ItemGroup>
     <Compile Include="App_Code\BusinessLogic.cs" />
     <Compile Include="App_Code\BusinessLogic_Sam.cs" />
-    <Content Include="App_Code\CartData.cs" />
+    <Compile Include="App_Code\CartData.cs" />
     <Content Include="App_Code\CS_JsonHelper.cs" />
     <Compile Include="App_Code\Model\Catalogue.cs" />
     <Compile Include="App_Code\Model\CollectionPoint.cs" />

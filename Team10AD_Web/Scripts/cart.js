@@ -29,7 +29,7 @@ $(document).ready(
 function addRow(obj, index) {
        $('<tr>').html(
         //"<tr>" +
-        "<td><input type=text readonly='true' id='txtItemCode" + index + "'></input></td><td>"
+           "<td>" + obj.itemCode+"</td><td>"
         + obj.description + "</td><td>"
         + "<input type=text id='txtInput"+index+"'></input></td><td>"
         //+ obj.quantity + "</td><td>"
@@ -38,10 +38,7 @@ function addRow(obj, index) {
     //Make quantity editable
        $('#txtInput' + index).val(obj.quantity);
 
-    //Make itemcode an input
-       $('#txtItemCode' + index).val(obj.itemCode);
-
-    console.log('Quantity: ' + obj.quantity);
+       console.log('Quantity: ' + obj.quantity);
 
     //Add Button
     addButton(index);
@@ -55,7 +52,7 @@ function addButton(index) {
     //var tr = $('#cartTable tr').eq(index+1);
     //console.log("CartRow is:" + tr.html());
     let td = $('#btnDelete'+index);
-    console.log("CartData is:" + td.html());
+   // console.log("CartData is:" + td.html());
     // ADD A BUTTON.
     var button = document.createElement('input');
 
@@ -76,9 +73,29 @@ function removeRow(oButton) {
 
 function saveData() {
     $(document).on("click", "[id*=btnSubmitRequisition]", function () {
-        console.log('Cart table is:'+$('#cartTable').html());
+        //console.log('Cart table is:'+$('#cartTable').html());
         //Iterate through rows, create JSON
-        console.log(tableToJson($('#cartTable').html()));
+        
+        var jsonData = "{\"cart\": " + tableToJson() + " }";
+        console.log("Json is " + jsonData);
+
+        $.ajax({
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            type: 'POST',
+            url: 'http://localhost:3000/Service/Service.svc/GetJSON',
+            data: jsonData,
+            success: function (r) {
+                console.log('Success: ' + r.d);
+                //Redirect if success
+            },
+            error: function (r) {
+                console.log(r.responseText);
+            },
+            failure: function (r) {
+                console.log('Error: '+ r);
+            }
+        }); 
         return false;
     });
 }
@@ -94,31 +111,22 @@ function deleteCart() {
     }
 }
 
-function tableToJson(table) {
-    var data = [];
 
-    // first row needs to be headers
-    var headers = [];
-    for (var i = 0; i < table.rows[0].cells.length; i++) {
-        headers[i] = table.rows[0].cells[i].innerHTML.toLowerCase().replace(/ /gi, '');
-    }
+function tableToJson() {
 
-    // go through cells
-    for (var i = 1; i < table.rows.length; i++) {
-
-        var tableRow = table.rows[i];
-        var rowData = {};
-
-        for (var j = 0; j < tableRow.cells.length; j++) {
-
-            rowData[headers[j]] = tableRow.cells[j].innerHTML;
-
+    var rows = [];
+    $('table tr').each(function (i, n) {
+        var $row = $(n);
+        if (i != 0) {
+            rows.push({
+                ItemCode: $row.find('td:eq(0)').text(),
+                Description: $row.find('td:eq(1)').text(),
+                Quantity: $row.find('td:eq(2) input').val(),
+                Uom: $row.find('td:eq(3)').text(),
+            });
         }
-
-        data.push(rowData);
-    }
-
-    return data;
+    });
+    return JSON.stringify(rows);
 }
 
 //OLD: Page leave confirmation - Cart will be discarded
@@ -133,5 +141,28 @@ function tableToJson(table) {
 //    deleteCart();
 //});
 
-
+//OLD:
+//function tableToJson() {
+//    (function ($) {
+//        var convertTableToJson = function () {
+//            var rows = [];
+//            $('table tr').each(function (i, n) {
+//                var $row = $(n);
+//                if (i != 0) {
+//                    rows.push({
+//                        itemCode: $row.find('td:eq(0)').text(),
+//                        description: $row.find('td:eq(1)').text(),
+//                        quantity: $row.find('td:eq(2) input').val(),
+//                        uom: $row.find('td:eq(3)').text(),
+//                    });
+//                }
+//            });
+//            return JSON.stringify(rows);
+//        };
+//        $(function () {
+//           console.log(convertTableToJson());
+//            return convertTableToJson;
+//        });
+//    })(jQuery);
+//}
 
