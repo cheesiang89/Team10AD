@@ -13,6 +13,33 @@ namespace Team10AD_Web.EmployeePage {
     public partial class AssignRepresentative {
         
         /// <summary>
+        /// lblRepName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblRepName;
+        
+        /// <summary>
+        /// lblRepSubtitle1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblRepSubtitle1;
+        
+        /// <summary>
+        /// lblRepSubtitle2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblRepSubtitle2;
+        
+        /// <summary>
         /// dgvAssignRep control.
         /// </summary>
         /// <remarks>
