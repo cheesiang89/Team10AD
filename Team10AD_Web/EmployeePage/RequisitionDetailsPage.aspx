@@ -15,5 +15,5 @@
             <asp:BoundField DataField="UnitOfMeasure" HeaderText="Unit Of Measure" />
         </Columns>
     </asp:GridView>
-    <asp:Button ID="CancelButton" runat="server" Text="Cancel Requisition" />
+    <asp:Button ID="CancelButton" runat="server" Text="Cancel Requisition" Visible="false" OnClick="CancelButton_Click" />
 </asp:Content>

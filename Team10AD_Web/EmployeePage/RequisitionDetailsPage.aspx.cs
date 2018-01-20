@@ -13,11 +13,18 @@ namespace Team10AD_Web.EmployeePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Team10ADModel context = new Team10ADModel();
-           
+            if (!IsPostBack)
+            {
+                Team10ADModel context = new Team10ADModel();
                 string requisitionid = (string)Session["requisitiondetail"];
                 int reqid = Convert.ToInt32(requisitionid);
                 Requisition req = RayBizLogic.GetRequisitionById(requisitionid);
+                int currentEmpId = (int)Session["employeeid"];
+
+                if (currentEmpId == req.RequestorID && req.Status == "Pending")
+                {
+                    CancelButton.Visible = true;
+                }
 
                 var qry = from r in context.RequisitionDetails where r.RequisitionID == reqid select new { r.Catalogue.Description, r.QuantityRequested, r.Catalogue.UnitOfMeasure };
                 dgvRequisitionDetail.DataSource = qry.ToList();
@@ -27,7 +34,16 @@ namespace Team10AD_Web.EmployeePage
                 App_Code.Model.Employee emp = context.Employees.Where(x => x.EmployeeID == req.RequestorID).First();
                 NameTextBox.Text = emp.Name;
                 StatusTextBox.Text = req.Status;
-            
+            }
+        }
+
+        protected void CancelButton_Click(object sender, EventArgs e)
+        {
+            Team10ADModel context = new Team10ADModel();
+            string requisitionid = (string)Session["requisitiondetail"];
+            int reqid = Convert.ToInt32(requisitionid);
+            RayBizLogic.CancelRequisition(reqid);
+            Response.Redirect("RequisitionDetailsPage.aspx");
         }
     }
 }

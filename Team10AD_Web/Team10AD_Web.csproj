@@ -134,6 +134,8 @@
     <Content Include="Clerk\StockFlow.aspx" />
     <Content Include="Clerk\SupplierDetailPage.aspx" />
     <Content Include="Clerk\SupplierList.aspx" />
+    <Content Include="Content\css\dpNumberPicker-2.x-skin.grey-min.css" />
+    <Content Include="Content\css\dpNumberPicker-2.x-skin.grey.css" />
     <Content Include="Content\css\site.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
@@ -236,6 +238,8 @@
     <Content Include="Scripts\Template\bootstrap.js" />
     <Content Include="Scripts\Template\bootstrap.min.js" />
     <Content Include="Scripts\Template\custom.js" />
+    <Content Include="Scripts\Template\dpNumberPicker-2.x-min.js" />
+    <Content Include="Scripts\Template\dpNumberPicker-2.x.js" />
     <Content Include="Scripts\Template\jquery-1.10.2.js" />
     <Content Include="Scripts\Template\jquery.easing.min.js" />
     <Content Include="Scripts\Template\jquery.min.js" />
