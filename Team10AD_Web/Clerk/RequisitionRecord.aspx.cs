@@ -87,6 +87,9 @@ namespace Team10AD_Web.Clerk
                 RayBizLogic.GenerateRetrievalList(rd, reqlist, clerkid);
             }
 
+            //Set selected requisition status to "Processing"
+            RayBizLogic.ReqStatusProcessing(reqIdList);
+
             Response.Redirect("RetrievalList.aspx");
         }
 

@@ -28,7 +28,18 @@ namespace Team10AD_Web.Clerk
                 int index = Convert.ToInt32(e.CommandArgument);
                 GridViewRow selectedRow = dgvRetList.Rows[index];
                 Session["retrievaldetail"] = selectedRow.Cells[0].Text;
-                Response.Redirect("RetrievalDetailPage.aspx");
+
+                int id = Convert.ToInt32(selectedRow.Cells[0].Text);
+                Retrieval ret =  RayBizLogic.GetRetrievalById(id);
+
+                if (ret.Status == "Retrieved")
+                {
+                    Response.Redirect("CompletedRetrievalDetailPage.aspx");
+                }
+                else
+                {
+                    Response.Redirect("RetrievalDetailPage.aspx");
+                }
             }
         }
 

@@ -121,6 +121,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Clerk\CompletedRetrievalDetailPage.aspx" />
     <Content Include="Clerk\DepartmentDetail.aspx" />
     <Content Include="Clerk\DepartmentList.aspx" />
     <Content Include="Clerk\DisbursementDetailsPage.aspx" />
@@ -354,6 +355,13 @@
     </Compile>
     <Compile Include="Clerk\Clerk.Master.designer.cs">
       <DependentUpon>Clerk.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Clerk\CompletedRetrievalDetailPage.aspx.cs">
+      <DependentUpon>CompletedRetrievalDetailPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Clerk\CompletedRetrievalDetailPage.aspx.designer.cs">
+      <DependentUpon>CompletedRetrievalDetailPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Clerk\DepartmentDetail.aspx.cs">
       <DependentUpon>DepartmentDetail.aspx</DependentUpon>
