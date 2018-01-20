@@ -50,10 +50,10 @@ function addRow(obj, index) {
 //Loop through rows and append button
 function addButton(index) {
      //Make DELETE Button on 5th <td>
-    var cartTab = $('#cartTable tbody');
-    console.log("CartTab is:" + cartTab.html());
-    var tr = $('#cartTable tr').eq(index+1);
-    console.log("CartRow is:" + tr.html());
+    //var cartTab = $('#cartTable tbody');
+    //console.log("CartTab is:" + cartTab.html());
+    //var tr = $('#cartTable tr').eq(index+1);
+    //console.log("CartRow is:" + tr.html());
     let td = $('#btnDelete'+index);
     console.log("CartData is:" + td.html());
     // ADD A BUTTON.
@@ -76,21 +76,9 @@ function removeRow(oButton) {
 
 function saveData() {
     $(document).on("click", "[id*=btnSubmitRequisition]", function () {
+        console.log('Cart table is:'+$('#cartTable').html());
         //Iterate through rows, create JSON
-        var cartObjs = $('#cartTable');
-        var values = new Array();
-
-        // LOOP THROUGH EACH ROW OF THE TABLE.
-        for (row = 1; row < cartObjs.rows.length - 1; row++) {
-            for (c = 0; c < cartObjs.rows[row].cells.length; c++) {   // EACH CELL IN A ROW.
-
-                var element = cartObjs.rows.item(row).cells[c];
-                if (element.childNodes[0].getAttribute('type') === 'text') {
-                    values.push("'" + element.childNodes[0].value + "'");
-                }
-            }
-        }
-        console.log(values);
+        console.log(tableToJson($('#cartTable').html()));
         return false;
     });
 }
@@ -104,6 +92,33 @@ function deleteCart() {
             window.alert('Empty cart?? :' + cart[i]);
         }
     }
+}
+
+function tableToJson(table) {
+    var data = [];
+
+    // first row needs to be headers
+    var headers = [];
+    for (var i = 0; i < table.rows[0].cells.length; i++) {
+        headers[i] = table.rows[0].cells[i].innerHTML.toLowerCase().replace(/ /gi, '');
+    }
+
+    // go through cells
+    for (var i = 1; i < table.rows.length; i++) {
+
+        var tableRow = table.rows[i];
+        var rowData = {};
+
+        for (var j = 0; j < tableRow.cells.length; j++) {
+
+            rowData[headers[j]] = tableRow.cells[j].innerHTML;
+
+        }
+
+        data.push(rowData);
+    }
+
+    return data;
 }
 
 //OLD: Page leave confirmation - Cart will be discarded
