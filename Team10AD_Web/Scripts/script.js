@@ -38,7 +38,7 @@ function showPopupCatalogueDetail() {
 
                     //Exit dialog if successful
                     if (saveToCart(itemCode, description, quantity, uom) === true) {
-                         //TODO: Clear Textbox
+                         //Clear Textbox
                         $(".dpui-numberPicker-input").val(0);
                         $(this).dialog('close');
                         //Show success
@@ -60,7 +60,7 @@ function showPopupCatalogueDetail() {
                     }
                 },
                 Cancel: function () {
-                    //TODO: Clear Textbox
+                    //Clear Textbox
                     $(".dpui-numberPicker-input").val(0);
                     $(this).dialog('close');
                 }
@@ -122,7 +122,10 @@ function populatePopOut(item) {
     $("#MainContent_lblDescription").html($(".Description", $(item).closest("tr")).html());
     $("#MainContent_lblUOM").html($(".UnitOfMeasure", $(item).closest("tr")).html());
     $("#MainContent_lblItemCode").html($(".ItemCode", $(item).closest("tr")).html());
-    console.log('populatepopout():' + $(".ItemCode", $(item).closest("tr")).html());
+  
+    $("#spinner").html("<div id=\"np\"></div >");
+    dpUI.numberPicker("#np", OPTIONS);
+    //console.log('populatepopout():' + $(".ItemCode", $(item).closest("tr")).html());
 }
 
 //Go Cart Page
@@ -166,7 +169,8 @@ var OPTIONS = {
     decreaseText: "-",
 
     // callbacks
-    onReady: function () { },
+    onReady: function () {
+     },
     onMin: function () { },
     onMax: function () { },
     beforeIncrease: function () { },

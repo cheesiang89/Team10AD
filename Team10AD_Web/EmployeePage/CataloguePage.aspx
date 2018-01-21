@@ -41,11 +41,12 @@
         <br />
         <b>Quantity</b>
         <%-- Use number spinner: Note that default <input> created has no ID." --%>
-       <div id="np">
-              <%-- <asp:TextBox ID="txtInputQty" runat="server"></asp:TextBox>--%>
+        <span id="spinner">
+    <%--   <div id="np">
+               <asp:TextBox ID="txtInputQty" runat="server"></asp:TextBox>
              
-             </div>
-
+             </div>--%>
+        </span>
         <br />
         <div id="warningAddToCart" style="color:red"> Number must be positive integer </div>
         <asp:Label ID="lblItemCode" runat="server" CSSClass="hidden"></asp:Label>
