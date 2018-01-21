@@ -17,11 +17,10 @@ namespace Team10AD_Web.App_Code
       
         public string reqid { get; set; }
 
-        //[DataMember]
-        //public string description { get; set; }
-       
 
-        //[DataMember]
-        //public string uom { get; set; }
+        public string description { get; set; }
+
+        
+        public string uom { get; set; }
     }
 }

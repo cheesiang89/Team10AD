@@ -21,15 +21,19 @@ $(document).ready(function () {
 
     }
 });
-//Save cart
+//Save cart, create Requisition
 $(document).ready(
-    saveData()
+    makeRequisition()
 );
 //Empty Cart
 $(document).ready(
    emptyCart()
 );
 
+//Test
+$(document).ready(
+    saveCartSession()
+);
 function addRow(obj, index) {
        $('<tr>').html(
         //"<tr>" +
@@ -75,7 +79,7 @@ function removeRow(oButton) {
     cartTab.deleteRow(oButton.parentNode.parentNode.rowIndex);       // BUTTON -> TD -> TR.
 }
 
-function saveData() {
+function makeRequisition() {
     $(document).on("click", "[id*=btnSubmitRequisition]", function () {
         //console.log('Cart table is:'+$('#cartTable').html());
         //Iterate through rows, create JSON
@@ -106,17 +110,14 @@ function saveData() {
 function emptyCart() {
     $(document).on("click", "[id*=btnEmptyCart]", function () {
         deleteCartSession();
-        location.reload();
+        //Delete Table
+        $("#cartTable").find("tr:gt(0)").remove();
+        return false;
     });
 }
 function deleteCartSession() {
     if (sessionStorage.cart) {
         sessionStorage.removeItem('cart');
-        //Iterate list check if got delete
-        cart = JSON.parse(sessionStorage.getItem('cart'));
-        for (var i = 0; i < cart.length; i++) {
-            console.log('Empty cart?? :' + cart[i]);
-        }
     }
 }
 
@@ -129,9 +130,9 @@ function tableToJson() {
         if (i != 0) {
             rows.push({
                 itemCode: $row.find('td:eq(0)').text(),
-               // description: $row.find('td:eq(1)').text(),
+                description: $row.find('td:eq(1)').text(),
                 quantity: $row.find('td:eq(2) input').val(),
-               // uom: $row.find('td:eq(3)').text(),
+                uom: $row.find('td:eq(3)').text(),
 
                 //Save employee id here
                 reqid: reqID,
@@ -140,10 +141,22 @@ function tableToJson() {
     });
     return JSON.stringify(rows);
 }
+//Not implemented
+function saveCartSession() {
+    $(document).on("click", "[id*=btnTest]", function () {
+     
+        var savedState = tableToJson();
+        console.log("Showing session data:" + savedState);
+        deleteCartSession();
+        sessionStorage.setItem('cart', savedState);
+        return false;
+    });
+}
+//$(window).unload(function () {
+//    alert("Do Reset..");
+//    saveCartSession();
+//});
 
-window.onbeforeunload = function () {
-    return 'Are you sure you want to leave?';
-};
 
 //window.onbeforeunload = function () {
 //    //Custom message not possible with later versions of Firefox and Chrome
