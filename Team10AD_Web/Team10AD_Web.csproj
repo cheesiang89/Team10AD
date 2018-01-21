@@ -306,7 +306,7 @@
     <Content Include="Scripts\Template\jquery-ui-1.8.24.min.js" />
     <Content Include="Scripts\Template\modernizr-2.6.2.js" />
     <Content Include="Scripts\script.js" />
-    <Content Include="Service\Service.svc" />
+    <Content Include="Service\CartService.svc" />
     <Content Include="TryMe.txt" />
     <Content Include="Old\ViewSwitcher.ascx" />
     <Content Include="Web.config">
@@ -329,6 +329,7 @@
   <ItemGroup>
     <Compile Include="App_Code\BusinessLogic.cs" />
     <Compile Include="App_Code\BusinessLogic_Sam.cs" />
+    <Content Include="App_Code\Cart.cs" />
     <Compile Include="App_Code\CartData.cs" />
     <Content Include="App_Code\CS_JsonHelper.cs" />
     <Compile Include="App_Code\Model\Catalogue.cs" />
@@ -612,8 +613,8 @@
     <Compile Include="Sample\Sample1.aspx.designer.cs">
       <DependentUpon>Sample1.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Service\Service.svc.cs">
-      <DependentUpon>Service.svc</DependentUpon>
+    <Compile Include="Service\CartService.svc.cs">
+      <DependentUpon>CartService.svc</DependentUpon>
     </Compile>
     <Compile Include="Shared.Master.cs">
       <DependentUpon>Shared.Master</DependentUpon>

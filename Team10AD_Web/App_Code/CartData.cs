@@ -10,9 +10,13 @@ namespace Team10AD_Web.App_Code
     [DataContract]
     public class CartData
     {
-        public string ItemCode { get; set; }
-        public string Description { get; set; }
-        public string Quantity { get; set; }
-        public string Uom { get; set; }
+        [DataMember]
+        public string itemCode { get; set; }
+        [DataMember]
+        public string description { get; set; }
+        [DataMember]
+        public string quantity { get; set; }
+        [DataMember]
+        public string uom { get; set; }
     }
 }

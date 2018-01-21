@@ -34,8 +34,11 @@ function showPopupCatalogueDetail() {
                    // console.log(saveToCart(itemCode,description, quantity, uom) === true);
 
                     //Exit dialog if successful
-                    if (saveToCart(itemCode,description,quantity,uom) === true) {
+                    if (saveToCart(itemCode, description, quantity, uom) === true) {
+                         //TODO: Clear Textbox
                         $(this).dialog('close');
+                    } else {
+                        //TODO: Show warning
                     }
                 },
                 Cancel: function () {
@@ -72,9 +75,10 @@ function saveToCart(itemCode, description, quantity, uom) {
         for (var i = 0; i < cart.length; i++) {
             console.log('List values:' + cart[i]);
         }
+         
 
         return true;
-        //TODO: Clear Textbox
+      
 
     } else return false;
 }
@@ -107,32 +111,12 @@ function goCart() {
 
     // var dataForServer = encodeURIComponent(sessionStorage.getItem(myKey));
     $(document).on("click", "[id*=imgCart]", function () {
-      // Service.Greeting(onSuccess);
-       // postData();
-        window.location.href = "RequisitionCart.aspx";
+      // CartService.Greeting(onSuccess);
+         window.location.href = "RequisitionCart.aspx";
         return false;
     });
 }
-function postData() {
-    //var data = {};
-    //data.ItemCode = "this";
-    //data.Quantity = "1";
 
-    //$.ajax({
-    //    url: "/Service/Service.svc/GetJSON",
-    //    type: "POST",
-    //    contentType: "application/json; charset=utf-8",
-    //    data: JSON.stringify({ "data": data }),
-    //    dataType: "json",
-    //    success: function (result) {
-    //        console.log("Success"+ result);
-            
-    //    },
-    //    error: function (error) {
-    //        alert("Error: " + error.Error);
-    //    }
-    //});
-}
 function onSuccess(result) {
     alert(result);
 }  
@@ -177,33 +161,3 @@ $(document).ready(function () {
 
 });
 
-
-//function saveToCartOld(itemCode, description, quantity, uom) {
-//    //Validation
-//    if (positiveInteger(quantity) === true) {
-
-//        var cart = new Object();
-//        // Create list in SessionState
-//        if (sessionStorage.cart) {
-//            cart = JSON.parse(sessionStorage.getItem('cart'));
-//            console.log("got cart");
-//        } else {
-//            console.log("no cart");
-//            cart = [];
-//        }
-//        //Save jSON(itemCode,quantity)
-//        var product = { "itemCode": itemCode, "description": description, "quantity": quantity,"uom": uom };
-//        var myJSON = JSON.stringify(product);
-//        //console.log('JSON is' + myJSON);
-//         cart.push(myJSON);
-//         sessionStorage.setItem('cart', JSON.stringify(cart));
-//         //Print list
-//         for (var i = 0; i < cart.length; i++) {
-//           console.log('List values:' + cart[i]);
-//        }
-
-//        return true;
-//        //TODO: Clear Textbox
-
-//    } else return false;
-//}

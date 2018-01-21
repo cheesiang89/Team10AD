@@ -7,11 +7,12 @@ using System.ServiceModel.Activation;
 using System.ServiceModel.Web;
 using System.Text;
 using Team10AD_Web.App_Code;
+
 namespace Team10AD_Web.Service
 {
     [ServiceContract(Namespace = "")]
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
-    public class Service
+    public class CartService
     {
         // To use HTTP GET, add [WebGet] attribute. (Default ResponseFormat is WebMessageFormat.Json)
         // To create an operation that returns XML,
@@ -24,22 +25,22 @@ namespace Team10AD_Web.Service
         public string Greeting()
         {
             // Add your operation implementation here
-            return "Hello world";
+            return   "Hello world"; ;
         }
 
-        // Add more operations here and mark them with [OperationContract]
         [OperationContract]
-        [WebInvoke (Method ="POST")]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest,
+              RequestFormat = WebMessageFormat.Json,
+              ResponseFormat = WebMessageFormat.Json)]
         public string GetJSON(List<CartData> cart)
         {
-            string x="";
-            // Add your operation implementation here
+            string s = "";
             foreach (var item in cart)
             {
-                x += item.ItemCode;
+                s += "*" + item.itemCode + "," + item.quantity + "*";
             }
+            return s;
 
-            return x;
         }
     }
 }

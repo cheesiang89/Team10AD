@@ -16,7 +16,7 @@ $(document).ready(function () {
     for (var i = 0; i < cart.length; i++) {
         console.log('2nd page List values:' + cart[i]);
         var obj = JSON.parse(cart[i]);
-        console.log('2nd page JSON object: ' + obj.itemCode);
+        console.log('2nd page JSON object: ' + obj.ItemCode);
         addRow(obj,i);
 
     }
@@ -38,7 +38,7 @@ function addRow(obj, index) {
     //Make quantity editable
        $('#txtInput' + index).val(obj.quantity);
 
-       console.log('Quantity: ' + obj.quantity);
+       //console.log('Quantity: ' + obj.quantity);
 
     //Add Button
     addButton(index);
@@ -83,7 +83,7 @@ function saveData() {
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
             type: 'POST',
-            url: 'http://localhost:3000/Service/Service.svc/GetJSON',
+            url: 'http://localhost:3000/Service/CartService.svc/GetJSON',
             data: jsonData,
             success: function (r) {
                 console.log('Success: ' + r.d);
@@ -119,10 +119,10 @@ function tableToJson() {
         var $row = $(n);
         if (i != 0) {
             rows.push({
-                ItemCode: $row.find('td:eq(0)').text(),
-                Description: $row.find('td:eq(1)').text(),
-                Quantity: $row.find('td:eq(2) input').val(),
-                Uom: $row.find('td:eq(3)').text(),
+                itemCode: $row.find('td:eq(0)').text(),
+                description: $row.find('td:eq(1)').text(),
+                quantity: $row.find('td:eq(2) input').val(),
+                uom: $row.find('td:eq(3)').text(),
             });
         }
     });
