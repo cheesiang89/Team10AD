@@ -5,16 +5,18 @@ using System.Web;
 using System.Web.Script.Serialization;
 using Team10AD_Web.App_Code.Model;
 
+
 namespace Team10AD_Web.App_Code
 {
     public static class CS_BizLogic
     {
-        //Combine duplicates
-        public static List<CartData> combineDuplicates(List<CartData> list)
+        private static int reqID;
+         //Combine duplicates
+        public static List<CartData> CombineDuplicates(List<CartData> oldList)
         {
             List<CartData> newList = new List<CartData>();
-
-            var result = list.GroupBy(x => x.itemCode,
+           
+            var result = oldList.GroupBy(x => x.itemCode,
              (key, values) => new {
                  itemCode = key,
                  quantity = values.Sum(x => Int32.Parse(x.quantity)),
@@ -33,50 +35,43 @@ namespace Team10AD_Web.App_Code
             return newList;
         }
         //Make into list of Requisition - Required: ItemCode, Quantity, RequestorID, RequisitionDate, Status
-        public static void CreateRequisition(List<CartData> cartList)
+        public static List<RequisitionDetail> CreateRequisition(List<CartData> oldList)
         {
+            reqID = Int32.Parse(oldList.Select(x => x).First().reqid);
+
+            List<CartData> cartList = CombineDuplicates(oldList);
+
             //Convert CartData to RequisitonDetail object
             List<RequisitionDetail> requisitionList = new List<RequisitionDetail>();
-            RequisitionDetail requisitionDTO = new RequisitionDetail();
+            
 
             foreach (var item in cartList)
             {
+                RequisitionDetail requisitionDTO = new RequisitionDetail();
                 requisitionDTO.ItemCode = item.itemCode;
                 requisitionDTO.QuantityRequested = Int32.Parse(item.quantity);
                 requisitionList.Add(requisitionDTO);
+
             }
+           
             using (Team10ADModel context = new Team10ADModel())
             {
-                
+
 
                 Requisition requisition = new Requisition();
                 {
-                    requisition.RequisitionDate = user;
+                    requisition.RequisitionDate = DateTime.Now;
                     requisition.Status = "Pending";
-                    requisition.RequestorID = " ";
-                    Size = size,
-                    Chilli = chilli,
-                    MoreSalt = salt,
-                    Pepper = pepper
+                    requisition.RequisitionDetails = requisitionList;
+                    requisition.RequestorID = reqID;
+
                 };
-                entities.Orders.Add(order);
-                entities.SaveChanges();
+                context.Requisitions.Add(requisition);
+                context.SaveChanges();
             }
+            return requisitionList;
         }
 
-
-        //public DateTime? RequisitionDate { get; set; }
-
-        //public int? RequestorID { get; set; }
-
-        //[StringLength(50)]
-        //public string Status { get; set; }
-
-        //RequisitionDetails = new HashSet<RequisitionDetail>();
-
-        //      public string ItemCode { get; set; }
-
-        //public int? QuantityRequested { get; set; }
         //Send notification
     }
 }

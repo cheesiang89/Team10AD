@@ -15,6 +15,6 @@
     <asp:Button ID="btnEmptyCart" runat="server" Text="Empty Cart" />
 
 <script type="text/javascript" src="<%= ResolveUrl ("~/Scripts/cart.js") %>"></script>
-    <asp:HiddenField ID="hiddenCart" runat="server" />
+    <asp:HiddenField ID="reqID" runat="server" />
    <a href="/EmployeePage/Test.aspx"></a>
 </asp:Content>

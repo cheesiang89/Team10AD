@@ -7,7 +7,7 @@ using System.ServiceModel.Activation;
 using System.ServiceModel.Web;
 using System.Text;
 using Team10AD_Web.App_Code;
-
+using Team10AD_Web.App_Code.Model;
 namespace Team10AD_Web.Service
 {
     [ServiceContract(Namespace = "")]
@@ -34,12 +34,23 @@ namespace Team10AD_Web.Service
               ResponseFormat = WebMessageFormat.Json)]
         public string GetJSON(List<CartData> cart)
         {
+            List<RequisitionDetail> newCart = CS_BizLogic.CreateRequisition(cart);
+
             string s = "";
-            foreach (var item in cart)
+            //OLD
+            //foreach (var item in newCart)
+            //{
+            //    s += "*" + item.itemCode + "," + item.quantity +","+item.reqid+ "*";
+            //}
+
+            foreach (var item in newCart)
             {
-                s += "*" + item.itemCode + "," + item.quantity + "*";
+                s += "*" + item.ItemCode + "," + item.QuantityRequested+"*";
             }
+
             return s;
+
+
 
         }
     }

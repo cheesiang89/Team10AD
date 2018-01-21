@@ -5,7 +5,10 @@ namespace Team10AD_Web.App_Code.Model
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Runtime.Serialization;
+    using System.Web;
 
+    [DataContract]
     public partial class RequisitionDetail
     {
         [Key]
@@ -16,8 +19,10 @@ namespace Team10AD_Web.App_Code.Model
         [Key]
         [Column(Order = 1)]
         [StringLength(4)]
+        [DataMember]
         public string ItemCode { get; set; }
 
+        [DataMember]
         public int? QuantityRequested { get; set; }
 
         public int? QuantityRetrieved { get; set; }

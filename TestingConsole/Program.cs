@@ -18,7 +18,7 @@ namespace TestingConsole
                
             }
 
-           List<CartData> newCart = combineDuplicates(originalCart);
+           List<CartData> newCart = CombineDuplicates(originalCart);
             foreach (var item in newCart)
             {
                 Console.WriteLine("New list: Item code is - " + item.itemCode + "| Quantity is - " + item.quantity);
@@ -66,16 +66,16 @@ namespace TestingConsole
             return cart;
         }
 
-      
-        public static List<CartData> combineDuplicates(List<CartData> list)
+
+        public static List<CartData> CombineDuplicates(List<CartData> oldList)
         {
             List<CartData> newList = new List<CartData>();
-            
-            var result = list.GroupBy(x => x.itemCode,
+
+            var result = oldList.GroupBy(x => x.itemCode,
              (key, values) => new {
                  itemCode = key,
                  quantity = values.Sum(x => Int32.Parse(x.quantity)),
-                 
+
              });
 
             CartData c;
@@ -85,8 +85,9 @@ namespace TestingConsole
                 c = new CartData();
                 c.itemCode = item.itemCode; c.quantity = item.quantity.ToString();
                 newList.Add(c);
+                Console.WriteLine(c.itemCode+","+c.quantity);
             }
-            
+
             return newList;
         }
     }

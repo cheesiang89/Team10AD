@@ -113,7 +113,8 @@ function deleteCart() {
 
 
 function tableToJson() {
-
+    var reqID = $('input[id$=reqID]').val().toString();
+    console.log("Requestor id is: "+ reqID);
     var rows = [];
     $('table tr').each(function (i, n) {
         var $row = $(n);
@@ -123,6 +124,9 @@ function tableToJson() {
                // description: $row.find('td:eq(1)').text(),
                 quantity: $row.find('td:eq(2) input').val(),
                // uom: $row.find('td:eq(3)').text(),
+
+                //Save employee id here
+                reqid: reqID,
             });
         }
     });
