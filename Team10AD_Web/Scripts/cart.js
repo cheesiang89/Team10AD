@@ -120,9 +120,9 @@ function tableToJson() {
         if (i != 0) {
             rows.push({
                 itemCode: $row.find('td:eq(0)').text(),
-                description: $row.find('td:eq(1)').text(),
+               // description: $row.find('td:eq(1)').text(),
                 quantity: $row.find('td:eq(2) input').val(),
-                uom: $row.find('td:eq(3)').text(),
+               // uom: $row.find('td:eq(3)').text(),
             });
         }
     });

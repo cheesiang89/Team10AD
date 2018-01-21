@@ -16,5 +16,5 @@
 
 <script type="text/javascript" src="<%= ResolveUrl ("~/Scripts/cart.js") %>"></script>
     <asp:HiddenField ID="hiddenCart" runat="server" />
-   
+   <a href="/EmployeePage/Test.aspx"></a>
 </asp:Content>

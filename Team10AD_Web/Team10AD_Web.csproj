@@ -197,6 +197,7 @@
     <Content Include="EmployeePage\RequisitionDetailsPage.aspx" />
     <Content Include="EmployeePage\RequisitionStatus.aspx" />
     <Content Include="EmployeePage\SelectCollection.aspx" />
+    <Content Include="EmployeePage\Test.aspx" />
     <Content Include="Images\cart1.png" />
     <Content Include="Sample\About.aspx" />
     <Content Include="Account\Login.aspx" />
@@ -329,9 +330,8 @@
   <ItemGroup>
     <Compile Include="App_Code\BusinessLogic.cs" />
     <Compile Include="App_Code\BusinessLogic_Sam.cs" />
-    <Content Include="App_Code\Cart.cs" />
     <Compile Include="App_Code\CartData.cs" />
-    <Content Include="App_Code\CS_JsonHelper.cs" />
+    <Compile Include="App_Code\CS_BizLogic.cs" />
     <Compile Include="App_Code\Model\Catalogue.cs" />
     <Compile Include="App_Code\Model\CollectionPoint.cs" />
     <Compile Include="App_Code\Model\Department.cs" />
@@ -545,6 +545,13 @@
     </Compile>
     <Compile Include="EmployeePage\SelectCollection.aspx.designer.cs">
       <DependentUpon>SelectCollection.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeePage\Test.aspx.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmployeePage\Test.aspx.designer.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
     </Compile>
     <Compile Include="Sample\About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
