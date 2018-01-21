@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using Team10AD_Web.App_Code.Model;
@@ -146,21 +147,35 @@ namespace Team10AD_Web.App_Code
                     int itemcounter = 0;
                     foreach (RetrievalDetail retrieval in retrievallist)
                     {
-                        //If itemcode exist, just increment the requested quantity
-                        if (retrieval.ItemCode == requisition.ItemCode)
+                        //If itemcode exist and quantity not fulfilled, just increment the requested quantity
+                        if ((retrieval.ItemCode == requisition.ItemCode && (requisition.QuantityRequested - requisition.QuantityRetrieved) > 0) || (retrieval.ItemCode == requisition.ItemCode && requisition.QuantityRetrieved == null))
                         {
                             itemcounter++;
-                            retrieval.RequestedQuantity += requisition.QuantityRequested;
+                            if (requisition.QuantityRetrieved == null)
+                            {
+                                retrieval.RequestedQuantity += requisition.QuantityRequested;
+                            }
+                            else
+                            {
+                                retrieval.RequestedQuantity += (requisition.QuantityRequested - requisition.QuantityRetrieved);
+                            }  
                         }
                     }
 
-                    //If no existing itemcode in the List<RequisitionDetail>, create a new instance of it
-                    if (itemcounter == 0)
+                    //If no existing itemcode and quantity not fulfilled in the List<RetrievalDetail>, create a new instance of it
+                    if ((itemcounter == 0 && (requisition.QuantityRequested - requisition.QuantityRetrieved) > 0) || (itemcounter == 0 && requisition.QuantityRetrieved == null))
                     {
                         RetrievalDetail ret = new RetrievalDetail();
                         ret.RetrievalID = retrievalnew.RetrievalID;
                         ret.ItemCode = requisition.ItemCode;
-                        ret.RequestedQuantity = requisition.QuantityRequested;
+                        if (requisition.QuantityRetrieved == null)
+                        {
+                            ret.RequestedQuantity = requisition.QuantityRequested;
+                        }
+                        else
+                        {
+                            ret.RequestedQuantity = (requisition.QuantityRequested - requisition.QuantityRetrieved);
+                        }
                         retrievallist.Add(ret);
                     }
 
@@ -190,11 +205,273 @@ namespace Team10AD_Web.App_Code
 
         public static Retrieval GetRetrievalById(int id)
         {
+            Team10ADModel context = new Team10ADModel();
+
+            Retrieval ret = context.Retrievals.Where(x => x.RetrievalID == id).First();
+            return ret;
+
+        }
+
+        public static List<RetrievalDetail> GetRetrievalList(int id)
+        {
+            Team10ADModel context = new Team10ADModel();
+
+            return context.RetrievalDetails.Where(r => r.RetrievalID == id).ToList();
+
+        }
+
+        //DEPRECATED. Unable to update existing table due to lazy instead of eager retrieve
+        //public static void UpdateRetrievalDetails(List<RetrievalDetail> userinput)
+        //{
+        //    using (Team10ADModel context = new Team10ADModel())
+        //    {
+        //        //Updating quantities in Catalogue, Retrieval and RetrievalDetail tables
+        //        foreach (RetrievalDetail userdetail in userinput)
+        //        {
+        //            userdetail.QuantityAfter = userdetail.Catalogue.BalanceQuantity - userdetail.RetrievedQuantity;
+        //            Catalogue item = context.Catalogues.Where(x => x.ItemCode == userdetail.ItemCode).First();
+        //            item.BalanceQuantity -= userdetail.RetrievedQuantity;
+        //            item.PendingRequestQuantity -= userdetail.RetrievedQuantity;
+        //            context.SaveChanges();
+        //        }
+
+        //        Retrieval retrieval = GetRetrievalById(userinput[0].RetrievalID);
+        //        retrieval.Status = "Retrieved";
+        //        context.SaveChanges();
+
+        //        //Generate Disbursement and DisbursementDetails
+
+        //    }
+        //}
+
+        public static void UpdateRetrievalDetailsEager(int retrievalid, List<RetrievalDetail> userinput, int clerkid)
+        {
             using (Team10ADModel context = new Team10ADModel())
             {
-                Retrieval ret = context.Retrievals.Where(x => x.RetrievalID == id).First();
-                return ret;
+                //Updating quantities in Catalogue, Retrieval and RetrievalDetail tables
+                foreach (RetrievalDetail userdetail in userinput)
+                {
+                    RetrievalDetail existingdata = context.RetrievalDetails.Where(r => r.RetrievalID == userdetail.RetrievalID && r.ItemCode == userdetail.ItemCode).First();
+
+                    existingdata.RetrievedQuantity = userdetail.RetrievedQuantity;
+                    existingdata.QuantityAfter = existingdata.Catalogue.BalanceQuantity - userdetail.RetrievedQuantity;
+                    
+                    Catalogue item = context.Catalogues.Where(x => x.ItemCode == userdetail.ItemCode).First();
+                    item.BalanceQuantity -= userdetail.RetrievedQuantity;
+                    item.PendingRequestQuantity -= userdetail.RetrievedQuantity;
+
+                    context.SaveChanges();
+                }
+
+                Retrieval retrieval = context.Retrievals.Where(x => x.RetrievalID == retrievalid).First();
+                retrieval.Status = "Retrieved";
+                context.SaveChanges();
+
+                //Generate Disbursement and DisbursementDetails
+                retrieval = context.Retrievals.Where(x => x.RetrievalID == retrievalid).First();
+                List<RetrievalDetail> retrievaldetaillist = retrieval.RetrievalDetails.ToList();
+                List<Requisition> reqlist = retrieval.Requisitions.ToList();
+                List<Department> fulldeptlist = context.Departments.ToList();
+
+
+                foreach (Department d in fulldeptlist)
+                {
+                    //Counter to check if disbursement record was generated for this department
+                    //This will determine to create a new disbursement for this department or not
+                    int deptcounter = 0;
+                    List<DisbursementDetail> disDetailList = new List<DisbursementDetail>();
+                    Disbursement disbursementnew = new Disbursement();
+
+                    foreach (RetrievalDetail retrievaldetail in retrievaldetaillist)
+                    {
+                        //Preparing the retrieved qty of the item to be splitted amount the disbursement
+                        int balretrievedqty;
+                        if (retrievaldetail.RetrievedQuantity != null)
+                        {
+                            balretrievedqty = (int)retrievaldetail.RetrievedQuantity;
+                        }
+                        else
+                        {
+                            balretrievedqty = 0;
+                        }
+
+                        //Match all requisition record of this retrieval to see if any match a department
+
+
+                        foreach (Requisition r in reqlist)
+                        {
+                            //Counter to check for partial or completed requisition
+                            int notcompletedcheck = 0;
+
+                            //If match department, loop through the requisition detail and save into disbursement detail
+                            if (d.DepartmentCode == r.Employee.DepartmentCode)
+                            {
+                                deptcounter++;
+                                //Creating a new disbursement
+                                if (deptcounter == 1)
+                                {
+                                    Disbursement disbursement = new Disbursement();
+                                    disbursement.CollectionDate = DateTime.Now;
+                                    disbursement.PointID = r.Employee.Department.CollectionPoint.PointID;
+                                    disbursement.DepartmentCode = r.Employee.DepartmentCode;
+                                    disbursement.Status = "Uncollected";
+                                    disbursement.StoreStaffID = clerkid;
+                                    context.Disbursements.Add(disbursement);
+                                    context.SaveChanges();
+
+                                    disbursementnew = context.Disbursements.OrderByDescending(x => x.DisbursementID).First();
+                                }
+                                List<RequisitionDetail> reqDetailList = r.RequisitionDetails.ToList();
+                                foreach (RequisitionDetail reqdetail in reqDetailList)
+                                {
+                                    //Counter to make sure no duplicates of the item is created in the details
+                                    int itemcounter = 0;
+                                    foreach (DisbursementDetail disDetail in disDetailList)
+                                    {
+                                        //If itemcode exist, increment the requested quantity in the disbursement
+                                        //Assign the quantity retrieved to the corresponding requisition
+                                        //Decrement from the temporary store of the balance retrieved quantity
+                                        if (disDetail.ItemCode == reqdetail.ItemCode && reqdetail.ItemCode == retrievaldetail.ItemCode)
+                                        {
+                                            itemcounter++;
+                                            //The outer if set checks if the retrieved qty is sufficient to split among the departments
+                                            if (balretrievedqty >= reqdetail.QuantityRequested)
+                                            {
+                                                //Checks for partial/new requisition cases
+                                                //If null can ignore the quantity retrieved in the requisition
+                                                if (reqdetail.QuantityRetrieved == null)
+                                                {
+                                                    disDetail.QuantityRequested += reqdetail.QuantityRequested;
+                                                    reqdetail.QuantityRetrieved = reqdetail.QuantityRequested;
+                                                    balretrievedqty -= (int)reqdetail.QuantityRequested;
+                                                }
+                                                //If not null can safetly do the math
+                                                else
+                                                {
+                                                    disDetail.QuantityRequested += (reqdetail.QuantityRequested - reqdetail.QuantityRetrieved);
+                                                    reqdetail.QuantityRetrieved += (reqdetail.QuantityRequested - reqdetail.QuantityRetrieved);
+                                                    balretrievedqty -= (int) (reqdetail.QuantityRequested - reqdetail.QuantityRetrieved);
+                                                }
+                                            }
+                                            else if ((balretrievedqty < reqdetail.QuantityRequested) && (balretrievedqty > 0))
+                                            {
+                                                if (reqdetail.QuantityRetrieved == null)
+                                                {
+                                                    disDetail.QuantityRequested += balretrievedqty;
+                                                    reqdetail.QuantityRetrieved += balretrievedqty;
+                                                    balretrievedqty -= (int) balretrievedqty;
+                                                }
+                                                else
+                                                {
+                                                    disDetail.QuantityRequested += balretrievedqty;
+                                                    reqdetail.QuantityRetrieved += balretrievedqty;
+                                                    balretrievedqty -= (int) balretrievedqty;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                //Actually not necessary since balance available to split to disbursement is already 0
+                                                //Just putting a zero incase of null value
+                                                if (reqdetail.QuantityRetrieved == null)
+                                                {
+                                                    disDetail.QuantityRequested += 0;
+                                                    reqdetail.QuantityRetrieved = 0;
+                                                }
+                                                
+                                            }
+
+                                        }
+                                    }
+
+                                    //If no existing itemcode in the List<RequisitionDetail>, create a new instance of it
+                                    if (reqdetail.ItemCode == retrievaldetail.ItemCode && itemcounter == 0)
+                                    {
+                                        DisbursementDetail disburementdetail = new DisbursementDetail();
+                                        disburementdetail.DisbursementID = disbursementnew.DisbursementID;
+                                        disburementdetail.ItemCode = reqdetail.ItemCode;
+
+                                        if (balretrievedqty >= reqdetail.QuantityRequested)
+                                        {
+                                            //Checks for partial/new requisition cases
+                                            //If null can ignore the quantity retrieved in the requisition
+                                            if (reqdetail.QuantityRetrieved == null)
+                                            {
+                                                disburementdetail.QuantityRequested = reqdetail.QuantityRequested;
+                                                reqdetail.QuantityRetrieved = reqdetail.QuantityRequested;
+                                                balretrievedqty -= (int)reqdetail.QuantityRequested;
+                                            }
+                                            //If not null can safetly do the math
+                                            else
+                                            {
+                                                disburementdetail.QuantityRequested = (reqdetail.QuantityRequested - reqdetail.QuantityRetrieved);
+                                                reqdetail.QuantityRetrieved += (reqdetail.QuantityRequested - reqdetail.QuantityRetrieved);
+                                                balretrievedqty -= (int)(reqdetail.QuantityRequested - reqdetail.QuantityRetrieved);
+                                            }
+                                        }
+                                        else if ((balretrievedqty < reqdetail.QuantityRequested) && (balretrievedqty > 0))
+                                        {
+                                            if (reqdetail.QuantityRetrieved == null)
+                                            {
+                                                disburementdetail.QuantityRequested = balretrievedqty;
+                                                reqdetail.QuantityRetrieved = balretrievedqty;
+                                                balretrievedqty -= balretrievedqty;
+                                            }
+                                            else
+                                            {
+                                                disburementdetail.QuantityRequested = balretrievedqty;
+                                                reqdetail.QuantityRetrieved += balretrievedqty;
+                                                balretrievedqty -= balretrievedqty;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (reqdetail.QuantityRetrieved == null)
+                                            {
+                                                reqdetail.QuantityRetrieved = 0;
+                                            }
+                                            disburementdetail.QuantityRequested = 0;
+                                        }
+
+                                        disDetailList.Add(disburementdetail);
+                                    }
+                                }
+                                //Loop through details of requisition to check for completeness
+                                foreach(RequisitionDetail rd in reqDetailList)
+                                {
+                                    if (rd.QuantityRequested != rd.QuantityRetrieved)
+                                    {
+                                        notcompletedcheck++;
+                                    }
+                                }
+                            }
+                            if (notcompletedcheck == 0)
+                            {
+                                r.Status = "Completed";
+                            }
+                            else
+                            {
+                                r.Status = "Partial";
+                            }
+                        }
+                    }
+                    //Creating a new set of disbursement details
+                    if (deptcounter > 0)
+                    {
+                        foreach (DisbursementDetail ddetail in disDetailList)
+                        {
+                            context.DisbursementDetails.Add(ddetail);
+                            context.SaveChanges();
+                        }
+                    }
+                }
+
+
             }
+        }
+
+        public static void GenerateAdjustmentVoucherDetails(List<RetrievalDetail> suggested, List<RetrievalDetail> userinput)
+        {
+
         }
     }
 }
