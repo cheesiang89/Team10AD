@@ -33,25 +33,34 @@ namespace Team10AD_Web.App_Code
             return newList;
         }
         //Make into list of Requisition - Required: ItemCode, Quantity, RequestorID, RequisitionDate, Status
-        public static void CreateRequisition(string user, int foodID, string foodname,
-string size, string chilli, string salt, string pepper)
+        public static void CreateRequisition(List<CartData> cartList)
         {
+            //Convert CartData to RequisitonDetail object
+            List<RequisitionDetail> requisitionList = new List<RequisitionDetail>();
+            RequisitionDetail requisitionDTO = new RequisitionDetail();
+
+            foreach (var item in cartList)
+            {
+                requisitionDTO.ItemCode = item.itemCode;
+                requisitionDTO.QuantityRequested = Int32.Parse(item.quantity);
+                requisitionList.Add(requisitionDTO);
+            }
             using (Team10ADModel context = new Team10ADModel())
             {
-                //RequisitionDetail = new RequisitionDetail();
+                
 
-                //Requisition order = new Requisition();
-                //{
-                //    RequisitionDate = user,
-                //    RequestorID = foodID,
-                //    Status = foodname,
-                //    Size = size,
-                //    Chilli = chilli,
-                //    MoreSalt = salt,
-                //    Pepper = pepper
-                //};
-                //entities.Orders.Add(order);
-                //entities.SaveChanges();
+                Requisition requisition = new Requisition();
+                {
+                    requisition.RequisitionDate = user;
+                    requisition.Status = "Pending";
+                    requisition.RequestorID = " ";
+                    Size = size,
+                    Chilli = chilli,
+                    MoreSalt = salt,
+                    Pepper = pepper
+                };
+                entities.Orders.Add(order);
+                entities.SaveChanges();
             }
         }
 
