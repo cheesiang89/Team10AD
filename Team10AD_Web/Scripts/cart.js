@@ -96,6 +96,7 @@ function makeRequisition() {
             success: function (r) {
                 console.log('Success: ' + r.d);
                 //Redirect if success
+                window.location.replace("/EmployeePage/RequisitionStatus.aspx")
             },
             error: function (r) {
                 console.log(r.responseText);
@@ -141,7 +142,7 @@ function tableToJson() {
     });
     return JSON.stringify(rows);
 }
-//Not implemented
+//NOT IMPLEMENTED
 function saveCartSession() {
     $(document).on("click", "[id*=btnTest]", function () {
      
