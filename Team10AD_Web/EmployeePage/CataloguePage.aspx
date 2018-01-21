@@ -8,7 +8,9 @@
     <asp:TextBox ID="txtBoxSearch" runat="server">Search by category/desc</asp:TextBox>
     <asp:Button ID="btnSearch" runat="server" Text="Search" />
     <br />
-    <asp:Label runat="server" ID="lblTest" Text="Test"></asp:Label>
+<%--    <asp:Label runat="server" ID="lblTest" Text="Test"></asp:Label>--%>
+    <br />
+    <div id="notifyAdded" style="color:forestgreen"></div>
 
     <asp:GridView ID="dgvCatalogue" runat="server" AllowPaging="True" OnPageIndexChanging="dgvCatalogue_PageIndexChanging"
         AutoGenerateColumns="False" OnRowCommand="dgvCatalogue_RowCommand">
@@ -29,9 +31,6 @@
         </Columns>
     </asp:GridView>
 
-
-    <asp:Button ID="btnTest" runat="server" Text="Test" OnClick="btnTest_Click" />
-
     <div id="dialog" style="display: none">
         <b>Category</b><asp:Label ID="lblCategory" runat="server"></asp:Label>
         <br />
@@ -48,6 +47,7 @@
              </div>
 
         <br />
+        <div id="warningAddToCart" style="color:red"> Number must be positive integer </div>
         <asp:Label ID="lblItemCode" runat="server" CSSClass="hidden"></asp:Label>
     </div>
 

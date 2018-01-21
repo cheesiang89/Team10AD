@@ -16,7 +16,7 @@ $(document).ready(function () {
     for (var i = 0; i < cart.length; i++) {
         console.log('2nd page List values:' + cart[i]);
         var obj = JSON.parse(cart[i]);
-        console.log('2nd page JSON object: ' + obj.ItemCode);
+        console.log('2nd page JSON object: ' + obj.itemCode);
         addRow(obj,i);
 
     }
@@ -24,6 +24,10 @@ $(document).ready(function () {
 //Save cart
 $(document).ready(
     saveData()
+);
+//Empty Cart
+$(document).ready(
+   emptyCart()
 );
 
 function addRow(obj, index) {
@@ -99,18 +103,22 @@ function saveData() {
         return false;
     });
 }
-
-function deleteCart() {
+function emptyCart() {
+    $(document).on("click", "[id*=btnEmptyCart]", function () {
+        deleteCartSession();
+        location.reload();
+    });
+}
+function deleteCartSession() {
     if (sessionStorage.cart) {
         sessionStorage.removeItem('cart');
         //Iterate list check if got delete
         cart = JSON.parse(sessionStorage.getItem('cart'));
         for (var i = 0; i < cart.length; i++) {
-            window.alert('Empty cart?? :' + cart[i]);
+            console.log('Empty cart?? :' + cart[i]);
         }
     }
 }
-
 
 function tableToJson() {
     var reqID = $('input[id$=reqID]').val().toString();
@@ -133,13 +141,21 @@ function tableToJson() {
     return JSON.stringify(rows);
 }
 
+window.onbeforeunload = function () {
+    return 'Are you sure you want to leave?';
+};
+
+//window.onbeforeunload = function () {
+//    //Custom message not possible with later versions of Firefox and Chrome
+//    return "Do you want to leave?"
+//}
 //OLD: Page leave confirmation - Cart will be discarded
 //window.onbeforeunload = function () {
 //    //Custom message not possible with later versions of Firefox and Chrome
 //    return "Do you want to leave?"
 //}
 
-//// A jQuery event (I think), which is triggered after "onbeforeunload"
+// A jQuery event (I think), which is triggered after "onbeforeunload"
 //$(window).unload(function () {
 //    alert("Do Reset..");
 //    deleteCart();

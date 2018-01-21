@@ -8,7 +8,7 @@ namespace Team10AD_Web.App_Code.Model
     using System.Runtime.Serialization;
     using System.Web;
 
-    [DataContract]
+    
     public partial class RequisitionDetail
     {
         [Key]
@@ -19,10 +19,9 @@ namespace Team10AD_Web.App_Code.Model
         [Key]
         [Column(Order = 1)]
         [StringLength(4)]
-        [DataMember]
-        public string ItemCode { get; set; }
+           public string ItemCode { get; set; }
 
-        [DataMember]
+       
         public int? QuantityRequested { get; set; }
 
         public int? QuantityRetrieved { get; set; }

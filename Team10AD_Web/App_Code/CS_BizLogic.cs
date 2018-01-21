@@ -69,9 +69,12 @@ namespace Team10AD_Web.App_Code
                 context.Requisitions.Add(requisition);
                 context.SaveChanges();
             }
+
+            //TO DO: Send notification
+
             return requisitionList;
         }
 
-        //Send notification
+       
     }
 }

@@ -238,6 +238,7 @@
     <Content Include="EmployeePage\Employee.Master" />
     <Content Include="EmployeePage\Web.config" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
+    <Content Include="Scripts\Template\bootstrap-flash-alert.min.js" />
     <Content Include="Scripts\cart.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />
     <Content Include="Scripts\jquery-1.12.4.min.js" />

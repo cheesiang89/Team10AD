@@ -35,32 +35,6 @@ namespace Team10AD_Web.EmployeePage
         }
 
 
-
-        protected void saveToCart(string itemCode)
-
-        {
-            Page.Validate();
-            if (Page.IsValid)
-            {
-
-                List<string> cart = (List<string>)Session["requisitionCart"];
-                cart.Add(itemCode);
-                // popup.HidePopupWindow();
-            }
-
-
-        }
-
-        protected void btnTest_Click(object sender, EventArgs e)
-        {
-            List<string> cart = (List<string>)Session["requisitionCart"];
-            StringBuilder sb = new StringBuilder();
-            foreach (string s in cart)
-            {
-                sb.Append(s);
-            }
-            lblTest.Text = sb.ToString();
-        }
         protected void dgvCatalogue_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             //if (e.CommandName == "Add")

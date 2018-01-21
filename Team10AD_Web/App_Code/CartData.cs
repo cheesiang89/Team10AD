@@ -6,17 +6,15 @@ using System.Web;
 
 namespace Team10AD_Web.App_Code
 {
-    [Serializable]
-    [DataContract]
-    public class CartData
+       public class CartData
     {
-        [DataMember]
+        
         public string itemCode { get; set; }
 
-        [DataMember]
+        
         public string quantity { get; set; }
 
-        [DataMember]
+      
         public string reqid { get; set; }
 
         //[DataMember]

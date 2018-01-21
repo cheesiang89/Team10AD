@@ -45,7 +45,7 @@ namespace Team10AD_Web.Service
 
             foreach (var item in newCart)
             {
-                s += "*" + item.ItemCode + "," + item.QuantityRequested+"*";
+                s += "**" + item.ItemCode + "," + item.QuantityRequested + "**";
             }
 
             return s;

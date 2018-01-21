@@ -1,5 +1,8 @@
 ﻿//Put custom JS here
 //window.alert('text');
+$(document).ready(
+    $('#notifyAdded').hide()
+);
 
 $(document).ready(
     showPopupCatalogueDetail()
@@ -8,9 +11,9 @@ $(document).ready(
 $(document).ready(
     goCart()
 );
-
 function showPopupCatalogueDetail() {
     $(document).on("click", "[id*=btnAdd]", function () {
+        $('#warningAddToCart').hide();
         populatePopOut(this);
         $("#dialog").dialog({
             title: "View Details",
@@ -36,13 +39,29 @@ function showPopupCatalogueDetail() {
                     //Exit dialog if successful
                     if (saveToCart(itemCode, description, quantity, uom) === true) {
                          //TODO: Clear Textbox
+                        $(".dpui-numberPicker-input").val(0);
                         $(this).dialog('close');
+                        //Show success
+                        $.alert("Item Added", {
+
+                            // auto close
+                            autoClose: true,
+
+                            // auto close time
+                            closeTime: 2000,
+                            // Position, the first position, followed by offset, if it is between 1 and -1 percentage
+                           position: ['center', [-200,400]],
+                           
+                        })
                     } else {
-                        //TODO: Show warning
+                        //Show warning
+                        $('#warningAddToCart').show();
+                        console.log($('#warningAddToCart').html());
                     }
                 },
                 Cancel: function () {
                     //TODO: Clear Textbox
+                    $(".dpui-numberPicker-input").val(0);
                     $(this).dialog('close');
                 }
             },
@@ -117,9 +136,10 @@ function goCart() {
     });
 }
 
-function onSuccess(result) {
-    alert(result);
-}  
+//function onSuccess(result) {
+//    alert(result);
+//}  
+
 
 //For number picker
 var OPTIONS = {

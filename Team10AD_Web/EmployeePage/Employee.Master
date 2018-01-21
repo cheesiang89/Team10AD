@@ -22,6 +22,7 @@
         rel="stylesheet" type="text/css" />
        <link rel="stylesheet" type="text/css" href="/Content/css/dpNumberPicker-2.x.css" />
     <link rel="stylesheet" type="text/css" href="/Content/css/dpNumberPicker-2.x-skin.grey.css" />
+
     <link rel="stylesheet" type="text/css" href="/Content/css/site.css" />
     <%-- For Header Content in Child Pages --%>
     <asp:ContentPlaceHolder ID="head" runat="server">
@@ -101,13 +102,13 @@
                             <asp:ScriptReference Path="/Scripts/Template/jquery.scrollTo.js" />
                             <asp:ScriptReference Path="/Scripts/Template/wow.min.js" />
                             <asp:ScriptReference Path="/Scripts/Template/custom.js" />
-                            <asp:ScriptReference Path="/Scripts/script.js" />
-                             <asp:ScriptReference Path="https://code.jquery.com/jquery-1.12.4.min.js" />  
+                               <asp:ScriptReference Path="https://code.jquery.com/jquery-1.12.4.min.js" />  
                               <asp:ScriptReference Path="http://code.jquery.com/jquery-1.11.1.min.js" />  
                                    <asp:ScriptReference Path="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" />
                             <asp:ScriptReference Path="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/jquery-ui.js" />
-                                     
-                            <asp:ScriptReference Path="/Scripts/Template/dpNumberPicker-2.x.js" />
+                               <asp:ScriptReference Path="/Scripts/Template/dpNumberPicker-2.x.js" />
+                             <asp:ScriptReference Path="/Scripts/Template/bootstrap-flash-alert.min.js" />
+                            <asp:ScriptReference Path="/Scripts/script.js" />
                         </Scripts>
                         <Services>
                             <asp:ServiceReference Path="~/Service/Service.svc" />
