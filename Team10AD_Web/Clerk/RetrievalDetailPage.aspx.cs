@@ -21,6 +21,7 @@ namespace Team10AD_Web.Clerk
                 Retrieval ret = RayBizLogic.GetRetrievalById(retrievalid);
                 int currentClerkId = (int)Session["clerkid"];
 
+                //Safety catch. Incase user click back and click generate again
                 if (ret.Status == "Retrieved")
                 {
                     GenDisbursementList.Visible = false;
@@ -74,6 +75,7 @@ namespace Team10AD_Web.Clerk
             Team10ADModel context = new Team10ADModel();
             List<RetrievalDetail> suggested = (List < RetrievalDetail >) Session["SuggestedRetrievalDetail"];
 
+            int clerkid = (int) Session["clerkid"];
             string id = (string)Session["retrievaldetail"];
             int retrievalid = Convert.ToInt32(id);
             List<RetrievalDetail> userinput = RayBizLogic.GetRetrievalList(retrievalid);
@@ -90,14 +92,15 @@ namespace Team10AD_Web.Clerk
             }
 
             //Update retrieval and catalogue
-            RayBizLogic.UpdateRetrievalDetails(userinput);
-
             //Generate disbursement lists
-            
-            //Update requisition
-            
+            //Update requisition qty
+            RayBizLogic.UpdateRetrievalDetailsEager(retrievalid, userinput, clerkid);
+
+            //Update requisition status
+
             //Check for adjustment voucher needs
 
+            Response.Redirect("DisbursementList.aspx");
         }
     }
 }
