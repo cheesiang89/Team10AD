@@ -55,18 +55,3 @@
 
 </asp:Content>
 
-<%-- Old- For custom script --%>
-<%--    <asp:ScriptManagerProxy ID="ScriptManagerProxy1" runat="server">
-        <Scripts>
-            <asp:ScriptReference Path="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" />
-        </Scripts>
-        <Scripts>
-            <asp:ScriptReference Path="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/jquery-ui.js" />
-        </Scripts>
-        <Scripts>
-            <asp:ScriptReference Path="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" />
-        </Scripts>
-        <Scripts>
-           <asp:ScriptReference Path="/Scripts/script.js" />
-        </Scripts>
-    </asp:ScriptManagerProxy>--%>

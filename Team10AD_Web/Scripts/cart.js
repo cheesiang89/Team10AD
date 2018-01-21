@@ -3,7 +3,7 @@
 $(document).ready(function () {
     //window.alert("Test");
 
-    var cart;
+    let cart;
     if (sessionStorage.cart) {
         cart = JSON.parse(sessionStorage.getItem('cart'));
         console.log("got cart");
@@ -13,12 +13,11 @@ $(document).ready(function () {
     }
 
     //Make Table
-    for (var i = 0; i < cart.length; i++) {
-        console.log('2nd page List values:' + cart[i]);
-        var obj = JSON.parse(cart[i]);
-        console.log('2nd page JSON object: ' + obj.itemCode);
+    for (let i = 0; i < cart.length; i++) {
+       // console.log('2nd page List values:' + cart[i]);
+        let obj = JSON.parse(cart[i]);
+        //console.log('2nd page JSON object: ' + obj.itemCode);
         addRow(obj,i);
-
     }
 });
 //Save cart, create Requisition
@@ -54,15 +53,15 @@ function addRow(obj, index) {
 }
 //Loop through rows and append button
 function addButton(index) {
-     //Make DELETE Button on 5th <td>
-    //var cartTab = $('#cartTable tbody');
+     //Make DELETE Button 
+    //let cartTab = $('#cartTable tbody');
     //console.log("CartTab is:" + cartTab.html());
-    //var tr = $('#cartTable tr').eq(index+1);
+    //let tr = $('#cartTable tr').eq(index+1);
     //console.log("CartRow is:" + tr.html());
     let td = $('#btnDelete'+index);
    // console.log("CartData is:" + td.html());
     // ADD A BUTTON.
-    var button = document.createElement('input');
+    let button = document.createElement('input');
 
     // SET INPUT ATTRIBUTE.
     button.setAttribute('type', 'button');
@@ -75,8 +74,9 @@ function addButton(index) {
 
 // DELETE TABLE ROW.
 function removeRow(oButton) {
-    var cartTab = document.getElementById('cartTable');
+    let cartTab = document.getElementById('cartTable');
     cartTab.deleteRow(oButton.parentNode.parentNode.rowIndex);       // BUTTON -> TD -> TR.
+    saveCartSession();
 }
 
 function makeRequisition() {
@@ -84,7 +84,7 @@ function makeRequisition() {
         //console.log('Cart table is:'+$('#cartTable').html());
         //Iterate through rows, create JSON
         
-        var jsonData = "{\"cart\": " + tableToJson() + " }";
+        let jsonData = "{\"cart\": " + tableToJson() + " }";
         console.log("Json is " + jsonData);
 
         $.ajax({
@@ -95,8 +95,10 @@ function makeRequisition() {
             data: jsonData,
             success: function (r) {
                 console.log('Success: ' + r.d);
+                //Delete session data
+                deleteCartSession();
                 //Redirect if success
-                window.location.replace("/EmployeePage/RequisitionStatus.aspx")
+                window.location.href = "RequisitionStatus.aspx";
             },
             error: function (r) {
                 console.log(r.responseText);
@@ -123,11 +125,11 @@ function deleteCartSession() {
 }
 
 function tableToJson() {
-    var reqID = $('input[id$=reqID]').val().toString();
+    let reqID = $('input[id$=reqID]').val().toString();
     console.log("Requestor id is: "+ reqID);
-    var rows = [];
+    let rows = [];
     $('table tr').each(function (i, n) {
-        var $row = $(n);
+        let $row = $(n);
         if (i != 0) {
             rows.push({
                 itemCode: $row.find('td:eq(0)').text(),
@@ -144,20 +146,28 @@ function tableToJson() {
 }
 //NOT IMPLEMENTED
 function saveCartSession() {
-    $(document).on("click", "[id*=btnTest]", function () {
-     
-        var savedState = tableToJson();
-        console.log("Showing session data:" + savedState);
+    //$(document).on("click", "[id*=btnTest]", function () {
+        //Create JSON string 
+        let savedState = JSON.parse(tableToJson());
+        let savedCart = [];
+        for (var i = 0; i < savedState.length; i++) {
+   
+            let product = {
+                "itemCode": savedState[i]["itemCode"],
+                "description": savedState[i]["description"],
+                "quantity": savedState[i]["quantity"],
+                "uom": savedState[i]["uom"]
+            };
+            let myJSON = JSON.stringify(product);
+            //console.log("Showing session data:" + product["itemCode"]);
+            savedCart.push(myJSON);
+        }
+        
         deleteCartSession();
-        sessionStorage.setItem('cart', savedState);
+        sessionStorage.setItem('cart', JSON.stringify(savedCart));
         return false;
-    });
+    //});
 }
-//$(window).unload(function () {
-//    alert("Do Reset..");
-//    saveCartSession();
-//});
-
 
 //window.onbeforeunload = function () {
 //    //Custom message not possible with later versions of Firefox and Chrome

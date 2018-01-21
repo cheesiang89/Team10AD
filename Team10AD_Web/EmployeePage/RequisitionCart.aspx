@@ -19,7 +19,7 @@
     <%--<asp:Button ID="btnSubmitRequisition" runat="server" Text="Submit Requisition" />--%>
     <input id="btnEmptyCart" type="button" value="Empty Cart" />
     <%--<asp:Button ID="btnEmptyCart" runat="server" Text="Empty Cart" />--%>
-   <%--   <input id="btnTest" type="button" value="Test" />--%>
+      <input id="btnTest" type="button" value="Test" />
 <%--    <asp:Button ID="Test" runat="server" Text="Test" />--%>
 <script type="text/javascript" src="<%= ResolveUrl ("~/Scripts/cart.js") %>"></script>
     <asp:HiddenField ID="reqID" runat="server" />
