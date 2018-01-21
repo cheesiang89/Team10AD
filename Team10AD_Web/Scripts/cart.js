@@ -39,7 +39,7 @@ function addRow(obj, index) {
            "<td>" + obj.itemCode+"</td><td>"
         + obj.description + "</td><td>"
            + "<input type=text id='txtInput" + index
-           + "' class='txtInput'></input><div class='lblError'"
+           + "' class='txtInput' onKeyUp='return saveCartSession()'></input><div class='lblError'"
            + "style='color:red'>Positive Integer only</div></td><td>"
         //+ obj.quantity + "</td><td>"
         + obj.uom + "</td><td id='btnDelete"+index+"'></td></tr>").appendTo('#cartTable tbody');
