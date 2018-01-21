@@ -149,7 +149,7 @@ function tableToJson() {
     });
     return JSON.stringify(rows);
 }
-//NOT IMPLEMENTED
+
 function saveCartSession() {
     //$(document).on("click", "[id*=btnTest]", function () {
         //Create JSON string 
@@ -190,44 +190,5 @@ function qtyGotError() {
    
         return gotError;
 }
-//window.onbeforeunload = function () {
-//    //Custom message not possible with later versions of Firefox and Chrome
-//    return "Do you want to leave?"
-//}
-//OLD: Page leave confirmation - Cart will be discarded
-//window.onbeforeunload = function () {
-//    //Custom message not possible with later versions of Firefox and Chrome
-//    return "Do you want to leave?"
-//}
 
-// A jQuery event (I think), which is triggered after "onbeforeunload"
-//$(window).unload(function () {
-//    alert("Do Reset..");
-//    deleteCart();
-//});
-
-//OLD:
-//function tableToJson() {
-//    (function ($) {
-//        var convertTableToJson = function () {
-//            var rows = [];
-//            $('table tr').each(function (i, n) {
-//                var $row = $(n);
-//                if (i != 0) {
-//                    rows.push({
-//                        itemCode: $row.find('td:eq(0)').text(),
-//                        description: $row.find('td:eq(1)').text(),
-//                        quantity: $row.find('td:eq(2) input').val(),
-//                        uom: $row.find('td:eq(3)').text(),
-//                    });
-//                }
-//            });
-//            return JSON.stringify(rows);
-//        };
-//        $(function () {
-//           console.log(convertTableToJson());
-//            return convertTableToJson;
-//        });
-//    })(jQuery);
-//}
 

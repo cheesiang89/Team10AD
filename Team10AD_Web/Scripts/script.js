@@ -180,8 +180,8 @@ var OPTIONS = {
     afterDecrease: function () { },
     afterChange: function () { }
 };
-$(document).ready(function () {
-    dpUI.numberPicker("#np", OPTIONS);
+//$(document).ready(function () {
+//    dpUI.numberPicker("#np", OPTIONS);
 
-});
+//});
 
