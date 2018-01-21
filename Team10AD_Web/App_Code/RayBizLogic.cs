@@ -147,21 +147,35 @@ namespace Team10AD_Web.App_Code
                     int itemcounter = 0;
                     foreach (RetrievalDetail retrieval in retrievallist)
                     {
-                        //If itemcode exist, just increment the requested quantity
-                        if (retrieval.ItemCode == requisition.ItemCode)
+                        //If itemcode exist and quantity not fulfilled, just increment the requested quantity
+                        if ((retrieval.ItemCode == requisition.ItemCode && (requisition.QuantityRequested - requisition.QuantityRetrieved) > 0) || (retrieval.ItemCode == requisition.ItemCode && requisition.QuantityRetrieved == null))
                         {
                             itemcounter++;
-                            retrieval.RequestedQuantity += requisition.QuantityRequested;
+                            if (requisition.QuantityRetrieved == null)
+                            {
+                                retrieval.RequestedQuantity += requisition.QuantityRequested;
+                            }
+                            else
+                            {
+                                retrieval.RequestedQuantity += (requisition.QuantityRequested - requisition.QuantityRetrieved);
+                            }  
                         }
                     }
 
-                    //If no existing itemcode in the List<RequisitionDetail>, create a new instance of it
-                    if (itemcounter == 0)
+                    //If no existing itemcode and quantity not fulfilled in the List<RetrievalDetail>, create a new instance of it
+                    if ((itemcounter == 0 && (requisition.QuantityRequested - requisition.QuantityRetrieved) > 0) || (itemcounter == 0 && requisition.QuantityRetrieved == null))
                     {
                         RetrievalDetail ret = new RetrievalDetail();
                         ret.RetrievalID = retrievalnew.RetrievalID;
                         ret.ItemCode = requisition.ItemCode;
-                        ret.RequestedQuantity = requisition.QuantityRequested;
+                        if (requisition.QuantityRetrieved == null)
+                        {
+                            ret.RequestedQuantity = requisition.QuantityRequested;
+                        }
+                        else
+                        {
+                            ret.RequestedQuantity = (requisition.QuantityRequested - requisition.QuantityRetrieved);
+                        }
                         retrievallist.Add(ret);
                     }
 
@@ -317,25 +331,50 @@ namespace Team10AD_Web.App_Code
                                         if (disDetail.ItemCode == reqdetail.ItemCode && reqdetail.ItemCode == retrievaldetail.ItemCode)
                                         {
                                             itemcounter++;
+                                            //The outer if set checks if the retrieved qty is sufficient to split among the departments
                                             if (balretrievedqty >= reqdetail.QuantityRequested)
                                             {
-                                                disDetail.QuantityRequested += reqdetail.QuantityRequested;
-
-                                                reqdetail.QuantityRetrieved = reqdetail.QuantityRequested;
-                                                balretrievedqty -= (int)reqdetail.QuantityRequested;
+                                                //Checks for partial/new requisition cases
+                                                //If null can ignore the quantity retrieved in the requisition
+                                                if (reqdetail.QuantityRetrieved == null)
+                                                {
+                                                    disDetail.QuantityRequested += reqdetail.QuantityRequested;
+                                                    reqdetail.QuantityRetrieved = reqdetail.QuantityRequested;
+                                                    balretrievedqty -= (int)reqdetail.QuantityRequested;
+                                                }
+                                                //If not null can safetly do the math
+                                                else
+                                                {
+                                                    disDetail.QuantityRequested += (reqdetail.QuantityRequested - reqdetail.QuantityRetrieved);
+                                                    reqdetail.QuantityRetrieved += (reqdetail.QuantityRequested - reqdetail.QuantityRetrieved);
+                                                    balretrievedqty -= (int) (reqdetail.QuantityRequested - reqdetail.QuantityRetrieved);
+                                                }
                                             }
                                             else if ((balretrievedqty < reqdetail.QuantityRequested) && (balretrievedqty > 0))
                                             {
-                                                disDetail.QuantityRequested = balretrievedqty;
-
-                                                reqdetail.QuantityRetrieved = balretrievedqty;
-                                                balretrievedqty -= balretrievedqty;
+                                                if (reqdetail.QuantityRetrieved == null)
+                                                {
+                                                    disDetail.QuantityRequested += balretrievedqty;
+                                                    reqdetail.QuantityRetrieved += balretrievedqty;
+                                                    balretrievedqty -= (int) balretrievedqty;
+                                                }
+                                                else
+                                                {
+                                                    disDetail.QuantityRequested += balretrievedqty;
+                                                    reqdetail.QuantityRetrieved += balretrievedqty;
+                                                    balretrievedqty -= (int) balretrievedqty;
+                                                }
                                             }
                                             else
                                             {
-                                                disDetail.QuantityRequested = 0;
-
-                                                reqdetail.QuantityRetrieved = 0;
+                                                //Actually not necessary since balance available to split to disbursement is already 0
+                                                //Just putting a zero incase of null value
+                                                if (reqdetail.QuantityRetrieved == null)
+                                                {
+                                                    disDetail.QuantityRequested += 0;
+                                                    reqdetail.QuantityRetrieved = 0;
+                                                }
+                                                
                                             }
 
                                         }
@@ -347,32 +386,50 @@ namespace Team10AD_Web.App_Code
                                         DisbursementDetail disburementdetail = new DisbursementDetail();
                                         disburementdetail.DisbursementID = disbursementnew.DisbursementID;
                                         disburementdetail.ItemCode = reqdetail.ItemCode;
-                                        disburementdetail.QuantityRequested = reqdetail.QuantityRequested;
 
                                         if (balretrievedqty >= reqdetail.QuantityRequested)
                                         {
-                                            disburementdetail.QuantityRequested += reqdetail.QuantityRequested;
-
-                                            reqdetail.QuantityRetrieved = reqdetail.QuantityRequested;
-                                            balretrievedqty -= (int)reqdetail.QuantityRequested;
+                                            //Checks for partial/new requisition cases
+                                            //If null can ignore the quantity retrieved in the requisition
+                                            if (reqdetail.QuantityRetrieved == null)
+                                            {
+                                                disburementdetail.QuantityRequested = reqdetail.QuantityRequested;
+                                                reqdetail.QuantityRetrieved = reqdetail.QuantityRequested;
+                                                balretrievedqty -= (int)reqdetail.QuantityRequested;
+                                            }
+                                            //If not null can safetly do the math
+                                            else
+                                            {
+                                                disburementdetail.QuantityRequested = (reqdetail.QuantityRequested - reqdetail.QuantityRetrieved);
+                                                reqdetail.QuantityRetrieved += (reqdetail.QuantityRequested - reqdetail.QuantityRetrieved);
+                                                balretrievedqty -= (int)(reqdetail.QuantityRequested - reqdetail.QuantityRetrieved);
+                                            }
                                         }
                                         else if ((balretrievedqty < reqdetail.QuantityRequested) && (balretrievedqty > 0))
                                         {
-                                            disburementdetail.QuantityRequested = balretrievedqty;
-
-                                            reqdetail.QuantityRetrieved = balretrievedqty;
-                                            balretrievedqty -= balretrievedqty;
+                                            if (reqdetail.QuantityRetrieved == null)
+                                            {
+                                                disburementdetail.QuantityRequested = balretrievedqty;
+                                                reqdetail.QuantityRetrieved = balretrievedqty;
+                                                balretrievedqty -= balretrievedqty;
+                                            }
+                                            else
+                                            {
+                                                disburementdetail.QuantityRequested = balretrievedqty;
+                                                reqdetail.QuantityRetrieved += balretrievedqty;
+                                                balretrievedqty -= balretrievedqty;
+                                            }
                                         }
                                         else
                                         {
+                                            if (reqdetail.QuantityRetrieved == null)
+                                            {
+                                                reqdetail.QuantityRetrieved = 0;
+                                            }
                                             disburementdetail.QuantityRequested = 0;
-
-                                            reqdetail.QuantityRetrieved = 0;
                                         }
 
                                         disDetailList.Add(disburementdetail);
-
-                                        reqdetail.QuantityRetrieved = reqdetail.QuantityRequested;
                                     }
                                 }
                             }

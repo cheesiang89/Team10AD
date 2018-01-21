@@ -30,7 +30,7 @@ namespace Team10AD_Web.Clerk
             {
                 int index = Convert.ToInt32(e.CommandArgument);
                 GridViewRow selectedRow = dgvReqList.Rows[index];
-                Session["requisitiondetail"] = selectedRow.Cells[0].Text;
+                Session["requisitiondetail"] = selectedRow.Cells[1].Text;
                 Response.Redirect("RequisitionDetailPage.aspx");
             }
         }
