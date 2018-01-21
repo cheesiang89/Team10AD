@@ -300,6 +300,9 @@ namespace Team10AD_Web.App_Code
 
                         foreach (Requisition r in reqlist)
                         {
+                            //Counter to check for partial or completed requisition
+                            int notcompletedcheck = 0;
+
                             //If match department, loop through the requisition detail and save into disbursement detail
                             if (d.DepartmentCode == r.Employee.DepartmentCode)
                             {
@@ -432,6 +435,22 @@ namespace Team10AD_Web.App_Code
                                         disDetailList.Add(disburementdetail);
                                     }
                                 }
+                                //Loop through details of requisition to check for completeness
+                                foreach(RequisitionDetail rd in reqDetailList)
+                                {
+                                    if (rd.QuantityRequested != rd.QuantityRetrieved)
+                                    {
+                                        notcompletedcheck++;
+                                    }
+                                }
+                            }
+                            if (notcompletedcheck == 0)
+                            {
+                                r.Status = "Completed";
+                            }
+                            else
+                            {
+                                r.Status = "Partial";
                             }
                         }
                     }
