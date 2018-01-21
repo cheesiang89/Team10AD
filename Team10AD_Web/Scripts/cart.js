@@ -31,20 +31,24 @@ $(document).ready(
 
 //Test
 $(document).ready(
-    saveCartSession()
+   
 );
 function addRow(obj, index) {
        $('<tr>').html(
         //"<tr>" +
            "<td>" + obj.itemCode+"</td><td>"
         + obj.description + "</td><td>"
-        + "<input type=text id='txtInput"+index+"'></input></td><td>"
+           + "<input type=text id='txtInput" + index
+           + "' class='txtInput'></input><div class='lblError'"
+           + "style='color:red'>Positive Integer only</div></td><td>"
         //+ obj.quantity + "</td><td>"
         + obj.uom + "</td><td id='btnDelete"+index+"'></td></tr>").appendTo('#cartTable tbody');
 
     //Make quantity editable
        $('#txtInput' + index).val(obj.quantity);
-
+    //Hide warning labels
+       $('.lblError').hide();
+       console.log($('div').val());
        //console.log('Quantity: ' + obj.quantity);
 
     //Add Button
@@ -83,30 +87,31 @@ function makeRequisition() {
     $(document).on("click", "[id*=btnSubmitRequisition]", function () {
         //console.log('Cart table is:'+$('#cartTable').html());
         //Iterate through rows, create JSON
-        
-        let jsonData = "{\"cart\": " + tableToJson() + " }";
-        console.log("Json is " + jsonData);
+        if (qtyGotError() === false) {
+            let jsonData = "{\"cart\": " + tableToJson() + " }";
+            //console.log("Json is " + jsonData);
 
-        $.ajax({
-            contentType: 'application/json; charset=utf-8',
-            dataType: 'json',
-            type: 'POST',
-            url: 'http://localhost:3000/Service/CartService.svc/GetJSON',
-            data: jsonData,
-            success: function (r) {
-                console.log('Success: ' + r.d);
-                //Delete session data
-                deleteCartSession();
-                //Redirect if success
-                window.location.href = "RequisitionStatus.aspx";
-            },
-            error: function (r) {
-                console.log(r.responseText);
-            },
-            failure: function (r) {
-                console.log('Error: '+ r);
-            }
-        }); 
+            $.ajax({
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                type: 'POST',
+                url: 'http://localhost:3000/Service/CartService.svc/GetJSON',
+                data: jsonData,
+                success: function (r) {
+                    console.log('Success: ' + r.d);
+                    //Delete session data
+                    deleteCartSession();
+                    //Redirect if success
+                    window.location.href = "RequisitionStatus.aspx";
+                },
+                error: function (r) {
+                    console.log(r.responseText);
+                },
+                failure: function (r) {
+                    console.log('Error: ' + r);
+                }
+            });
+        } else { console.log("Error with qty");}
         return false;
     });
 }
@@ -126,7 +131,7 @@ function deleteCartSession() {
 
 function tableToJson() {
     let reqID = $('input[id$=reqID]').val().toString();
-    console.log("Requestor id is: "+ reqID);
+    //console.log("Requestor id is: "+ reqID);
     let rows = [];
     $('table tr').each(function (i, n) {
         let $row = $(n);
@@ -168,7 +173,23 @@ function saveCartSession() {
         return false;
     //});
 }
-
+function qtyGotError() {
+    
+    var gotError = false;
+    $(".txtInput").each(function () {
+        let input = $(this).val();
+        
+        if (!positiveInteger(input)) {
+            $(this).next().show();
+            gotError = true;
+        } else {
+            $(this).next().hide();
+        }
+            //console.log("Is positive?"+input);
+    });
+   
+        return gotError;
+}
 //window.onbeforeunload = function () {
 //    //Custom message not possible with later versions of Firefox and Chrome
 //    return "Do you want to leave?"
