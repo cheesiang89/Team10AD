@@ -13,26 +13,24 @@ namespace Team10AD_Web.EmployeePage
         BusinessLogic b = new BusinessLogic();
         protected void Page_Load(object sender, EventArgs e)
         {
+            int employeeid = (int)Session["employeeid"];
             if (!IsPostBack)
             {
-                //Employee emp = (Employee)Session["Employee"];
-                //int employeeID = b.GetEmployee();
-                int pointID = b.ShowCollectionPointID(61);
+                int pointID = b.ShowCollectionPointID(employeeid);
                 rdoBtnSelectCollection.Items.FindByValue(pointID.ToString()).Selected = true;
             }
         }
 
         protected void rdoBtnSelectCollection_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //Employee emp = (Employee)Session["Employee"];
-            //int employeeID = b.GetEmployee();
+            int employeeid = (int)Session["employeeid"];
             string pointID = rdoBtnSelectCollection.SelectedValue;
            // string representativeID = b.GetEmployee();
             try
             {
-                b.SelectCollection(pointID);
+                b.SelectCollection(pointID, employeeid);
                 lblSelection.Visible = true;
-                lblSelection.Text = b.ShowCollectionPointName(61) + " is successfully selected!";
+                lblSelection.Text = b.ShowCollectionPointName(employeeid) + " is successfully selected!";
 
             }
             catch (Exception exp)

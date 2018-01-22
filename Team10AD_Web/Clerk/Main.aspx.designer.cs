@@ -7,45 +7,45 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Team10AD_Web.EmployeePage {
+namespace Team10AD_Web.Clerk {
     
     
-    public partial class DepartmentRequisition {
+    public partial class Main {
         
         /// <summary>
-        /// btnPendingReq control.
+        /// dgvAlertLowSto control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnPendingReq;
+        protected global::System.Web.UI.WebControls.GridView dgvAlertLowSto;
         
         /// <summary>
-        /// btnReqHst control.
+        /// dgvReqPendCol control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnReqHst;
+        protected global::System.Web.UI.WebControls.GridView dgvReqPendCol;
         
         /// <summary>
-        /// Label1 control.
+        /// btnCreatePO control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.Button btnCreatePO;
         
         /// <summary>
-        /// dgvDepReq control.
+        /// btnGoReqRec control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView dgvDepReq;
+        protected global::System.Web.UI.WebControls.Button btnGoReqRec;
     }
 }

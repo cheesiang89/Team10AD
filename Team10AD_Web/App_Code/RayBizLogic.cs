@@ -470,9 +470,81 @@ namespace Team10AD_Web.App_Code
             }
         }
 
-        public static void GenerateAdjustmentVoucherDetails(List<RetrievalDetail> suggested, List<RetrievalDetail> userinput)
+        public static int GenerateAdjustmentVoucherDetails(List<RetrievalDetail> suggested, List<RetrievalDetail> userinput, int clerkid)
         {
+            using (Team10ADModel context = new Team10ADModel())
+            {
+                //To be returned for redirecting to the correct adjustment detail
+                int adjustmentVoucherId = 0;
+                //Counter to check whether there is any item that need adjustment
+                int needAdjustment = 0;
 
+                StockAdjustmentVoucher adjNew = new StockAdjustmentVoucher();
+                List<StockAdjustmentVoucherDetail> adjDetailList = new List<StockAdjustmentVoucherDetail>();
+
+                foreach (RetrievalDetail sDetail in suggested)
+                {
+                    foreach (RetrievalDetail uDetail in userinput)
+                    {
+                        if (sDetail.ItemCode == uDetail.ItemCode)
+                        {
+                            //Check that there is a change in suggested quantity and that the balance is below the requested quantity
+                            //This is to give clerk the flexibility to still reduce the quantity and not trigger an adjustment
+                            if (sDetail.RetrievedQuantity < sDetail.RequestedQuantity && sDetail.RetrievedQuantity != uDetail.RetrievedQuantity)
+                            {
+                                needAdjustment++;
+                                if (needAdjustment == 1)
+                                {
+                                    StockAdjustmentVoucher adj = new StockAdjustmentVoucher();
+                                    adj.StoreStaffID = clerkid;
+                                    adj.DateIssue = DateTime.Now;
+                                    adj.Status = "Pending";
+                                    context.StockAdjustmentVouchers.Add(adj);
+                                    context.SaveChanges();
+
+                                    adjNew = context.StockAdjustmentVouchers.OrderByDescending(x => x.VoucherID).First();
+                                    adjustmentVoucherId = adjNew.VoucherID;
+                                }
+
+                                StockAdjustmentVoucherDetail adjDetail = new StockAdjustmentVoucherDetail();
+                                adjDetail.VoucherID = adjNew.VoucherID;
+                                adjDetail.ItemCode = uDetail.ItemCode;
+                                adjDetail.QuantityAdjusted = - (uDetail.Catalogue.BalanceQuantity - uDetail.RetrievedQuantity);
+                                adjDetailList.Add(adjDetail);
+                            }
+                        }
+                    }
+                }
+
+                if (needAdjustment > 0)
+                {
+                    foreach (StockAdjustmentVoucherDetail detail in adjDetailList)
+                    {
+                        context.StockAdjustmentVoucherDetails.Add(detail);
+                        context.SaveChanges();
+                    }
+                }
+
+                return adjustmentVoucherId;
+            }
+        }
+
+        public static object AdjustmentVoucherDetailForGV(int needAdjustment)
+        {
+            using (Team10ADModel context = new Team10ADModel())
+            {
+                var qry = from v in context.StockAdjustmentVoucherDetails where v.VoucherID == needAdjustment select new { v.ItemCode, v.Catalogue.Description, v.QuantityAdjusted };
+                return qry.ToList();
+            }
+        }
+
+        public static List<StockAdjustmentVoucherDetail> AdjustmentVoucherDetailById(int needAdjustment)
+        {
+            using (Team10ADModel context = new Team10ADModel())
+            {
+                List<StockAdjustmentVoucherDetail> adjVoucherDetail = context.StockAdjustmentVoucherDetails.Where(x => x.VoucherID == needAdjustment).ToList();
+                return adjVoucherDetail;
+            }
         }
     }
 }
