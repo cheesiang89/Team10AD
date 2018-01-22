@@ -688,7 +688,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AppCode\" />
-    <Folder Include="App_Data\" />
+    <Folder Include="App_Code\App_Data\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Account\Web.config" />
