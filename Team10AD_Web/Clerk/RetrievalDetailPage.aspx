@@ -22,5 +22,5 @@
             </asp:TemplateField>
         </Columns>
     </asp:GridView>
-    <asp:Button ID="GenDisbursementButton" runat="server" Text="Generate Disbursement Lists" />
+    <asp:Button ID="GenDisbursementButton" runat="server" Text="Generate Disbursement Lists" OnClick="GenDisbursementButton_Click" />
 </asp:Content>
