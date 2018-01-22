@@ -35,9 +35,13 @@ namespace TestingConsole
             //Console.WriteLine(SendEmailAuto(toEmailAddress, subject, fromEmailAddress, body));
 
             //SendUndelegateRepEmail test
-            string departmentCode = "ARTS";
-            Program t = new Program();
-            Console.WriteLine(t.SendUndelegateRepEmail(departmentCode));
+            //string departmentCode = "ARTS";
+            //Program t = new Program();
+            //Console.WriteLine(t.SendUndelegateRepEmail(departmentCode));
+
+            //GetApproverEmailFromReqID test
+            int requestorID = 109;
+            Console.WriteLine(GetApproverEmailFromReqID(requestorID));
             Console.ReadLine();
         }
         public static List<CartData> createList()
@@ -189,7 +193,14 @@ namespace TestingConsole
             return String.Format(oldRepEmail+"***"+body);
         }
 
-
+        public static string GetApproverEmailFromReqID(int requestorID)
+        {
+            Model.Team10ADModel m = new Model.Team10ADModel();
+            int? approverID = m.Employees.Where(x => x.EmployeeID == requestorID)
+                  .Select(x => x.Department).Select(x => x.ApproverID).First();
+            string approverEmail = m.Employees.Where(x => x.EmployeeID == approverID).Select(x => x.Email).First();
+            return approverEmail;
+        }
     }
 
 }
