@@ -47,7 +47,7 @@
             <br />
             <br />
             <br />
-            <asp:Button ID="btnConfirm" runat="server" Text="Confirm" Font-Bold="True" ForeColor="White" BackColor="#009933" OnClick="btnConfirm_Click" />&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<asp:Button ID="Button2" runat="server" Text="Cancel" BackColor="Red" ForeColor="White" Font-Bold="True" OnClick="btnCancel_Click" CausesValidation="False" />
+            <asp:Button ID="btnConfirm" runat="server" Text="Confirm" Font-Bold="True" ForeColor="White" BackColor="#009933" OnClick="btnConfirm_Click" />&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<asp:Button ID="btnCancel" runat="server" Text="Cancel" BackColor="Red" ForeColor="White" Font-Bold="True" OnClick="btnCancel_Click" CausesValidation="False" />
        <%-- </ContentTemplate>--%>
     </asp:Panel>
        <%-- </div>--%>
