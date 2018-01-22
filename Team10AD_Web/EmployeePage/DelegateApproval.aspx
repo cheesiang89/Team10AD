@@ -1,102 +1,71 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/EmployeePage/Employee.Master" AutoEventWireup="true" CodeBehind="DelegateApproval.aspx.cs" Inherits="Team10AD_Web.EmployeePage.DelegateApproval" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Delegated employee should be always sorted to the top of table PLUS the row will be highlighted</h2>
     <h2>Delegate Approval Authority</h2>
-            <asp:GridView ID="dgvDelegateApproval" runat="server" AutoGenerateColumns="False" OnSelectedIndexChanged="dgvDelegateApproval_SelectedIndexChanged" Width="236px" OnRowCommand="dgvDelegateApproval_RowCommand">
-                <Columns>
-                    <asp:BoundField DataField="Name" HeaderText="Employee Name" ItemStyle-CssClass="EmpName"/>
-                    <asp:TemplateField ShowHeader="False">
-                        <ItemTemplate>
-                            <asp:Button ID="btnDelegate" runat="server" CausesValidation="false" CommandName="Select" Text="Delegate" />
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    
-            <%-- Hidden fields--%>
-            <asp:TemplateField Visible="False">
+    <asp:GridView ID="dgvDelegateApproval" runat="server" AutoGenerateColumns="False" Width="236px" OnRowCommand="dgvDelegateApproval_RowCommand">
+        <Columns>
+            <asp:BoundField DataField="Name" HeaderText="Employee Name" />
+            <asp:TemplateField ShowHeader="False">
                 <ItemTemplate>
-                    <asp:Label ID="lblApproverID" runat="server" Text='<%# Bind("EmployeeID") %>'></asp:Label>
+                    <asp:Button ID="btnDelegate" runat="server" CausesValidation="false" CommandName="Select" Text="Delegate" />
                 </ItemTemplate>
-                <ItemStyle CssClass="ItemCode" />
             </asp:TemplateField>
-
-            <%--  --%>
-                </Columns>
-            </asp:GridView>
-            <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
-    <asp:Label ID="lblID" runat="server"></asp:Label>    
+        </Columns>
+    </asp:GridView>
+    <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+    <asp:Label ID="lblID" runat="server"></asp:Label>
     <asp:Label ID="lblApproverID" runat="server"></asp:Label>
-    <asp:Label ID="lblApproverName" runat="server" Text="Label"></asp:Label>         
-    
-     <div id="dialog" style="display: none">
-                <b>Approval authority is to be delegated to </b>
-                <asp:Label ID="lblApprover" runat="server" Font-Bold="True" Font-Size="Medium" ForeColor="Red"></asp:Label>
-         <b>from:</b>
-                
-                <br />
-                <br />
-                <b>Start Date:</b>
-                <asp:TextBox ID="txtStartDate" runat="server" TextMode="Date" Min='<%# DateTime.Now.ToString("yyyy-MM-dd") %>'></asp:TextBox>
-                <asp:RequiredFieldValidator ID="validRequiredStartDate" runat="server" ErrorMessage="This field must be selected." ControlToValidate="txtStartDate" ></asp:RequiredFieldValidator>
-                <br />
-                <br />
-                <b>End Date:</b>
-                <asp:TextBox ID="txtEndDate" runat="server" TextMode="Date"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="validRequiredEndDate" runat="server" ErrorMessage="This field must be selected" ControlToValidate="txtEndDate" ></asp:RequiredFieldValidator>
-                <br />
-                <br />
-                <br />
-                <br />
-         <%-- This button need to change --%>
-               <%-- <asp:Button ID="btnConfirm" runat="server" Text="Confirm" Font-Bold="True" ForeColor="White" BackColor="#009933" OnClick="btnConfirm_Click" />&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<asp:Button ID="btnCancel" runat="server" Text="Cancel" BackColor="Red" ForeColor="White" Font-Bold="True" OnClick="btnCancel_Click" CausesValidation="False" />--%>
-            </div>
-
-     <asp:ScriptManagerProxy ID="ScriptManagerProxy1" runat="server">
-        <Scripts>
-            <asp:ScriptReference Path="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" />
-        </Scripts>
-        <Scripts>
-            <asp:ScriptReference Path="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/jquery-ui.js" />
-        </Scripts>
-        <Scripts>
-            <asp:ScriptReference Path="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" />
-        </Scripts>
-    </asp:ScriptManagerProxy>
-
-    
-    <link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/themes/start/jquery-ui.css"
-        rel="stylesheet" type="text/css" />
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $(document).on("click", "[id*=btnDelegate]", function () {
-                $("#MainContent_txtStartDate").html($(".EmpName", $(this).closest("tr")).html());
-                $("#MainContent_txtStartDate").attr("min", (new Date()).toISOString().substring(0, 10));
-                $("#MainContent_txtEndDate").attr("min", (new Date()).toISOString().substring(0, 10));
-                  $("#dialog").dialog({
-                    title: "View Details",
-                    buttons: {
-                        Confirm: function () {
-                            close();
-                            $(this).dialog('close');
-                        },
-                        Close: function () {
-                            $(this).dialog('close');
-                        }
-                    },
-                    modal: true
-                });
-                //  window.alert($(".Category", $(this).closest("tr")).html());
-                return false;
-            });
-
-            function close() {
-                //Dump all code in this function
-                window.alert("TEst"); //closing on Ok click
-            }
-        });
-
-       
-    </script>
+    <asp:Label ID="lblApproverName" runat="server" Text="Label"></asp:Label>
+    <asp:LinkButton ID="lnkDummy" runat="server"></asp:LinkButton>
+    <%--  <asp:LinkButton ID="lnkBtn2" runat="server"></asp:LinkButton>--%>
+    <cc1:ModalPopupExtender ID="mPop1" runat="server" BackgroundCssClass="modalBackground" PopupControlID="UpdatePanel1" TargetControlID="lnkDummy" >
+    </cc1:ModalPopupExtender>
+    <asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
+  <%--  <div id="updatePanel1Div" class="modalPopup">--%>
+    <asp:Panel ID="UpdatePanel1" runat="server" CssClass="modalPopup" align="center" >
+        <%--<ContentTemplate>--%>
+        <asp:Label ID="lblSubtitle1" runat="server" Font-Bold="True" Font-Size="Medium">Approval authority is to be delegated to </asp:Label>
+            <asp:Label ID="lblApprover" runat="server" Font-Bold="True" Font-Size="Medium" ForeColor="#009933"></asp:Label>
+            <asp:Label ID="lblSubtitle2" runat="server" Text=" from:" Font-Bold="True" Font-Size="Medium"></asp:Label>
+            <br />
+            <br />
+            <asp:Label ID="lblStartDate" runat="server" Font-Bold="True">Start Date:</asp:Label>
+            <asp:TextBox ID="txtStartDate" runat="server" TextMode="Date"></asp:TextBox>
+            <asp:RequiredFieldValidator ID="validRequiredStartDate" runat="server" ErrorMessage="This field must be selected." ControlToValidate="txtStartDate" ForeColor="#FF3300" Font-Bold="True"></asp:RequiredFieldValidator>
+            <br />
+            <br />
+            <asp:Label ID="lblEndDate" runat="server" Font-Bold="True">End Date:</asp:Label>
+            <asp:TextBox ID="txtEndDate" runat="server" TextMode="Date"></asp:TextBox>
+            <asp:RequiredFieldValidator ID="validRequiredEndDate" runat="server" ErrorMessage="This field must be selected" ControlToValidate="txtEndDate" ForeColor="#FF3300" Font-Bold="True"></asp:RequiredFieldValidator>
+            <br />
+            <asp:CompareValidator ID="validCompareDates" runat="server" ErrorMessage="End date should not be before Start date." Font-Bold="True" Operator="GreaterThanEqual" ControlToCompare="txtStartDate" ControlToValidate="txtEndDate" ForeColor="Red"></asp:CompareValidator>
+            <br />
+            <br />
+            <br />
+            <br />
+            <asp:Button ID="btnConfirm" runat="server" Text="Confirm" Font-Bold="True" ForeColor="White" BackColor="#009933" OnClick="btnConfirm_Click" />&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<asp:Button ID="Button2" runat="server" Text="Cancel" BackColor="Red" ForeColor="White" Font-Bold="True" OnClick="btnCancel_Click" CausesValidation="False" />
+       <%-- </ContentTemplate>--%>
+    </asp:Panel>
+       <%-- </div>--%>
+ <%--   <div id="updatePane21Div" class="modalPopup">--%>
+      <asp:LinkButton ID="lnkBtn2" runat="server"></asp:LinkButton>
+      <cc1:ModalPopupExtender ID="mPop2" runat="server" BackgroundCssClass="modalBackground" PopupControlID="UpdatePanel2" TargetControlID="lnkBtn2" >
+    </cc1:ModalPopupExtender>
+    <asp:Panel ID="UpdatePanel2" runat="server" CssClass="modalPopup" align="center" >
+        <%--<ContentTemplate>--%>
+            <asp:Label ID="lblFailApprover" runat="server" Font-Bold="True" Font-Size="Medium" ForeColor="#009933"></asp:Label>
+            <asp:Label ID="lblFailApproverSubtitle1" runat="server" Font-Bold="True" Font-Size="Medium" >, has outstanding requisition(s).</asp:Label>
+            <br />
+            <br />
+            <asp:Label ID="lblFailApproverSubtitle2" runat="server" Font-Bold="True" Font-Size="Medium">Proceed to Department Requisition page to approve the pending requisition(s) before delegation? </asp:Label>
+            <br />
+            <br />
+               <asp:Button ID="btnConfirmProceed" runat="server" Text="Confirm" Font-Bold="True" ForeColor="White" BackColor="#009933" OnClick="btnConfirmProceed_Click" CausesValidation="False" />&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<asp:Button ID="btnCancelProceed" runat="server" Text="Cancel" BackColor="Red" ForeColor="White" Font-Bold="True" OnClick="btnCancelProceed_Click" CausesValidation="False" />
+       <%--     </ContentTemplate>--%>
+    </asp:Panel>
+  <%--  </div>--%>
 </asp:Content>

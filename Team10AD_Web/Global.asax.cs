@@ -42,6 +42,10 @@ namespace Team10AD_Web
             Session["departmentcode"] = "ARTS";
             //Stores requisition id to pass to requisition detail page
             Session["requisitiondetail"] = "";
+            //Stores HOD ID
+            Session["HODID"] = 0;
+            //Stores Approver ID
+            Session["ApproverID"] = 0;
         }
     }
 }
