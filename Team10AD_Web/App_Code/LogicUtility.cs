@@ -86,8 +86,8 @@ namespace Team10AD_Web.App_Code
             using (Model.Team10ADModel m = new Model.Team10ADModel())
             {
                 //FOR TESTING-Hardcoded email
-                repEmail = "e0227390@u.nus.edu";
-               // repEmail = m.Employees.Where(x => x.Name ==repName).Select(x => x.Email).First();
+                //repEmail = "e0227390@u.nus.edu";
+                repEmail = m.Employees.Where(x => x.Name ==repName).Select(x => x.Email).First();
             }
 
             if (flag == "DELEGATE")
@@ -129,8 +129,8 @@ namespace Team10AD_Web.App_Code
             using (Model.Team10ADModel m = new Model.Team10ADModel())
             {
                 //FOR TESTING-Hardcoded email
-                approverEmail = "e0227390@u.nus.edu";
-                // approverEmail = m.Employees.Where(x => x.Name ==selectedApproverName).Select(x => x.Email).First();
+                //approverEmail = "e0227390@u.nus.edu";
+                 approverEmail = m.Employees.Where(x => x.Name ==selectedApproverName).Select(x => x.Email).First();
             }
 
                 //Construct body
@@ -150,6 +150,7 @@ namespace Team10AD_Web.App_Code
             return result;
 
         }
+
         //On Submit requisition (Employee -> Approver) notify
         public string SendRequisitionEmail(string requisitionID, int? requestorID, string requisitionDate)
         {
@@ -163,24 +164,25 @@ namespace Team10AD_Web.App_Code
             using (Model.Team10ADModel m = new Model.Team10ADModel())
             {
                 //FOR TESTING-Hardcoded email
-                approverEmail = "e0227390@u.nus.edu";
+                //approverEmail = "e0227390@u.nus.edu";
 
-                //approverID = m.Employees.Where(x => x.EmployeeID == requestorID)
-                //    .Select(x => x.Department).Select(x => x.ApproverID).First();
-                //approverEmail = m.Employees.Where(x => x.EmployeeID == approverID).Select(x => x.Email).First();
+                approverID = m.Employees.Where(x => x.EmployeeID == requestorID)
+                    .Select(x => x.Department).Select(x => x.ApproverID).First();
+                approverEmail = m.Employees.Where(x => x.EmployeeID == approverID).Select(x => x.Email).First();
                 requestorName = m.Employees.Where(x => x.EmployeeID == requestorID).Select(x => x.Name).First();
 
             }
 
             //Construct body
             StringBuilder sb = new StringBuilder();
-            sb.Append("<b>Stationery Requisition<b/><br/>");
-            sb.Append("Requisition ID: ");
+            sb.Append("<b>Stationery Requisition</b><br/>");
+            sb.Append("<b>Requisition ID</b>: ");
             sb.Append(requisitionID +"<br/>");
-            sb.Append("Date: ");
+            sb.Append("<b>Requisition Date</b>: ");
             sb.Append(requisitionDate + "<br/>");
-            sb.Append("Employee Name: ");
+            sb.Append("<b>Employee Name</b>: ");
             sb.Append(requestorName);
+            sb.Append("<br/>Sincerely, <br/> Logic University");
             body = sb.ToString();
             subject = "New Requisition pending approval";
 
@@ -191,15 +193,132 @@ namespace Team10AD_Web.App_Code
             return result;
 
         }
-        //4. Approve/reject requisition (Approver -> Employee)
-        public void SendRequisitionResponseEmail(string requestorID)
-        {
-            //Need EmployeeID (Requestor)
-        }
-        //5. Generate disbursement list (Clerk-> Rep)
-        public void SendDisbursementEmails()
-        {//Need Disbursment ID
 
+        //On Approve/reject requisition (Approver -> Employee) notify
+        public string SendRequisitionResponseEmail(int requisitionID, string requestorName, string remarks, string flag)
+        {
+            string result = "ERROR";
+            string requestorEmail = "";
+            string requisitionDate = "";
+            string body = "";
+            string subject = "";
+            string fromEmailAddress = "logicuniversity2018@gmail.com";
+
+            using (Model.Team10ADModel m = new Model.Team10ADModel())
+            {
+                //FOR TESTING-Hardcoded email
+               // requestorEmail = "e0227390@u.nus.edu";
+
+                requestorEmail = m.Employees.Where(x => x.Name == requestorName).Select(x => x.Email).First();
+                requisitionDate = m.Requisitions.Where(x => x.RequisitionID == requisitionID).Select(x => x.RequisitionDate).First().ToString();
+            }
+
+            //Construct body
+            StringBuilder sb = new StringBuilder();
+            sb.Append("<b>Stationery Requisition</b><br/>");
+            sb.Append("<b>Requisition ID</b>: ");
+            sb.Append(requisitionID + "<br/>");
+            sb.Append("<b>Requisition Date:</b> ");
+            sb.Append(requisitionDate + "<br/>");
+            sb.Append("<b>Employee Name</b>: ");
+            sb.Append(requestorName);
+            if (flag == "APPROVED")
+            {
+                sb.Append("<br/><br/><b>Your requisition has been approved.</b><br/>");
+            }
+            else if (flag == "REJECTED")
+            {
+                sb.Append("<br/><br/><b>Your requisition has been rejected.</b><br/>");
+            }
+            sb.Append("<br/>Remarks: " + remarks);
+            sb.Append("<br/>Sincerely, <br/> Logic University");
+            body = sb.ToString();
+            subject = "Requisition status update";
+
+            if (!String.IsNullOrEmpty(requestorEmail))
+            {
+                result = LogicUtility.Instance.SendEmailAuto(requestorEmail, subject, fromEmailAddress, body);
+            }
+            return result;
+        }
+
+        //On Generate disbursement list (Clerk-> Rep)
+        public string SendDisbursementEmail(int disbursementID)
+        {
+           
+            string result = "ERROR";
+            string repName="";
+            string repEmail = "";
+            
+            string collectionPoint = "";
+            string body = "";
+            string subject = "";
+            string fromEmailAddress = "logicuniversity2018@gmail.com";
+            
+            using (Model.Team10ADModel m = new Model.Team10ADModel())
+            {
+                //FOR TESTING-Hardcoded email
+                //repEmail = "e0227390@u.nus.edu";
+
+                repName = m.Disbursements.Where(x => x.DisbursementID == disbursementID)
+                    .Select(x => x.Department).Select(x => x.Employee).Select(x => x.Name).First();
+                repEmail = m.Employees.Where(x => x.Name == repName).Select(x => x.Email).First();
+                collectionPoint = m.Disbursements.Where(x => x.DisbursementID == disbursementID)
+                    .Select(x => x.CollectionPoint).Select(x => x.PointName).First();
+               
+            }
+
+            //Construct body
+            StringBuilder sb = new StringBuilder();
+            sb.Append("Hi ");
+            sb.Append(repName+",<br/>");
+            sb.Append("Your stationery is ready for collection.<br/><br/>");
+            sb.Append("<b>Disbursement No:</b>");
+            sb.Append(disbursementID.ToString() + "<br/>");
+            sb.Append("<b>Collection point: </b>");
+            sb.Append(collectionPoint + "<br/><br/>");
+            sb.Append(makeDisbursementTable(disbursementID));
+            sb.Append("<br/>Sincerely, <br/> Logic University");
+            body = sb.ToString();
+            subject = "Disbursement Ready for Collection";
+
+            if (!String.IsNullOrEmpty(repEmail))
+            {
+                result = LogicUtility.Instance.SendEmailAuto(repEmail, subject, fromEmailAddress, body);
+            }
+            return result;
+
+        }
+
+        public string makeDisbursementTable(int disbursementID)
+        {
+            int num =1;
+            string itemDescription="";
+            string quantityDisbursed="";
+            StringBuilder sb = new StringBuilder();
+            sb.Append("<table style='width: 100 %'><tr>");
+            sb.Append("<th colspan='1' style='border:solid 1px'>S/N</th>");
+            sb.Append("<th colspan='1' style='border:solid 1px'>Description</th>");
+            sb.Append("<th colspan='2' style='border:solid 1px'>Quantity</th></tr>");
+            using (Model.Team10ADModel m = new Model.Team10ADModel())
+            {
+                List<DisbursementDetail> itemList = m.DisbursementDetails
+                    .Where(x => x.DisbursementID == disbursementID).Select(x => x).ToList();
+                foreach (var item in itemList)
+                {
+                    //Get itemDescription, quantityDisbursed
+                    itemDescription = m.Catalogues.Where(x => x.ItemCode == item.ItemCode).Select(x => x.Description).First();
+                    quantityDisbursed = item.QuantityRequested.ToString();
+                    sb.Append("<tr><td style='border:solid 1px'>");
+                    sb.Append(num + "</td><td style='border:solid 1px'>");
+                    sb.Append(itemDescription + "</td><td style='border:solid 1px'>");
+                    sb.Append(quantityDisbursed + "</td></tr>");
+                    num++;
+                }
+            }
+                     
+            sb.Append("</table>");
+            return sb.ToString();
         }
 
     }

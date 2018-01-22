@@ -115,8 +115,10 @@ namespace Team10AD_Web.EmployeePage
             //SendEmailAuto(toEmailAddress, subject, fromEmailAddress, body);
             //ClientScript.RegisterStartupScript(GetType(), "alert", "alert('Email sent.');", true);
 
-           //lblResult.Text=LogicUtility.Instance.SendRepEmail("ARTS","UNDELEGATE");
-            lblResult.Text = LogicUtility.Instance.SendApproverEmail("Naing Nana", "12/12/2017","01/05/2018");
+            //lblResult.Text=LogicUtility.Instance.SendRepEmail("ARTS","UNDELEGATE");
+            //lblResult.Text = LogicUtility.Instance.SendApproverEmail("Naing Nana", "12/12/2017","01/05/2018");
+            //lblResult.Text = LogicUtility.Instance.SendRequisitionResponseEmail(1,"Ling Lang","I rejected coz I hate u", "REJECTED");
+            lblResult.Text = LogicUtility.Instance.SendDisbursementEmail(1);
         }
     }
 }

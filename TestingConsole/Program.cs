@@ -40,8 +40,19 @@ namespace TestingConsole
             //Console.WriteLine(t.SendUndelegateRepEmail(departmentCode));
 
             //GetApproverEmailFromReqID test
-            int requestorID = 109;
-            Console.WriteLine(GetApproverEmailFromReqID(requestorID));
+            //int requestorID = 109;
+            //Console.WriteLine(GetApproverEmailFromReqID(requestorID));
+
+            //SendRequisitionResponseEmail test
+            //int requisitionID = 1; string requestorName = "Ling Lang"; string remarks = "HELLO"; string flag = "APPROVED";
+            //Program p = new Program();
+            //Console.WriteLine(p.SendRequisitionResponseEmail(requisitionID, requestorName, remarks, flag));
+
+            //MakeDisbursemenTable test
+            int disbursementID = 1; 
+            Program p = new Program();
+            Console.WriteLine(p.makeDisbursementTable(disbursementID));
+
             Console.ReadLine();
         }
         public static List<CartData> createList()
@@ -200,6 +211,79 @@ namespace TestingConsole
                   .Select(x => x.Department).Select(x => x.ApproverID).First();
             string approverEmail = m.Employees.Where(x => x.EmployeeID == approverID).Select(x => x.Email).First();
             return approverEmail;
+        }
+        public string SendRequisitionResponseEmail(int requisitionID, string requestorName, string remarks, string flag)
+        {
+            string result = "ERROR";
+            string requestorEmail = "";
+            string requisitionDate = "";
+            string body = "";
+            string subject = "";
+            string fromEmailAddress = "logicuniversity2018@gmail.com";
+
+            using (Model.Team10ADModel m = new Model.Team10ADModel())
+            {
+                //FOR TESTING-Hardcoded email
+                requestorEmail = "e0227390@u.nus.edu";
+
+                requestorEmail = m.Employees.Where(x => x.Name == requestorName).Select(x => x.Email).First();
+                requisitionDate = m.Requisitions.Where(x => x.RequisitionID == requisitionID).Select(x => x.Remarks).First().ToString();
+            }
+
+            //Construct body
+            StringBuilder sb = new StringBuilder();
+            sb.Append("<b>Stationery Requisition<b/><br/>");
+            sb.Append("Requisition ID: ");
+            sb.Append(requisitionID + "<br/>");
+            sb.Append("Approval Date: ");
+            sb.Append(requisitionDate + "<br/>");
+            sb.Append("Employee Name: ");
+            sb.Append(requestorName);
+            if (flag == "APPROVED")
+            {
+                sb.Append("<br/>Your requisition has been approved.");
+            }
+            else if (flag == "REJECTED")
+            {
+                sb.Append("<br/>Your requisition has been rejected.");
+            }
+            sb.Append("<br/>Remarks: " + remarks);
+
+            body = sb.ToString();
+            subject = "Requisition status update";
+
+            //if (!String.IsNullOrEmpty(requestorEmail))
+            //{
+            //    result = LogicUtility.Instance.SendEmailAuto(requestorEmail, subject, fromEmailAddress, body);
+            //}
+            return body;
+        }
+        public string makeDisbursementTable(int disbursementID)
+        {
+           int num = 1;
+            string itemDescription = "";
+            string quantityDisbursed = "";
+            StringBuilder sb = new StringBuilder();
+            sb.Append("<table><tr><th>S/N</th><th>Description</th><th>Quantity</th></tr>");
+            using (Model.Team10ADModel m = new Model.Team10ADModel())
+            {
+                List<Model.DisbursementDetail> itemList = m.DisbursementDetails
+                    .Where(x => x.DisbursementID == disbursementID).Select(x => x).ToList();
+                foreach (var item in itemList)
+                {
+                    //Get itemDescription, quantityDisbursed
+                    itemDescription = m.Catalogues.Where(x => x.ItemCode == item.ItemCode).Select(x => x.Description).First();
+                    quantityDisbursed = item.QuantityRequested.ToString();
+                    sb.Append("<tr><td>");
+                    sb.Append(num + "</td><td>");
+                    sb.Append(itemDescription + "</td><td>");
+                    sb.Append(quantityDisbursed + "</td><td></tr>");
+                    num++;
+                }
+            }
+
+            sb.Append("</table>");
+            return sb.ToString();
         }
     }
 
