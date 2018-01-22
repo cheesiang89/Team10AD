@@ -46,7 +46,7 @@ dpUI.numberPicker = function(selector, options){
 		el.options = $.extend(defaults, options);
 		el.options = $.extend(el.options, dpUI.helper.data2obj(el));
 		el.number = dpUI.helper.betterParseFloat(el.options.start);
-		np.addClass("dpui-numberPicker").html("<button class='dpui-numberPicker-decrease'>"+el.options.decreaseText+"</button><input type='text' class='dpui-numberPicker-input' /><button class='dpui-numberPicker-increase'>"+el.options.increaseText+"</button>");
+		np.addClass("dpui-numberPicker").html("<button class='dpui-numberPicker-decrease'>"+el.options.decreaseText+"</button><input type='text' class='dpui-numberPicker-input' id='txtInputQty'/><button class='dpui-numberPicker-increase'>"+el.options.increaseText+"</button>");
 		var input = np.find(".dpui-numberPicker-input");
 		input.val(el.options.formatter(dpUI.helper.formatter(el.number, el.options.format)));
 		if(el.options.min!==false&&el.options.start==el.options.min)np.addClass("dpui-numberPicker-min");
