@@ -37,7 +37,11 @@ namespace Team10AD_Web.EmployeePage
                 {//need to set the employeename dynamically
                     dgvDepReq.Rows[i].Cells[3].Text = "123";
                 }
-               
+
+                GridView1.DataSource = BusinessLogic_Sam.getEmployeeNamefromRequestorID(departmentCode);
+                GridView1.DataBind();
+
+
             }
         }
 

@@ -22,7 +22,7 @@ namespace Team10AD_Web.App_Code
             }
         }
 
-     
+
         //Return EmployeeList excluding the HOD
         public static List<Employee> EmployeeList(string departmentCode, int hodID)
         {
@@ -64,7 +64,7 @@ namespace Team10AD_Web.App_Code
             using (App_Code.Model.Team10ADModel entities = new App_Code.Model.Team10ADModel())
             {
                 int selectedApproverID = ((from x in entities.Employees where x.Name == selectedApproverName select new { x.EmployeeID }).First()).EmployeeID;
-                int pendingReqQty = (from x in entities.Requisitions where x.RequestorID == selectedApproverID && x.Status=="Pending" select x).Count();
+                int pendingReqQty = (from x in entities.Requisitions where x.RequestorID == selectedApproverID && x.Status == "Pending" select x).Count();
                 return pendingReqQty;
             }
         }
@@ -76,7 +76,7 @@ namespace Team10AD_Web.App_Code
 
             using (App_Code.Model.Team10ADModel entities = new App_Code.Model.Team10ADModel())
             {
-               
+
                 Department deptApprover = entities.Departments.Where(p => p.DepartmentCode == departmentCode).First<Department>();
                 deptApprover.ApproverID = ApproverID;
                 deptApprover.ApprovingPeriodStart = startDate;
@@ -90,7 +90,7 @@ namespace Team10AD_Web.App_Code
 
         public static void assignNewRepresentative(string newRepName, string departmentCode)
         {
-            using(App_Code.Model.Team10ADModel entities = new App_Code.Model.Team10ADModel())
+            using (App_Code.Model.Team10ADModel entities = new App_Code.Model.Team10ADModel())
             {
                 int newRepID = ((from x in entities.Employees where x.Name == newRepName select new { x.EmployeeID }).First()).EmployeeID;
                 Department deptRepresentative = entities.Departments.Where(p => p.DepartmentCode == departmentCode).First<Department>();
@@ -112,7 +112,7 @@ namespace Team10AD_Web.App_Code
 
             using (App_Code.Model.Team10ADModel entities = new App_Code.Model.Team10ADModel())
             {
-              
+
                 //Get the list of requisitions with status = "Pending"
                 var qry = entities.Requisitions.Where(x => x.Status == "Pending");
                 allPendingRequisitionList = qry.ToList();
@@ -142,34 +142,36 @@ namespace Team10AD_Web.App_Code
         }
 
 
-        //public static List<Requisition> getEmployeeNamefromRequestorID(string departmentCode)
-        //{
-        //    List<Requisition> empPendingReq = new List<Requisition>();
-        //    using (App_Code.Model.Team10ADModel entities = new App_Code.Model.Team10ADModel())
-        //    {
+        public static object getEmployeeNamefromRequestorID(string departmentCode)
+        {
+            object empPendingReq = new object();
+            using (App_Code.Model.Team10ADModel entities = new App_Code.Model.Team10ADModel())
+            {
 
-        //        //var qry1 = from x in entities.Requisitions
-        //        //          from y in entities.Employees
-        //        //          where x.RequestorID == y.EmployeeID && y.DepartmentCode == departmentCode && x.Status == "Pending"
-        //        //          select new { x.RequestorID, x.RequisitionDate,y.Name };
+                var qry1 = from x in entities.Requisitions
+                           from y in entities.Employees
+                           where x.RequestorID == y.EmployeeID && y.DepartmentCode == departmentCode && x.Status == "Pending"
+                           select new { x.RequestorID, x.RequisitionDate, y.Name };
 
-        //        var qry = (from x in entities.Requisitions
-        //                  join y in entities.Employees on x.RequestorID equals y.EmployeeID
-        //                  where y.DepartmentCode == departmentCode && x.Status =="Pending"
-        //                  select x).ToList();
+                //var qry = (from x in entities.Requisitions
+                //           join y in entities.Employees on x.RequestorID equals y.EmployeeID
+                //           where y.DepartmentCode == departmentCode && x.Status == "Pending"
+                //           select x).ToList();
 
-        //        empPendingReq = qry.ToList() ;
-        //        return empPendingReq;
+                empPendingReq = qry1.ToList();
+                return empPendingReq;
 
 
-        //        //var projects = (from p in DBContext.projects
-        //        //                join o in DBContext.organizations on p.organization_id equals o.organization_id
-        //        //                join m in DBContext.members on o.organization_id equals m.organization_id
-        //        //                where m.member_id == performed_by_id
-        //        //                select p).ToList();
-        //        //return projects;
-        //    }
-        //}
+                //        //var projects = (from p in DBContext.projects
+                //        //                join o in DBContext.organizations on p.organization_id equals o.organization_id
+                //        //                join m in DBContext.members on o.organization_id equals m.organization_id
+                //        //                where m.member_id == performed_by_id
+                //        //                select p).ToList();
+                //        //return projects;
+                //    }
+                //}
 
+            }
+        }
     }
 }
