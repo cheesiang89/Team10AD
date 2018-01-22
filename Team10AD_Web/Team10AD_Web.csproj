@@ -56,6 +56,7 @@
     <Reference Include="AspNet.ScriptManager.jQuery, Version=1.12.4.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\AspNet.ScriptManager.jQuery.1.12.4\lib\net45\AspNet.ScriptManager.jQuery.dll</HintPath>
     </Reference>
+    <Reference Include="CrystalDecisions.Web, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="DotNetOpenAuth.AspNet, Version=4.3.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
       <HintPath>..\packages\DotNetOpenAuth.AspNet.4.3.4.13329\lib\net45-full\DotNetOpenAuth.AspNet.dll</HintPath>
     </Reference>
@@ -128,7 +129,10 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Clerk\AdjustmentVoucherDetail.aspx" />
+    <Content Include="Clerk\AdjustmentVoucherList.aspx" />
     <Content Include="Clerk\CompletedRetrievalDetailPage.aspx" />
+    <Content Include="Clerk\CreateAdjustmentVoucher.aspx" />
     <Content Include="Clerk\DepartmentDetail.aspx" />
     <Content Include="Clerk\DepartmentList.aspx" />
     <Content Include="Clerk\DisbursementDetailsPage.aspx" />
@@ -365,6 +369,20 @@
     <Compile Include="App_Code\RayBizLogic.cs" />
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Clerk\AdjustmentVoucherDetail.aspx.cs">
+      <DependentUpon>AdjustmentVoucherDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Clerk\AdjustmentVoucherDetail.aspx.designer.cs">
+      <DependentUpon>AdjustmentVoucherDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Clerk\AdjustmentVoucherList.aspx.cs">
+      <DependentUpon>AdjustmentVoucherList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Clerk\AdjustmentVoucherList.aspx.designer.cs">
+      <DependentUpon>AdjustmentVoucherList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Clerk\Clerk.Master.cs">
       <DependentUpon>Clerk.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -378,6 +396,13 @@
     </Compile>
     <Compile Include="Clerk\CompletedRetrievalDetailPage.aspx.designer.cs">
       <DependentUpon>CompletedRetrievalDetailPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Clerk\CreateAdjustmentVoucher.aspx.cs">
+      <DependentUpon>CreateAdjustmentVoucher.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Clerk\CreateAdjustmentVoucher.aspx.designer.cs">
+      <DependentUpon>CreateAdjustmentVoucher.aspx</DependentUpon>
     </Compile>
     <Compile Include="Clerk\DepartmentDetail.aspx.cs">
       <DependentUpon>DepartmentDetail.aspx</DependentUpon>
