@@ -32,7 +32,7 @@ namespace Team10AD_Web.EmployeePage
                 btnPendingReq.ForeColor = System.Drawing.Color.Green;
                 dgvDepReq.DataSource = BusinessLogic_Sam.getDepartmentPendingRequisition(departmentCode);
                 dgvDepReq.DataBind();
-                Label1.Text = DateTime.Now.ToShortDateString();        
+              
              
             }
         }
