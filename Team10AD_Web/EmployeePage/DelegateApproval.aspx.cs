@@ -82,6 +82,7 @@ namespace Team10AD_Web.EmployeePage
                     {
                         //Change: need to rename businesslogic path here
                         BusinessLogic_Sam.delegateApprover(approverID, approvalStartDate, approvalEndDate, departmentCode);
+                    
                         Response.Redirect("DelegateApproval.aspx");
                     }
                     catch (Exception exp)
@@ -137,6 +138,7 @@ namespace Team10AD_Web.EmployeePage
             {
                 //Change: need to rename businesslogic path here
                 BusinessLogic_Sam.delegateApprover(approverID, approvalStartDate, approvalEndDate,departmentCode);
+                
             }
             catch (Exception exp)
             {
