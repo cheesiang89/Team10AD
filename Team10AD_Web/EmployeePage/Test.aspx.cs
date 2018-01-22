@@ -7,11 +7,12 @@ using System.Web.UI.WebControls;
 
 namespace Team10AD_Web.EmployeePage
 {
-    public partial class RequisitionCart : System.Web.UI.Page
+    public partial class Test : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            reqID.Value = ((int)Session["employeeid"]).ToString();
+            //Call bizLogic to test
+
         }
     }
 }
