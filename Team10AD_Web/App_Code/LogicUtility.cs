@@ -71,6 +71,7 @@ namespace Team10AD_Web.App_Code
 
             }
         }
+
         //On UnAssign or Assign rep, notify (HOD-> Employee)
         public string SendRepEmail(string departmentCode, string flag)
         {
@@ -289,7 +290,7 @@ namespace Team10AD_Web.App_Code
             return result;
 
         }
-
+        //Method used by SendDisbursementEmail()
         public string makeDisbursementTable(int disbursementID)
         {
             int num =1;
