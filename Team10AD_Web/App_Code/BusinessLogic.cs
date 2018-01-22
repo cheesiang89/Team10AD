@@ -9,8 +9,8 @@ using Team10AD_Web.App_Code.Model;
 /// </summary>
 public class BusinessLogic
 {
-     Team10ADModel tm = new Team10ADModel();
- 
+    Team10ADModel tm = new Team10ADModel();
+
     public Employee GetEmployee(int employeeID)
     {
         Employee emp = tm.Employees.Where(x => x.EmployeeID == employeeID).First();
@@ -19,7 +19,7 @@ public class BusinessLogic
 
     public string GetEmployeeName(int employeeID)
     {
-        string empName = tm.Employees.Where(x => x.EmployeeID == employeeID).Select(eid=>eid.Name).First();
+        string empName = tm.Employees.Where(x => x.EmployeeID == employeeID).Select(eid => eid.Name).First();
         return empName;
     }
 
@@ -41,7 +41,7 @@ public class BusinessLogic
         employeeID = 61;
         string departmentCode = tm.Employees.Where(x => x.EmployeeID == employeeID).Select(dc => dc.DepartmentCode).First();
         Department department = tm.Departments.Where(x => x.DepartmentCode == departmentCode).First();
-        return (int) department.PointID;
+        return (int)department.PointID;
     }
 
     public string ShowCollectionPointName(int employeeID)
@@ -54,4 +54,26 @@ public class BusinessLogic
         CollectionPoint collectionPoint = tm.CollectionPoints.Where(x => x.PointID == pointID).First();
         return collectionPoint.PointName;
     }
+
+    public object DisbursementRecords()
+    {
+        var qry = (from d in tm.Disbursements select new { d.DisbursementID, d.CollectionDate, d.Department.DepartmentName, d.CollectionPoint.PointName, d.Department.Employee1.Name, d.Status }).ToList();
+        return qry;
+    }
+
+    public Disbursement GetDisbursement(int disbursementID)
+    {
+        List<Disbursement> result = tm.Disbursements.Where(x => x.DisbursementID == disbursementID).ToList();
+        return result[0];
+    }
+
+    public object ShowDisbursementDetails(int disbursementID)
+    {
+        var qry = (from dd in tm.DisbursementDetails.Where(x => x.DisbursementID == disbursementID) select new { dd.DisbursementID, dd.ItemCode, dd.Catalogue.Description, dd.QuantityRequested, dd.QuantityCollected, dd.Remarks }).ToList();
+        return qry;
+    }
+
+
+
 }
+

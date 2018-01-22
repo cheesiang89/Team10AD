@@ -212,9 +212,17 @@ namespace Team10AD_Web.App_Code.Model
                 .IsFixedLength()
                 .IsUnicode(false);
 
+            modelBuilder.Entity<PurchaseOrderDetail>()
+                .Property(e => e.Status)
+                .IsUnicode(false);
+
             modelBuilder.Entity<PurchaseOrder>()
                 .Property(e => e.SupplierCode)
                 .IsFixedLength()
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PurchaseOrder>()
+                .Property(e => e.Status)
                 .IsUnicode(false);
 
             modelBuilder.Entity<PurchaseOrder>()
