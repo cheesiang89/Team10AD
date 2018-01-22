@@ -155,7 +155,7 @@ function saveCartSession() {
         //Create JSON string 
         let savedState = JSON.parse(tableToJson());
         let savedCart = [];
-        for (var i = 0; i < savedState.length; i++) {
+        for (let i = 0; i < savedState.length; i++) {
    
             let product = {
                 "itemCode": savedState[i]["itemCode"],
@@ -175,7 +175,7 @@ function saveCartSession() {
 }
 function qtyGotError() {
     
-    var gotError = false;
+    let gotError = false;
     $(".txtInput").each(function () {
         let input = $(this).val();
         
