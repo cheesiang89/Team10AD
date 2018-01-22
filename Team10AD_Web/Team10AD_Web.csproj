@@ -138,6 +138,7 @@
     <Content Include="Clerk\DisbursementDetailsPage.aspx" />
     <Content Include="Clerk\DisbursementList.aspx" />
     <Content Include="Clerk\Inventory.aspx" />
+    <Content Include="Clerk\Main.aspx" />
     <Content Include="Clerk\OrderTrend.aspx" />
     <Content Include="Clerk\PurchaseOrderPage.aspx" />
     <Content Include="Clerk\RequisitionDetailPage.aspx" />
@@ -201,6 +202,7 @@
     <Content Include="EmployeePage\DepartmentRequisition.aspx" />
     <Content Include="EmployeePage\DepartmentRequisitionDetail.aspx" />
     <Content Include="EmployeePage\DisbursementDetailsPage.aspx" />
+    <Content Include="EmployeePage\DisbursementList.aspx" />
     <Content Include="EmployeePage\OldCode.txt" />
     <Content Include="EmployeePage\RequisitionCart.aspx" />
     <Content Include="EmployeePage\RequisitionDetailsPage.aspx" />
@@ -437,6 +439,13 @@
     <Compile Include="Clerk\Inventory.aspx.designer.cs">
       <DependentUpon>Inventory.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Clerk\Main.aspx.cs">
+      <DependentUpon>Main.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Clerk\Main.aspx.designer.cs">
+      <DependentUpon>Main.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Clerk\OrderTrend.aspx.cs">
       <DependentUpon>OrderTrend.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -569,6 +578,13 @@
     </Compile>
     <Compile Include="EmployeePage\DisbursementDetailsPage.aspx.designer.cs">
       <DependentUpon>DisbursementDetailsPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeePage\DisbursementList.aspx.cs">
+      <DependentUpon>DisbursementList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmployeePage\DisbursementList.aspx.designer.cs">
+      <DependentUpon>DisbursementList.aspx</DependentUpon>
     </Compile>
     <Compile Include="EmployeePage\Employee.Master.cs">
       <DependentUpon>Employee.Master</DependentUpon>
@@ -713,7 +729,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AppCode\" />
-    <Folder Include="App_Data\" />
+    <Folder Include="App_Code\App_Data\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Account\Web.config" />

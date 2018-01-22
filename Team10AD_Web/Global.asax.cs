@@ -43,7 +43,7 @@ namespace Team10AD_Web
             //Stores requisition id to pass to requisition detail page
             Session["requisitiondetail"] = "";
             //Stores HOD ID
-            Session["HODID"] = 0;
+            Session["HODID"] = 104;
             //Stores Approver ID
             Session["ApproverID"] = 0;
         }
