@@ -46,21 +46,21 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Catalogue <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="../Clerk/Inventory.aspx">Inventory</a></li>
-                                <li><a href="../Clerk/StockCheck.aspx">Stock Check</a></li>
+                               <%-- <li><a href="../Clerk/StockCheck.aspx">Stock Check</a></li>--%>
                             </ul>
                         </li>
                               <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Requisition <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="../Clerk/RequestsRecords.aspx">Requests Record</a></li>
+                                <li><a href="../Clerk/RequisitionRecord.aspx">Requests Record</a></li>
                                 <li><a href="../Clerk/RetrievalList.aspx">Retrieval List</a></li>
-                                <li><a href="../Clerk/DisbursementRecord">Disbursement Record</a></li>
+                                <li><a href="../Clerk/DisbursementList">Disbursement Record</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Ordering <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="../Clerk/PORecord">PO Record</a></li>
+                                <li><a href="../Clerk/PurchaseOrderPage">PO Record</a></li>
                             </ul>
                         </li>
                       <li class="dropdown">
@@ -73,8 +73,8 @@
                                   <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Information <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="../Clerk/Supplier">Supplier</a></li>
-                                       <li><a href="../Clerk/Department">Department</a></li>
+                                <li><a href="../Clerk/SupplierList">Supplier</a></li>
+                                       <li><a href="../Clerk/DepartmentList">Department</a></li>
                             </ul>
                         </li>
                         <li><a href="#">Logout</a></li>

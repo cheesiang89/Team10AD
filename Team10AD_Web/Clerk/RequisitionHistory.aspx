@@ -3,7 +3,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Requisition History</h2>
-    <asp:GridView ID="dgvReqList" runat="server" AutoGenerateColumns="False" OnRowCommand="dgvReqList_RowCommand">
+    <asp:GridView ID="dgvReqList" runat="server" AllowPaging="True" OnPageIndexChanging="dgvReqList_PageIndexChanging" AutoGenerateColumns="False" OnRowCommand="dgvReqList_RowCommand">
         <Columns>
             <asp:BoundField DataField="RequisitionID" HeaderText="Requisition No." ReadOnly="True" />
             <asp:BoundField DataField="ApprovalDate" HeaderText="Date" ReadOnly="True" DataFormatString="{0:dd-MMM-yyyy}" />

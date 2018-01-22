@@ -3,7 +3,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Pending Requisitions</h2>
-    <asp:GridView ID="dgvReqList" runat="server" AutoGenerateColumns="False" OnRowCommand="dgvReqList_RowCommand" OnRowDataBound="dgvReqList_RowDataBound">
+    <asp:GridView ID="dgvReqList" runat="server" AllowPaging="True" OnPageIndexChanging="dgvReqList_PageIndexChanging" AutoGenerateColumns="False" OnRowCommand="dgvReqList_RowCommand" OnRowDataBound="dgvReqList_RowDataBound">
         <Columns>
             <asp:TemplateField>
                 <HeaderTemplate>

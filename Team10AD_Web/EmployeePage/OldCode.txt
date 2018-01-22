@@ -189,3 +189,8 @@
                 <br />
                 <asp:Button ID="btnConfirm" runat="server" Text="Confirm" Font-Bold="True" ForeColor="White" BackColor="#009933" OnClick="btnConfirm_Click" />&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<asp:Button ID="btnCancel" runat="server" Text="Cancel" BackColor="Red" ForeColor="White" Font-Bold="True" OnClick="btnCancel_Click" CausesValidation="False" />
             </div>
+
+
+			Cart JSON String is: ["{\"itemCode\":\"C001\",\"description\":\"Clips Double 1\\\"\",\"quantity\":\"1\",\"uom\":\"Dozen\"}","{\"itemCode\":\"C002\",\"description\":\"Clips Double 2\\\"\",\"quantity\":\"3\",\"uom\":\"Dozen\"}","{\"itemCode\":\"C001\",\"description\":\"Clips Double 1\\\"\",\"quantity\":\"1\",\"uom\":\"Dozen\"}"]
+			[{"itemCode":"C001","description":"Clips Double 1\"","quantity":"1","uom":"Dozen","reqid":"78"},{"itemCode":"C002","description":"Clips Double 2\"","quantity":"3","uom":"Dozen","reqid":"78"},{"itemCode":"C001","description":"Clips Double 1\"","quantity":"1","uom":"Dozen","reqid":"78"}]
+			Session JSON String is: "[{\"itemCode\":\"C001\",\"description\":\"Clips Double 1\\\"\",\"quantity\":\"1\",\"uom\":\"Dozen\",\"reqid\":\"78\"},{\"itemCode\":\"C002\",\"description\":\"Clips Double 2\\\"\",\"quantity\":\"2\",\"uom\":\"Dozen\",\"reqid\":\"78\"}]"
