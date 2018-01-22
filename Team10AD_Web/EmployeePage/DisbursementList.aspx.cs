@@ -6,16 +6,19 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Team10AD_Web.App_Code.Model;
 
-namespace Team10AD_Web.Clerk
+namespace Team10AD_Web.EmployeePage
 {
-    public partial class DisbursementRecord : System.Web.UI.Page
+    public partial class DisbursementList : System.Web.UI.Page
     {
         BusinessLogic b = new BusinessLogic();
         protected void Page_Load(object sender, EventArgs e)
         {
+            int employeeid = (int)Session["employeeid"];
+            Team10AD_Web.App_Code.Model.Employee emp = b.GetEmployee(employeeid);
+            string employeeDepCode = emp.DepartmentCode;
             if (!IsPostBack)
             {
-                dgvDisbursementRecord.DataSource = b.DisbursementRecords();
+                dgvDisbursementRecord.DataSource = b.DisbursementRecordsByDepartment(employeeDepCode);
                 dgvDisbursementRecord.DataBind();
             }
         }
@@ -29,7 +32,7 @@ namespace Team10AD_Web.Clerk
                 Disbursement disbursement = b.GetDisbursement(disbursementID);
                 Session["Disbursement"] = disbursement;
                 int employeeid = (int)Session["employeeid"];
-                Employee emp = b.GetEmployee(employeeid);
+                Team10AD_Web.App_Code.Model.Employee emp = b.GetEmployee(employeeid);
                 Session["Employee"] = emp;
                 Response.Redirect("DisbursementDetailsPage.aspx");
             }

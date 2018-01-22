@@ -198,6 +198,7 @@
     <Content Include="EmployeePage\DepartmentRequisition.aspx" />
     <Content Include="EmployeePage\DepartmentRequisitionDetail.aspx" />
     <Content Include="EmployeePage\DisbursementDetailsPage.aspx" />
+    <Content Include="EmployeePage\DisbursementList.aspx" />
     <Content Include="EmployeePage\OldCode.txt" />
     <Content Include="EmployeePage\RequisitionCart.aspx" />
     <Content Include="EmployeePage\RequisitionDetailsPage.aspx" />
@@ -552,6 +553,13 @@
     </Compile>
     <Compile Include="EmployeePage\DisbursementDetailsPage.aspx.designer.cs">
       <DependentUpon>DisbursementDetailsPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeePage\DisbursementList.aspx.cs">
+      <DependentUpon>DisbursementList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmployeePage\DisbursementList.aspx.designer.cs">
+      <DependentUpon>DisbursementList.aspx</DependentUpon>
     </Compile>
     <Compile Include="EmployeePage\Employee.Master.cs">
       <DependentUpon>Employee.Master</DependentUpon>
