@@ -194,3 +194,32 @@
 			Cart JSON String is: ["{\"itemCode\":\"C001\",\"description\":\"Clips Double 1\\\"\",\"quantity\":\"1\",\"uom\":\"Dozen\"}","{\"itemCode\":\"C002\",\"description\":\"Clips Double 2\\\"\",\"quantity\":\"3\",\"uom\":\"Dozen\"}","{\"itemCode\":\"C001\",\"description\":\"Clips Double 1\\\"\",\"quantity\":\"1\",\"uom\":\"Dozen\"}"]
 			[{"itemCode":"C001","description":"Clips Double 1\"","quantity":"1","uom":"Dozen","reqid":"78"},{"itemCode":"C002","description":"Clips Double 2\"","quantity":"3","uom":"Dozen","reqid":"78"},{"itemCode":"C001","description":"Clips Double 1\"","quantity":"1","uom":"Dozen","reqid":"78"}]
 			Session JSON String is: "[{\"itemCode\":\"C001\",\"description\":\"Clips Double 1\\\"\",\"quantity\":\"1\",\"uom\":\"Dozen\",\"reqid\":\"78\"},{\"itemCode\":\"C002\",\"description\":\"Clips Double 2\\\"\",\"quantity\":\"2\",\"uom\":\"Dozen\",\"reqid\":\"78\"}]"
+
+			//OLD
+        //public static string SendEmailClient(string toEmailAddress, string subject, string fromEmailAddress, string body)
+        //{
+        //    //Function will open email client with fields filled up
+        //    // "fromEmailAddress" is not used because assumption is sender will be sending with corporate email client tied to own a/c
+        //    // navigateurl = "mailto:user@example.com?subject=MessageTitle&body=MessageContent";
+        //    // window.location.href = navigateurl;
+           
+        //    //Usecases to send email:
+        //    //1. Assign rep (HOD-> Employee)
+        //    //2. Undelegate approval (HOD-> Employee)
+        //    //3. Delegate approval (HOD-> Employee)
+        //    //4. Submit requisition (Employee -> Approver)
+        //    //5. Approve/reject requisition (Approver -> Employee)
+        //    //6. Generate disbursement list (Clerk-> Rep)
+
+        //    //Construct NavigateUrl string
+        //    StringBuilder sb = new StringBuilder();
+        //    sb.Append("mailto:");
+        //    sb.Append(toEmailAddress);
+        //    sb.Append("?subject=");
+        //    sb.Append(subject);
+        //    sb.Append("&body=");
+        //    sb.Append(body);
+
+        //    string navigateurl = sb.ToString();
+        //    return navigateurl;
+        //}

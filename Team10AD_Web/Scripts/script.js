@@ -91,7 +91,7 @@ function saveToCart(itemCode, description, quantity, uom) {
         cart.push(myJSON);
         sessionStorage.setItem('cart', JSON.stringify(cart));
         //Print list
-        //for (var i = 0; i < cart.length; i++) {
+        //for (let i = 0; i < cart.length; i++) {
         //    console.log('List values:' + cart[i]);
         //}
        console.log("Cart JSON String is: " + sessionStorage.getItem('cart'));

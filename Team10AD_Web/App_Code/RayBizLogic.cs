@@ -460,6 +460,7 @@ namespace Team10AD_Web.App_Code
                         foreach (DisbursementDetail ddetail in disDetailList)
                         {
                             context.DisbursementDetails.Add(ddetail);
+                            //TODO: Send notification email
                             context.SaveChanges();
                         }
                     }
