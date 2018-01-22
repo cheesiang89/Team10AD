@@ -135,11 +135,9 @@ namespace Team10AD_Web.App_Code
                 foreach (Requisition r in reqList)
                 {
                     context.Requisitions.Attach(r);
-                }   
+                }
                 retrievalnew.Requisitions = reqList;
                 context.SaveChanges();
-
-                retrievalnew = context.Retrievals.OrderByDescending(x => x.RetrievalID).First();
 
                 foreach (RequisitionDetail requisition in reqdetaillist)
                 {
@@ -158,7 +156,7 @@ namespace Team10AD_Web.App_Code
                             else
                             {
                                 retrieval.RequestedQuantity += (requisition.QuantityRequested - requisition.QuantityRetrieved);
-                            }  
+                            }
                         }
                     }
 
@@ -255,7 +253,7 @@ namespace Team10AD_Web.App_Code
 
                     existingdata.RetrievedQuantity = userdetail.RetrievedQuantity;
                     existingdata.QuantityAfter = existingdata.Catalogue.BalanceQuantity - userdetail.RetrievedQuantity;
-                    
+
                     Catalogue item = context.Catalogues.Where(x => x.ItemCode == userdetail.ItemCode).First();
                     item.BalanceQuantity -= userdetail.RetrievedQuantity;
                     item.PendingRequestQuantity -= userdetail.RetrievedQuantity;
@@ -280,7 +278,9 @@ namespace Team10AD_Web.App_Code
                     //This will determine to create a new disbursement for this department or not
                     int deptcounter = 0;
                     List<DisbursementDetail> disDetailList = new List<DisbursementDetail>();
-                    Disbursement disbursementnew = new Disbursement();
+
+                    //Disbursement disbursementnew = new Disbursement();
+                    Disbursement disbursement = new Disbursement();
 
                     foreach (RetrievalDetail retrievaldetail in retrievaldetaillist)
                     {
@@ -310,7 +310,7 @@ namespace Team10AD_Web.App_Code
                                 //Creating a new disbursement
                                 if (deptcounter == 1)
                                 {
-                                    Disbursement disbursement = new Disbursement();
+                                    //Disbursement disbursement = new Disbursement();
                                     disbursement.CollectionDate = DateTime.Now;
                                     disbursement.PointID = r.Employee.Department.CollectionPoint.PointID;
                                     disbursement.DepartmentCode = r.Employee.DepartmentCode;
@@ -319,7 +319,7 @@ namespace Team10AD_Web.App_Code
                                     context.Disbursements.Add(disbursement);
                                     context.SaveChanges();
 
-                                    disbursementnew = context.Disbursements.OrderByDescending(x => x.DisbursementID).First();
+                                    //disbursementnew = context.Disbursements.OrderByDescending(x => x.DisbursementID).First();
                                 }
                                 List<RequisitionDetail> reqDetailList = r.RequisitionDetails.ToList();
                                 foreach (RequisitionDetail reqdetail in reqDetailList)
@@ -350,7 +350,7 @@ namespace Team10AD_Web.App_Code
                                                 {
                                                     disDetail.QuantityRequested += (reqdetail.QuantityRequested - reqdetail.QuantityRetrieved);
                                                     reqdetail.QuantityRetrieved += (reqdetail.QuantityRequested - reqdetail.QuantityRetrieved);
-                                                    balretrievedqty -= (int) (reqdetail.QuantityRequested - reqdetail.QuantityRetrieved);
+                                                    balretrievedqty -= (int)(reqdetail.QuantityRequested - reqdetail.QuantityRetrieved);
                                                 }
                                             }
                                             else if ((balretrievedqty < reqdetail.QuantityRequested) && (balretrievedqty > 0))
@@ -359,13 +359,13 @@ namespace Team10AD_Web.App_Code
                                                 {
                                                     disDetail.QuantityRequested += balretrievedqty;
                                                     reqdetail.QuantityRetrieved += balretrievedqty;
-                                                    balretrievedqty -= (int) balretrievedqty;
+                                                    balretrievedqty -= (int)balretrievedqty;
                                                 }
                                                 else
                                                 {
                                                     disDetail.QuantityRequested += balretrievedqty;
                                                     reqdetail.QuantityRetrieved += balretrievedqty;
-                                                    balretrievedqty -= (int) balretrievedqty;
+                                                    balretrievedqty -= (int)balretrievedqty;
                                                 }
                                             }
                                             else
@@ -377,7 +377,7 @@ namespace Team10AD_Web.App_Code
                                                     disDetail.QuantityRequested += 0;
                                                     reqdetail.QuantityRetrieved = 0;
                                                 }
-                                                
+
                                             }
 
                                         }
@@ -387,7 +387,7 @@ namespace Team10AD_Web.App_Code
                                     if (reqdetail.ItemCode == retrievaldetail.ItemCode && itemcounter == 0)
                                     {
                                         DisbursementDetail disburementdetail = new DisbursementDetail();
-                                        disburementdetail.DisbursementID = disbursementnew.DisbursementID;
+                                        disburementdetail.DisbursementID = disbursement.DisbursementID;
                                         disburementdetail.ItemCode = reqdetail.ItemCode;
 
                                         if (balretrievedqty >= reqdetail.QuantityRequested)
@@ -436,7 +436,7 @@ namespace Team10AD_Web.App_Code
                                     }
                                 }
                                 //Loop through details of requisition to check for completeness
-                                foreach(RequisitionDetail rd in reqDetailList)
+                                foreach (RequisitionDetail rd in reqDetailList)
                                 {
                                     if (rd.QuantityRequested != rd.QuantityRetrieved)
                                     {
@@ -478,7 +478,7 @@ namespace Team10AD_Web.App_Code
                 //Counter to check whether there is any item that need adjustment
                 int needAdjustment = 0;
 
-                StockAdjustmentVoucher adjNew = new StockAdjustmentVoucher();
+                //StockAdjustmentVoucher adjNew = new StockAdjustmentVoucher();
                 List<StockAdjustmentVoucherDetail> adjDetailList = new List<StockAdjustmentVoucherDetail>();
 
                 foreach (RetrievalDetail sDetail in suggested)
@@ -501,14 +501,16 @@ namespace Team10AD_Web.App_Code
                                     context.StockAdjustmentVouchers.Add(adj);
                                     context.SaveChanges();
 
-                                    adjNew = context.StockAdjustmentVouchers.OrderByDescending(x => x.VoucherID).First();
-                                    adjustmentVoucherId = adjNew.VoucherID;
+                                    //adjNew = context.StockAdjustmentVouchers.OrderByDescending(x => x.VoucherID).First();
+                                    //adjustmentVoucherId = adjNew.VoucherID;
+
+                                    adjustmentVoucherId = adj.VoucherID;
                                 }
 
                                 StockAdjustmentVoucherDetail adjDetail = new StockAdjustmentVoucherDetail();
-                                adjDetail.VoucherID = adjNew.VoucherID;
+                                adjDetail.VoucherID = adjustmentVoucherId;
                                 adjDetail.ItemCode = uDetail.ItemCode;
-                                adjDetail.QuantityAdjusted = - (uDetail.Catalogue.BalanceQuantity - uDetail.RetrievedQuantity);
+                                adjDetail.QuantityAdjusted = -(uDetail.Catalogue.BalanceQuantity - uDetail.RetrievedQuantity);
                                 adjDetailList.Add(adjDetail);
                             }
                         }
@@ -545,5 +547,59 @@ namespace Team10AD_Web.App_Code
                 return adjVoucherDetail;
             }
         }
+
+        public static object AdjustmentVoucherList()
+        {
+            using (Team10ADModel context = new Team10ADModel())
+            {
+                var qry = from v in context.StockAdjustmentVouchers orderby v.Status descending select new { v.VoucherID, v.StoreStaff.Name, v.DateIssue, v.Status, Approver = v.StoreStaff1.Name };
+                return qry.ToList();
+            }
+        }
+
+        public static object AdjustmentVoucherDetailList(int id)
+        {
+            using (Team10ADModel context = new Team10ADModel())
+            {
+                var qry = from v in context.StockAdjustmentVoucherDetails where (v.VoucherID == id) select new { v.ItemCode, v.QuantityAdjusted, v.Reason };
+                return qry.ToList();
+            }
+        }
+
+        public static double AdjustmentVoucherCost(int id)
+        {
+            using (Team10ADModel context = new Team10ADModel())
+            {
+                List<StockAdjustmentVoucherDetail> detailList = context.StockAdjustmentVoucherDetails.Where(v => v.VoucherID == id).ToList();
+
+                double totalCost = 0;
+
+                foreach (StockAdjustmentVoucherDetail d in detailList)
+                {
+                    double avgprice = (double) context.SupplierDetails.Where(i => i.ItemCode == d.ItemCode).Average(x => x.Price);
+                    //Take the absolute value because can have negative or positive quantity adjustment
+                    totalCost += (Math.Abs((int) d.QuantityAdjusted) * avgprice);
+                }
+                return totalCost;
+            }
+        }
+
+        public static StoreStaff GetStoreStaffById(int id)
+        {
+            using (Team10ADModel context = new Team10ADModel())
+            {
+                return context.StoreStaffs.Where(x => x.StoreStaffID == id).First();
+            }
+
+        }
+
+        public static StockAdjustmentVoucher GetStockAdjustmentVoucherById(int id)
+        {
+            using (Team10ADModel context = new Team10ADModel())
+            {
+                return context.StockAdjustmentVouchers.Where(v => v.VoucherID == id).First();
+            }
+        }
     }
 }
+

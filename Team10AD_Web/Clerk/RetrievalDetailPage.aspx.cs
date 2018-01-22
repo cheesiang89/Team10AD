@@ -92,7 +92,7 @@ namespace Team10AD_Web.Clerk
             }
 
             //Check for adjustment voucher needs
-            int needAdjustment = RayBizLogic.GenerateAdjustmentVoucherDetails(suggested, userinput, clerkid);
+            int adjustmentVoucherId = RayBizLogic.GenerateAdjustmentVoucherDetails(suggested, userinput, clerkid);
 
             //Update retrieval and catalogue
             //Generate disbursement lists
@@ -100,9 +100,9 @@ namespace Team10AD_Web.Clerk
             //Update requisition status
             RayBizLogic.UpdateRetrievalDetailsEager(retrievalid, userinput, clerkid);
 
-            if (needAdjustment > 0)
+            if (adjustmentVoucherId > 0)
             {
-                Session["AdjustVoucherId"] = needAdjustment;
+                Session["AdjustVoucherId"] = adjustmentVoucherId;
                 Response.Redirect("CreateAdjustmentVoucher.aspx");
             }
             else
