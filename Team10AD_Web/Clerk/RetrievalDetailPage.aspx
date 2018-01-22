@@ -9,6 +9,8 @@
     <asp:Label ID="RetStatus" runat="server" Text="Status:"></asp:Label>
     <asp:TextBox ID="StatusTextBox" runat="server" ReadOnly="True"></asp:TextBox>
     <br />
+    <asp:ValidationSummary ID="QtyValidationSummary" runat="server" validationgroup="QtyValidation"/>
+    <br />
     <asp:GridView ID="dgvRetrievalDetail" runat="server" AutoGenerateColumns="False">
         <Columns>
             <asp:BoundField DataField="ItemCode" HeaderText="Item Code" />
@@ -18,9 +20,11 @@
             <asp:TemplateField HeaderText="Quantity to Retrieve">
                 <ItemTemplate>
                     <asp:TextBox ID="RetrieveQty" runat="server" Text='<%# QtyToRetrieve((int) Eval("BalanceQuantity"),(int) Eval("RequestedQuantity")) %>'></asp:TextBox>
+                    <asp:CompareValidator ID="ReqQtyValidator" runat="server" controltovalidate="RetrieveQty" ValueToCompare='<%# (int) Eval("RequestedQuantity")%>' operator="LessThanEqual" type="Integer" ErrorMessage="Have to be equal or less than the quantity requested!" Font-Bold="True" ></asp:CompareValidator>
+                    <asp:CompareValidator ID="NegativeQtyValidator" runat="server" controltovalidate="RetrieveQty" ValueToCompare='0' operator="GreaterThanEqual" type="Integer" ErrorMessage="Cannot be negative!" Font-Bold="True" ></asp:CompareValidator>
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>
     </asp:GridView>
-    <asp:Button ID="GenDisbursementButton" runat="server" Text="Generate Disbursement Lists" OnClick="GenDisbursementButton_Click" />
+    <asp:Button ID="GenDisbursementList" runat="server" Text="Generate Disbursement Lists" OnClick="GenDisbursementList_Click" />
 </asp:Content>
