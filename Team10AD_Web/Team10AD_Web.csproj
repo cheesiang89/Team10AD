@@ -134,6 +134,7 @@
     <Content Include="Clerk\DisbursementDetailsPage.aspx" />
     <Content Include="Clerk\DisbursementList.aspx" />
     <Content Include="Clerk\Inventory.aspx" />
+    <Content Include="Clerk\Main.aspx" />
     <Content Include="Clerk\OrderTrend.aspx" />
     <Content Include="Clerk\PurchaseOrderPage.aspx" />
     <Content Include="Clerk\RequisitionDetailPage.aspx" />
@@ -411,6 +412,13 @@
     </Compile>
     <Compile Include="Clerk\Inventory.aspx.designer.cs">
       <DependentUpon>Inventory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Clerk\Main.aspx.cs">
+      <DependentUpon>Main.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Clerk\Main.aspx.designer.cs">
+      <DependentUpon>Main.aspx</DependentUpon>
     </Compile>
     <Compile Include="Clerk\OrderTrend.aspx.cs">
       <DependentUpon>OrderTrend.aspx</DependentUpon>
