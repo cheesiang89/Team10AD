@@ -28,6 +28,7 @@
     <TargetFrameworkProfile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -86,10 +87,14 @@
       <HintPath>..\packages\Microsoft.AspNet.Membership.OpenAuth.2.0.1\lib\net45\Microsoft.AspNet.Membership.OpenAuth.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Extensions, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Extensions.dll</HintPath>
@@ -101,6 +106,8 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Extensions.Design" />
@@ -195,6 +202,8 @@
     <Content Include="EmployeePage\RequisitionDetailsPage.aspx" />
     <Content Include="EmployeePage\RequisitionStatus.aspx" />
     <Content Include="EmployeePage\SelectCollection.aspx" />
+    <Content Include="EmployeePage\Test.aspx" />
+    <Content Include="Images\cart1.png" />
     <Content Include="Sample\About.aspx" />
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Manage.aspx" />
@@ -233,12 +242,14 @@
     <Content Include="Content\img\team\3.png" />
     <Content Include="EmployeePage\Employee.Master" />
     <Content Include="EmployeePage\Web.config" />
-    <None Include="Scripts\jquery-1.12.4.intellisense.js" />
-    <Content Include="Scripts\jquery-1.12.4.js" />
-    <Content Include="Scripts\jquery-1.12.4.min.js" />
-    <Content Include="Scripts\jquery-ui-1.12.1.js" />
-    <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
-    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <None Include="Scripts\Template\jquery-1.12.4.intellisense.js" />
+    <Content Include="Scripts\Template\bootstrap-flash-alert.min.js" />
+    <Content Include="Scripts\cart.js" />
+    <Content Include="Scripts\Template\jquery-1.12.4.js" />
+    <Content Include="Scripts\Template\jquery-1.12.4.min.js" />
+    <Content Include="Scripts\Template\jquery-ui-1.12.1.js" />
+    <Content Include="Scripts\Template\jquery-ui-1.12.1.min.js" />
+    <Content Include="Scripts\Template\modernizr-2.8.3.js" />
     <Content Include="Scripts\Template\bootstrap.js" />
     <Content Include="Scripts\Template\bootstrap.min.js" />
     <Content Include="Scripts\Template\custom.js" />
@@ -293,7 +304,7 @@
     <Content Include="Old\Employee.sitemap" />
     <Content Include="Clerk\Clerk.Master" />
     <Content Include="Clerk\Web.config" />
-    <Content Include="Scripts\jquery-1.12.4.min.map" />
+    <Content Include="Scripts\Template\jquery-1.12.4.min.map" />
     <None Include="Scripts\Template\jquery-1.8.2.intellisense.js" />
     <Content Include="Sample\Sample1.aspx" />
     <Content Include="Scripts\Template\jquery-1.8.2.js" />
@@ -302,6 +313,7 @@
     <Content Include="Scripts\Template\jquery-ui-1.8.24.min.js" />
     <Content Include="Scripts\Template\modernizr-2.6.2.js" />
     <Content Include="Scripts\script.js" />
+    <Content Include="Service\CartService.svc" />
     <Content Include="TryMe.txt" />
     <Content Include="Old\ViewSwitcher.ascx" />
     <Content Include="Web.config">
@@ -324,6 +336,8 @@
   <ItemGroup>
     <Compile Include="App_Code\BusinessLogic.cs" />
     <Compile Include="App_Code\BusinessLogic_Sam.cs" />
+    <Compile Include="App_Code\CartData.cs" />
+    <Compile Include="App_Code\CS_BizLogic.cs" />
     <Compile Include="App_Code\Model\Catalogue.cs" />
     <Compile Include="App_Code\Model\CollectionPoint.cs" />
     <Compile Include="App_Code\Model\Department.cs" />
@@ -566,6 +580,13 @@
     <Compile Include="EmployeePage\SelectCollection.aspx.designer.cs">
       <DependentUpon>SelectCollection.aspx</DependentUpon>
     </Compile>
+    <Compile Include="EmployeePage\Test.aspx.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmployeePage\Test.aspx.designer.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Sample\About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -633,6 +654,9 @@
     <Compile Include="Sample\Sample1.aspx.designer.cs">
       <DependentUpon>Sample1.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Service\CartService.svc.cs">
+      <DependentUpon>CartService.svc</DependentUpon>
+    </Compile>
     <Compile Include="Shared.Master.cs">
       <DependentUpon>Shared.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -665,7 +689,6 @@
   <ItemGroup>
     <Folder Include="AppCode\" />
     <Folder Include="App_Data\" />
-    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Account\Web.config" />
