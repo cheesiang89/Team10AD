@@ -10,13 +10,12 @@ namespace Team10AD_Web.Clerk
 {
     public partial class SupplierList1 : System.Web.UI.Page
     {
-       
-            PurvaBizLogic b = new PurvaBizLogic();
+
     protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                dgvSupList.DataSource = b.ShowSuppliers();
+                dgvSupList.DataSource = PurvaBizLogic.ShowSuppliers();
                 dgvSupList.DataBind();
                 dgvSupList.AllowPaging = true;
             }
@@ -37,7 +36,7 @@ namespace Team10AD_Web.Clerk
                 GridViewRow gvRow = (GridViewRow)(((Button)e.CommandSource).NamingContainer);
                 //Get JobId value and save to session or other page object
                 string supplierCode = gvRow.Cells[0].Text;
-                Supplier supplier = b.GetSupplier(supplierCode);
+                Supplier supplier = PurvaBizLogic.GetSupplier(supplierCode);
                 Session["Supplier"] = supplier;
                 Response.Redirect("SupplierDetailPage.aspx");
             }
@@ -46,7 +45,7 @@ namespace Team10AD_Web.Clerk
         protected void dgvSupList_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             dgvSupList.PageIndex = e.NewPageIndex;
-            dgvSupList.DataSource = b.ShowSuppliers();
+            dgvSupList.DataSource = PurvaBizLogic.ShowSuppliers();
             dgvSupList.DataBind();
         }
     }

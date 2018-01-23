@@ -137,6 +137,7 @@
     <Content Include="Clerk\DepartmentList.aspx" />
     <Content Include="Clerk\DisbursementDetailsPage.aspx" />
     <Content Include="Clerk\DisbursementList.aspx" />
+    <Content Include="Clerk\GeneratePO.aspx" />
     <Content Include="Clerk\Inventory.aspx" />
     <Content Include="Clerk\Main.aspx" />
     <Content Include="Clerk\OrderTrend.aspx" />
@@ -367,8 +368,8 @@
     <Compile Include="App_Code\Model\Team10ADModel.cs" />
     <Compile Include="App_Code\PurvaBizLogic.cs" />
     <Compile Include="App_Code\LogicUtility.cs" />
-    <Compile Include="App_Code\XpBizLogic.cs" />
     <Compile Include="App_Code\RayBizLogic.cs" />
+    <Compile Include="App_Code\XPBizLogic.cs" />
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Clerk\AdjustmentVoucherDetail.aspx.cs">
@@ -433,6 +434,13 @@
     </Compile>
     <Compile Include="Clerk\DisbursementList.aspx.designer.cs">
       <DependentUpon>DisbursementList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Clerk\GeneratePO.aspx.cs">
+      <DependentUpon>GeneratePO.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Clerk\GeneratePO.aspx.designer.cs">
+      <DependentUpon>GeneratePO.aspx</DependentUpon>
     </Compile>
     <Compile Include="Clerk\Inventory.aspx.cs">
       <DependentUpon>Inventory.aspx</DependentUpon>

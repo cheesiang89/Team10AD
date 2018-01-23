@@ -68,7 +68,7 @@ namespace Team10AD_Web.App_Code
                 };
                 context.Requisitions.Add(requisition);
                 context.SaveChanges();
-                //TO DO: Send notification
+                //Send notification
                 LogicUtility.Instance.SendRequisitionEmail(requisition.RequisitionID, requisition.RequestorID, requisition.RequisitionDate.ToString());
             }
 
