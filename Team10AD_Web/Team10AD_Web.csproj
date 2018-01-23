@@ -382,8 +382,8 @@
     <Compile Include="App_Code\Model\Team10ADModel.cs" />
     <Compile Include="App_Code\PurvaBizLogic.cs" />
     <Compile Include="App_Code\LogicUtility.cs" />
-    <Compile Include="App_Code\XpBizLogic.cs" />
     <Compile Include="App_Code\RayBizLogic.cs" />
+    <Compile Include="App_Code\XPBizLogic.cs" />
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Clerk\AdjustmentVoucherDetail.aspx.cs">
@@ -448,20 +448,6 @@
     </Compile>
     <Compile Include="Clerk\DisbursementList.aspx.designer.cs">
       <DependentUpon>DisbursementList.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Clerk\GenerateOrderReport.aspx.cs">
-      <DependentUpon>GenerateOrderReport.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Clerk\GenerateOrderReport.aspx.designer.cs">
-      <DependentUpon>GenerateOrderReport.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Clerk\GenerateRequestReport.aspx.cs">
-      <DependentUpon>GenerateRequestReport.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Clerk\GenerateRequestReport.aspx.designer.cs">
-      <DependentUpon>GenerateRequestReport.aspx</DependentUpon>
     </Compile>
     <Compile Include="Clerk\Inventory.aspx.cs">
       <DependentUpon>Inventory.aspx</DependentUpon>

@@ -17,6 +17,7 @@ namespace Team10AD_Web.Clerk
             {
                 dgvDisbursementRecord.DataSource = b.DisbursementRecords();
                 dgvDisbursementRecord.DataBind();
+                dgvDisbursementRecord.AllowPaging = true;
             }
         }
 
@@ -33,6 +34,13 @@ namespace Team10AD_Web.Clerk
                 Session["Employee"] = emp;
                 Response.Redirect("DisbursementDetailsPage.aspx");
             }
+        }
+
+        protected void dgvDisbursementRecord_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            dgvDisbursementRecord.PageIndex = e.NewPageIndex;
+            dgvDisbursementRecord.DataSource = b.DisbursementRecords();
+            dgvDisbursementRecord.DataBind();
         }
     }
 }

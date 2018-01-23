@@ -13,6 +13,7 @@
             <asp:BoundField DataField="Description" HeaderText="Description" />
             <asp:BoundField DataField="QuantityRequested" HeaderText="Quantity" />
             <asp:BoundField DataField="UnitOfMeasure" HeaderText="Unit Of Measure" />
+            <asp:BoundField DataField="ItemCode" HeaderText="Item Code" />
         </Columns>
     </asp:GridView>
     <br />
