@@ -50,13 +50,13 @@ public class BusinessLogic
 
     public object DisbursementRecords()
     {
-        var qry = (from d in tm.Disbursements select new { d.DisbursementID, d.CollectionDate, d.Department.DepartmentName, d.CollectionPoint.PointName, d.Department.Employee1.Name, d.Status }).ToList();
+        var qry = (from d in tm.Disbursements orderby d.Status descending orderby d.CollectionDate descending select new { d.DisbursementID, d.CollectionDate, d.Department.DepartmentName, d.CollectionPoint.PointName, d.Department.Employee1.Name, d.Status }).ToList();
         return qry;
     }
 
     public object DisbursementRecordsByDepartment(string employeeDepCode)
     {
-        var qry = (from d in tm.Disbursements.Where(x=>x.DepartmentCode == employeeDepCode) select new { d.DisbursementID, d.CollectionDate, d.Department.DepartmentName, d.CollectionPoint.PointName, d.Department.Employee1.Name, d.Status }).ToList();
+        var qry = (from d in tm.Disbursements.Where(x=>x.DepartmentCode == employeeDepCode) orderby d.Status descending orderby d.CollectionDate descending select new { d.DisbursementID, d.CollectionDate, d.Department.DepartmentName, d.CollectionPoint.PointName, d.Department.Employee1.Name, d.Status }).ToList();
         return qry;
     }
 
@@ -71,8 +71,6 @@ public class BusinessLogic
         var qry = (from dd in tm.DisbursementDetails.Where(x => x.DisbursementID == disbursementID) select new { dd.DisbursementID, dd.ItemCode, dd.Catalogue.Description, dd.QuantityRequested, dd.QuantityCollected, dd.Remarks }).ToList();
         return qry;
     }
-
-
 
 }
 
