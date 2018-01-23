@@ -153,7 +153,7 @@ namespace Team10AD_Web.App_Code
         }
 
         //On Submit requisition (Employee -> Approver) notify
-        public string SendRequisitionEmail(string requisitionID, int? requestorID, string requisitionDate)
+        public string SendRequisitionEmail(int requisitionID, int? requestorID, string requisitionDate)
         {
             string result = "ERROR";
             string approverEmail = "";
@@ -182,7 +182,8 @@ namespace Team10AD_Web.App_Code
             sb.Append("<b>Requisition Date</b>: ");
             sb.Append(requisitionDate + "<br/>");
             sb.Append("<b>Employee Name</b>: ");
-            sb.Append(requestorName);
+            sb.Append(requestorName + "<br/><br/>");
+            sb.Append(makeDetailsTable(requisitionID, "REQUISITION"));
             sb.Append("<br/>Sincerely, <br/> Logic University");
             body = sb.ToString();
             subject = "New Requisition pending approval";
@@ -222,7 +223,8 @@ namespace Team10AD_Web.App_Code
             sb.Append("<b>Requisition Date:</b> ");
             sb.Append(requisitionDate + "<br/>");
             sb.Append("<b>Employee Name</b>: ");
-            sb.Append(requestorName);
+            sb.Append(requestorName + "<br/><br/>");
+            sb.Append(makeDetailsTable(requisitionID, "REQUISITION"));
             if (flag == "APPROVED")
             {
                 sb.Append("<br/><br/><b>Your requisition has been approved.</b><br/>");
@@ -231,8 +233,8 @@ namespace Team10AD_Web.App_Code
             {
                 sb.Append("<br/><br/><b>Your requisition has been rejected.</b><br/>");
             }
-            sb.Append("<br/>Remarks: " + remarks);
-            sb.Append("<br/>Sincerely, <br/> Logic University");
+            sb.Append("<br/><b>Remarks</b>: " + remarks);
+            sb.Append("<br/><br/>Sincerely, <br/> Logic University");
             body = sb.ToString();
             subject = "Requisition status update";
 
@@ -278,7 +280,7 @@ namespace Team10AD_Web.App_Code
             sb.Append(disbursementID.ToString() + "<br/>");
             sb.Append("<b>Collection point: </b>");
             sb.Append(collectionPoint + "<br/><br/>");
-            sb.Append(makeDisbursementTable(disbursementID));
+            sb.Append(makeDetailsTable(disbursementID,"DISBURSEMENT"));
             sb.Append("<br/>Sincerely, <br/> Logic University");
             body = sb.ToString();
             subject = "Disbursement Ready for Collection";
@@ -291,34 +293,72 @@ namespace Team10AD_Web.App_Code
 
         }
         //Method used by SendDisbursementEmail()
-        public string makeDisbursementTable(int disbursementID)
+        public string makeDetailsTable(int ID, string flag)
         {
-            int num =1;
-            string itemDescription="";
-            string quantityDisbursed="";
             StringBuilder sb = new StringBuilder();
-            sb.Append("<table style='width: 100 %'><tr>");
-            sb.Append("<th colspan='1' style='border:solid 1px'>S/N</th>");
-            sb.Append("<th colspan='1' style='border:solid 1px'>Description</th>");
-            sb.Append("<th colspan='2' style='border:solid 1px'>Quantity</th></tr>");
-            using (Model.Team10ADModel m = new Model.Team10ADModel())
+            if (flag=="DISBURSEMENT")
             {
-                List<DisbursementDetail> itemList = m.DisbursementDetails
-                    .Where(x => x.DisbursementID == disbursementID).Select(x => x).ToList();
-                foreach (var item in itemList)
+                int num = 1;
+                string itemDescription = "";
+                string quantityDisbursed = "";
+
+                sb.Append("<table style='width: 100 %'><tr>");
+                sb.Append("<th colspan='1' style='border:solid 1px'>S/N</th>");
+                sb.Append("<th colspan='1' style='border:solid 1px'>Description</th>");
+                sb.Append("<th colspan='2' style='border:solid 1px'>Quantity</th></tr>");
+                using (Model.Team10ADModel m = new Model.Team10ADModel())
                 {
-                    //Get itemDescription, quantityDisbursed
-                    itemDescription = m.Catalogues.Where(x => x.ItemCode == item.ItemCode).Select(x => x.Description).First();
-                    quantityDisbursed = item.QuantityRequested.ToString();
-                    sb.Append("<tr><td style='border:solid 1px'>");
-                    sb.Append(num + "</td><td style='border:solid 1px'>");
-                    sb.Append(itemDescription + "</td><td style='border:solid 1px'>");
-                    sb.Append(quantityDisbursed + "</td></tr>");
-                    num++;
+                    List<DisbursementDetail> itemList = m.DisbursementDetails
+                        .Where(x => x.DisbursementID == ID).Select(x => x).ToList();
+                    foreach (var item in itemList)
+                    {
+                        //Get itemDescription, quantityDisbursed
+                        itemDescription = m.Catalogues.Where(x => x.ItemCode == item.ItemCode).Select(x => x.Description).First();
+                        quantityDisbursed = item.QuantityRequested.ToString();
+                        sb.Append("<tr><td style='border:solid 1px'>");
+                        sb.Append(num + "</td><td style='border:solid 1px'>");
+                        sb.Append(itemDescription + "</td><td style='border:solid 1px'>");
+                        sb.Append(quantityDisbursed + "</td></tr>");
+                        num++;
+                    }
                 }
+
+                sb.Append("</table>");
+
             }
-                     
-            sb.Append("</table>");
+            else if (flag == "REQUISITION")
+            {
+                int num = 1;
+                string itemDescription = "";
+                string quantityRequested = "";
+                string unitOfMeasure = "";
+                sb.Append("<table style='width: 100 %'><tr>");
+                sb.Append("<th colspan='1' style='border:solid 1px'>S/N</th>");
+                sb.Append("<th colspan='1' style='border:solid 1px'>Description</th>");
+                sb.Append("<th colspan='2' style='border:solid 1px'>Quantity</th>");
+                sb.Append("<th colspan='2' style='border:solid 1px'>Unit of Measure</th></tr>");
+                using (Model.Team10ADModel m = new Model.Team10ADModel())
+                {
+                    List<RequisitionDetail> itemList = m.RequisitionDetails
+                        .Where(x => x.RequisitionID == ID).Select(x => x).ToList();
+                    foreach (var item in itemList)
+                    {
+                        //Get itemDescription, quantityDisbursed
+                        itemDescription = m.Catalogues.Where(x => x.ItemCode == item.ItemCode).Select(x => x.Description).First();
+                        quantityRequested = item.QuantityRequested.ToString();
+                        unitOfMeasure = item.Catalogue.UnitOfMeasure;
+                        sb.Append("<tr><td style='border:solid 1px'>");
+                        sb.Append(num + "</td><td style='border:solid 1px'>");
+                        sb.Append(itemDescription + "</td><td style='border:solid 1px'>");
+                        sb.Append(quantityRequested + "</td><td></td><td style='border:solid 1px'>");
+                        sb.Append(unitOfMeasure + "</td><td></td></tr>");
+                        num++;
+                    }
+                }
+
+                sb.Append("</table>");
+            }
+           
             return sb.ToString();
         }
 

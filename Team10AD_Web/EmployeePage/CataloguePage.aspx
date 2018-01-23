@@ -53,6 +53,6 @@
     </div>
 
 
-
+    <script type="text/javascript" src="<%= ResolveUrl ("~/Scripts/catalogue.js") %>"></script>
 </asp:Content>
 
