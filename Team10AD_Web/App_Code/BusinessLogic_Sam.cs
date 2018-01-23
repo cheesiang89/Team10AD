@@ -99,47 +99,6 @@ namespace Team10AD_Web.App_Code
             }
         }
 
-        //public static List<Requisition> getDepartmentPendingRequisition(string departmentCode)
-        //{
-        //    //get all requisitions status with "Pending"
-        //    //get all requestorID where they are from the particular department
-        //    //loop through the pending requisitions where the requestors are from that particular department
-        //    List<int> deptEmpIdList = new List<int>();
-        //    List<Requisition> allPendingRequisitionList = new List<Requisition>();
-        //    List<Requisition> deptPendingRequisitionList = new List<Requisition>();
-        //    Dictionary<int, string> deptEmployeeList = new Dictionary<int, string>();
-
-        //    using (App_Code.Model.Team10ADModel entities = new App_Code.Model.Team10ADModel())
-        //    {
-
-        //        //Get the list of requisitions with status = "Pending"
-        //        var qry = entities.Requisitions.Where(x => x.Status == "Pending");
-        //        allPendingRequisitionList = qry.ToList();
-
-        //        //Get the list of employees in that particular department
-        //        List<Employee> deptEmpList = entities.Employees.Where(x => x.DepartmentCode == departmentCode).ToList();
-        //        foreach (Employee emp in deptEmpList)
-        //        {
-        //            deptEmpIdList.Add(emp.EmployeeID);
-        //            deptEmployeeList.Add(emp.EmployeeID, emp.Name);
-
-        //        }
-
-        //        //Get the list of Pending requisitions from that particular department
-        //        foreach (Requisition req in allPendingRequisitionList)
-        //        {
-        //            foreach (int reqId in deptEmpIdList)
-        //            {
-        //                if (req.RequestorID.Equals(reqId))
-        //                {
-        //                    deptPendingRequisitionList.Add(req);
-        //                }
-        //            }
-        //        }
-        //        return deptPendingRequisitionList;
-        //    }
-        //}
-
 
         public static object getDepartmentPendingRequisition(string departmentCode)
         {
@@ -171,17 +130,61 @@ namespace Team10AD_Web.App_Code
             }
         }
 
-        public static void approveRequisition(int requisitionId,string remarks)
+        public static void approveRequisition(int requisitionId,string remarks, string approverID)
         {
+            //DateTime approvalDate = new DateTime();
             using(Team10ADModel entities = new Team10ADModel())
             {
                 Requisition req = entities.Requisitions.Where(p => p.RequisitionID == requisitionId).SingleOrDefault();
                 req.Status = "Approved";
                 req.Remarks = remarks;
+                req.ApprovalDate = DateTime.Today;
+                req.ApproverID = Convert.ToInt32(approverID);
+                //RequisitionDetail reqDetails = entities.RequisitionDetails.Where()
                 entities.SaveChanges();
             }
 
         }
+
+        public static void updateItemStockLevel(Dictionary<string, int> reqListItems)
+        {
+
+            using(Team10ADModel entities = new Team10ADModel())
+            {
+                Catalogue catReqItem = new Catalogue();
+                string key;
+                int keyValue; int balance; int pendDelQty;
+                int pendReqQty; int reorderLvl;
+                int stockCheckQty;
+                //for(int index = 0; index < reqListItems.Count; index++)
+                //{
+                //    key= reqListItems[  
+                //    catReqItem = entities.Catalogues.Where(p => p.ItemCode == reqListItems[index].Key.ToString()).FirstOrDefault();
+
+                //}
+
+                foreach (KeyValuePair<string, int> catItem in reqListItems)
+                {
+                    key = catItem.Key;
+                    keyValue = catItem.Value;
+                    catReqItem = entities.Catalogues.Where(p => p.ItemCode == key).FirstOrDefault();
+                    catReqItem.PendingRequestQuantity = keyValue;
+                    balance = (int)catReqItem.BalanceQuantity;
+                    pendDelQty = (int)catReqItem.PendingDeliveryQuantity;
+                    pendReqQty = keyValue;
+                    reorderLvl = (int)catReqItem.ReorderLevel;
+                    stockCheckQty = balance + pendDelQty - pendReqQty;
+                    //if the reorder level more than (balance+pending delivery quantity - pending request delivery), shortfall status = false
+                    if (stockCheckQty < reorderLvl)
+                    {
+                        catReqItem.ShortfallStatus = "True";
+                    }
+                }
+
+                entities.SaveChanges();
+            }
+        }
+
 
         public static void rejectRequisition(int requisitionId,string remarks)
         {
