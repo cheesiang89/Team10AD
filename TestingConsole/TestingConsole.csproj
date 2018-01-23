@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppCode\BusinessLogic_Sam.cs" />
     <Compile Include="CartData.cs" />
     <Compile Include="Model\Catalogue.cs" />
     <Compile Include="Model\CollectionPoint.cs" />

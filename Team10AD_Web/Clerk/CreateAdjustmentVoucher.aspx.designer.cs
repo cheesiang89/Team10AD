@@ -7,36 +7,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Team10AD_Web.EmployeePage {
+namespace Team10AD_Web.Clerk {
     
     
-    public partial class Test {
+    public partial class CreateAdjustmentVoucher {
         
         /// <summary>
-        /// form1 control.
+        /// dgvCreateAdj control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.WebControls.GridView dgvCreateAdj;
         
         /// <summary>
-        /// lblResult control.
+        /// UpdateButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblResult;
-        
-        /// <summary>
-        /// btnAutoEmail control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAutoEmail;
+        protected global::System.Web.UI.WebControls.Button UpdateButton;
     }
 }

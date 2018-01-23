@@ -56,6 +56,7 @@
     <Reference Include="AspNet.ScriptManager.jQuery, Version=1.12.4.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\AspNet.ScriptManager.jQuery.1.12.4\lib\net45\AspNet.ScriptManager.jQuery.dll</HintPath>
     </Reference>
+    <Reference Include="CrystalDecisions.Web, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="DotNetOpenAuth.AspNet, Version=4.3.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
       <HintPath>..\packages\DotNetOpenAuth.AspNet.4.3.4.13329\lib\net45-full\DotNetOpenAuth.AspNet.dll</HintPath>
     </Reference>
@@ -128,12 +129,16 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Clerk\AdjustmentVoucherDetail.aspx" />
+    <Content Include="Clerk\AdjustmentVoucherList.aspx" />
     <Content Include="Clerk\CompletedRetrievalDetailPage.aspx" />
+    <Content Include="Clerk\CreateAdjustmentVoucher.aspx" />
     <Content Include="Clerk\DepartmentDetail.aspx" />
     <Content Include="Clerk\DepartmentList.aspx" />
     <Content Include="Clerk\DisbursementDetailsPage.aspx" />
     <Content Include="Clerk\DisbursementList.aspx" />
     <Content Include="Clerk\Inventory.aspx" />
+    <Content Include="Clerk\Main.aspx" />
     <Content Include="Clerk\OrderTrend.aspx" />
     <Content Include="Clerk\PurchaseOrderPage.aspx" />
     <Content Include="Clerk\RequisitionDetailPage.aspx" />
@@ -197,6 +202,7 @@
     <Content Include="EmployeePage\DepartmentRequisition.aspx" />
     <Content Include="EmployeePage\DepartmentRequisitionDetail.aspx" />
     <Content Include="EmployeePage\DisbursementDetailsPage.aspx" />
+    <Content Include="EmployeePage\DisbursementList.aspx" />
     <Content Include="EmployeePage\OldCode.txt" />
     <Content Include="EmployeePage\RequisitionCart.aspx" />
     <Content Include="EmployeePage\RequisitionDetailsPage.aspx" />
@@ -243,6 +249,7 @@
     <Content Include="EmployeePage\Employee.Master" />
     <Content Include="EmployeePage\Web.config" />
     <None Include="Scripts\Template\jquery-1.12.4.intellisense.js" />
+    <Content Include="Scripts\catalogue.js" />
     <Content Include="Scripts\Template\bootstrap-flash-alert.min.js" />
     <Content Include="Scripts\cart.js" />
     <Content Include="Scripts\Template\jquery-1.12.4.js" />
@@ -359,10 +366,25 @@
     <Compile Include="App_Code\Model\SupplierDetail.cs" />
     <Compile Include="App_Code\Model\Team10ADModel.cs" />
     <Compile Include="App_Code\PurvaBizLogic.cs" />
+    <Compile Include="App_Code\LogicUtility.cs" />
     <Compile Include="App_Code\XpBizLogic.cs" />
     <Compile Include="App_Code\RayBizLogic.cs" />
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Clerk\AdjustmentVoucherDetail.aspx.cs">
+      <DependentUpon>AdjustmentVoucherDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Clerk\AdjustmentVoucherDetail.aspx.designer.cs">
+      <DependentUpon>AdjustmentVoucherDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Clerk\AdjustmentVoucherList.aspx.cs">
+      <DependentUpon>AdjustmentVoucherList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Clerk\AdjustmentVoucherList.aspx.designer.cs">
+      <DependentUpon>AdjustmentVoucherList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Clerk\Clerk.Master.cs">
       <DependentUpon>Clerk.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -376,6 +398,13 @@
     </Compile>
     <Compile Include="Clerk\CompletedRetrievalDetailPage.aspx.designer.cs">
       <DependentUpon>CompletedRetrievalDetailPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Clerk\CreateAdjustmentVoucher.aspx.cs">
+      <DependentUpon>CreateAdjustmentVoucher.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Clerk\CreateAdjustmentVoucher.aspx.designer.cs">
+      <DependentUpon>CreateAdjustmentVoucher.aspx</DependentUpon>
     </Compile>
     <Compile Include="Clerk\DepartmentDetail.aspx.cs">
       <DependentUpon>DepartmentDetail.aspx</DependentUpon>
@@ -411,6 +440,13 @@
     </Compile>
     <Compile Include="Clerk\Inventory.aspx.designer.cs">
       <DependentUpon>Inventory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Clerk\Main.aspx.cs">
+      <DependentUpon>Main.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Clerk\Main.aspx.designer.cs">
+      <DependentUpon>Main.aspx</DependentUpon>
     </Compile>
     <Compile Include="Clerk\OrderTrend.aspx.cs">
       <DependentUpon>OrderTrend.aspx</DependentUpon>
@@ -544,6 +580,13 @@
     </Compile>
     <Compile Include="EmployeePage\DisbursementDetailsPage.aspx.designer.cs">
       <DependentUpon>DisbursementDetailsPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeePage\DisbursementList.aspx.cs">
+      <DependentUpon>DisbursementList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmployeePage\DisbursementList.aspx.designer.cs">
+      <DependentUpon>DisbursementList.aspx</DependentUpon>
     </Compile>
     <Compile Include="EmployeePage\Employee.Master.cs">
       <DependentUpon>Employee.Master</DependentUpon>
@@ -688,7 +731,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AppCode\" />
-    <Folder Include="App_Data\" />
+    <Folder Include="App_Code\App_Data\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Account\Web.config" />
