@@ -35,7 +35,8 @@ namespace Team10AD_Web.Clerk
 
         protected void btnCreatePO_Click(object sender, EventArgs e)
         {
-            Response.Redirect("PurchaseOrderPage.aspx");
+            Session["Shortfall"] = PurvaBizLogic.GetLowStockByStatus("True");
+            Response.Redirect("GeneratePO.aspx");
         }
 
         protected void btnGoReqRec_Click(object sender, EventArgs e)

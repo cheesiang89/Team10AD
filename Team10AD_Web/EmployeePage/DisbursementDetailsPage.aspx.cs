@@ -12,12 +12,11 @@ namespace Team10AD_Web.EmployeePage
     {
         BusinessLogic b = new BusinessLogic();
         protected void Page_Load(object sender, EventArgs e)
-        {
+        {       
             string collected = "Collected";
             string uncollected = "Uncollected";
             if (!IsPostBack)
             {
-
                 Disbursement disbursement = (Disbursement)Session["Disbursement"];
                 lblDisList2.Text = disbursement.DisbursementID.ToString();
                 lblDepName2.Text = disbursement.Department.DepartmentName;
