@@ -37,7 +37,7 @@ namespace Team10AD_Web
             //Stores employee id to pass to detail page
             Session["employeeid"] = 78;
             //Stores clerk id to pass to detail page
-            Session["clerkid"] = 10001;
+            Session["clerkid"] = 10004;
             //Stores department id to pass to detail page
             Session["departmentcode"] = "ARTS";
             //Stores requisition id to pass to requisition detail page
