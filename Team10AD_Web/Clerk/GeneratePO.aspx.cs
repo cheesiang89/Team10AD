@@ -55,7 +55,6 @@ namespace Team10AD_Web.Clerk
                 lblTag.Text = "No such item";
                 lblTag.Visible = true;
                 
-
             }
         }
 
