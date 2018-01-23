@@ -196,7 +196,7 @@ namespace Team10AD_Web.App_Code
         {
             using (Team10ADModel context = new Team10ADModel())
             {
-                var qry = from r in context.Retrievals orderby r.Status descending select new { r.RetrievalID, r.RetrievalDate, r.Status };
+                var qry = from r in context.Retrievals orderby r.Status descending, r.RetrievalID descending select new { r.RetrievalID, r.RetrievalDate, r.Status };
                 return qry.ToList();
             }
         }
@@ -252,7 +252,6 @@ namespace Team10AD_Web.App_Code
                     RetrievalDetail existingdata = context.RetrievalDetails.Where(r => r.RetrievalID == userdetail.RetrievalID && r.ItemCode == userdetail.ItemCode).First();
 
                     existingdata.RetrievedQuantity = userdetail.RetrievedQuantity;
-                   // existingdata.QuantityAfter = existingdata.Catalogue.BalanceQuantity - userdetail.RetrievedQuantity;
 
                     Catalogue item = context.Catalogues.Where(x => x.ItemCode == userdetail.ItemCode).First();
                     item.BalanceQuantity -= userdetail.RetrievedQuantity;
@@ -480,7 +479,6 @@ namespace Team10AD_Web.App_Code
                     RetrievalDetail existingdata = context.RetrievalDetails.Where(r => r.RetrievalID == userdetail.RetrievalID && r.ItemCode == userdetail.ItemCode).First();
 
                     existingdata.RetrievedQuantity = userdetail.RetrievedQuantity;
-                   // existingdata.QuantityAfter = existingdata.Catalogue.BalanceQuantity - userdetail.RetrievedQuantity;
 
                     Catalogue item = context.Catalogues.Where(x => x.ItemCode == userdetail.ItemCode).First();
                     item.BalanceQuantity -= userdetail.RetrievedQuantity;
@@ -740,10 +738,12 @@ namespace Team10AD_Web.App_Code
                                 adjDetail.VoucherID = adjustmentVoucherId;
                                 adjDetail.ItemCode = uDetail.ItemCode;
                                 adjDetail.QuantityAdjusted = -(uDetail.Catalogue.BalanceQuantity - uDetail.RetrievedQuantity);
-                                adjDetailList.Add(adjDetail);
 
                                 Catalogue item = context.Catalogues.Where(x => x.ItemCode == adjDetail.ItemCode).First();
                                 item.BalanceQuantity -= (uDetail.Catalogue.BalanceQuantity - uDetail.RetrievedQuantity);
+
+                                adjDetail.QuantityAfter = item.BalanceQuantity;
+                                adjDetailList.Add(adjDetail);
                                 context.SaveChanges();
                             }
                         }
