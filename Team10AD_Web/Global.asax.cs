@@ -46,6 +46,7 @@ namespace Team10AD_Web
             Session["HODID"] = 0;
             //Stores Approver ID
             Session["ApproverID"] = 0;
+            Session["PurchaseOrder"] = "";
         }
     }
 }

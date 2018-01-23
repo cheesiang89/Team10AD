@@ -4,9 +4,6 @@ using System.Linq;
 using System.Web;
 using Team10AD_Web.App_Code.Model;
 
-/// <summary>
-/// Summary description for BusinessLogic
-/// </summary>
 public class PurvaBizLogic
 {
     Team10ADModel tm = new Team10ADModel();

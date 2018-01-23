@@ -133,6 +133,7 @@
     <Content Include="Clerk\DepartmentList.aspx" />
     <Content Include="Clerk\DisbursementDetailsPage.aspx" />
     <Content Include="Clerk\DisbursementList.aspx" />
+    <Content Include="Clerk\GeneratePurchaseOrder.aspx" />
     <Content Include="Clerk\Inventory.aspx" />
     <Content Include="Clerk\OrderTrend.aspx" />
     <Content Include="Clerk\PurchaseOrderPage.aspx" />
@@ -142,6 +143,8 @@
     <Content Include="Clerk\RequisitionTrend.aspx" />
     <Content Include="Clerk\RetrievalDetailPage.aspx" />
     <Content Include="Clerk\RetrievalList.aspx" />
+    <Content Include="Clerk\ShowPurchaseOrderDetails.aspx" />
+    <Content Include="Clerk\ShowPurchaseOrderRecords.aspx" />
     <Content Include="Clerk\StockFlow.aspx" />
     <Content Include="Clerk\SupplierDetailPage.aspx" />
     <Content Include="Clerk\SupplierList.aspx" />
@@ -358,6 +361,7 @@
     <Compile Include="App_Code\Model\Supplier.cs" />
     <Compile Include="App_Code\Model\SupplierDetail.cs" />
     <Compile Include="App_Code\Model\Team10ADModel.cs" />
+    <Compile Include="App_Code\PurchaseOrderBizLogic.cs" />
     <Compile Include="App_Code\PurvaBizLogic.cs" />
     <Compile Include="App_Code\XpBizLogic.cs" />
     <Compile Include="App_Code\RayBizLogic.cs" />
@@ -404,6 +408,13 @@
     </Compile>
     <Compile Include="Clerk\DisbursementList.aspx.designer.cs">
       <DependentUpon>DisbursementList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Clerk\GeneratePurchaseOrder.aspx.cs">
+      <DependentUpon>GeneratePurchaseOrder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Clerk\GeneratePurchaseOrder.aspx.designer.cs">
+      <DependentUpon>GeneratePurchaseOrder.aspx</DependentUpon>
     </Compile>
     <Compile Include="Clerk\Inventory.aspx.cs">
       <DependentUpon>Inventory.aspx</DependentUpon>
@@ -467,6 +478,20 @@
     </Compile>
     <Compile Include="Clerk\RetrievalList.aspx.designer.cs">
       <DependentUpon>RetrievalList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Clerk\ShowPurchaseOrderDetails.aspx.cs">
+      <DependentUpon>ShowPurchaseOrderDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Clerk\ShowPurchaseOrderDetails.aspx.designer.cs">
+      <DependentUpon>ShowPurchaseOrderDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Clerk\ShowPurchaseOrderRecords.aspx.cs">
+      <DependentUpon>ShowPurchaseOrderRecords.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Clerk\ShowPurchaseOrderRecords.aspx.designer.cs">
+      <DependentUpon>ShowPurchaseOrderRecords.aspx</DependentUpon>
     </Compile>
     <Compile Include="Clerk\StockFlow.aspx.cs">
       <DependentUpon>StockFlow.aspx</DependentUpon>
