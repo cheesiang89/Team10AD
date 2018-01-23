@@ -7,99 +7,81 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Team10AD_Web.EmployeePage {
+namespace Team10AD_Web.Clerk {
     
     
-    public partial class RequisitionDetailsPage {
+    public partial class AdjustmentVoucherDetail {
         
         /// <summary>
-        /// EmployeeName control.
+        /// VoucherNumberLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label EmployeeName;
+        protected global::System.Web.UI.WebControls.Label VoucherNumberLabel;
         
         /// <summary>
-        /// NameTextBox control.
+        /// VouchderIdBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox NameTextBox;
+        protected global::System.Web.UI.WebControls.TextBox VouchderIdBox;
         
         /// <summary>
-        /// Status control.
+        /// DateIssueLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Status;
+        protected global::System.Web.UI.WebControls.Label DateIssueLabel;
         
         /// <summary>
-        /// StatusTextBox control.
+        /// DateTextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox StatusTextBox;
+        protected global::System.Web.UI.WebControls.TextBox DateTextBox;
         
         /// <summary>
-        /// dgvRequisitionDetail control.
+        /// GenByLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView dgvRequisitionDetail;
+        protected global::System.Web.UI.WebControls.Label GenByLabel;
         
         /// <summary>
-        /// CancelButton control.
+        /// GenByTextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button CancelButton;
+        protected global::System.Web.UI.WebControls.TextBox GenByTextBox;
         
         /// <summary>
-        /// lblRemarks control.
+        /// dgvVoucherDetail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblRemarks;
+        protected global::System.Web.UI.WebControls.GridView dgvVoucherDetail;
         
         /// <summary>
-        /// txtBoxRemarks control.
+        /// AcknowledgeButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtBoxRemarks;
-        
-        /// <summary>
-        /// btnApprove control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnApprove;
-        
-        /// <summary>
-        /// btnReject control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnReject;
+        protected global::System.Web.UI.WebControls.Button AcknowledgeButton;
     }
 }

@@ -17,7 +17,7 @@ namespace Team10AD_Web.EmployeePage
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session["HODID"] = 104;
+            //Session["HODID"] = 104;
             Session["departmentid"] = "ARTS";
             Session["employeeid"] = 78;
             departmentCode = (string)Session["departmentid"];

@@ -7,36 +7,45 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Team10AD_Web.EmployeePage {
+namespace Team10AD_Web.Clerk {
     
     
-    public partial class Test {
+    public partial class Main {
         
         /// <summary>
-        /// form1 control.
+        /// dgvAlertLowSto control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.WebControls.GridView dgvAlertLowSto;
         
         /// <summary>
-        /// lblResult control.
+        /// dgvReqPendCol control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblResult;
+        protected global::System.Web.UI.WebControls.GridView dgvReqPendCol;
         
         /// <summary>
-        /// btnAutoEmail control.
+        /// btnCreatePO control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAutoEmail;
+        protected global::System.Web.UI.WebControls.Button btnCreatePO;
+        
+        /// <summary>
+        /// btnGoReqRec control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnGoReqRec;
     }
 }

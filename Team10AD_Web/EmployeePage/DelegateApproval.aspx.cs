@@ -30,7 +30,7 @@ namespace Team10AD_Web.EmployeePage
             //Need to filter the HOD ID from the employee list from display[get from session state]. 
 
             //Change: Need to get employeeid, HODID, departmentid from Session state.
-            Session["HODID"] = 104;
+            //Session["HODID"] = 104;
             Session["departmentid"] = "ARTS";
             Session["employeeid"] = 78;
             departmentCode = (string)Session["departmentid"];
@@ -82,6 +82,7 @@ namespace Team10AD_Web.EmployeePage
                     {
                         //Change: need to rename businesslogic path here
                         BusinessLogic_Sam.delegateApprover(approverID, approvalStartDate, approvalEndDate, departmentCode);
+                    
                         Response.Redirect("DelegateApproval.aspx");
                     }
                     catch (Exception exp)
@@ -137,6 +138,7 @@ namespace Team10AD_Web.EmployeePage
             {
                 //Change: need to rename businesslogic path here
                 BusinessLogic_Sam.delegateApprover(approverID, approvalStartDate, approvalEndDate,departmentCode);
+                
             }
             catch (Exception exp)
             {
