@@ -119,7 +119,7 @@ namespace Team10AD_Web.EmployeePage
             //lblResult.Text = LogicUtility.Instance.SendApproverEmail("Naing Nana", "12/12/2017","01/05/2018");
             lblResult.Text = LogicUtility.Instance.SendRequisitionResponseEmail(1, "Ling Lang", "I rejected coz I hate u", "REJECTED");
             //lblResult.Text = LogicUtility.Instance.SendRequisitionEmail(1,78, "2018-01-03 00:00:00.000");
-            lblResult.Text = LogicUtility.Instance.SendDisbursementEmail(1);
+           // lblResult.Text = LogicUtility.Instance.SendDisbursementEmail(1);
         }
     }
 }

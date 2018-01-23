@@ -11,17 +11,37 @@ namespace Team10AD_Web.App_Code
 {
     public class LogicUtility
     {
-        private static LogicUtility instance;
-        private LogicUtility() { }
+        //private static LogicUtility instance;
+        //private LogicUtility() { }
+
+        //public static LogicUtility Instance
+        //{
+        //    get
+        //    {
+        //        if (instance == null)
+        //        {
+        //            instance = new LogicUtility();
+        //        }
+        //        return instance;
+        //    }
+        //}
+
+        private static readonly LogicUtility instance = new LogicUtility();
+
+        // Explicit static constructor to tell C# compiler
+        // not to mark type as beforefieldinit
+        static LogicUtility()
+        {
+        }
+
+        private LogicUtility()
+        {
+        }
 
         public static LogicUtility Instance
         {
             get
             {
-                if (instance == null)
-                {
-                    instance = new LogicUtility();
-                }
                 return instance;
             }
         }
