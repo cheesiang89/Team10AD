@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Routing;
 using System.Web.Security;
 using Team10AD_Web;
+using Team10AD_Web.App_Code.Model;
 
 namespace Team10AD_Web
 {
@@ -46,7 +47,8 @@ namespace Team10AD_Web
             Session["HODID"] = 104;
             //Stores Approver ID
             Session["ApproverID"] = 0;
-            Session["PurchaseOrder"] = "";
+           //Store shortfall items
+           Session["Shortfall"]= new List<Catalogue>();
         }
     }
 }

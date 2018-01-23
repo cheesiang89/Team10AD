@@ -371,7 +371,7 @@
     <Compile Include="App_Code\PurvaBizLogic.cs" />
     <Compile Include="App_Code\LogicUtility.cs" />
     <Compile Include="App_Code\RayBizLogic.cs" />
-    <Content Include="App_Code\XpBizLogic.cs" />
+    <Compile Include="App_Code\XPBizLogic.cs" />
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Clerk\AdjustmentVoucherDetail.aspx.cs">
