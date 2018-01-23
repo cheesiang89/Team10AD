@@ -11,7 +11,6 @@ namespace Team10AD_Web.EmployeePage
     public partial class DepartmentRequisition : System.Web.UI.Page
     {
         // ONLY approver can see this page. I'll assume this has been filter at menu side prior to entering this page.
-        string approverName;
         string departmentCode;
         //int hodID;
         int employeeID;
@@ -33,13 +32,29 @@ namespace Team10AD_Web.EmployeePage
                 btnPendingReq.ForeColor = System.Drawing.Color.Green;
                 dgvDepReq.DataSource = BusinessLogic_Sam.getDepartmentPendingRequisition(departmentCode);
                 dgvDepReq.DataBind();
-               for(int i=0; i < dgvDepReq.Rows.Count; i++)
-                {//need to set the employeename dynamically
-                    dgvDepReq.Rows[i].Cells[3].Text = "123";
-                }
-               
+              
+             
             }
         }
+
+        protected void btnReqHst_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("DepartmentRequisitionHistory.aspx");
+        }
+
+        protected void dgvDepReq_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Details")
+            {
+ 
+                GridViewRow selectedRow = (GridViewRow)(((Button)e.CommandSource).NamingContainer);
+                int selectedIndex = selectedRow.RowIndex;
+                Session["requisitiondetail"] = dgvDepReq.Rows[selectedIndex].Cells[4].Text;
+                Response.Redirect("RequisitionDetailsPage.aspx");
+
+            }
+        }
+
 
     }
 }

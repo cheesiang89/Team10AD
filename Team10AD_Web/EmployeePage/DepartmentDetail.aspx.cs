@@ -15,9 +15,9 @@ namespace Team10AD_Web.EmployeePage
         {
             if (!IsPostBack)
             {
-                //Employee emp = (Employee)Session["Employee"];
-                txtBoxRepName.Text = b.GetEmployeeName(61);
-                txtBoxCollectionPt.Text = b.ShowCollectionPointName(61);
+                int employeeid = (int)Session["employeeid"];
+                txtBoxRepName.Text = b.GetEmployeeName(employeeid);
+                txtBoxCollectionPt.Text = b.ShowCollectionPointName(employeeid);
             }
         }
     }
