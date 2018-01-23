@@ -252,7 +252,7 @@ namespace Team10AD_Web.App_Code
                     RetrievalDetail existingdata = context.RetrievalDetails.Where(r => r.RetrievalID == userdetail.RetrievalID && r.ItemCode == userdetail.ItemCode).First();
 
                     existingdata.RetrievedQuantity = userdetail.RetrievedQuantity;
-                    existingdata.QuantityAfter = existingdata.Catalogue.BalanceQuantity - userdetail.RetrievedQuantity;
+                   // existingdata.QuantityAfter = existingdata.Catalogue.BalanceQuantity - userdetail.RetrievedQuantity;
 
                     Catalogue item = context.Catalogues.Where(x => x.ItemCode == userdetail.ItemCode).First();
                     item.BalanceQuantity -= userdetail.RetrievedQuantity;
@@ -480,7 +480,7 @@ namespace Team10AD_Web.App_Code
                     RetrievalDetail existingdata = context.RetrievalDetails.Where(r => r.RetrievalID == userdetail.RetrievalID && r.ItemCode == userdetail.ItemCode).First();
 
                     existingdata.RetrievedQuantity = userdetail.RetrievedQuantity;
-                    existingdata.QuantityAfter = existingdata.Catalogue.BalanceQuantity - userdetail.RetrievedQuantity;
+                   // existingdata.QuantityAfter = existingdata.Catalogue.BalanceQuantity - userdetail.RetrievedQuantity;
 
                     Catalogue item = context.Catalogues.Where(x => x.ItemCode == userdetail.ItemCode).First();
                     item.BalanceQuantity -= userdetail.RetrievedQuantity;
