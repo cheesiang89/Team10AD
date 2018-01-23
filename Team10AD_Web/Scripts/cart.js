@@ -3,7 +3,7 @@
 $(document).ready(function () {
     //window.alert("Test");
 
-    let cart;
+    var cart;
     if (sessionStorage.cart) {
         cart = JSON.parse(sessionStorage.getItem('cart'));
         console.log("got cart");
@@ -13,9 +13,9 @@ $(document).ready(function () {
     }
 
     //Make Table
-    for (let i = 0; i < cart.length; i++) {
+    for (var i = 0; i < cart.length; i++) {
        // console.log('2nd page List values:' + cart[i]);
-        let obj = JSON.parse(cart[i]);
+        var obj = JSON.parse(cart[i]);
         //console.log('2nd page JSON object: ' + obj.itemCode);
         addRow(obj,i);
     }
@@ -42,7 +42,7 @@ function addRow(obj, index) {
            + "' class='txtInput' onKeyUp='return saveCartSession()'></input><div class='lblError'"
            + "style='color:red'>Positive Integer only</div></td><td>"
         //+ obj.quantity + "</td><td>"
-        + obj.uom + "</td><td id='btnDelete"+index+"'></td></tr>").appendTo('#cartTable tbody');
+        + obj.uom + "</td><td id='btnDevare"+index+"'></td></tr>").appendTo('#cartTable tbody');
 
     //Make quantity editable
        $('#txtInput' + index).val(obj.quantity);
@@ -57,15 +57,15 @@ function addRow(obj, index) {
 }
 //Loop through rows and append button
 function addButton(index) {
-     //Make DELETE Button 
-    //let cartTab = $('#cartTable tbody');
+     //Make DEvarE Button 
+    //var cartTab = $('#cartTable tbody');
     //console.log("CartTab is:" + cartTab.html());
-    //let tr = $('#cartTable tr').eq(index+1);
+    //var tr = $('#cartTable tr').eq(index+1);
     //console.log("CartRow is:" + tr.html());
-    let td = $('#btnDelete'+index);
+    var td = $('#btnDevare'+index);
    // console.log("CartData is:" + td.html());
     // ADD A BUTTON.
-    let button = document.createElement('input');
+    var button = document.createElement('input');
 
     // SET INPUT ATTRIBUTE.
     button.setAttribute('type', 'button');
@@ -76,9 +76,9 @@ function addButton(index) {
     td.append(button);
 }
 
-// DELETE TABLE ROW.
+// DEvarE TABLE ROW.
 function removeRow(oButton) {
-    let cartTab = document.getElementById('cartTable');
+    var cartTab = document.getElementById('cartTable');
     cartTab.deleteRow(oButton.parentNode.parentNode.rowIndex);       // BUTTON -> TD -> TR.
     saveCartSession();
 }
@@ -88,7 +88,7 @@ function makeRequisition() {
         //console.log('Cart table is:'+$('#cartTable').html());
         //Iterate through rows, create JSON
         if (qtyGotError() === false) {
-            let jsonData = "{\"cart\": " + tableToJson() + " }";
+            let jsonData = "{\"cart\": " + tabvaroJson() + " }";
             //console.log("Json is " + jsonData);
 
             $.ajax({
@@ -99,7 +99,7 @@ function makeRequisition() {
                 data: jsonData,
                 success: function (r) {
                     console.log('Success: ' + r.d);
-                    //Delete session data
+                    //Devare session data
                     deleteCartSession();
                     //Redirect if success
                     window.location.href = "RequisitionStatus.aspx";
@@ -132,7 +132,7 @@ function deleteCartSession() {
 function tableToJson() {
     let reqID = $('input[id$=reqID]').val().toString();
     //console.log("Requestor id is: "+ reqID);
-    let rows = [];
+    var rows = [];
     $('table tr').each(function (i, n) {
         let $row = $(n);
         if (i != 0) {
@@ -153,17 +153,17 @@ function tableToJson() {
 function saveCartSession() {
     //$(document).on("click", "[id*=btnTest]", function () {
         //Create JSON string 
-        let savedState = JSON.parse(tableToJson());
-        let savedCart = [];
+        var savedState = JSON.parse(tableToJson());
+        var savedCart = [];
         for (var i = 0; i < savedState.length; i++) {
    
-            let product = {
+            var product = {
                 "itemCode": savedState[i]["itemCode"],
                 "description": savedState[i]["description"],
                 "quantity": savedState[i]["quantity"],
                 "uom": savedState[i]["uom"]
             };
-            let myJSON = JSON.stringify(product);
+            var myJSON = JSON.stringify(product);
             //console.log("Showing session data:" + product["itemCode"]);
             savedCart.push(myJSON);
         }
@@ -177,7 +177,7 @@ function qtyGotError() {
     
     var gotError = false;
     $(".txtInput").each(function () {
-        let input = $(this).val();
+        var input = $(this).val();
         
         if (!positiveInteger(input)) {
             $(this).next().show();

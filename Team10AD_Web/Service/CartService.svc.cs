@@ -37,12 +37,7 @@ namespace Team10AD_Web.Service
             List<RequisitionDetail> newCart = CS_BizLogic.CreateRequisition(cart);
 
             string s = "";
-            //OLD
-            //foreach (var item in newCart)
-            //{
-            //    s += "*" + item.itemCode + "," + item.quantity +","+item.reqid+ "*";
-            //}
-
+           
             foreach (var item in newCart)
             {
                 s += "**" + item.ItemCode + "," + item.QuantityRequested + "**";

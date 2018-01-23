@@ -16,7 +16,7 @@ namespace Team10AD_Web.Clerk
             if (!IsPostBack)
             {
                 Team10ADModel context = new Team10ADModel();
-                var qry = from r in context.Requisitions where (r.Status == "Approved" || r.Status == "Ready To Collect" || r.Status == "Completed" || r.Status == "Partial") select new { r.RequisitionID, r.ApprovalDate, r.Employee.Department.DepartmentName, r.Status};
+                var qry = from r in context.Requisitions where (r.Status == "Approved" || r.Status == "Processing" || r.Status == "Completed" || r.Status == "Partial") select new { r.RequisitionID, r.ApprovalDate, r.Employee.Department.DepartmentName, r.Status};
                 dgvReqList.DataSource = qry.ToList();
                 dgvReqList.DataBind();
                 dgvReqList.AllowPaging = true;
