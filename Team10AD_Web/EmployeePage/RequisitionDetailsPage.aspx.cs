@@ -75,6 +75,7 @@ namespace Team10AD_Web.EmployeePage
             try
             {
                 reqid = Convert.ToInt32(requisitionid);
+                string approverID = (string)Session["ApproverID"];
                 remarks = txtBoxRemarks.Text;
                 BusinessLogic_Sam.approveRequisition(reqid,remarks,approverID);
                 BusinessLogic_Sam.updateItemStockLevel(reqListItems);

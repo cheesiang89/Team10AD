@@ -62,6 +62,7 @@ namespace Team10AD_Web.Clerk
         protected void btnAddItem_Click(object sender, EventArgs e)
         {
             listSource.Add(PurvaBizLogic.GetItemByCode(txtItemCode.Text));
+            Session["Shortfall"] = listSource;
             dataRefresh();
         }
       
@@ -71,6 +72,7 @@ namespace Team10AD_Web.Clerk
             if (e.CommandName == "Delete")
             {
                 listSource.RemoveAt(Convert.ToInt32(e.CommandArgument));
+                Session["Shortfall"] = listSource;
                 dataRefresh();
             }
 
