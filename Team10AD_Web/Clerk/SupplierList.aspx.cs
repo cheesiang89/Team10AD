@@ -18,6 +18,7 @@ namespace Team10AD_Web.Clerk
             {
                 dgvSupList.DataSource = b.ShowSuppliers();
                 dgvSupList.DataBind();
+                dgvSupList.AllowPaging = true;
             }
         }
 
@@ -41,6 +42,13 @@ namespace Team10AD_Web.Clerk
                 Response.Redirect("SupplierDetailPage.aspx");
             }
         }
+
+        protected void dgvSupList_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            dgvSupList.PageIndex = e.NewPageIndex;
+            dgvSupList.DataSource = b.ShowSuppliers();
+            dgvSupList.DataBind();
         }
+    }
     }
     

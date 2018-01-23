@@ -13,7 +13,7 @@ public class PurvaBizLogic
 
     public Supplier GetSupplier(string supplierCode)
     {
-        List<Supplier> result = tm.Suppliers.Where(x => x.SupplierCode == supplierCode).ToList();
+        List<Supplier> result = tm.Suppliers.OrderBy(x=>x.SupplierName).Where(x => x.SupplierCode == supplierCode).ToList();
         return result[0];
     }
 
