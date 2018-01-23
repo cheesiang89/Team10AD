@@ -45,7 +45,7 @@ namespace Team10AD_Web.Clerk
         protected void dgvSupList_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             dgvSupList.PageIndex = e.NewPageIndex;
-            dgvSupList.DataSource = b.ShowSuppliers();
+            dgvSupList.DataSource = PurvaBizLogic.ShowSuppliers();
             dgvSupList.DataBind();
         }
     }
