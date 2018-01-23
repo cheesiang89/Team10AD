@@ -7,18 +7,52 @@ using Team10AD_Web.App_Code.Model;
 /// <summary>
 /// Summary description for BusinessLogic
 /// </summary>
-public class PurvaBizLogic
+public static class PurvaBizLogic
 {
-    Team10ADModel tm = new Team10ADModel();
+    
 
-    public Supplier GetSupplier(string supplierCode)
+    public static Supplier GetSupplier(string supplierCode)
     {
-        List<Supplier> result = tm.Suppliers.OrderBy(x=>x.SupplierName).Where(x => x.SupplierCode == supplierCode).ToList();
-        return result[0];
+        using (Team10ADModel tm = new Team10ADModel())
+        {
+            List<Supplier> result = tm.Suppliers.Where(x => x.SupplierCode == supplierCode).ToList();
+            return result[0];
+        }
+       
     }
 
-    public List<Supplier> ShowSuppliers()
+    public static List<Supplier> ShowSuppliers()
     {
-        return tm.Suppliers.OrderBy(x => x.SupplierName).ToList();
+        using (Team10ADModel tm = new Team10ADModel())
+        {
+            return tm.Suppliers.OrderBy(x => x.SupplierName).ToList();
+        }
     }
+    public static string GetDescriptionFromItemCode(string query)
+    {
+        string description = "";
+        try
+        {
+            using (Team10ADModel tm = new Team10ADModel())
+            {
+                description = tm.Catalogues.Where(x => x.ItemCode == query).Select(x => x.Description).First();
+                return description;
+            }
+        }
+        catch (Exception)
+        {
+
+            return description;
+        }
+    }
+    public static List<Catalogue> GetLowStockByStatus(string status)
+    {
+        using (Team10ADModel tm = new Team10ADModel())
+        {
+            return tm.Catalogues.Where(x => x.ShortfallStatus == status).Select(x => x).ToList();
+        }
+        
+    }
+
+
 }
