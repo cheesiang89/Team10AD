@@ -8,7 +8,7 @@ namespace Team10AD_Web.App_Code.Model
     public partial class Team10ADModel : DbContext
     {
         public Team10ADModel()
-            : base("name=team10")
+            : base("name=Team10ADModel")
         {
         }
 
