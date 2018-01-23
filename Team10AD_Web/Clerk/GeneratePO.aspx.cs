@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Team10AD_Web.App_Code;
 using Team10AD_Web.App_Code.Model;
+using Team10AD_Web.App_Code.DTO;
 
 namespace Team10AD_Web.Clerk
 {
@@ -75,6 +76,92 @@ namespace Team10AD_Web.Clerk
                 dataRefresh();
             }
 
+        }
+
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Main.aspx");
+        }
+
+        protected void btnGeneratePO_Click(object sender, EventArgs e)
+        {
+            //Generate PO DTO
+            List<POIntermediate> poList = iterateItems();
+            //Generate requisitions
+
+
+        }
+        protected List<POIntermediate> iterateItems()
+        {
+
+            List<POIntermediate> poList = new List<POIntermediate>();
+            string itemCode = "";
+            string firstSupName = "";
+            string secondSupName = "";
+            string thirdSupName = "";
+            string firstSupQty = "";
+            string secondSupQty = "";
+            string thirdSupQty = "";
+
+            foreach (RepeaterItem item in repeaterItems.Items)
+            {
+                POIntermediate temp1 = new POIntermediate();
+                POIntermediate temp2 = new POIntermediate();
+                POIntermediate temp3 = new POIntermediate();
+
+                //Get Item Code
+                itemCode = ((Label)item.FindControl("lblItemCode")).Text;
+
+                //Get 1st supplier name
+                firstSupName = ((Label)item.FindControl("lblHeaderS1")).Text.Substring(9,4);
+
+                //Get 1st supplier quantity
+                firstSupQty = ((TextBox)item.FindControl("txtSupp1")).Text;
+                if (String.IsNullOrEmpty(firstSupQty))
+                {
+                    firstSupQty = "0";
+                }
+                //Make 1st DTO
+                temp1.ItemCode = itemCode;
+                temp1.SupplierName = firstSupName;
+                temp1.Quantity = firstSupName;
+         
+                //Get 2nd supplier name
+                secondSupName = ((Label)item.FindControl("lblHeaderS2")).Text.Substring(9, 4);
+
+                //Get 2nd supplier quantity
+                secondSupQty = ((TextBox)item.FindControl("txtSupp2")).Text;
+                if (String.IsNullOrEmpty(secondSupQty))
+                {
+                    firstSupQty = "0";
+                }
+                //Make 2nd DTO
+                temp2.ItemCode = itemCode;
+                temp2.SupplierName = secondSupName;
+                temp2.Quantity = secondSupQty;
+
+                //Get 3rd supplier name
+                thirdSupName = ((Label)item.FindControl("lblHeaderS3")).Text.Substring(9, 4);
+
+                //Get 3rd supplier quantity
+                thirdSupQty = ((TextBox)item.FindControl("txtSupp3")).Text;
+                if (String.IsNullOrEmpty(thirdSupQty))
+                {
+                    firstSupQty = "0";
+                }
+                //Make 3rd DTO
+                temp3.ItemCode = itemCode;
+                temp3.SupplierName = thirdSupName;
+                temp3.Quantity = thirdSupQty;
+
+                //Push to list
+                poList.Add(temp1);
+                poList.Add(temp2);
+                poList.Add(temp3);
+
+            }
+            //lblTest.Text = String.Format("ItemCode: "+itemCode+"1stName: "+firstSupName+"1stQty"+firstSupQty+"2ndName:"+secondSupName+"2ndQty"+secondSupQty+"3rdName:"+thirdSupName+"3rdqty"+thirdSupQty) ;
+            return poList;
         }
     }
 }

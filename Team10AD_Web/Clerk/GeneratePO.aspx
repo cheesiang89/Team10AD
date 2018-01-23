@@ -2,7 +2,11 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <h2>Create Purchase Order </h2>
+    <h2>
+       
+        
+       
+        Create Purchase Order </h2>
     <div>
         <asp:Label ID="lblItemCode" runat="server" Text="Item Code"></asp:Label>
         <asp:TextBox ID="txtItemCode" runat="server"></asp:TextBox>
@@ -15,7 +19,8 @@
             <asp:Button ID="btnAddItem" runat="server" Text="Add Item" OnClick="btnAddItem_Click" />
       
     <%--</asp:Panel>--%>
-    <br />
+    <br /><asp:Label ID="lblTest" runat="server" Text=""></asp:Label>
+    <br /><br/<br />
     <asp:Repeater ID="repeaterItems" runat="server" OnItemCommand="repeaterItems_ItemCommand">
 
         <ItemTemplate>
@@ -61,6 +66,7 @@
 
     </asp:Repeater>
 
+     <asp:Button ID="btnGeneratePO" runat="server" Text="Generate PO" OnClick="btnGeneratePO_Click" />
+        <asp:Button ID="btnCancel" runat="server" Text="Cancel" OnClick="btnCancel_Click" />
     
-
 </asp:Content>

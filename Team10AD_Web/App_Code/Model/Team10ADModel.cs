@@ -31,6 +31,7 @@ namespace Team10AD_Web.App_Code.Model
         public virtual DbSet<StoreStaff> StoreStaffs { get; set; }
         public virtual DbSet<SupplierDetail> SupplierDetails { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
+        public virtual DbSet<StockFlow> StockFlows { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -361,6 +362,15 @@ namespace Team10AD_Web.App_Code.Model
                 .HasMany(e => e.SupplierDetails)
                 .WithRequired(e => e.Supplier)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<StockFlow>()
+                .Property(e => e.ItemCode)
+                .IsFixedLength()
+                .IsUnicode(false);
+
+            modelBuilder.Entity<StockFlow>()
+                .Property(e => e.Dept_supplier_voucherID)
+                .IsUnicode(false);
         }
     }
 }
