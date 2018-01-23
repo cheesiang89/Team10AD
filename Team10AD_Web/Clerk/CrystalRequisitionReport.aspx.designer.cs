@@ -10,7 +10,7 @@
 namespace Team10AD_Web.Clerk {
     
     
-    public partial class GenerateOrderReport {
+    public partial class CrystalRequisitionReport {
         
         /// <summary>
         /// lblCatagory control.

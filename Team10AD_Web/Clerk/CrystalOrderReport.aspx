@@ -1,6 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Clerk/Clerk.Master" AutoEventWireup="true" CodeBehind="GenerateOrderReport.aspx.cs" Inherits="Team10AD_Web.Clerk.GenerateOrderReport" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Clerk/Clerk.Master" AutoEventWireup="true" CodeBehind="CrystalOrderReport.aspx.cs" Inherits="Team10AD_Web.Clerk.CrystalOrderReport" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <style type="text/css">
+     <style type="text/css">
         .auto-style1 {
             width: 253px;
         }

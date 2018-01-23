@@ -10,52 +10,52 @@
 namespace Team10AD_Web.Clerk {
     
     
-    public partial class GenerateRequestReport {
+    public partial class CrystalOrderReport {
         
         /// <summary>
-        /// lblDept control.
+        /// lblCatagory control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDept;
+        protected global::System.Web.UI.WebControls.Label lblCatagory;
         
         /// <summary>
-        /// dropDept control.
+        /// dropCategory control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList dropDept;
+        protected global::System.Web.UI.WebControls.DropDownList dropCategory;
         
         /// <summary>
-        /// SqlDataSource1 control.
+        /// SqlDataSource3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource3;
         
         /// <summary>
-        /// btnAddDept control.
+        /// btnCategoryAdd control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAddDept;
+        protected global::System.Web.UI.WebControls.Button btnCategoryAdd;
         
         /// <summary>
-        /// dgvDept control.
+        /// dgvCategory control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView dgvDept;
+        protected global::System.Web.UI.WebControls.GridView dgvCategory;
         
         /// <summary>
         /// lblMonth control.
@@ -76,6 +76,15 @@ namespace Team10AD_Web.Clerk {
         protected global::System.Web.UI.WebControls.DropDownList dropMonth;
         
         /// <summary>
+        /// dgvMonth control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView dgvMonth;
+        
+        /// <summary>
         /// lblYear control.
         /// </summary>
         /// <remarks>
@@ -94,67 +103,13 @@ namespace Team10AD_Web.Clerk {
         protected global::System.Web.UI.WebControls.DropDownList dropYear;
         
         /// <summary>
-        /// btnADDMonth control.
+        /// btnYearAdd control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnADDMonth;
-        
-        /// <summary>
-        /// dgvMmonth control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView dgvMmonth;
-        
-        /// <summary>
-        /// lblCategory control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCategory;
-        
-        /// <summary>
-        /// dropCategory control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList dropCategory;
-        
-        /// <summary>
-        /// SqlDataSource2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource2;
-        
-        /// <summary>
-        /// btnAddCategory control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAddCategory;
-        
-        /// <summary>
-        /// dgvCatagory control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView dgvCatagory;
+        protected global::System.Web.UI.WebControls.Button btnYearAdd;
         
         /// <summary>
         /// btnGenerate control.
