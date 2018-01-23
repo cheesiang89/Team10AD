@@ -20,6 +20,7 @@ namespace Team10AD_Web.EmployeePage
             {
                 dgvDisbursementRecord.DataSource = b.DisbursementRecordsByDepartment(employeeDepCode);
                 dgvDisbursementRecord.DataBind();
+                dgvDisbursementRecord.AllowPaging = true;
             }
         }
 

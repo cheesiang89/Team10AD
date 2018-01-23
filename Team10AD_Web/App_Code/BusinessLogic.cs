@@ -50,7 +50,7 @@ public class BusinessLogic
 
     public object DisbursementRecords()
     {
-        var qry = (from d in tm.Disbursements select new { d.DisbursementID, d.CollectionDate, d.Department.DepartmentName, d.CollectionPoint.PointName, d.Department.Employee1.Name, d.Status }).ToList();
+        var qry = (from d in tm.Disbursements orderby d.Status descending orderby d.CollectionDate descending select new { d.DisbursementID, d.CollectionDate, d.Department.DepartmentName, d.CollectionPoint.PointName, d.Department.Employee1.Name, d.Status }).ToList();
         return qry;
     }
 
