@@ -252,16 +252,16 @@
     <Content Include="Content\img\team\3.png" />
     <Content Include="EmployeePage\Employee.Master" />
     <Content Include="EmployeePage\Web.config" />
-    <Content Include="DSTeam10AD.xsc">
-      <DependentUpon>DSTeam10AD.xsd</DependentUpon>
+    <Content Include="DataSetTeam10AD.xsc">
+      <DependentUpon>DataSetTeam10AD.xsd</DependentUpon>
     </Content>
-    <None Include="DSTeam10AD.xsd">
+    <None Include="DataSetTeam10AD.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DSTeam10AD.Designer.cs</LastGenOutput>
+      <LastGenOutput>DataSetTeam10AD.Designer.cs</LastGenOutput>
     </None>
-    <Content Include="DSTeam10AD.xss">
-      <DependentUpon>DSTeam10AD.xsd</DependentUpon>
+    <Content Include="DataSetTeam10AD.xss">
+      <DependentUpon>DataSetTeam10AD.xsd</DependentUpon>
     </Content>
     <None Include="Scripts\Template\jquery-1.12.4.intellisense.js" />
     <Content Include="Scripts\catalogue.js" />
@@ -421,6 +421,12 @@
     <Compile Include="Clerk\CreateAdjustmentVoucher.aspx.designer.cs">
       <DependentUpon>CreateAdjustmentVoucher.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Clerk\CrystalReportReuisition.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CrystalReportReuisition.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Clerk\DepartmentDetail.aspx.cs">
       <DependentUpon>DepartmentDetail.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -533,10 +539,10 @@
     <Compile Include="Clerk\SupplierList.aspx.designer.cs">
       <DependentUpon>SupplierList.aspx</DependentUpon>
     </Compile>
-    <Compile Include="DSTeam10AD.Designer.cs">
+    <Compile Include="DataSetTeam10AD.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DSTeam10AD.xsd</DependentUpon>
+      <DependentUpon>DataSetTeam10AD.xsd</DependentUpon>
     </Compile>
     <Compile Include="EmployeePage\AssignRepresentative.aspx.cs">
       <DependentUpon>AssignRepresentative.aspx</DependentUpon>
@@ -753,6 +759,12 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Clerk\CrystalReportReuisition.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CrystalReportReuisition.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
