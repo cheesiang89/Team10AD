@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
-using TestingConsole.Model;
 
 namespace TestingConsole
 {
@@ -11,26 +11,21 @@ namespace TestingConsole
     {
         static void Main(string[] args)
         {
-            //List<CartData> originalCart = createList();
-            //foreach (var item in originalCart)
-            //{
-            //    Console.WriteLine("Original list: Item code is - " + item.itemCode + "| Quantity is - " + item.quantity);
-
-            //}
-
-            //List<CartData> newCart = CombineDuplicates(originalCart);
-            //foreach (var item in newCart)
-            //{
-            //    Console.WriteLine("New list: Item code is - " + item.itemCode + "| Quantity is - " + item.quantity);
-
-            //}
-            List<Catalogue> list = ShowShortfallItems();
-            foreach (var item in list)
+            List<CartData> originalCart = createList();
+            foreach (var item in originalCart)
             {
-                Console.WriteLine("Item code\t"+item.ItemCode + "\tQuantity\t" + item.BalanceQuantity + "\tFirst Supplier \t" + item.FirstSupplier);
+                Console.WriteLine("Original list: Item code is - "+ item.itemCode + "| Quantity is - "+ item.quantity);
+               
             }
-            Console.ReadLine();
 
+           List<CartData> newCart = CombineDuplicates(originalCart);
+            foreach (var item in newCart)
+            {
+                Console.WriteLine("New list: Item code is - " + item.itemCode + "| Quantity is - " + item.quantity);
+
+            }
+
+            Console.ReadLine();
         }
         public static List<CartData> createList()
         {
@@ -95,13 +90,5 @@ namespace TestingConsole
 
             return newList;
         }
-
-
-        public static List<Catalogue> ShowShortfallItems()
-        {
-            Team10ADModel context = new Team10ADModel();
-            return (from x in context.Catalogues where x.ShortfallStatus == "True" select x).ToList();
-        }
     }
 }
-

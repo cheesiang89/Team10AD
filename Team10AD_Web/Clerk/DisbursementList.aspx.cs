@@ -15,10 +15,9 @@ namespace Team10AD_Web.Clerk
         {
             if (!IsPostBack)
             {
-                //Team10ADModel tm = new Team10ADModel();
-                //var qry = from d in tm.Disbursements select new { d.DisbursementID, d.CollectionDate, d.Department.DepartmentName, d.CollectionPoint.PointName, d.Department.Employee.Name, d.Status };
                 dgvDisbursementRecord.DataSource = b.DisbursementRecords();
                 dgvDisbursementRecord.DataBind();
+                dgvDisbursementRecord.AllowPaging = true;
             }
         }
 
@@ -28,12 +27,20 @@ namespace Team10AD_Web.Clerk
             {
                 GridViewRow gvRow = (GridViewRow)(((Button)e.CommandSource).NamingContainer);
                 int disbursementID = Int32.Parse(gvRow.Cells[0].Text);
-                //string collectionDate = gvRow.Cells[1].Text;
-                //string status = gvRow.Cells[5].Text;
                 Disbursement disbursement = b.GetDisbursement(disbursementID);
                 Session["Disbursement"] = disbursement;
+                int employeeid = (int)Session["employeeid"];
+                Employee emp = b.GetEmployee(employeeid);
+                Session["Employee"] = emp;
                 Response.Redirect("DisbursementDetailsPage.aspx");
             }
+        }
+
+        protected void dgvDisbursementRecord_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            dgvDisbursementRecord.PageIndex = e.NewPageIndex;
+            dgvDisbursementRecord.DataSource = b.DisbursementRecords();
+            dgvDisbursementRecord.DataBind();
         }
     }
 }

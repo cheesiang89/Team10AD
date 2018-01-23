@@ -17,28 +17,23 @@ public class BusinessLogic
         return emp;
     }
 
-    public string GetEmployeeName(int employeeID)
+    public string GetEmployeeName(int? employeeID)
     {
         string empName = tm.Employees.Where(x => x.EmployeeID == employeeID).Select(eid => eid.Name).First();
         return empName;
     }
 
-    public void SelectCollection(string pointID)
+    public void SelectCollection(string pointID, int employeeid)
     {
-        //Employee emp = GetEmployee(employeeID);
-        int employeeID = 61;
-        string representativeID = "61";
-        string departmentCode = tm.Employees.Where(x => x.EmployeeID == employeeID).Select(dc => dc.DepartmentCode).First();
+        string departmentCode = tm.Employees.Where(x => x.EmployeeID == employeeid).Select(dc => dc.DepartmentCode).First();
         Department department = tm.Departments.Where(x => x.DepartmentCode == departmentCode).First();
         department.PointID = Int32.Parse(pointID);
-        department.RepresentativeID = Int32.Parse(representativeID);
+        department.RepresentativeID = employeeid;
         tm.SaveChanges();
     }
 
     public int ShowCollectionPointID(int employeeID)
     {
-        //Employee emp = GetEmployee(employeeID);
-        employeeID = 61;
         string departmentCode = tm.Employees.Where(x => x.EmployeeID == employeeID).Select(dc => dc.DepartmentCode).First();
         Department department = tm.Departments.Where(x => x.DepartmentCode == departmentCode).First();
         return (int)department.PointID;
@@ -46,8 +41,6 @@ public class BusinessLogic
 
     public string ShowCollectionPointName(int employeeID)
     {
-        //Employee emp = GetEmployee(employeeID);
-        employeeID = 61;
         string departmentCode = tm.Employees.Where(x => x.EmployeeID == employeeID).Select(dc => dc.DepartmentCode).First();
         Department department = tm.Departments.Where(x => x.DepartmentCode == departmentCode).First();
         int pointID = (int)department.PointID;
@@ -57,7 +50,13 @@ public class BusinessLogic
 
     public object DisbursementRecords()
     {
-        var qry = (from d in tm.Disbursements select new { d.DisbursementID, d.CollectionDate, d.Department.DepartmentName, d.CollectionPoint.PointName, d.Department.Employee1.Name, d.Status }).ToList();
+        var qry = (from d in tm.Disbursements orderby d.Status descending orderby d.CollectionDate descending select new { d.DisbursementID, d.CollectionDate, d.Department.DepartmentName, d.CollectionPoint.PointName, d.Department.Employee1.Name, d.Status }).ToList();
+        return qry;
+    }
+
+    public object DisbursementRecordsByDepartment(string employeeDepCode)
+    {
+        var qry = (from d in tm.Disbursements.Where(x=>x.DepartmentCode == employeeDepCode) orderby d.Status descending orderby d.CollectionDate descending select new { d.DisbursementID, d.CollectionDate, d.Department.DepartmentName, d.CollectionPoint.PointName, d.Department.Employee1.Name, d.Status }).ToList();
         return qry;
     }
 
@@ -72,8 +71,6 @@ public class BusinessLogic
         var qry = (from dd in tm.DisbursementDetails.Where(x => x.DisbursementID == disbursementID) select new { dd.DisbursementID, dd.ItemCode, dd.Catalogue.Description, dd.QuantityRequested, dd.QuantityCollected, dd.Remarks }).ToList();
         return qry;
     }
-
-
 
 }
 

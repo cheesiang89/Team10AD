@@ -10,7 +10,7 @@ namespace Team10AD_Web.App_Code
 {
     public static class CS_BizLogic
     {
-        private static int reqID;
+        private static int requestorID;
          //Combine duplicates
         public static List<CartData> CombineDuplicates(List<CartData> oldList)
         {
@@ -37,7 +37,7 @@ namespace Team10AD_Web.App_Code
         //Make into list of Requisition - Required: ItemCode, Quantity, RequestorID, RequisitionDate, Status
         public static List<RequisitionDetail> CreateRequisition(List<CartData> oldList)
         {
-            reqID = Int32.Parse(oldList.Select(x => x).First().reqid);
+            requestorID = Int32.Parse(oldList.Select(x => x).First().reqid);
 
             List<CartData> cartList = CombineDuplicates(oldList);
 
@@ -63,15 +63,16 @@ namespace Team10AD_Web.App_Code
                     requisition.RequisitionDate = DateTime.Now;
                     requisition.Status = "Pending";
                     requisition.RequisitionDetails = requisitionList;
-                    requisition.RequestorID = reqID;
+                    requisition.RequestorID = requestorID;
 
                 };
                 context.Requisitions.Add(requisition);
                 context.SaveChanges();
+                //Send notification
+                LogicUtility.Instance.SendRequisitionEmail(requisition.RequisitionID, requisition.RequestorID, requisition.RequisitionDate.ToString());
             }
 
-            //TO DO: Send notification
-
+            
             return requisitionList;
         }
 
