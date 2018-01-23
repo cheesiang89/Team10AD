@@ -38,5 +38,15 @@ namespace Team10AD_Web.EmployeePage
                 Response.Redirect("DisbursementDetailsPage.aspx");
             }
         }
+
+        protected void dgvDisbursementRecord_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            int employeeid = (int)Session["employeeid"];
+            Team10AD_Web.App_Code.Model.Employee emp = b.GetEmployee(employeeid);
+            string employeeDepCode = emp.DepartmentCode;
+            dgvDisbursementRecord.PageIndex = e.NewPageIndex;
+            dgvDisbursementRecord.DataSource = b.DisbursementRecordsByDepartment(employeeDepCode);
+            dgvDisbursementRecord.DataBind();
+        }
     }
 }
