@@ -28,7 +28,7 @@ namespace Team10AD_Web.App_Code
         }
         public static Catalogue GetLowStockByStatus(string status)
         {
-            using(Team10ADModel context=new Team10ADModel())
+            using (Team10ADModel context = new Team10ADModel())
             {
                 Catalogue catalogue = context.Catalogues.Where(x => x.ShortfallStatus == status).First();
                 return catalogue;

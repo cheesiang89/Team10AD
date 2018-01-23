@@ -53,6 +53,14 @@ public static class PurvaBizLogic
         }
         
     }
+    public static Catalogue GetItemByCode(string itemCode)
+    {
+        using (Team10ADModel tm = new Team10ADModel())
+        {
+            return tm.Catalogues.Where(x => x.ItemCode == itemCode).Select(x => x).First();
+        }
+
+    }
 
 
 }

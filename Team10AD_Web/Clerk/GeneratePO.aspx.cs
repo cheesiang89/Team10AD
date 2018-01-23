@@ -11,16 +11,30 @@ namespace Team10AD_Web.Clerk
 {
     public partial class GeneratePO : System.Web.UI.Page
     {
+
+
+        List<Catalogue> listSource;
         protected void Page_Load(object sender, EventArgs e)
         {
+           listSource = (List<Catalogue>)Session["Shortfall"];
             lblTag.Visible = false;
                 lblDescription.Visible = false;
             btnAddItem.Visible = false;
-            List<Catalogue> c = PurvaBizLogic.GetLowStockByStatus("True");
-            repeaterItems.DataSource = c;
-            repeaterItems.DataBind();
+            
+            if (!IsPostBack)
+            {
+                //Storelist in shortfall
+               
+                dataRefresh();
+            }
+        
         }
 
+        protected void dataRefresh()
+        {
+            repeaterItems.DataSource = listSource;
+            repeaterItems.DataBind();
+        }
         protected void btnSearch_Click(object sender, EventArgs e)
         {
             //Show Label with Item Description
@@ -47,6 +61,18 @@ namespace Team10AD_Web.Clerk
 
         protected void btnAddItem_Click(object sender, EventArgs e)
         {
+            listSource.Add(PurvaBizLogic.GetItemByCode(txtItemCode.Text));
+            dataRefresh();
+        }
+      
+
+        protected void repeaterItems_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "Delete")
+            {
+                listSource.RemoveAt(Convert.ToInt32(e.CommandArgument));
+                dataRefresh();
+            }
 
         }
     }
