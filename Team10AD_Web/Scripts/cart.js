@@ -88,7 +88,7 @@ function makeRequisition() {
         //console.log('Cart table is:'+$('#cartTable').html());
         //Iterate through rows, create JSON
         if (qtyGotError() === false) {
-            let jsonData = "{\"cart\": " + tabvaroJson() + " }";
+            let jsonData = "{\"cart\": " + tableToJson() + " }";
             //console.log("Json is " + jsonData);
 
             $.ajax({
