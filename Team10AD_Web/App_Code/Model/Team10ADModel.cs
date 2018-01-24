@@ -369,7 +369,7 @@ namespace Team10AD_Web.App_Code.Model
                 .IsUnicode(false);
 
             modelBuilder.Entity<StockFlow>()
-                .Property(e => e.Dept_supplier_voucherID)
+                .Property(e => e.Entity)
                 .IsUnicode(false);
         }
     }

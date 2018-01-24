@@ -415,7 +415,6 @@ namespace Team10AD_Web.App_Code
         {
 
             string result = "ERROR";
-            int supOrMgrID;
             string supOrMgrName = "";
             string supOrMgrEmail = "";
 
@@ -428,10 +427,8 @@ namespace Team10AD_Web.App_Code
                 //FOR TESTING-Hardcoded email
                 //repEmail = "e0227390@u.nus.edu";
 
-                supOrMgrID = m.StockAdjustmentVouchers.Where(x => x.VoucherID == voucherID)
-                        .Select(x => x.ApproverID.GetValueOrDefault()).First();
-                supOrMgrName = m.StoreStaffs.Where(x => x.StoreStaffID == supOrMgrID).Select(x => x.Name).First();
-                supOrMgrEmail = m.StoreStaffs.Where(x => x.StoreStaffID == supOrMgrID).Select(x => x.Email).First();
+                supOrMgrName = m.StoreStaffs.Where(x => x.StoreStaffID == staffID).Select(x => x.Name).First();
+                supOrMgrEmail = m.StoreStaffs.Where(x => x.StoreStaffID == staffID).Select(x => x.Email).First();
             }
 
             //Construct body

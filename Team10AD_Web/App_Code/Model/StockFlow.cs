@@ -13,11 +13,10 @@ namespace Team10AD_Web.App_Code.Model
         [StringLength(4)]
         public string ItemCode { get; set; }
 
-        public DateTime? ReceivedDate { get; set; }
+        public DateTime? Date { get; set; }
 
-        [Column("Dept/supplier/voucherID")]
-        [StringLength(10)]
-        public string Dept_supplier_voucherID { get; set; }
+        [StringLength(50)]
+        public string Entity { get; set; }
 
         [Column("Adjusted Quantity")]
         public int? Adjusted_Quantity { get; set; }
