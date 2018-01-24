@@ -24,8 +24,7 @@ namespace Team10AD_Web.Clerk
             
             if (!IsPostBack)
             {
-                //Storelist in shortfall
-               
+                             
                 dataRefresh();
             }
         
@@ -41,28 +40,41 @@ namespace Team10AD_Web.Clerk
             //Show Label with Item Description
             string itemQuery = txtItemCode.Text.ToUpper();
            string description = PurvaBizLogic.GetDescriptionFromItemCode(itemQuery);
-            lblDescription.Text = description;
-            if (!String.IsNullOrEmpty(description))
+            //lblDescription.Text = description;
+            //Have check if duplicate item
+            if (!checkDuplicates(itemQuery))
             {
-                lblTag.Text = "Description: ";
-                lblDescription.Text = description;
-                lblTag.Visible = true;
-                lblDescription.Visible = true;
-                btnAddItem.Visible = true;
-           
+                if (!String.IsNullOrEmpty(description))
+                {
+                    lblTag.Text = "Description: ";
+                    lblDescription.Text = description;
+                    lblTag.Visible = true;
+                    lblDescription.Visible = true;
+                    btnAddItem.Visible = true;
+
+                }
+                else
+                {
+                    lblTag.Text = "No such item";
+                    lblTag.Visible = true;
+
+                }
             }
             else
             {
-                lblTag.Text = "No such item";
+                lblTag.Text = "Item already in list ";
                 lblTag.Visible = true;
-                
             }
+
+
         }
 
         protected void btnAddItem_Click(object sender, EventArgs e)
         {
             listSource.Add(PurvaBizLogic.GetItemByCode(txtItemCode.Text));
             Session["Shortfall"] = listSource;
+            lblTag.Visible = false;
+            txtItemCode.Text = "";
             dataRefresh();
         }
       
@@ -167,6 +179,19 @@ namespace Team10AD_Web.Clerk
             }
             //lblTest.Text = String.Format("ItemCode: "+itemCode+"1stName: "+firstSupName+"1stQty"+firstSupQty+"2ndName:"+secondSupName+"2ndQty"+secondSupQty+"3rdName:"+thirdSupName+"3rdqty"+thirdSupQty) ;
             return poList;
+        }
+        protected bool checkDuplicates(string itemCode)
+        {
+            bool isDuplicate = false;
+            //Iterate list in sessionState
+            foreach (Catalogue item in listSource)
+            {
+                if (itemCode==item.ItemCode)
+                {
+                    isDuplicate = true;
+                }
+            }
+            return isDuplicate;
         }
     }
 }

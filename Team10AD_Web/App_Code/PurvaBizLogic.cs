@@ -109,7 +109,7 @@ namespace Team10AD_Web.App_Code
                     //Get from POIntermediate: SupplierCode, PODetails: ItemCode,Quantity, UnitPrice, Status
                     foreach (var poIntermediate in poList)
                     {
-                        if (supName == poIntermediate.SupplierName)
+                        if (supName == poIntermediate.SupplierName && poIntermediate.Quantity!="0")
                         {
                             po.SupplierCode = poIntermediate.SupplierName;
                             pd.ItemCode = poIntermediate.ItemCode;
@@ -117,6 +117,7 @@ namespace Team10AD_Web.App_Code
                             pd.UnitPrice = m.SupplierDetails
                                 .Where(x => x.ItemCode == pd.ItemCode && x.SupplierCode == po.SupplierCode)
                                 .Select(x => x.Price).First();
+                            pd.Status = "Unreceived";
                             poDetailList.Add(pd);
                         }
 
@@ -124,8 +125,13 @@ namespace Team10AD_Web.App_Code
                     po.PurchaseOrderDetails = poDetailList;
                     //Status
                     po.Status = "Unreceived";
-                    m.PurchaseOrders.Add(po);
-                    m.SaveChanges();
+                    //Only save changes if PO is not empty
+                    if (poDetailList.Count != 0)
+                    {
+                        m.PurchaseOrders.Add(po);
+                        m.SaveChanges();
+                    }
+                   
                 }
                 //return test;
                 //Update the "Shorfall" status
