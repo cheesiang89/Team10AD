@@ -527,16 +527,16 @@ namespace Team10AD_Web.App_Code
                     }
                 }
 
-                //StoreStaff supervisor = context.StoreStaffs.Where(x => x.Title == "Supervisor").First();
-                //StoreStaff manager = context.StoreStaffs.Where(x => x.Title == "Manager").First();
-                //if (adjustmentVoucherId > 0 && AdjustmentVoucherCost(adjustmentVoucherId) <= 250)
-                //{
-                //    LogicUtility.Instance.SendAdjustmentEmail(adjustmentVoucherId, supervisor.StoreStaffID);
-                //}
-                //else if (adjustmentVoucherId > 0 &&  AdjustmentVoucherCost(adjustmentVoucherId) > 250)
-                //{
-                //    LogicUtility.Instance.SendAdjustmentEmail(adjustmentVoucherId, manager.StoreStaffID);
-                //}
+                StoreStaff supervisor = context.StoreStaffs.Where(x => x.Title == "Supervisor").First();
+                StoreStaff manager = context.StoreStaffs.Where(x => x.Title == "Manager").First();
+                if (adjustmentVoucherId > 0 && AdjustmentVoucherCost(adjustmentVoucherId) <= 250)
+                {
+                    LogicUtility.Instance.SendAdjustmentEmail(adjustmentVoucherId, supervisor.StoreStaffID);
+                }
+                else if (adjustmentVoucherId > 0 && AdjustmentVoucherCost(adjustmentVoucherId) > 250)
+                {
+                    LogicUtility.Instance.SendAdjustmentEmail(adjustmentVoucherId, manager.StoreStaffID);
+                }
 
                 return adjustmentVoucherId;
             }
