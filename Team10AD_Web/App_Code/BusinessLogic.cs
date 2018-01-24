@@ -29,7 +29,7 @@ public class BusinessLogic
         Department department = tm.Departments.Where(x => x.DepartmentCode == departmentCode).First();
         department.PointID = Int32.Parse(pointID);
         department.RepresentativeID = employeeid;
-        //tm.SaveChanges();
+        tm.SaveChanges();
     }
 
     public int ShowCollectionPointID(int employeeID)
