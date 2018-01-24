@@ -98,7 +98,7 @@ namespace Team10AD_Web.Clerk
             //Generate disbursement lists
             //Update requisition qty
             //Update requisition status
-            RayBizLogic.UpdateRetrievalDetailsEager(retrievalid, userinput, clerkid);
+            RayBizLogic.UpdateRetrievalDetailsFull(retrievalid, userinput, clerkid);
 
             if (adjustmentVoucherId > 0)
             {

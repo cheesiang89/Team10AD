@@ -11,17 +11,37 @@ namespace Team10AD_Web.App_Code
 {
     public class LogicUtility
     {
-        private static LogicUtility instance;
-        private LogicUtility() { }
+        //private static LogicUtility instance;
+        //private LogicUtility() { }
+
+        //public static LogicUtility Instance
+        //{
+        //    get
+        //    {
+        //        if (instance == null)
+        //        {
+        //            instance = new LogicUtility();
+        //        }
+        //        return instance;
+        //    }
+        //}
+
+        private static readonly LogicUtility instance = new LogicUtility();
+
+        // Explicit static constructor to tell C# compiler
+        // not to mark type as beforefieldinit
+        static LogicUtility()
+        {
+        }
+
+        private LogicUtility()
+        {
+        }
 
         public static LogicUtility Instance
         {
             get
             {
-                if (instance == null)
-                {
-                    instance = new LogicUtility();
-                }
                 return instance;
             }
         }
@@ -73,12 +93,11 @@ namespace Team10AD_Web.App_Code
         }
 
         //On UnAssign or Assign rep, notify (HOD-> Employee)
-        public string SendRepEmail(string departmentCode, string flag)
+        public string SendRepEmail(string repName, string flag)
         {
             string result = "ERROR";
 
             //Get email Details: 
-            string repName = BusinessLogic_Sam.checkCurrentRep(departmentCode);
             string repEmail = "";
             string body = "";
             string subject = "";
@@ -199,7 +218,7 @@ namespace Team10AD_Web.App_Code
         }
 
         //On Approve/reject requisition (Approver -> Employee) notify
-        public string SendRequisitionResponseEmail(int requisitionID, string requestorName, string remarks, string flag)
+        public string SendRequisitionResponseEmail(int requisitionID, string remarks, string flag)
         {
             string result = "ERROR";
             string requestorEmail = "";
@@ -207,13 +226,14 @@ namespace Team10AD_Web.App_Code
             string body = "";
             string subject = "";
             string fromEmailAddress = "logicuniversity2018@gmail.com";
-
+            string requestorName = "";
             using (Model.Team10ADModel m = new Model.Team10ADModel())
             {
                 //FOR TESTING-Hardcoded email
                 // requestorEmail = "e0227390@u.nus.edu";
-
-                requestorEmail = m.Employees.Where(x => x.Name == requestorName).Select(x => x.Email).First();
+                int? requestorID = m.Requisitions.Where(x => x.RequisitionID == requisitionID).Select(x => x.RequestorID).First();
+                requestorEmail = m.Employees.Where(x => x.EmployeeID == requestorID).Select(x => x.Email).First();
+                requestorName = m.Employees.Where(x => x.EmployeeID == requestorID).Select(x => x.Name).First();
                 requisitionDate = m.Requisitions.Where(x => x.RequisitionID == requisitionID).Select(x => x.RequisitionDate).First().ToString();
             }
 
@@ -395,7 +415,6 @@ namespace Team10AD_Web.App_Code
         {
 
             string result = "ERROR";
-            int supOrMgrID;
             string supOrMgrName = "";
             string supOrMgrEmail = "";
 
@@ -408,10 +427,8 @@ namespace Team10AD_Web.App_Code
                 //FOR TESTING-Hardcoded email
                 //repEmail = "e0227390@u.nus.edu";
 
-                supOrMgrID = m.StockAdjustmentVouchers.Where(x => x.VoucherID == voucherID)
-                        .Select(x => x.ApproverID.GetValueOrDefault()).First();
-                supOrMgrName = m.StoreStaffs.Where(x => x.StoreStaffID == supOrMgrID).Select(x => x.Name).First();
-                supOrMgrEmail = m.StoreStaffs.Where(x => x.StoreStaffID == supOrMgrID).Select(x => x.Email).First();
+                supOrMgrName = m.StoreStaffs.Where(x => x.StoreStaffID == staffID).Select(x => x.Name).First();
+                supOrMgrEmail = m.StoreStaffs.Where(x => x.StoreStaffID == staffID).Select(x => x.Email).First();
             }
 
             //Construct body
