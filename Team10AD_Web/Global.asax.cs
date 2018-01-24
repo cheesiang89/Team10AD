@@ -49,6 +49,7 @@ namespace Team10AD_Web
             Session["ApproverID"] = 0;
            //Store shortfall items
            Session["Shortfall"]= new List<Catalogue>();
+            Session["Catalogue"] = "";
         }
     }
 }

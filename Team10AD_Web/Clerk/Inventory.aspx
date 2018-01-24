@@ -7,7 +7,7 @@
         
     </h2>
     <asp:TextBox ID="SearchBox" placeholder="Search by category/description" runat="server" Width="220px"></asp:TextBox><asp:Button ID="SearchBtn" runat="server" Text="Search" OnClick="SearchBtn_Click" />
-    <asp:GridView ID="dgvCatalogue" runat="server" AllowPaging="True" OnPageIndexChanging="dgvCatalogue_PageIndexChanging" AutoGenerateColumns="False" >
+    <asp:GridView ID="dgvCatalogue" runat="server" AllowPaging="True" OnPageIndexChanging="dgvCatalogue_PageIndexChanging" AutoGenerateColumns="False" OnRowCommand="dgvCatalogue_RowCommand" >
         <Columns>
             <asp:BoundField DataField="ItemCode" HeaderText="Item Code" />
             <asp:BoundField DataField="Category" HeaderText="Category" />
@@ -17,7 +17,11 @@
             <asp:BoundField DataField="BalanceQuantity" HeaderText="Existing Qty" />
             <asp:BoundField DataField="UnitOfMeasure" HeaderText="Unit of Measure" />
             <asp:BoundField DataField="Location" HeaderText="Location" />
-            <asp:ButtonField ButtonType="Button" CommandName="Details" Text="Details" />
+            <asp:TemplateField ShowHeader="False">
+                <ItemTemplate>
+                    <asp:Button ID="Button1" runat="server" CausesValidation="false" CommandName="Details" Text="Details" />
+                </ItemTemplate>
+            </asp:TemplateField>
         </Columns>
         </asp:GridView>
 </asp:Content>
