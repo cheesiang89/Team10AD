@@ -29,7 +29,7 @@ public class BusinessLogic
         Department department = tm.Departments.Where(x => x.DepartmentCode == departmentCode).First();
         department.PointID = Int32.Parse(pointID);
         department.RepresentativeID = employeeid;
-        tm.SaveChanges();
+        //tm.SaveChanges();
     }
 
     public int ShowCollectionPointID(int employeeID)
@@ -70,6 +70,18 @@ public class BusinessLogic
     {
         var qry = (from dd in tm.DisbursementDetails.Where(x => x.DisbursementID == disbursementID) select new { dd.DisbursementID, dd.ItemCode, dd.Catalogue.Description, dd.QuantityRequested, dd.QuantityCollected, dd.Remarks }).ToList();
         return qry;
+    }
+
+    public object ShowStockFlow(string itemCode)
+    {
+        var qry = (from sf in tm.StockFlows. Where(x=>x.ItemCode == itemCode) select new { sf.Date, sf.Entity, sf.Adjusted_Quantity, sf.Balance_Quantity}).ToList();
+        return qry;
+    }
+
+    public Catalogue GetCatalogue(string itemCode)
+    {
+        List<Catalogue> result = tm.Catalogues.Where(x => x.ItemCode == itemCode).ToList();
+        return result[0];
     }
 
 }
