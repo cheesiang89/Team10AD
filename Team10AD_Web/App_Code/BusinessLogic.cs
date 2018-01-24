@@ -72,5 +72,17 @@ public class BusinessLogic
         return qry;
     }
 
+    public object ShowStockFlow(string itemCode)
+    {
+        var qry = (from sf in tm.StockFlows. Where(x=>x.ItemCode == itemCode) select new { sf.Date, sf.Entity, sf.Adjusted_Quantity, sf.Balance_Quantity}).ToList();
+        return qry;
+    }
+
+    public Catalogue GetCatalogue(string itemCode)
+    {
+        List<Catalogue> result = tm.Catalogues.Where(x => x.ItemCode == itemCode).ToList();
+        return result[0];
+    }
+
 }
 
