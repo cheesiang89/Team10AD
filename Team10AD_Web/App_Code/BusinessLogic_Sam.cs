@@ -138,7 +138,7 @@ namespace Team10AD_Web.App_Code
                 Requisition req = entities.Requisitions.Where(p => p.RequisitionID == requisitionId).SingleOrDefault();
                 req.Status = "Approved";
                 req.Remarks = remarks;
-                req.ApprovalDate = DateTime.Today;
+                req.ApprovalDate = DateTime.Now;
                 req.ApproverID = Convert.ToInt32(approverID);
                 //RequisitionDetail reqDetails = entities.RequisitionDetails.Where()
                 entities.SaveChanges();

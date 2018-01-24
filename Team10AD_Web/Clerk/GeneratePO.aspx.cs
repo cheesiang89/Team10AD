@@ -89,7 +89,12 @@ namespace Team10AD_Web.Clerk
             List<POIntermediate> poList = iterateItems();
             //Generate requisitions
 
-
+            //TEST
+            //string test = PurvaBizLogic.SavePOInfo(poList);
+            //lblTest.Text = test;
+            int storeStaffID = (int)Session["clerkid"];
+            PurvaBizLogic.SavePOInfo(poList,storeStaffID);
+            
         }
         protected List<POIntermediate> iterateItems()
         {
@@ -124,7 +129,7 @@ namespace Team10AD_Web.Clerk
                 //Make 1st DTO
                 temp1.ItemCode = itemCode;
                 temp1.SupplierName = firstSupName;
-                temp1.Quantity = firstSupName;
+                temp1.Quantity = firstSupQty;
          
                 //Get 2nd supplier name
                 secondSupName = ((Label)item.FindControl("lblHeaderS2")).Text.Substring(9, 4);
@@ -133,7 +138,7 @@ namespace Team10AD_Web.Clerk
                 secondSupQty = ((TextBox)item.FindControl("txtSupp2")).Text;
                 if (String.IsNullOrEmpty(secondSupQty))
                 {
-                    firstSupQty = "0";
+                    secondSupQty = "0";
                 }
                 //Make 2nd DTO
                 temp2.ItemCode = itemCode;
@@ -147,7 +152,7 @@ namespace Team10AD_Web.Clerk
                 thirdSupQty = ((TextBox)item.FindControl("txtSupp3")).Text;
                 if (String.IsNullOrEmpty(thirdSupQty))
                 {
-                    firstSupQty = "0";
+                    thirdSupQty = "0";
                 }
                 //Make 3rd DTO
                 temp3.ItemCode = itemCode;

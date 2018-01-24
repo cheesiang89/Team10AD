@@ -4,7 +4,8 @@ using System.Linq;
 using System.Web;
 using Team10AD_Web.App_Code.Model;
 using Team10AD_Web.App_Code.DTO;
-namespace Team10AD_Web.App_Code {
+namespace Team10AD_Web.App_Code
+{
     /// <summary>
     /// Summary description for BusinessLogic
     /// </summary>
@@ -75,8 +76,9 @@ namespace Team10AD_Web.App_Code {
             //Update Catalogue "Shorfall" status
 
         }
-        public static void SavePOInfo(List<POIntermediate> poList)
+        public static void SavePOInfo(List<POIntermediate> poList, int storeStaffID)
         {
+            //string test = "";
             HashSet<string> supSet = new HashSet<string>();
             //Save supplier names in HashSet
             foreach (var item in poList)
@@ -85,12 +87,51 @@ namespace Team10AD_Web.App_Code {
             }
             //Create different PO objects depending on suppliers
             int count = supSet.Count;
-            //TODO: Iterate through hashset to createPO 
-            //PODetails: ItemCode,Quantity, UnitPrice, Status
+            //Iterate through hashset to createPO- Convert to Array and iterate Array 
+            string[] stringArray = supSet.ToArray();
 
 
-            //Update the "Shorfall" status
+            foreach (string supName in stringArray)
+            {
+                //TEST
+                //    test += supName;
+                //Create a PO for each unique supplier
+
+                using (Team10ADModel m = new Team10ADModel())
+                {
+                    List<PurchaseOrderDetail> poDetailList = new List<PurchaseOrderDetail>();
+                    PurchaseOrder po = new PurchaseOrder();
+                    PurchaseOrderDetail pd = new PurchaseOrderDetail();
+                    //CreationDate
+                    po.CreationDate = DateTime.Now;
+                    //StoreStaffID 
+                    po.StoreStaffID = storeStaffID;
+                    //Get from POIntermediate: SupplierCode, PODetails: ItemCode,Quantity, UnitPrice, Status
+                    foreach (var poIntermediate in poList)
+                    {
+                        if (supName == poIntermediate.SupplierName)
+                        {
+                            po.SupplierCode = poIntermediate.SupplierName;
+                            pd.ItemCode = poIntermediate.ItemCode;
+                            pd.Quantity = Int32.Parse(poIntermediate.Quantity);
+                            pd.UnitPrice = m.SupplierDetails
+                                .Where(x => x.ItemCode == pd.ItemCode && x.SupplierCode == po.SupplierCode)
+                                .Select(x => x.Price).First();
+                            poDetailList.Add(pd);
+                        }
+
+                    }
+                    po.PurchaseOrderDetails = poDetailList;
+                    //Status
+                    po.Status = "Unreceived";
+                    m.PurchaseOrders.Add(po);
+                    m.SaveChanges();
+                }
+                //return test;
+                //Update the "Shorfall" status
+            }
+
         }
-
     }
 }
+    
