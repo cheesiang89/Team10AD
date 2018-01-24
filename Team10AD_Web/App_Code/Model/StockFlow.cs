@@ -15,7 +15,7 @@ namespace Team10AD_Web.App_Code.Model
 
         public DateTime? Date { get; set; }
 
-        [StringLength(10)]
+        [StringLength(50)]
         public string Entity { get; set; }
 
         [Column("Adjusted Quantity")]

@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Clerk/Clerk.Master" AutoEventWireup="true" CodeBehind="GeneratePO.aspx.cs" Inherits="Team10AD_Web.Clerk.GeneratePO" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -6,15 +7,19 @@
     <div>
         <asp:Label ID="lblItemCode" runat="server" Text="Item Code"></asp:Label>
         <asp:TextBox ID="txtItemCode" runat="server"></asp:TextBox>
-           <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" />
+        <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" />
     </div>
-    <asp:Label ID="lblTag" runat="server" Text="" ></asp:Label>
-   <%-- <asp:Panel ID="pnlDescription" Visible="false" runat="server">--%>
-        
-        <asp:Label ID="lblDescription" runat="server" Text="Hello" ></asp:Label>
-            <asp:Button ID="btnAddItem" runat="server" Text="Add Item" OnClick="btnAddItem_Click" />
-      
+    <asp:Label ID="lblTag" runat="server" Text=""></asp:Label>
+    <%-- <asp:Panel ID="pnlDescription" Visible="false" runat="server">--%>
+
+    <asp:Label ID="lblDescription" runat="server" Text="Hello"></asp:Label>
+    <asp:Button ID="btnAddItem" runat="server" Text="Add Item" OnClick="btnAddItem_Click" />
+
     <%--</asp:Panel>--%>
+    <br />
+    <asp:Label ID="lblTest" runat="server" Text=""></asp:Label>
+    <br />
+    <br />
     <br />
     <asp:Repeater ID="repeaterItems" runat="server" OnItemCommand="repeaterItems_ItemCommand">
 
@@ -52,15 +57,17 @@
                     <td>
                         <asp:TextBox ID="txtSupp3" runat="server"></asp:TextBox>
                     </td>
-                            <th><asp:Button ID="btnDelete" runat="server" Text="Delete"
-                                CommandArgument='<%# Container.ItemIndex %>'
-                                CommandName="Delete"/></th>
+                    <th>
+                        <asp:Button ID="btnDelete" runat="server" Text="Delete"
+                            CommandArgument='<%# Container.ItemIndex %>'
+                            CommandName="Delete" /></th>
                 </tr>
             </table>
         </ItemTemplate>
 
     </asp:Repeater>
 
-    
+    <asp:Button ID="btnGeneratePO" runat="server" Text="Generate PO" OnClick="btnGeneratePO_Click" />
+    <asp:Button ID="btnCancel" runat="server" Text="Cancel" OnClick="btnCancel_Click" />
 
 </asp:Content>
