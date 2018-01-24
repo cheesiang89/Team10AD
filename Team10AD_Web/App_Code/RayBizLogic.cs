@@ -222,8 +222,6 @@ namespace Team10AD_Web.App_Code
         {
             using (Team10ADModel context = new Team10ADModel())
             {
-                
-
                 //Updating quantities in Catalogue, Retrieval and RetrievalDetail tables
                 foreach (RetrievalDetail userdetail in retrievaldetaillist)
                 {
@@ -437,15 +435,17 @@ namespace Team10AD_Web.App_Code
                                         notcompletedcheck++;
                                     }
                                 }
+                                if (notcompletedcheck == 0)
+                                {
+                                    r.Status = "Completed";
+                                }
+                                else
+                                {
+                                    r.Status = "Partial";
+                                }
+                                context.SaveChanges();
                             }
-                            if (notcompletedcheck == 0)
-                            {
-                                r.Status = "Completed";
-                            }
-                            else
-                            {
-                                r.Status = "Partial";
-                            }
+
                         }
                     }
                     //Creating a new set of disbursement details
