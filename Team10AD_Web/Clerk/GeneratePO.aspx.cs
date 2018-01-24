@@ -105,7 +105,11 @@ namespace Team10AD_Web.Clerk
             //string test = PurvaBizLogic.SavePOInfo(poList);
             //lblTest.Text = test;
             int storeStaffID = (int)Session["clerkid"];
-            PurvaBizLogic.SavePOInfo(poList,storeStaffID);
+            if (PurvaBizLogic.SavePOInfo(poList, storeStaffID))
+            {
+                Response.Redirect("PurchaseOrderPage.aspx");
+            }
+           
             
         }
         protected List<POIntermediate> iterateItems()

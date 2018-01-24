@@ -76,8 +76,9 @@ namespace Team10AD_Web.App_Code
             //Update Catalogue "Shorfall" status
 
         }
-        public static void SavePOInfo(List<POIntermediate> poList, int storeStaffID)
+        public static bool SavePOInfo(List<POIntermediate> poList, int storeStaffID)
         {
+            bool result = false;
             //string test = "";
             HashSet<string> supSet = new HashSet<string>();
             //Save supplier names in HashSet
@@ -129,14 +130,27 @@ namespace Team10AD_Web.App_Code
                     if (poDetailList.Count != 0)
                     {
                         m.PurchaseOrders.Add(po);
+                        foreach (PurchaseOrderDetail item in poDetailList)
+                        {
+                            Catalogue c = m.Catalogues.Where(x => x.ItemCode == item.ItemCode).Select(x => x).First();
+                            //Set shortfall to false
+                            c.ShortfallStatus = "False";
+                        //Add pending delivery qty
+                            int? qty = m.Catalogues.Where(x => x.ItemCode == item.ItemCode).Select(x => x.PendingDeliveryQuantity).First();
+                            qty += item.Quantity.GetValueOrDefault();
+                            c.PendingDeliveryQuantity = qty;
+                     
+                        }
+                       
                         m.SaveChanges();
+                        result = true;
                     }
                    
                 }
                 //return test;
-                //Update the "Shorfall" status
+               
             }
-
+            return result;
         }
     }
 }
