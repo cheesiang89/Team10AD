@@ -458,6 +458,8 @@ namespace Team10AD_Web.App_Code
                             context.SaveChanges();
                         }
                     }
+
+                    LogicUtility.Instance.SendDisbursementEmail(disbursement.DisbursementID);
                 }
 
 
