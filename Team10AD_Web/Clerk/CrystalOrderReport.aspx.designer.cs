@@ -76,13 +76,13 @@ namespace Team10AD_Web.Clerk {
         protected global::System.Web.UI.WebControls.DropDownList dropMonth;
         
         /// <summary>
-        /// dgvMonth control.
+        /// dgvDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView dgvMonth;
+        protected global::System.Web.UI.WebControls.GridView dgvDate;
         
         /// <summary>
         /// lblYear control.
@@ -103,13 +103,13 @@ namespace Team10AD_Web.Clerk {
         protected global::System.Web.UI.WebControls.DropDownList dropYear;
         
         /// <summary>
-        /// btnYearAdd control.
+        /// btnDateAdd control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnYearAdd;
+        protected global::System.Web.UI.WebControls.Button btnDateAdd;
         
         /// <summary>
         /// btnGenerate control.

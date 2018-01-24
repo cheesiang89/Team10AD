@@ -12,12 +12,25 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <table style="width: 100%;">
         <tr>
-            <td class="auto-style2">&nbsp;<asp:Label ID="lblCatagory" runat="server" Text="Catagory:"></asp:Label></td>
+            <td class="auto-style2">&nbsp;<asp:Label ID="lblCatagory" runat="server" Text="Category:"></asp:Label></td>
             <td class="auto-style1">&nbsp;<asp:DropDownList ID="dropCategory" runat="server" DataSourceID="SqlDataSource3" DataTextField="Category" DataValueField="Category"></asp:DropDownList>
                 <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:Team10ADConnectionString %>" SelectCommand="SELECT DISTINCT Category FROM Catalogues"></asp:SqlDataSource>
             </td>
             <td>&nbsp;<asp:Button ID="btnCategoryAdd" runat="server" Text="Add" OnClick="btnCategoryAdd_Click" /></td>
-             <td>&nbsp;<asp:GridView ID="dgvCategory" runat="server"></asp:GridView>
+             <td>&nbsp;<asp:GridView ID="dgvCategory" runat="server" AutoGenerateColumns="False" OnRowCommand="dgvCategory_RowCommand">
+                 <Columns>
+                     <asp:TemplateField HeaderText="Category">
+                          <ItemTemplate>
+                                <asp:Label ID="lblCategory" runat="server" Text='<%# Bind("Category") %>'></asp:Label>
+                            </ItemTemplate>
+                     </asp:TemplateField>
+                     <asp:TemplateField ShowHeader="False">
+                         <ItemTemplate>
+                             <asp:Button ID="Button1" runat="server" CausesValidation="false" CommandName="DeleteRow" Text="Delete" />
+                         </ItemTemplate>
+                     </asp:TemplateField>
+                 </Columns>
+                 </asp:GridView>
              </td>
         </tr>
         <tr>
@@ -37,7 +50,20 @@
                 <asp:ListItem>December</asp:ListItem>
                 </asp:DropDownList></td>
             <td>&nbsp;</td>
-            <td>&nbsp;<asp:GridView ID="dgvMonth" runat="server"></asp:GridView>
+            <td>&nbsp;<asp:GridView ID="dgvDate" runat="server" AutoGenerateColumns="False" OnRowCommand="dgvDate_RowCommand">
+                <Columns>
+                    <asp:TemplateField HeaderText="Date">                     
+                        <ItemTemplate>
+                            <asp:Label ID="lblDate" runat="server" Text='<%# Bind("Date") %>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField ShowHeader="False">
+                        <ItemTemplate>
+                            <asp:Button ID="Button1" runat="server" CausesValidation="false" CommandName="DeleteRow" Text="Delete" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                </Columns>
+                </asp:GridView>
             </td>
         </tr>
         <tr>
@@ -47,13 +73,13 @@
                 <asp:ListItem>2017</asp:ListItem>
                 <asp:ListItem>2018</asp:ListItem>
                 </asp:DropDownList></td>
-            <td>&nbsp;<asp:Button ID="btnYearAdd" runat="server" Text="Add" /></td>
+            <td>&nbsp;<asp:Button ID="btnDateAdd" runat="server" Text="Add" OnClick="btnDateAdd_Click" /></td>
             <td>&nbsp;</td>
         </tr>
         <tr>
             <td class="auto-style2">&nbsp;</td>
-            <td class="auto-style1"><asp:Button ID="btnGenerate" runat="server" Text="Generate" /></td>
-            <td><asp:Button ID="btnClear" runat="server" Text="Clear" /></td>
+            <td class="auto-style1"><asp:Button ID="btnGenerate" runat="server" Text="Generate" OnClick="btnGenerate_Click" /></td>
+            <td><asp:Button ID="btnClear" runat="server" Text="Clear" OnClick="btnClear_Click" /></td>
             <td>&nbsp;</td>            
         </tr>
     </table>
