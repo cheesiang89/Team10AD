@@ -362,6 +362,7 @@
     <Compile Include="App_Code\Model\RetrievalDetail.cs" />
     <Compile Include="App_Code\Model\StockAdjustmentVoucher.cs" />
     <Compile Include="App_Code\Model\StockAdjustmentVoucherDetail.cs" />
+    <Compile Include="App_Code\Model\StockFlow.cs" />
     <Compile Include="App_Code\Model\StoreStaff.cs" />
     <Compile Include="App_Code\Model\Supplier.cs" />
     <Compile Include="App_Code\Model\SupplierDetail.cs" />
