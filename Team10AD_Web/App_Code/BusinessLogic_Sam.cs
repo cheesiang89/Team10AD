@@ -81,19 +81,24 @@ namespace Team10AD_Web.App_Code
                 deptApprover.ApprovingPeriodStart = startDate;
                 deptApprover.ApprovingPeriodEnd = endDate;
                 entities.SaveChanges();
+                //Send email
+                string selectedApproverName = entities.Employees.Where(x => x.EmployeeID == ApproverID).Select(x => x.Name).First();
+                LogicUtility.Instance.SendApproverEmail(selectedApproverName, startDate.ToShortTimeString(), endDate.ToShortTimeString());
                 status = "success";
             }
             return status;
         }
 
 
-        public static void assignNewRepresentative(string newRepName, string departmentCode)
+        public static void assignNewRepresentative(string oldRepName, string newRepName, string departmentCode)
         {
             using (App_Code.Model.Team10ADModel entities = new App_Code.Model.Team10ADModel())
             {
                 int newRepID = ((from x in entities.Employees where x.Name == newRepName select new { x.EmployeeID }).First()).EmployeeID;
                 Department deptRepresentative = entities.Departments.Where(p => p.DepartmentCode == departmentCode).First<Department>();
                 deptRepresentative.RepresentativeID = newRepID;
+                LogicUtility.Instance.SendRepEmail(newRepName, "ASSIGN");
+                LogicUtility.Instance.SendRepEmail(oldRepName, "UNASSIGN");
                 entities.SaveChanges();
 
             }
@@ -138,10 +143,13 @@ namespace Team10AD_Web.App_Code
                 Requisition req = entities.Requisitions.Where(p => p.RequisitionID == requisitionId).SingleOrDefault();
                 req.Status = "Approved";
                 req.Remarks = remarks;
-                req.ApprovalDate = DateTime.Today;
+                req.ApprovalDate = DateTime.Now;
                 req.ApproverID = Convert.ToInt32(approverID);
                 //RequisitionDetail reqDetails = entities.RequisitionDetails.Where()
                 entities.SaveChanges();
+                //Send email
+
+                LogicUtility.Instance.SendRequisitionResponseEmail(requisitionId, remarks, "APPROVED");
             }
 
         }
@@ -195,7 +203,9 @@ namespace Team10AD_Web.App_Code
                     req.Remarks = remarks;
                     entities.SaveChanges();
                 }
-            
+            //Send email
+
+            LogicUtility.Instance.SendRequisitionResponseEmail(requisitionId, remarks, "REJECTED");
         }
 
     }
