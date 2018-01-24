@@ -75,9 +75,9 @@ namespace Team10AD_Web.EmployeePage
             try
             {
                 reqid = Convert.ToInt32(requisitionid);
-                string approverID = (string)Session["ApproverID"];
+                int approverID = (int)Session["ApproverID"];
                 remarks = txtBoxRemarks.Text;
-                BusinessLogic_Sam.approveRequisition(reqid,remarks,approverID);
+                BusinessLogic_Sam.approveRequisition(reqid,remarks,approverID.ToString());
                 BusinessLogic_Sam.updateItemStockLevel(reqListItems);
                 Response.Redirect("DepartmentRequisition.aspx");
             }

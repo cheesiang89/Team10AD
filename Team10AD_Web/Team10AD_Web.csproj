@@ -56,6 +56,9 @@
     <Reference Include="AspNet.ScriptManager.jQuery, Version=1.12.4.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\AspNet.ScriptManager.jQuery.1.12.4\lib\net45\AspNet.ScriptManager.jQuery.dll</HintPath>
     </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.Web, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="DotNetOpenAuth.AspNet, Version=4.3.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
       <HintPath>..\packages\DotNetOpenAuth.AspNet.4.3.4.13329\lib\net45-full\DotNetOpenAuth.AspNet.dll</HintPath>
@@ -133,19 +136,20 @@
     <Content Include="Clerk\AdjustmentVoucherList.aspx" />
     <Content Include="Clerk\CompletedRetrievalDetailPage.aspx" />
     <Content Include="Clerk\CreateAdjustmentVoucher.aspx" />
+    <Content Include="Clerk\CrystalOrderReport.aspx" />
+    <Content Include="Clerk\CrystalRequisitionReport.aspx" />
     <Content Include="Clerk\DepartmentDetail.aspx" />
     <Content Include="Clerk\DepartmentList.aspx" />
     <Content Include="Clerk\DisbursementDetailsPage.aspx" />
     <Content Include="Clerk\DisbursementList.aspx" />
-    <Content Include="Clerk\GeneratePO.aspx" />
     <Content Include="Clerk\Inventory.aspx" />
     <Content Include="Clerk\Main.aspx" />
-    <Content Include="Clerk\OrderTrend.aspx" />
+    <Content Include="Clerk\OrderReportPage.aspx" />
     <Content Include="Clerk\PurchaseOrderPage.aspx" />
     <Content Include="Clerk\RequisitionDetailPage.aspx" />
     <Content Include="Clerk\RequisitionHistory.aspx" />
     <Content Include="Clerk\RequisitionRecord.aspx" />
-    <Content Include="Clerk\RequisitionTrend.aspx" />
+    <Content Include="Clerk\RequisitionReportPage.aspx" />
     <Content Include="Clerk\RetrievalDetailPage.aspx" />
     <Content Include="Clerk\RetrievalList.aspx" />
     <Content Include="Clerk\StockFlow.aspx" />
@@ -249,6 +253,17 @@
     <Content Include="Content\img\team\3.png" />
     <Content Include="EmployeePage\Employee.Master" />
     <Content Include="EmployeePage\Web.config" />
+    <Content Include="DataSetTeam10AD.xsc">
+      <DependentUpon>DataSetTeam10AD.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSetTeam10AD.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSetTeam10AD.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSetTeam10AD.xss">
+      <DependentUpon>DataSetTeam10AD.xsd</DependentUpon>
+    </Content>
     <None Include="Scripts\Template\jquery-1.12.4.intellisense.js" />
     <Content Include="Scripts\catalogue.js" />
     <Content Include="Scripts\Template\bootstrap-flash-alert.min.js" />
@@ -346,6 +361,7 @@
     <Compile Include="App_Code\BusinessLogic_Sam.cs" />
     <Compile Include="App_Code\CartData.cs" />
     <Compile Include="App_Code\CS_BizLogic.cs" />
+    <Compile Include="App_Code\DTO\POIntermediate.cs" />
     <Compile Include="App_Code\Model\Catalogue.cs" />
     <Compile Include="App_Code\Model\CollectionPoint.cs" />
     <Compile Include="App_Code\Model\Department.cs" />
@@ -408,6 +424,26 @@
     <Compile Include="Clerk\CreateAdjustmentVoucher.aspx.designer.cs">
       <DependentUpon>CreateAdjustmentVoucher.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Clerk\CrystalOrderReport.aspx.cs">
+      <DependentUpon>CrystalOrderReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Clerk\CrystalOrderReport.aspx.designer.cs">
+      <DependentUpon>CrystalOrderReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Clerk\CrystalReportReuisition.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CrystalReportReuisition.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Clerk\CrystalRequisitionReport.aspx.cs">
+      <DependentUpon>CrystalRequisitionReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Clerk\CrystalRequisitionReport.aspx.designer.cs">
+      <DependentUpon>CrystalRequisitionReport.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Clerk\DepartmentDetail.aspx.cs">
       <DependentUpon>DepartmentDetail.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -436,13 +472,6 @@
     <Compile Include="Clerk\DisbursementList.aspx.designer.cs">
       <DependentUpon>DisbursementList.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Clerk\GeneratePO.aspx.cs">
-      <DependentUpon>GeneratePO.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Clerk\GeneratePO.aspx.designer.cs">
-      <DependentUpon>GeneratePO.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Clerk\Inventory.aspx.cs">
       <DependentUpon>Inventory.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -457,12 +486,12 @@
     <Compile Include="Clerk\Main.aspx.designer.cs">
       <DependentUpon>Main.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Clerk\OrderTrend.aspx.cs">
-      <DependentUpon>OrderTrend.aspx</DependentUpon>
+    <Compile Include="Clerk\OrderReportPage.aspx.cs">
+      <DependentUpon>OrderReportPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Clerk\OrderTrend.aspx.designer.cs">
-      <DependentUpon>OrderTrend.aspx</DependentUpon>
+    <Compile Include="Clerk\OrderReportPage.aspx.designer.cs">
+      <DependentUpon>OrderReportPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Clerk\PurchaseOrderPage.aspx.cs">
       <DependentUpon>PurchaseOrderPage.aspx</DependentUpon>
@@ -492,12 +521,12 @@
     <Compile Include="Clerk\RequisitionRecord.aspx.designer.cs">
       <DependentUpon>RequisitionRecord.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Clerk\RequisitionTrend.aspx.cs">
-      <DependentUpon>RequisitionTrend.aspx</DependentUpon>
+    <Compile Include="Clerk\RequisitionReportPage.aspx.cs">
+      <DependentUpon>RequisitionReportPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Clerk\RequisitionTrend.aspx.designer.cs">
-      <DependentUpon>RequisitionTrend.aspx</DependentUpon>
+    <Compile Include="Clerk\RequisitionReportPage.aspx.designer.cs">
+      <DependentUpon>RequisitionReportPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Clerk\RetrievalDetailPage.aspx.cs">
       <DependentUpon>RetrievalDetailPage.aspx</DependentUpon>
@@ -533,6 +562,11 @@
     </Compile>
     <Compile Include="Clerk\SupplierList.aspx.designer.cs">
       <DependentUpon>SupplierList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DataSetTeam10AD.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetTeam10AD.xsd</DependentUpon>
     </Compile>
     <Compile Include="EmployeePage\AssignRepresentative.aspx.cs">
       <DependentUpon>AssignRepresentative.aspx</DependentUpon>
@@ -748,6 +782,13 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Clerk\CrystalReportReuisition.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CrystalReportReuisition.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

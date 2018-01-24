@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace Team10AD_Web.Clerk
 {
-    public partial class RequisitionTrend : System.Web.UI.Page
+    public partial class RequisitionReportPage : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
