@@ -346,6 +346,7 @@
     <Compile Include="App_Code\BusinessLogic_Sam.cs" />
     <Compile Include="App_Code\CartData.cs" />
     <Compile Include="App_Code\CS_BizLogic.cs" />
+    <Compile Include="App_Code\DTO\POIntermediate.cs" />
     <Compile Include="App_Code\Model\Catalogue.cs" />
     <Compile Include="App_Code\Model\CollectionPoint.cs" />
     <Compile Include="App_Code\Model\Department.cs" />
