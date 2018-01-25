@@ -216,19 +216,6 @@ namespace Team10AD_Web.Service
             return a;
         }
 
-        public WCFRequisition[] CheckRequisition(string employeeID)
-        {
-            List<WCFRequisition> l = new List<WCFRequisition>();
-            foreach (Requisition c in Data.checkRequisition(Int32.Parse(employeeID)))
-            {
-                WCFRequisition w = WCFRequisition.Make(c.RequisitionID, c.RequisitionDate.HasValue ? c.RequisitionDate.Value.ToString("dd-MM-yyyy") : null, c.ApprovalDate.HasValue ? c.ApprovalDate.Value.ToString("dd-MM-yyyy") : null, c.RequestorID, c.Status, c.Remarks, c.ApproverID);
-                l.Add(w);
-            }
-            return l.ToArray<WCFRequisition>();
-        }
-
-
-
         public WCFRep[] ListRep(string depCode)
         {
             List<WCFRep> l = new List<WCFRep>();
@@ -255,6 +242,7 @@ namespace Team10AD_Web.Service
         ////////ReceivingGoods
         public WCFReceivingGoodData[] ReceivingGoods(string poid)
         {
+            //string msg = "";
 
             List<WCFReceivingGoodData> goodslist = new List<WCFReceivingGoodData>();
 
@@ -268,16 +256,27 @@ namespace Team10AD_Web.Service
 
             PurchaseOrder po = dictionary[polist[0]];
 
+
             foreach (PurchaseOrderDetail d in polist)
             {
                 int receivedqty = Data.GetTotalGoodsReceived(po.POID, d.ItemCode);
                 int pendingqty = (int)d.Quantity - receivedqty;
 
-                WCFReceivingGoodData good = WCFReceivingGoodData.Make(po.CreationDate.HasValue ? po.CreationDate.Value.ToString("dd-MMM-yyyy") : null, d.POID.ToString(), d.ItemCode, pendingqty.ToString(), d.Catalogue.Description, po.Supplier.SupplierName);
-                goodslist.Add(good);
+                if (pendingqty > 0)
+                {
+                    WCFReceivingGoodData good = WCFReceivingGoodData.Make(po.CreationDate.HasValue ? po.CreationDate.Value.ToString("dd-MMM-yyyy") : null, d.POID.ToString(), d.ItemCode, pendingqty.ToString(), d.Catalogue.Description, po.Supplier.SupplierName);
+                    goodslist.Add(good);
+                }
+
             }
 
+            //catch (Exception e)
+            //{
+            //    msg = e.Message;
+            //}
+            //msg = "ok";
 
+            //return msg;
             return goodslist.ToArray<WCFReceivingGoodData>();
         }
 
@@ -351,6 +350,47 @@ namespace Team10AD_Web.Service
                 l.Add(w);
             }
             return l.ToArray<WCFClerkLogIn>();
+        }
+        
+        /////////////Requisition
+        public WCFRequisition[] PendingRequisitionList()
+        {
+            List<WCFRequisition> wcfReqList = new List<WCFRequisition>();
+            List<Requisition> reqList = Data.PendingRequisitionList();
+
+            foreach (Requisition r in reqList)
+            {
+                WCFRequisition wcfReq = WCFRequisition.Make(r.RequisitionID.ToString(), r.RequisitionDate.HasValue ? r.RequisitionDate.Value.ToString("dd-MMM-yyyy") : null, r.Employee.Name, r.RequestorID.ToString());
+                wcfReqList.Add(wcfReq);
+            }
+            return wcfReqList.ToArray<WCFRequisition>();
+        }
+
+        public WCFRequisitionDetail[] RequisitionDetailList(string reqid)
+        {
+            int id = Convert.ToInt32(reqid);
+            List<WCFRequisitionDetail> wcfReqDetailList = new List<WCFRequisitionDetail>();
+            //List<RequisitionDetail> reqDetailList = Data.GetRequisitionDetailsById(id);
+            Team10ADModel context = new Team10ADModel();
+            List<RequisitionDetail> reqDetailList = context.RequisitionDetails.Where(r => r.RequisitionID == id).ToList();
+
+            foreach (RequisitionDetail rd in reqDetailList)
+            {
+                WCFRequisitionDetail wcfReqDetail = WCFRequisitionDetail.Make(rd.RequisitionID.ToString(), rd.ItemCode, rd.QuantityRequested.ToString(), rd.Catalogue.Description);
+                wcfReqDetailList.Add(wcfReqDetail);
+            }
+
+            return wcfReqDetailList.ToArray<WCFRequisitionDetail>();
+        }
+
+        public void RequisitionApproval(WCFRequisitionApproval wcfReq)
+        {
+            Requisition req = Data.GetRequisitionById(Convert.ToInt32(wcfReq.ReqId));
+            req.ApproverID = Convert.ToInt32(wcfReq.ApproverId);
+            req.Status = wcfReq.Status;
+            req.Remarks = wcfReq.Remark;
+
+            Data.UpdateReqStatus(req);
         }
     }
 }
