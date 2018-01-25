@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
-
 
 namespace TestingConsole
 {
@@ -26,7 +26,6 @@ namespace TestingConsole
             }
 
             Console.ReadLine();
-
         }
         public static List<CartData> createList()
         {
@@ -72,7 +71,8 @@ namespace TestingConsole
             List<CartData> newList = new List<CartData>();
 
             var result = oldList.GroupBy(x => x.itemCode,
-             (key, values) => new {
+             (key, values) => new
+             {
                  itemCode = key,
                  quantity = values.Sum(x => Int32.Parse(x.quantity)),
 
@@ -85,7 +85,7 @@ namespace TestingConsole
                 c = new CartData();
                 c.itemCode = item.itemCode; c.quantity = item.quantity.ToString();
                 newList.Add(c);
-                Console.WriteLine(c.itemCode+","+c.quantity);
+                Console.WriteLine(c.itemCode + "," + c.quantity);
             }
 
             return newList;

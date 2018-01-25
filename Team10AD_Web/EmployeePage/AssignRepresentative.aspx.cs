@@ -17,7 +17,7 @@ namespace Team10AD_Web.EmployeePage
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session["HODID"] = 104;
+            //Session["HODID"] = 104;
             Session["departmentid"] = "ARTS";
             Session["employeeid"] = 78;
             departmentCode = (string)Session["departmentid"];
@@ -40,6 +40,7 @@ namespace Team10AD_Web.EmployeePage
                         buttonAssign.BackColor = System.Drawing.Color.Red;
                         dgvAssignRep.Rows[rowIndex].BackColor = System.Drawing.Color.LightBlue;
                         lblRepName.Text = repName;
+                        Session["CurrentRep"] = repName;
                         lblRepSubtitle1.Text = " is the current Department Representative.";
                     }
                 }
@@ -63,9 +64,11 @@ namespace Team10AD_Web.EmployeePage
                 {
                     try
                     {
-                        BusinessLogic_Sam.assignNewRepresentative(newRepName, departmentCode);
+                        string oldRepName = (string)Session["CurrentRep"];
                         lblRepName.Text = newRepName;
                         lblRepSubtitle1.Text = " is the current Department Representative.";
+                        BusinessLogic_Sam.assignNewRepresentative(oldRepName, newRepName, departmentCode);
+                        Session["CurrentRep"] = newRepName;
                         Response.Redirect("AssignRepresentative.aspx");
                     }
                     catch (Exception exp)

@@ -25,6 +25,8 @@ namespace Team10AD_Web.App_Code.Model
         [StringLength(50)]
         public string Remarks { get; set; }
 
+        public int? QuantityAfter { get; set; }
+
         public virtual Catalogue Catalogue { get; set; }
 
         public virtual Disbursement Disbursement { get; set; }

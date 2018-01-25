@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Routing;
 using System.Web.Security;
 using Team10AD_Web;
+using Team10AD_Web.App_Code.Model;
 
 namespace Team10AD_Web
 {
@@ -37,15 +38,18 @@ namespace Team10AD_Web
             //Stores employee id to pass to detail page
             Session["employeeid"] = 78;
             //Stores clerk id to pass to detail page
-            Session["clerkid"] = 10001;
+            Session["clerkid"] = 10004;
             //Stores department id to pass to detail page
             Session["departmentcode"] = "ARTS";
             //Stores requisition id to pass to requisition detail page
             Session["requisitiondetail"] = "";
             //Stores HOD ID
-            Session["HODID"] = 0;
+            Session["HODID"] = 104;
             //Stores Approver ID
             Session["ApproverID"] = 0;
+           //Store shortfall items
+           Session["Shortfall"]= new List<Catalogue>();
+            Session["Catalogue"] = "";
         }
     }
 }

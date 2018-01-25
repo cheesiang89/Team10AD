@@ -91,16 +91,24 @@ namespace Team10AD_Web.Clerk
                 }
             }
 
+            //Check for adjustment voucher needs
+            int adjustmentVoucherId = RayBizLogic.GenerateAdjustmentVoucherDetails(suggested, userinput, clerkid);
+
             //Update retrieval and catalogue
             //Generate disbursement lists
             //Update requisition qty
-            RayBizLogic.UpdateRetrievalDetailsEager(retrievalid, userinput, clerkid);
-
             //Update requisition status
+            RayBizLogic.UpdateRetrievalDetailsFull(retrievalid, userinput, clerkid);
 
-            //Check for adjustment voucher needs
-
-            Response.Redirect("DisbursementList.aspx");
+            if (adjustmentVoucherId > 0)
+            {
+                Session["AdjustVoucherId"] = adjustmentVoucherId;
+                Response.Redirect("CreateAdjustmentVoucher.aspx");
+            }
+            else
+            {
+                Response.Redirect("DisbursementList.aspx");
+            }
         }
     }
 }

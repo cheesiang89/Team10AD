@@ -22,8 +22,6 @@ namespace Team10AD_Web.App_Code.Model
 
         public int? RetrievedQuantity { get; set; }
 
-        public int? QuantityAfter { get; set; }
-
         public virtual Catalogue Catalogue { get; set; }
 
         public virtual Retrieval Retrieval { get; set; }

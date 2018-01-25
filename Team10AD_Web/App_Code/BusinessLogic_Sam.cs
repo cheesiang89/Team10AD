@@ -8,13 +8,12 @@ using System.Web.Services;
 namespace Team10AD_Web.App_Code
 {
 
-
     public class BusinessLogic_Sam
     {
 
         public static int getApproverIDfromName(string approverName)
         {
-            using (App_Code.Model.Team10ADModel entities = new App_Code.Model.Team10ADModel())
+            using (Team10ADModel entities = new Team10ADModel())
             {
                 App_Code.Model.Employee emp = entities.Employees.Where(x => x.Name == approverName).First();
                 int approverID = emp.EmployeeID;
@@ -22,7 +21,7 @@ namespace Team10AD_Web.App_Code
             }
         }
 
-     
+
         //Return EmployeeList excluding the HOD
         public static List<Employee> EmployeeList(string departmentCode, int hodID)
         {
@@ -64,7 +63,7 @@ namespace Team10AD_Web.App_Code
             using (App_Code.Model.Team10ADModel entities = new App_Code.Model.Team10ADModel())
             {
                 int selectedApproverID = ((from x in entities.Employees where x.Name == selectedApproverName select new { x.EmployeeID }).First()).EmployeeID;
-                int pendingReqQty = (from x in entities.Requisitions where x.RequestorID == selectedApproverID && x.Status=="Pending" select x).Count();
+                int pendingReqQty = (from x in entities.Requisitions where x.RequestorID == selectedApproverID && x.Status == "Pending" select x).Count();
                 return pendingReqQty;
             }
         }
@@ -76,100 +75,138 @@ namespace Team10AD_Web.App_Code
 
             using (App_Code.Model.Team10ADModel entities = new App_Code.Model.Team10ADModel())
             {
-               
+
                 Department deptApprover = entities.Departments.Where(p => p.DepartmentCode == departmentCode).First<Department>();
                 deptApprover.ApproverID = ApproverID;
                 deptApprover.ApprovingPeriodStart = startDate;
                 deptApprover.ApprovingPeriodEnd = endDate;
                 entities.SaveChanges();
+                //Send email
+                string selectedApproverName = entities.Employees.Where(x => x.EmployeeID == ApproverID).Select(x => x.Name).First();
+                LogicUtility.Instance.SendApproverEmail(selectedApproverName, startDate.ToShortTimeString(), endDate.ToShortTimeString());
                 status = "success";
             }
             return status;
         }
 
 
-        public static void assignNewRepresentative(string newRepName, string departmentCode)
+        public static void assignNewRepresentative(string oldRepName, string newRepName, string departmentCode)
         {
-            using(App_Code.Model.Team10ADModel entities = new App_Code.Model.Team10ADModel())
+            using (App_Code.Model.Team10ADModel entities = new App_Code.Model.Team10ADModel())
             {
                 int newRepID = ((from x in entities.Employees where x.Name == newRepName select new { x.EmployeeID }).First()).EmployeeID;
                 Department deptRepresentative = entities.Departments.Where(p => p.DepartmentCode == departmentCode).First<Department>();
                 deptRepresentative.RepresentativeID = newRepID;
+                LogicUtility.Instance.SendRepEmail(newRepName, "ASSIGN");
+                LogicUtility.Instance.SendRepEmail(oldRepName, "UNASSIGN");
                 entities.SaveChanges();
 
             }
         }
 
-        public static List<Requisition> getDepartmentPendingRequisition(string departmentCode)
-        {
-            //get all requisitions status with "Pending"
-            //get all requestorID where they are from the particular department
-            //loop through the pending requisitions where the requestors are from that particular department
-            List<int> deptEmpIdList = new List<int>();
-            List<Requisition> allPendingRequisitionList = new List<Requisition>();
-            List<Requisition> deptPendingRequisitionList = new List<Requisition>();
-            Dictionary<int, string> deptEmployeeList = new Dictionary<int, string>();
 
+        public static object getDepartmentPendingRequisition(string departmentCode)
+        {
+            object empPendingReq = new object();
             using (App_Code.Model.Team10ADModel entities = new App_Code.Model.Team10ADModel())
             {
-              
-                //Get the list of requisitions with status = "Pending"
-                var qry = entities.Requisitions.Where(x => x.Status == "Pending");
-                allPendingRequisitionList = qry.ToList();
 
-                //Get the list of employees in that particular department
-                List<Employee> deptEmpList = entities.Employees.Where(x => x.DepartmentCode == departmentCode).ToList();
-                foreach (Employee emp in deptEmpList)
+                var qry1 = from x in entities.Requisitions
+                           from y in entities.Employees
+                           where x.RequestorID == y.EmployeeID && y.DepartmentCode == departmentCode && x.Status == "Pending"
+                           select new { x.RequestorID, x.RequisitionDate, y.Name,x.RequisitionID };
+
+                empPendingReq = qry1.ToList();
+                return empPendingReq;
+            }
+        }
+
+        public static object getDepartmentRequisitionList(string departmentCode)
+        {
+            object empDptReqList = new object();
+            using (App_Code.Model.Team10ADModel entities = new App_Code.Model.Team10ADModel())
+            {
+                var qry2 = from x in entities.Requisitions
+                           from y in entities.Employees
+                           where x.RequestorID == y.EmployeeID && y.DepartmentCode == departmentCode
+                           select new { x.RequestorID, x.RequisitionDate, y.Name, x.RequisitionID, x.Status };
+                empDptReqList = qry2.ToList();
+                return empDptReqList;
+            }
+        }
+
+        public static void approveRequisition(int requisitionId,string remarks, string approverID)
+        {
+            //DateTime approvalDate = new DateTime();
+            using(Team10ADModel entities = new Team10ADModel())
+            {
+                Requisition req = entities.Requisitions.Where(p => p.RequisitionID == requisitionId).SingleOrDefault();
+                req.Status = "Approved";
+                req.Remarks = remarks;
+                req.ApprovalDate = DateTime.Now;
+                req.ApproverID = Convert.ToInt32(approverID);
+                //RequisitionDetail reqDetails = entities.RequisitionDetails.Where()
+                entities.SaveChanges();
+                //Send email
+
+                LogicUtility.Instance.SendRequisitionResponseEmail(requisitionId, remarks, "APPROVED");
+            }
+
+        }
+
+        public static void updateItemStockLevel(Dictionary<string, int> reqListItems)
+        {
+
+            using(Team10ADModel entities = new Team10ADModel())
+            {
+                Catalogue catReqItem = new Catalogue();
+                string key;
+                int keyValue; int balance; int pendDelQty;
+                int pendReqQty; int reorderLvl;
+                int stockCheckQty;
+                //for(int index = 0; index < reqListItems.Count; index++)
+                //{
+                //    key= reqListItems[  
+                //    catReqItem = entities.Catalogues.Where(p => p.ItemCode == reqListItems[index].Key.ToString()).FirstOrDefault();
+
+                //}
+
+                foreach (KeyValuePair<string, int> catItem in reqListItems)
                 {
-                    deptEmpIdList.Add(emp.EmployeeID);
-                    deptEmployeeList.Add(emp.EmployeeID, emp.Name);
-
-                }
-
-                //Get the list of Pending requisitions from that particular department
-                foreach (Requisition req in allPendingRequisitionList)
-                {
-                    foreach (int reqId in deptEmpIdList)
+                    key = catItem.Key;
+                    keyValue = catItem.Value;
+                    catReqItem = entities.Catalogues.Where(p => p.ItemCode == key).FirstOrDefault();
+                    catReqItem.PendingRequestQuantity = keyValue;
+                    balance = (int)catReqItem.BalanceQuantity;
+                    pendDelQty = (int)catReqItem.PendingDeliveryQuantity;
+                    pendReqQty = keyValue;
+                    reorderLvl = (int)catReqItem.ReorderLevel;
+                    stockCheckQty = balance + pendDelQty - pendReqQty;
+                    //if the reorder level more than (balance+pending delivery quantity - pending request delivery), shortfall status = false
+                    if (stockCheckQty < reorderLvl)
                     {
-                        if (req.RequestorID.Equals(reqId))
-                        {
-                            deptPendingRequisitionList.Add(req);
-                        }
+                        catReqItem.ShortfallStatus = "True";
                     }
                 }
-                return deptPendingRequisitionList;
+
+                entities.SaveChanges();
             }
         }
 
 
-        //public static List<Requisition> getEmployeeNamefromRequestorID(string departmentCode)
-        //{
-        //    List<Requisition> empPendingReq = new List<Requisition>();
-        //    using (App_Code.Model.Team10ADModel entities = new App_Code.Model.Team10ADModel())
-        //    {
+        public static void rejectRequisition(int requisitionId,string remarks)
+        {
+                using (Team10ADModel entities = new Team10ADModel())
+                {
+                    Requisition req = entities.Requisitions.Where(p => p.RequisitionID == requisitionId).SingleOrDefault();
+                    req.Status = "Rejected";
+                    req.Remarks = remarks;
+                    entities.SaveChanges();
+                }
+            //Send email
 
-        //        //var qry1 = from x in entities.Requisitions
-        //        //          from y in entities.Employees
-        //        //          where x.RequestorID == y.EmployeeID && y.DepartmentCode == departmentCode && x.Status == "Pending"
-        //        //          select new { x.RequestorID, x.RequisitionDate,y.Name };
-
-        //        var qry = (from x in entities.Requisitions
-        //                  join y in entities.Employees on x.RequestorID equals y.EmployeeID
-        //                  where y.DepartmentCode == departmentCode && x.Status =="Pending"
-        //                  select x).ToList();
-
-        //        empPendingReq = qry.ToList() ;
-        //        return empPendingReq;
-
-
-        //        //var projects = (from p in DBContext.projects
-        //        //                join o in DBContext.organizations on p.organization_id equals o.organization_id
-        //        //                join m in DBContext.members on o.organization_id equals m.organization_id
-        //        //                where m.member_id == performed_by_id
-        //        //                select p).ToList();
-        //        //return projects;
-        //    }
-        //}
+            LogicUtility.Instance.SendRequisitionResponseEmail(requisitionId, remarks, "REJECTED");
+        }
 
     }
 }
