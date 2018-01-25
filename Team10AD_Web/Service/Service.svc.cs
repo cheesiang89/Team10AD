@@ -29,7 +29,7 @@ namespace Team10AD_Web.Service
         public WCFCatalogue GetCatalogue(string itemCode)
         {
             Catalogue c = Data.GetCatalogue(itemCode);
-            return WCFCatalogue.Make(c.ItemCode, c.Description, c.Location, c.BalanceQuantity);
+            return WCFCatalogue.Make(c.ItemCode, c.Description, c.Location, c.BalanceQuantity, c.UnitOfMeasure);
         }
 
         public WCFCatalogue[] ListCatalogues()
@@ -37,7 +37,7 @@ namespace Team10AD_Web.Service
             List<WCFCatalogue> l = new List<WCFCatalogue>();
             foreach (Catalogue c in Data.ListCatalogues())
             {
-                WCFCatalogue w = WCFCatalogue.Make(c.ItemCode, c.Description, c.Location, c.BalanceQuantity);
+                WCFCatalogue w = WCFCatalogue.Make(c.ItemCode, c.Description, c.Location, c.BalanceQuantity, c.UnitOfMeasure);
                 l.Add(w);
             }
             return l.ToArray<WCFCatalogue>();
@@ -51,18 +51,18 @@ namespace Team10AD_Web.Service
 
             foreach (DisbursementDetail c in Data.GetDisbursementDetails(Convert.ToInt32(disbursementID)))
             {
-                WCFDisbursementDetail w = WCFDisbursementDetail.Make(disbursementID, c.Remarks, c.ItemCode, c.QuantityRequested.ToString(), c.QuantityCollected.ToString(), c.Catalogue.Description);
+                WCFDisbursementDetail w = WCFDisbursementDetail.Make(disbursementID, c.Remarks, c.ItemCode, c.QuantityRequested.ToString(), c.QuantityCollected.ToString(), c.Catalogue.Description, c.Catalogue.UnitOfMeasure);
                 l.Add(w);
             }
 
             return l.ToArray<WCFDisbursementDetail>();
         }
 
-        public WCFDisbursement[] ListDisbursements()
+        public WCFDisbursement[] ListDisbursements(String status)
         {
             List<WCFDisbursement> l = new List<WCFDisbursement>();
 
-            foreach (Disbursement d in Data.ListDisbursements())
+            foreach (Disbursement d in Data.ListDisbursements(status))
             {
                 WCFDisbursement w = WCFDisbursement.Make(d.DisbursementID.ToString(), d.CollectionDate.HasValue ? d.CollectionDate.Value.ToString("dd-MMM-yyyy") : null, d.CollectionPoint.PointName, d.Department.DepartmentName, d.Status, d.StoreStaffID.ToString());
                 l.Add(w);
@@ -122,8 +122,8 @@ namespace Team10AD_Web.Service
                 l.Add(r);
             }
             return Data.UpdateRetrievalDetails(l);
-            //return Data.UpdateRetrievalDetails();
         }
+
 
 
         ///////////////Receive & ReceiveDetail 

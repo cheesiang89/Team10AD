@@ -94,11 +94,11 @@ namespace Team10AD_Web.App_Code
 
 
         /////////////Disbursement & DisbursementDetail
-        public static List<Disbursement> ListDisbursements()
+        public static List<Disbursement> ListDisbursements(string status)
         {
             Team10ADModel m = new Team10ADModel();
 
-            return m.Disbursements.ToList<Disbursement>();
+            return m.Disbursements.Where(p => p.Status == status).ToList<Disbursement>();
         }
 
         public static List<DisbursementDetail> GetDisbursementDetails(int disbursementID)
