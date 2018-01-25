@@ -16,6 +16,53 @@ namespace Team10AD_Web.Service
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     public class Service : IService
     {
+
+        /////////Voucher
+        public string CreateVoucher(WCFVoucherDetail[] input)
+        {
+            try
+            {
+                List<StockAdjustmentVoucherDetail> detailList = new List<StockAdjustmentVoucherDetail>();
+                foreach (WCFVoucherDetail WCFdetail in input)
+                {
+                    StockAdjustmentVoucherDetail detail = new StockAdjustmentVoucherDetail();
+                    detail.ItemCode = WCFdetail.ItemCode;
+                    detail.QuantityAdjusted = Convert.ToInt32(WCFdetail.QuantityAdjusted);
+                    detail.Reason = WCFdetail.Reason;
+                    detailList.Add(detail);
+                }
+                Data.InsertVoucher(detailList, input[0].StoreStaffID);
+                return "OK";
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+        }
+
+        /////////Voucher & UpdateDisbursement
+        public string UpdateDisbursement(WCFDisbursementDetail[] input)
+        {
+            try
+            {
+                List<DisbursementDetail> detailList = new List<DisbursementDetail>();
+                foreach (WCFDisbursementDetail WCFdetail in input)
+                {
+                    DisbursementDetail detail = new DisbursementDetail();
+                    detail.ItemCode = WCFdetail.ItemCode;
+                    detail.QuantityRequested = Convert.ToInt32(WCFdetail.QuantityRequested);
+                    detail.QuantityCollected = Convert.ToInt32(WCFdetail.QuantityCollected);
+                    detail.Remarks = WCFdetail.Remarks;
+                    detailList.Add(detail);
+                }
+                Data.UpdateDisbursement(detailList);
+                return "OK";
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+        }
         /////////Test
         public Test TestM()
         {

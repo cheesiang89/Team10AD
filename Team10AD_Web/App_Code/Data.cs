@@ -9,6 +9,50 @@ namespace Team10AD_Web.App_Code
 {
     public class Data
     {
+        //////Voucher
+
+        public static void InsertVoucher(List<StockAdjustmentVoucherDetail> detailList, int storeStaffID)
+        {
+            using (Team10ADModel m = new Team10ADModel())
+            {
+                StockAdjustmentVoucher voucher = new StockAdjustmentVoucher();
+                voucher.StoreStaffID = storeStaffID;
+                voucher.DateIssue = DateTime.Now;
+                voucher.Status = "Pending";
+                m.StockAdjustmentVouchers.Add(voucher);
+                m.SaveChanges();
+
+                foreach (StockAdjustmentVoucherDetail detail in detailList)
+                {
+
+                    detail.VoucherID = voucher.VoucherID;
+                    m.StockAdjustmentVoucherDetails.Add(detail);
+                    m.SaveChanges();
+                }
+
+
+            }
+        }
+
+        ////////UpdateDisbursement
+        public static void UpdateDisbursement(List<DisbursementDetail> input)
+        {
+            using (Team10ADModel m = new Team10ADModel())
+            {
+                Disbursement disbursement = new Disbursement();
+                disbursement.DisbursementID = Convert.ToInt32(input[0].DisbursementID);
+                m.Disbursements.Attach(disbursement);
+                m.Entry(disbursement).Property(x => x.Status).IsModified = true;
+                m.SaveChanges();
+
+                //foreach (StockAdjustmentVoucherDetail detail in detailList)
+                //{
+                //    detail.VoucherID = voucher.VoucherID;
+                //    m.StockAdjustmentVoucherDetails.Add(detail);
+                //    m.SaveChanges();
+                //}
+            }
+        }
         /////////////Catalogue
         public static List<Catalogue> ListCatalogues()
         {
