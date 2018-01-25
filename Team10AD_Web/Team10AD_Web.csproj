@@ -348,6 +348,7 @@
     <Content Include="Scripts\Template\modernizr-2.6.2.js" />
     <Content Include="Scripts\script.js" />
     <Content Include="Service\CartService.svc" />
+    <Content Include="Service\Service.svc" />
     <Content Include="TryMe.txt" />
     <Content Include="Old\ViewSwitcher.ascx" />
     <Content Include="Web.config">
@@ -372,6 +373,7 @@
     <Compile Include="App_Code\BusinessLogic_Sam.cs" />
     <Compile Include="App_Code\CartData.cs" />
     <Compile Include="App_Code\CS_BizLogic.cs" />
+    <Compile Include="App_Code\Data.cs" />
     <Compile Include="App_Code\DTO\POIntermediate.cs" />
     <Compile Include="App_Code\Model\Catalogue.cs" />
     <Compile Include="App_Code\Model\CollectionPoint.cs" />
@@ -486,6 +488,7 @@
     </Compile>
     <Compile Include="Clerk\GeneratePO.aspx.cs">
       <DependentUpon>GeneratePO.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Clerk\GeneratePO.aspx.designer.cs">
       <DependentUpon>GeneratePO.aspx</DependentUpon>
@@ -774,6 +777,10 @@
     </Compile>
     <Compile Include="Service\CartService.svc.cs">
       <DependentUpon>CartService.svc</DependentUpon>
+    </Compile>
+    <Compile Include="Service\IService.cs" />
+    <Compile Include="Service\Service.svc.cs">
+      <DependentUpon>Service.svc</DependentUpon>
     </Compile>
     <Compile Include="Shared.Master.cs">
       <DependentUpon>Shared.Master</DependentUpon>
