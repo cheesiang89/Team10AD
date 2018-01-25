@@ -1,0 +1,225 @@
+﻿<%--Old code--%>
+
+<%--
+        <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="true">
+    </asp:ScriptManager>
+    <asp:Panel ID="detailPanel" runat="server" BackColor="White"
+            Style="display: none; text-align: center; vertical-align: middle;"
+            Width="300" Height="150">
+
+            <table width="100%" cellspacing="4">
+                <tr style="background-color: #33CC66">
+                    <td colspan="2" align="center">Store Details</td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        <asp:Button ID="btnOK" CommandName="OK" runat="server" Text="OK" OnClick="btnOK_Click" />
+                    </td>
+                    <td>
+                        <asp:Button ID="btnCancel" runat="server" Text="Cancel" />
+                    </td>
+                </tr>
+
+            </table>
+        </asp:Panel>
+      <asp:Button ID="modelPopup" runat="server" Style="display: none" />
+        <asp:ModalPopupExtender ID="ModalPopupExtender1" runat="server" TargetControlID="modelPopup" PopupControlID="detailPanel"
+            PopupDragHandleControlID="detailPanel" BackgroundCssClass="tableBackground" CancelControlID="btnCancel" Y="10" X="10">
+        </asp:ModalPopupExtender>
+--%>
+
+<
+
+
+
+
+
+
+	    <table >
+                        <tr>
+                            <td>
+                                <asp:Label runat="server" Text="Category:" /></td>
+                            <td>
+                                <asp:Label runat="server" Text="" ID="lblCategory" /></td>
+                        </tr>
+                        <tr>
+                            <td >
+                                <asp:Label runat="server" Text="Description:" /></td>
+                            <td>
+                                 <asp:Label runat="server" Text="" ID="lblDescription" /></td>
+                        </tr>
+                        <tr>
+                            <td >
+                                <asp:Label runat="server" Text="Unit of Measure:" /></td>
+                            <td >
+                                <asp:Label runat="server" Text="" ID="lblUOM" /></td>
+                        </tr>
+                            <tr>
+                            <td>
+                                <asp:Label runat="server" Text="Quantity:" /></td>
+                            <td>
+                                                               
+                                <asp:TextBox runat="server" ID="txtQuantity" CausesValidation="False"></asp:TextBox></td>
+                          </tr>
+                        <tr>
+                           <td>
+                               <%-- <asp:RegularExpressionValidator ID="validNumOnly" runat="server" 
+                                    ErrorMessage="Numbers only" ControlToValidate="txtQuantity"  
+                                    ValidationExpression="^\d+$" ValidationGroup="vNumOnly"></asp:RegularExpressionValidator>--%>
+                                <%--<asp:RequiredFieldValidator ID="validRequired" runat="server" 
+                                    ErrorMessage="Required" ControlToValidate="txtQuantity"></asp:RequiredFieldValidator>
+                                <asp:RangeValidator ID="validRange" runat="server" 
+                                    ErrorMessage="Must be positive value" ControlToValidate="txtQuantity" MinimumValue="0" 
+                                    SetFocusOnError="False" MaximumValue="100"></asp:RangeValidator>--%>
+                               <asp:ValidationSummary runat="server" ID="vSummary" ValidationGroup="vNumOnly" DisplayMode="BulletList" /></td> 
+                        </tr>
+                        <tr>
+                            <td>
+                            <asp:Button ID="btnConfirm" CommandName="Add" runat="server" Text="Add to Cart" OnClick="btnConfirm_Click" 
+                                OnClientClick="return false"/>
+                                </td>
+                        </tr>
+
+                    </table>
+
+<%--    <ASPP:PopupPanel HeaderText="" ID="popup" runat="server" >
+            <PopupWindow runat="server" >
+                <ASPP:PopupWindow ID="PopupWindow1" runat="server">
+                  <div align="center" style="width: 500px; height:150px">
+                       <asp:Label runat="server" Text="Category:" />
+                                                        <asp:Label runat="server" Text="" ID="lblCategory" />
+                       <br />
+                                <asp:Label runat="server" Text="Description:" />
+                                                             <asp:Label runat="server" Text="" ID="lblDescription" />
+                        <br />
+                                <asp:Label runat="server" Text="Unit of Measure:" />
+                           
+                                <asp:Label runat="server" Text="" ID="lblUOM" />
+                        <br />
+                        
+                                <asp:Label runat="server" Text="Quantity:" />
+                                <asp:TextBox runat="server" ID="txtQuantity"></asp:TextBox>
+                          <br />
+                      
+                            <asp:Button ID="btnConfirm" runat="server" Text="Add to Cart" OnClick="btnConfirm_Click" CausesValidation="False" />
+                       <asp:Button ID="btnCancel" runat="server" Text="Cancel" OnClick="btnCancel_Click" CausesValidation="False" />
+                                      </div>
+                         <asp:RegularExpressionValidator ID="validNumOnly" runat="server" 
+                                    ErrorMessage="Numbers only" ControlToValidate="txtQuantity"  
+                                    ValidationExpression="^\d+$" ValidationGroup="vNumOnly"></asp:RegularExpressionValidator>
+                                <asp:RequiredFieldValidator ID="validRequired" runat="server" 
+                                    ErrorMessage="Required" ControlToValidate="txtQuantity"></asp:RequiredFieldValidator>
+                                <asp:RangeValidator ID="validRange" runat="server" 
+                                    ErrorMessage="Must be positive value" ControlToValidate="txtQuantity" MinimumValue="0" 
+                                    SetFocusOnError="False" MaximumValue="100"></asp:RangeValidator>
+                               <asp:ValidationSummary runat="server" ID="vSummary" ValidationGroup="vNumOnly" DisplayMode="BulletList" />
+                </ASPP:PopupWindow>
+            </PopupWindow>
+        </ASPP:PopupPanel>
+    --%>
+
+	   protected void populatePopup(string itemCode)
+        {
+            lblCategory.Text = m.Catalogues.Where(x => x.ItemCode == itemCode).Select(x => x.Category).First().ToString();
+            lblDescription.Text = m.Catalogues.Where(x => x.ItemCode == itemCode).Select(x => x.Description).First().ToString();
+            lblUOM.Text = m.Catalogues.Where(x => x.ItemCode == itemCode).Select(x => x.UnitOfMeasure).First().ToString();
+        }
+
+		<%@ Register Assembly="ASP.Web.UI.PopupControl" Namespace="ASP.Web.UI.PopupControl" TagPrefix="ASPP" %>
+
+		 <asp:LinkButton ID="btnAdd" runat="server" Text="Add" CommandName="Select" CommandArgument="<%# Container.DataItemIndex %>"/>
+
+		        protected void dgvCatalogue_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            //if (e.CommandName == "Select")
+            //{
+                
+            //    //Pass in Item Code to Pop up window
+            //    // Convert the row index stored in the CommandArgument property to an Integer.
+            //    int index = Convert.ToInt32(e.CommandArgument);
+            //    //Reference the GridView Row.
+            //    GridViewRow row = dgvCatalogue.Rows[index];
+            //    string itemCode = row.Cells[0].Text.ToString();
+            //    // lblTest.Text = itemCode;
+            //    //populatePopup(itemCode);
+            //  //  popup.ShowPopupWindow();
+            //}
+
+         }
+
+		 
+        protected void dgvCatalogue_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                //LinkButton btnDetails = new LinkButton();
+                //btnDetails = (e.Row.FindControl("btnDetails") as LinkButton);
+                //btnDetails.Attributes.Add("onClick", "jQuery('#dialog').dialog('open'); return false;");
+
+            }
+        }
+
+		      protected void btnDetails_Click(object sender, EventArgs e)
+        {
+            //Pass in Item Code to Pop up window
+               //LinkButton btnDetails = sender as LinkButton;
+            //GridViewRow gRow = (GridViewRow)btnDetails.NamingContainer;
+            //this.ModalPopupExtender1.Show();
+
+            //ScriptManager.RegisterStartupScript(Page, typeof(Page), "OpenWindow", "window.open('Test.aspx');", true);
+        }
+
+		 <div align="center" style="width: 500px; height: 300px">
+                <asp:Label ID="lblSubtitle1" runat="server" Font-Bold="True" Font-Size="Medium">Approval authority is to be delegated to </asp:Label>
+                <asp:Label ID="lblApprover" runat="server" Font-Bold="True" Font-Size="Medium" ForeColor="Red"></asp:Label>
+                <asp:Label ID="lblSubtitle2" runat="server" Text=" from:" Font-Bold="True" Font-Size="Medium"></asp:Label>
+                <br />
+                <br />
+                <asp:Label ID="lblStartDate" runat="server" Font-Bold="True">Start Date:</asp:Label>
+                <asp:TextBox ID="txtStartDate" runat="server" TextMode="Date"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="validRequiredStartDate" runat="server" ErrorMessage="This field must be selected." ControlToValidate="txtStartDate" ></asp:RequiredFieldValidator>
+                <br />
+                <br />
+                <asp:Label ID="lblEndDate" runat="server" Font-Bold="True">End Date:</asp:Label>
+                <asp:TextBox ID="txtEndDate" runat="server" TextMode="Date"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="validRequiredEndDate" runat="server" ErrorMessage="This field must be selected" ControlToValidate="txtEndDate" ></asp:RequiredFieldValidator>
+                <br />
+                <br />
+                <br />
+                <br />
+                <asp:Button ID="btnConfirm" runat="server" Text="Confirm" Font-Bold="True" ForeColor="White" BackColor="#009933" OnClick="btnConfirm_Click" />&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<asp:Button ID="btnCancel" runat="server" Text="Cancel" BackColor="Red" ForeColor="White" Font-Bold="True" OnClick="btnCancel_Click" CausesValidation="False" />
+            </div>
+
+
+			Cart JSON String is: ["{\"itemCode\":\"C001\",\"description\":\"Clips Double 1\\\"\",\"quantity\":\"1\",\"uom\":\"Dozen\"}","{\"itemCode\":\"C002\",\"description\":\"Clips Double 2\\\"\",\"quantity\":\"3\",\"uom\":\"Dozen\"}","{\"itemCode\":\"C001\",\"description\":\"Clips Double 1\\\"\",\"quantity\":\"1\",\"uom\":\"Dozen\"}"]
+			[{"itemCode":"C001","description":"Clips Double 1\"","quantity":"1","uom":"Dozen","reqid":"78"},{"itemCode":"C002","description":"Clips Double 2\"","quantity":"3","uom":"Dozen","reqid":"78"},{"itemCode":"C001","description":"Clips Double 1\"","quantity":"1","uom":"Dozen","reqid":"78"}]
+			Session JSON String is: "[{\"itemCode\":\"C001\",\"description\":\"Clips Double 1\\\"\",\"quantity\":\"1\",\"uom\":\"Dozen\",\"reqid\":\"78\"},{\"itemCode\":\"C002\",\"description\":\"Clips Double 2\\\"\",\"quantity\":\"2\",\"uom\":\"Dozen\",\"reqid\":\"78\"}]"
+
+			//OLD
+        //public static string SendEmailClient(string toEmailAddress, string subject, string fromEmailAddress, string body)
+        //{
+        //    //Function will open email client with fields filled up
+        //    // "fromEmailAddress" is not used because assumption is sender will be sending with corporate email client tied to own a/c
+        //    // navigateurl = "mailto:user@example.com?subject=MessageTitle&body=MessageContent";
+        //    // window.location.href = navigateurl;
+           
+        //    //Usecases to send email:
+        //    //1. Assign rep (HOD-> Employee)
+        //    //2. Undelegate approval (HOD-> Employee)
+        //    //3. Delegate approval (HOD-> Employee)
+        //    //4. Submit requisition (Employee -> Approver)
+        //    //5. Approve/reject requisition (Approver -> Employee)
+        //    //6. Generate disbursement list (Clerk-> Rep)
+
+        //    //Construct NavigateUrl string
+        //    StringBuilder sb = new StringBuilder();
+        //    sb.Append("mailto:");
+        //    sb.Append(toEmailAddress);
+        //    sb.Append("?subject=");
+        //    sb.Append(subject);
+        //    sb.Append("&body=");
+        //    sb.Append(body);
+
+        //    string navigateurl = sb.ToString();
+        //    return navigateurl;
+        //}

@@ -22,6 +22,9 @@ namespace Team10AD_Web.App_Code.Model
 
         public double? UnitPrice { get; set; }
 
+        [StringLength(50)]
+        public string Status { get; set; }
+
         public virtual Catalogue Catalogue { get; set; }
 
         public virtual PurchaseOrder PurchaseOrder { get; set; }
