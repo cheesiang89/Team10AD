@@ -13,6 +13,22 @@ namespace Team10AD_Web.Service
     [ServiceContract]
     public interface IService
     {
+
+            /////////////Voucher
+    [OperationContract]
+    [WebInvoke(UriTemplate = "/CreateVoucher", Method = "POST",
+    RequestFormat = WebMessageFormat.Json,
+    ResponseFormat = WebMessageFormat.Json)]
+    string CreateVoucher(WCFVoucherDetail[] input);
+
+
+    ////////////Voucher & UpdateDisbursement
+    [OperationContract]
+    [WebInvoke(UriTemplate = "/UpdateDisbursement", Method = "POST",
+    RequestFormat = WebMessageFormat.Json,
+    ResponseFormat = WebMessageFormat.Json)]
+    string UpdateDisbursement(WCFDisbursementDetail[] input);
+
         /////////////Catalogue
         [OperationContract]
         [WebGet(UriTemplate = "/Catalogue/{itemCode}", ResponseFormat = WebMessageFormat.Json)]
@@ -22,14 +38,14 @@ namespace Team10AD_Web.Service
         [WebGet(UriTemplate = "/Catalogues", ResponseFormat = WebMessageFormat.Json)]
         WCFCatalogue[] ListCatalogues();
 
-        /////////////Disbursement & DisbursementDetail
-        //[OperationContract]
-        //[WebGet(UriTemplate = "/Disbursement/{disbursementID}", ResponseFormat = WebMessageFormat.Json)]
-        //WCFDisbursementDetail[] ListDisbursementDetail(string disbursementID);
+        ///////////Disbursement & DisbursementDetail
+        [OperationContract]
+        [WebGet(UriTemplate = "/Disbursement/{disbursementID}", ResponseFormat = WebMessageFormat.Json)]
+        WCFDisbursementDetail[] ListDisbursementDetail(string disbursementID);
 
-        //[OperationContract]
-        //[WebGet(UriTemplate = "/Disbursements", ResponseFormat = WebMessageFormat.Json)]
-        //WCFDisbursement[] ListDisbursements();
+        [OperationContract]
+        [WebGet(UriTemplate = "/Disbursements/{status}", ResponseFormat = WebMessageFormat.Json)]
+        WCFDisbursement[] ListDisbursements(string status);
 
         /////////////Retrieval & RetrievalDetail
         [OperationContract]
@@ -128,6 +144,7 @@ namespace Team10AD_Web.Service
             ResponseFormat = WebMessageFormat.Json)]
         void SavingGoodsReceivedWCF(PostWCFReceivingGoodData[] goodwcflist);
 
+
         ///////////////////////Requisition
         [OperationContract]
         [WebGet(UriTemplate = "/PendingRequisitionList", ResponseFormat = WebMessageFormat.Json)]
@@ -151,14 +168,83 @@ namespace Team10AD_Web.Service
         [WebGet(UriTemplate = "/ListDisbursementDetail/{disbursementID}", ResponseFormat = WebMessageFormat.Json)]
         WCFDisbursementDetail[] ListDisbursementDetail(string disbursementID);
 
-        [OperationContract]
-        [WebGet(UriTemplate = "/ListDisbursement", ResponseFormat = WebMessageFormat.Json)]
-        WCFDisbursement[] ListDisbursements();
+        //[OperationContract]
+        //[WebGet(UriTemplate = "/ListDisbursementDetail/{disbursementID}", ResponseFormat = WebMessageFormat.Json)]
+        //WCFDisbursementDetail[] ListDisbursementDetail(string disbursementID);
+
+
+        //[OperationContract]
+        //[WebGet(UriTemplate = "/ListDisbursement", ResponseFormat = WebMessageFormat.Json)]
+        //WCFDisbursement[] ListDisbursements();
 
         /////////////Test
         [OperationContract]
         [WebGet(UriTemplate = "/Test", ResponseFormat = WebMessageFormat.Json)]
         Test TestM();
+    }
+    [DataContract]
+    public class WCFVoucherDetail
+    {
+        string itemCode;
+        string quantityAdjusted;
+        string reason;
+        int storeStaffID;
+
+        public static WCFVoucherDetail Make(string itemCode, string quantityAdjusted, string reason, int storeStaffID)
+        {
+            WCFVoucherDetail t = new WCFVoucherDetail();
+            t.itemCode = itemCode;
+            t.quantityAdjusted = quantityAdjusted;
+            t.reason = reason;
+            t.storeStaffID = storeStaffID;
+            return t;
+        }
+
+        [DataMember]
+        public string ItemCode
+        {
+            get { return itemCode; }
+            set { itemCode = value; }
+        }
+        [DataMember]
+        public string QuantityAdjusted
+        {
+            get
+            {
+                return quantityAdjusted;
+            }
+
+            set
+            {
+                quantityAdjusted = value;
+            }
+        }
+        [DataMember]
+        public string Reason
+        {
+            get
+            {
+                return reason;
+            }
+
+            set
+            {
+                reason = value;
+            }
+        }
+        [DataMember]
+        public int StoreStaffID
+        {
+            get
+            {
+                return storeStaffID;
+            }
+
+            set
+            {
+                storeStaffID = value;
+            }
+        }
     }
 
     [DataContract]
@@ -270,8 +356,10 @@ namespace Team10AD_Web.Service
         string quantityRequested;
         string quantityCollected;
         string description;//catalogue
+        string unitOfMeature;
+        string storeStaffID;
 
-        public static WCFDisbursementDetail Make(string disbursementID, string remarks, string itemCode, string quantityRequested, string quantityCollected, string description)
+        public static WCFDisbursementDetail Make(string disbursementID, string remarks, string itemCode, string quantityRequested, string quantityCollected, string description, string unitOfMeature)
         {
             WCFDisbursementDetail c = new WCFDisbursementDetail();
             c.DisbursementID = disbursementID;
@@ -280,6 +368,7 @@ namespace Team10AD_Web.Service
             c.QuantityRequested = quantityRequested;
             c.QuantityCollected = quantityCollected;
             c.Description = description;
+            c.unitOfMeature = unitOfMeature;
             return c;
         }
 
@@ -331,6 +420,33 @@ namespace Team10AD_Web.Service
 
             set { description = value; }
         }
+
+        [DataMember]
+        public string UnitOfMeature
+        {
+            get
+            {
+                return unitOfMeature;
+            }
+
+            set
+            {
+                unitOfMeature = value;
+            }
+        }
+        [DataMember]
+        public string StoreStaffID
+        {
+            get
+            {
+                return storeStaffID;
+            }
+
+            set
+            {
+                storeStaffID = value;
+            }
+        }
     }
 
 
@@ -342,14 +458,16 @@ namespace Team10AD_Web.Service
         string description;
         string location;
         int? balanceQuantity;
+        string unitOfMeature;
 
-        public static WCFCatalogue Make(string itemCode, string description, string location, int? balanceQuantity)
+        public static WCFCatalogue Make(string itemCode, string description, string location, int? balanceQuantity, string unitOfMeature)
         {
             WCFCatalogue c = new WCFCatalogue();
             c.itemCode = itemCode;
             c.description = description;
             c.location = location;
             c.balanceQuantity = balanceQuantity;
+            c.UnitOfMeature = unitOfMeature;
             return c;
         }
 
@@ -379,6 +497,19 @@ namespace Team10AD_Web.Service
         {
             get { return balanceQuantity; }
             set { balanceQuantity = value; }
+        }
+
+        public string UnitOfMeature
+        {
+            get
+            {
+                return unitOfMeature;
+            }
+
+            set
+            {
+                unitOfMeature = value;
+            }
         }
     }
 
