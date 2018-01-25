@@ -63,19 +63,7 @@ namespace Team10AD_Web.App_Code
             }
 
         }
-        public static void CreatePO()
-        {
-            //Get all data
-
-            //1. Find unique suppliers
-            //2. Create no of PO
-            //3. Create PODetail objects -> Create PO
-
-            //Create PO records
-
-            //Update Catalogue "Shorfall" status
-
-        }
+       
         public static bool SavePOInfo(List<POIntermediate> poList, int storeStaffID)
         {
             bool result = false;
@@ -111,12 +99,12 @@ namespace Team10AD_Web.App_Code
                     //Get from POIntermediate: SupplierCode, PODetails: ItemCode,Quantity, UnitPrice, Status
                     foreach (var poIntermediate in poList)
                     {
-                        if (supName == poIntermediate.SupplierName && poIntermediate.Quantity!="0")
+                        if (supName == poIntermediate.SupplierName && poIntermediate.Quantity!=0)
                         {
                             pd= new PurchaseOrderDetail();
                             po.SupplierCode = poIntermediate.SupplierName;
                             pd.ItemCode = poIntermediate.ItemCode;
-                            pd.Quantity = Int32.Parse(poIntermediate.Quantity);
+                            pd.Quantity = poIntermediate.Quantity;
                             pd.UnitPrice = m.SupplierDetails
                                 .Where(x => x.ItemCode == pd.ItemCode)
                                 .Select(x => x.Price).First();
@@ -166,6 +154,16 @@ namespace Team10AD_Web.App_Code
                
             }
             return result;
+        }
+
+        public static int? GetMinOrderQty(string itemCode)
+        {
+            int? minOrderQty = 0;
+            using (Team10ADModel m = new Team10ADModel())
+            {
+               minOrderQty  = m.Catalogues.Where(x => x.ItemCode == itemCode).Select(x => x.MinimumOrderQuantity).First();
+            }
+            return minOrderQty;
         }
     }
 }
