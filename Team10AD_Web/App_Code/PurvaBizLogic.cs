@@ -102,7 +102,8 @@ namespace Team10AD_Web.App_Code
                 {
                     List<PurchaseOrderDetail> poDetailList = new List<PurchaseOrderDetail>();
                     PurchaseOrder po = new PurchaseOrder();
-                    PurchaseOrderDetail pd = new PurchaseOrderDetail();
+                    PurchaseOrderDetail pd;
+                    int? minOrderQty;
                     //CreationDate
                     po.CreationDate = DateTime.Now;
                     //StoreStaffID 
@@ -112,14 +113,23 @@ namespace Team10AD_Web.App_Code
                     {
                         if (supName == poIntermediate.SupplierName && poIntermediate.Quantity!="0")
                         {
+                            pd= new PurchaseOrderDetail();
                             po.SupplierCode = poIntermediate.SupplierName;
                             pd.ItemCode = poIntermediate.ItemCode;
                             pd.Quantity = Int32.Parse(poIntermediate.Quantity);
                             pd.UnitPrice = m.SupplierDetails
-                                .Where(x => x.ItemCode == pd.ItemCode && x.SupplierCode == po.SupplierCode)
+                                .Where(x => x.ItemCode == pd.ItemCode)
                                 .Select(x => x.Price).First();
+                            minOrderQty = m.Catalogues
+                                .Where(x => x.ItemCode == pd.ItemCode)
+                                .Select(x => x.MinimumOrderQuantity).First();
                             pd.Status = "Unreceived";
-                            poDetailList.Add(pd);
+                            //Only add if order qty >= Min order qty
+                            if (pd.Quantity>=minOrderQty)
+                            {
+                                poDetailList.Add(pd);
+                            }
+                           
                         }
 
                     }
@@ -133,15 +143,20 @@ namespace Team10AD_Web.App_Code
                         foreach (PurchaseOrderDetail item in poDetailList)
                         {
                             Catalogue c = m.Catalogues.Where(x => x.ItemCode == item.ItemCode).Select(x => x).First();
-                            //Set shortfall to false
-                            c.ShortfallStatus = "False";
-                        //Add pending delivery qty
+                           
+                            //Add pending delivery qty
                             int? qty = m.Catalogues.Where(x => x.ItemCode == item.ItemCode).Select(x => x.PendingDeliveryQuantity).First();
+                            int? balanceQty = m.Catalogues.Where(x => x.ItemCode == item.ItemCode).Select(x => x.BalanceQuantity).First();
+                            int? reorderQty = m.Catalogues.Where(x => x.ItemCode == item.ItemCode).Select(x => x.ReorderLevel).First();
                             qty += item.Quantity.GetValueOrDefault();
                             c.PendingDeliveryQuantity = qty;
-                     
+                            if (qty>=(reorderQty-balanceQty))
+                            {
+                                //Set shortfall to false
+                                c.ShortfallStatus = "False";
+                            }
                         }
-                       
+
                         m.SaveChanges();
                         result = true;
                     }
@@ -154,4 +169,3 @@ namespace Team10AD_Web.App_Code
         }
     }
 }
-    

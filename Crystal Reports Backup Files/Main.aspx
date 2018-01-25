@@ -12,11 +12,9 @@
                         <asp:BoundField DataField="ReorderLevel" HeaderText="Reorder Level" Visible="False" />
                         <asp:BoundField DataField="PendingRequestQuantity" HeaderText="Pending Request Qty" Visible="False" />
                         <asp:BoundField DataField="BalanceQuantity" HeaderText="Balance Quantity" Visible="False" />
-                        <asp:BoundField DataField="PendingDeliveryQuantity" HeaderText="Pending Delivery Quantity" Visible="False" />
                         <asp:TemplateField HeaderText="Suggested Quantity to Order">
                             <ItemTemplate>
-                                <asp:Label ID="SuggestedQty" runat="server" 
-                                    Text='<%# SuggestedOrderQty((int) Eval("ReorderLevel"),(int) Eval("PendingRequestQuantity"), (int) Eval("BalanceQuantity"),(int)Eval("PendingDeliveryQuantity") ) %>'></asp:Label>
+                                <asp:Label ID="SuggestedQty" runat="server" Text='<%# SuggestedOrderQty((int) Eval("ReorderLevel"),(int) Eval("PendingRequestQuantity"), (int) Eval("BalanceQuantity")) %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>

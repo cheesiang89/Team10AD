@@ -107,7 +107,7 @@ namespace Team10AD_Web.Clerk
             int storeStaffID = (int)Session["clerkid"];
             if (PurvaBizLogic.SavePOInfo(poList, storeStaffID))
             {
-                Response.Redirect("PurchaseOrderPage.aspx");
+                //Response.Redirect("PurchaseOrderPage.aspx");
             }
            
             
@@ -181,7 +181,7 @@ namespace Team10AD_Web.Clerk
                 poList.Add(temp3);
 
             }
-            //lblTest.Text = String.Format("ItemCode: "+itemCode+"1stName: "+firstSupName+"1stQty"+firstSupQty+"2ndName:"+secondSupName+"2ndQty"+secondSupQty+"3rdName:"+thirdSupName+"3rdqty"+thirdSupQty) ;
+            //lblTest.Text += String.Format("ItemCode: "+itemCode+"1stName: "+firstSupName+"1stQty"+firstSupQty+"2ndName:"+secondSupName+"2ndQty"+secondSupQty+"3rdName:"+thirdSupName+"3rdqty"+thirdSupQty) ;
             return poList;
         }
         protected bool checkDuplicates(string itemCode)
