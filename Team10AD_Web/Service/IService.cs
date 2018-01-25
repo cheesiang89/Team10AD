@@ -164,9 +164,9 @@ namespace Team10AD_Web.Service
             ResponseFormat = WebMessageFormat.Json)]
         void RequisitionApproval(WCFRequisitionApproval wcfReq);
 
-        [OperationContract]
-        [WebGet(UriTemplate = "/ListDisbursementDetail/{disbursementID}", ResponseFormat = WebMessageFormat.Json)]
-        WCFDisbursementDetail[] ListDisbursementDetail(string disbursementID);
+        //[OperationContract]
+        //[WebGet(UriTemplate = "/ListDisbursementDetail/{disbursementID}", ResponseFormat = WebMessageFormat.Json)]
+        //WCFDisbursementDetail[] ListDisbursementDetail(string disbursementID);
 
         //[OperationContract]
         //[WebGet(UriTemplate = "/ListDisbursementDetail/{disbursementID}", ResponseFormat = WebMessageFormat.Json)]
@@ -1115,35 +1115,24 @@ namespace Team10AD_Web.Service
     [DataContract]
     public class PostWCFReceivingGoodData
     {
-        string creationDate;
         string poId;
         string itemCode;
         string quantity;
-        string description;
         string supplierName;
         string remark;
         string storeStaffID;
 
-        public static PostWCFReceivingGoodData Make(string creationDate, string poId, string itemCode, string quantity, string description, string supplierName, string remark, string storeStaffID)
+        public static PostWCFReceivingGoodData Make(string poId, string itemCode, string quantity, string supplierName, string remark, string storeStaffID)
         {
             PostWCFReceivingGoodData goods = new PostWCFReceivingGoodData();
-            goods.creationDate = creationDate;
             goods.poId = poId;
             goods.itemCode = itemCode;
             goods.quantity = quantity;
-            goods.description = description;
             goods.supplierName = supplierName;
             goods.remark = remark;
             goods.storeStaffID = storeStaffID;
 
             return goods;
-        }
-
-        [DataMember]
-        public string CreationDate
-        {
-            get { return creationDate; }
-            set { creationDate = value; }
         }
 
         [DataMember]
@@ -1165,13 +1154,6 @@ namespace Team10AD_Web.Service
         {
             get { return quantity; }
             set { quantity = value; }
-        }
-
-        [DataMember]
-        public string Description
-        {
-            get { return description; }
-            set { description = value; }
         }
 
         [DataMember]

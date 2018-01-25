@@ -209,8 +209,8 @@ namespace Team10AD_Web.App_Code
 
         public static List<Requisition> PendingRequisitionListByEmp(int id)
         {
-            Team10ADModel m = new Team10ADModel();
-            return m.Requisitions.Where(p => p.Status == "Pending" && p.RequestorID == id).ToList<Requisition>();
+            Team10ADModel context = new Team10ADModel();
+            return context.Requisitions.Where(p => p.Status == "Pending" && p.RequestorID == id).ToList<Requisition>();
 
         }
 
