@@ -134,6 +134,10 @@ namespace Team10AD_Web.Service
         WCFRequisition[] PendingRequisitionList();
 
         [OperationContract]
+        [WebGet(UriTemplate = "/PendingRequisitionListByEmp/{empid}", ResponseFormat = WebMessageFormat.Json)]
+        WCFRequisition[] PendingRequisitionListByEmp(string empid);
+
+        [OperationContract]
         [WebGet(UriTemplate = "/WCFRequisitionDetail/{reqid}", ResponseFormat = WebMessageFormat.Json)]
         WCFRequisitionDetail[] RequisitionDetailList(string reqid);
 
