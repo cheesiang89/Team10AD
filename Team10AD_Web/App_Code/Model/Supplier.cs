@@ -35,8 +35,7 @@ namespace Team10AD_Web.App_Code.Model
 
         public int? FaxNumber { get; set; }
 
-
-        [StringLength(50)]
+        [StringLength(250)]
         public string Address { get; set; }
 
         [StringLength(12)]
