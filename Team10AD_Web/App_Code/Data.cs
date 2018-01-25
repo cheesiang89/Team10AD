@@ -202,10 +202,16 @@ namespace Team10AD_Web.App_Code
         }
         public static List<Requisition> PendingRequisitionList()
         {
-            using (Team10ADModel m = new Team10ADModel())
-            {
-                return m.Requisitions.Where(p => p.Status == "Pending").ToList<Requisition>();
-            }
+            Team10ADModel m = new Team10ADModel();
+            return m.Requisitions.Where(p => p.Status == "Pending").ToList<Requisition>();
+
+        }
+
+        public static List<Requisition> PendingRequisitionListByEmp(int id)
+        {
+            Team10ADModel m = new Team10ADModel();
+            return m.Requisitions.Where(p => p.Status == "Pending" && p.RequestorID == id).ToList<Requisition>();
+
         }
 
         public static List<Requisition> PartialRequisitionList()
@@ -241,6 +247,20 @@ namespace Team10AD_Web.App_Code
             }
         }
 
+        public static Requisition GetRequisitionById(int reqId)
+        {
+            using (Team10ADModel context = new Team10ADModel())
+            {
+                return context.Requisitions.Where(r => r.RequisitionID == reqId).First();
+            }
+        }
+
+        public static List<RequisitionDetail> GetRequisitionDetailsById(int reqId)
+        {
+            Team10ADModel context = new Team10ADModel();
+
+            return context.RequisitionDetails.Where(r => r.RequisitionID == reqId).ToList();
+        }
 
         ////////////Delegate
         public static List<Employee> A_EmployeeList(string departmentCode)
@@ -342,7 +362,7 @@ namespace Team10AD_Web.App_Code
             Dictionary<PurchaseOrderDetail, PurchaseOrder> dictionary = new Dictionary<PurchaseOrderDetail, PurchaseOrder>();
             int id = Convert.ToInt32(poid);
             PurchaseOrder po = context.PurchaseOrders.Where(p => p.POID == id).First();
-            List<PurchaseOrderDetail> poDetailList = context.PurchaseOrderDetails.Where(p => p.POID == id && (p.Status == "Unreceived" || p.Status == "Partial")).ToList();
+            List<PurchaseOrderDetail> poDetailList = context.PurchaseOrderDetails.Where(p => p.POID == id && p.Status != "Received").ToList();
             foreach (PurchaseOrderDetail d in poDetailList)
             {
                 dictionary.Add(d, po);
@@ -358,15 +378,19 @@ namespace Team10AD_Web.App_Code
             List<GoodsReceivedRecord> goodsrecordlist = context.GoodsReceivedRecords.Where(x => x.POID == poid).ToList();
 
             int totalqty = 0;
-            foreach (GoodsReceivedRecord good in goodsrecordlist)
+
+            if(goodsrecordlist != null)
             {
-                GoodsReceivedRecordDetail item = context.GoodsReceivedRecordDetails.Where(x => x.ItemCode == itemcode && x.GoodReceiveID == good.GoodReceiveID).First();
-                if (item.ReceivedQuantity != null)
+                foreach (GoodsReceivedRecord good in goodsrecordlist)
                 {
-                    totalqty += (int)item.ReceivedQuantity;
+                    GoodsReceivedRecordDetail item = context.GoodsReceivedRecordDetails.Where(x => x.ItemCode == itemcode && x.GoodReceiveID == good.GoodReceiveID).First();
+                    if (item.ReceivedQuantity != null)
+                    {
+                        totalqty += (int)item.ReceivedQuantity;
+                    }
                 }
             }
-
+            
             return totalqty;
         }
 
@@ -450,6 +474,22 @@ namespace Team10AD_Web.App_Code
             List<PurchaseOrder> polist = context.PurchaseOrders.Where(x => x.Status == "Unreceived" || x.Status == "Partial").ToList();
 
             return polist;
+        }
+
+        /////////////////////////////////Requisition
+
+        public static void UpdateReqStatus(Requisition req)
+        {
+            using (Team10ADModel context = new Team10ADModel())
+            {
+                Requisition updateReq = context.Requisitions.Where(x => x.RequisitionID == req.RequisitionID).First();
+                updateReq.RequestorID = req.RequestorID;
+                updateReq.ApprovalDate = DateTime.Now;
+                updateReq.Status = req.Status;
+                updateReq.Remarks = req.Remarks;
+
+                context.SaveChanges();
+            }
         }
     }
 }
