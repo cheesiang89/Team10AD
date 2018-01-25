@@ -10,114 +10,123 @@
 namespace Team10AD_Web.Clerk {
     
     
-    public partial class StockCheck {
+    public partial class CrystalOrderReport {
         
         /// <summary>
-        /// lblItemCode1 control.
+        /// lblCatagory control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblItemCode1;
+        protected global::System.Web.UI.WebControls.Label lblCatagory;
         
         /// <summary>
-        /// lblItemCode2 control.
+        /// dropCategory control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblItemCode2;
+        protected global::System.Web.UI.WebControls.DropDownList dropCategory;
         
         /// <summary>
-        /// lblItemDesc1 control.
+        /// SqlDataSource3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblItemDesc1;
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource3;
         
         /// <summary>
-        /// lblItemDesc2 control.
+        /// btnCategoryAdd control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblItemDesc2;
+        protected global::System.Web.UI.WebControls.Button btnCategoryAdd;
         
         /// <summary>
-        /// lblLoc1 control.
+        /// dgvCategory control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblLoc1;
+        protected global::System.Web.UI.WebControls.GridView dgvCategory;
         
         /// <summary>
-        /// lblLoc2 control.
+        /// lblMonth control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblLoc2;
+        protected global::System.Web.UI.WebControls.Label lblMonth;
         
         /// <summary>
-        /// lblqty1 control.
+        /// dropMonth control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblqty1;
+        protected global::System.Web.UI.WebControls.DropDownList dropMonth;
         
         /// <summary>
-        /// lblqty2 control.
+        /// dgvDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblqty2;
+        protected global::System.Web.UI.WebControls.GridView dgvDate;
         
         /// <summary>
-        /// lblUOM1 control.
+        /// lblYear control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblUOM1;
+        protected global::System.Web.UI.WebControls.Label lblYear;
         
         /// <summary>
-        /// lblUOM2 control.
+        /// dropYear control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblUOM2;
+        protected global::System.Web.UI.WebControls.DropDownList dropYear;
         
         /// <summary>
-        /// dgvHstTrans control.
+        /// btnDateAdd control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView dgvHstTrans;
+        protected global::System.Web.UI.WebControls.Button btnDateAdd;
         
         /// <summary>
-        /// btnBack control.
+        /// btnGenerate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnBack;
+        protected global::System.Web.UI.WebControls.Button btnGenerate;
+        
+        /// <summary>
+        /// btnClear control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnClear;
     }
 }

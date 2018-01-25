@@ -457,6 +457,7 @@ namespace Team10AD_Web.App_Code
                             //TODO: Send notification email
                             context.SaveChanges();
                         }
+                        LogicUtility.Instance.SendDisbursementEmail(disbursement.DisbursementID);
                     }
                 }
 
