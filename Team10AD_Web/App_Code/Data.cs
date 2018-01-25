@@ -35,15 +35,23 @@ namespace Team10AD_Web.App_Code
         }
 
         ////////UpdateDisbursement
-        public static void UpdateDisbursement(List<DisbursementDetail> input)
+        public static String UpdateDisbursement(List<DisbursementDetail> input)
         {
             using (Team10ADModel m = new Team10ADModel())
             {
                 Disbursement disbursement = new Disbursement();
-                disbursement.DisbursementID = Convert.ToInt32(input[0].DisbursementID);
-                m.Disbursements.Attach(disbursement);
-                m.Entry(disbursement).Property(x => x.Status).IsModified = true;
+                //disbursement.DisbursementID = Convert.ToInt32(input[0].DisbursementID);
+                int i = Convert.ToInt32(input[0].DisbursementID);
+                disbursement = m.Disbursements.Where(x => x.DisbursementID == i).First();
+                disbursement.Status = "Collected";
                 m.SaveChanges();
+
+
+                //disbursement.Status = "Collected";
+                //m.Disbursements.Attach(disbursement);
+                //m.Entry(disbursement).Property(x=>x.Status).IsModified = true;
+                //m.SaveChanges();
+                return i.ToString();
 
                 //foreach (StockAdjustmentVoucherDetail detail in detailList)
                 //{
