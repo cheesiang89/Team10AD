@@ -366,6 +366,20 @@ namespace Team10AD_Web.Service
             return wcfReqList.ToArray<WCFRequisition>();
         }
 
+        public WCFRequisition[] PendingRequisitionListByEmp(string empid)
+        {
+            int id = Convert.ToInt32(empid);
+            List<WCFRequisition> wcfReqList = new List<WCFRequisition>();
+            List<Requisition> reqList = Data.PendingRequisitionListByEmp(id);
+
+            foreach (Requisition r in reqList)
+            {
+                WCFRequisition wcfReq = WCFRequisition.Make(r.RequisitionID.ToString(), r.RequisitionDate.HasValue ? r.RequisitionDate.Value.ToString("dd-MMM-yyyy") : null, r.Employee.Name, r.RequestorID.ToString());
+                wcfReqList.Add(wcfReq);
+            }
+            return wcfReqList.ToArray<WCFRequisition>();
+        }
+
         public WCFRequisitionDetail[] RequisitionDetailList(string reqid)
         {
             int id = Convert.ToInt32(reqid);
