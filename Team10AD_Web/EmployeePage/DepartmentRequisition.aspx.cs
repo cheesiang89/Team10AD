@@ -22,7 +22,7 @@ namespace Team10AD_Web.EmployeePage
             ////this employee is the approver
             //Session["employeeid"] = 104;
             //Session["ApproverID"] = 104;
-            departmentCode = (string)Session["departmentid"];
+            departmentCode = (string)Session["departmentcode"];
             employeeID = (int)Session["employeeid"];
             approverID = (int)Session["ApproverID"];
             //on page load, the Pending Requisition button is selected(green) and the dgv load requisitions with status pending
