@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Team10AD_Web.App_Code;
+using Team10AD_Web;
 
 namespace Team10AD_Web.EmployeePage
 {
@@ -16,11 +16,11 @@ namespace Team10AD_Web.EmployeePage
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session["departmentid"] = "ARTS";
-            //this employee is the approver
-            Session["employeeid"] = 104;
-            Session["ApproverID"] = 104;
-            departmentCode = (string)Session["departmentid"];
+            //Session["departmentid"] = "ARTS";
+            ////this employee is the approver
+            //Session["employeeid"] = 104;
+            //Session["ApproverID"] = 104;
+            departmentCode = (string)Session["departmentcode"];
             employeeID = (int)Session["employeeid"];
             approverID = (int)Session["ApproverID"];
 

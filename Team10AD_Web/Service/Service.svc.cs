@@ -6,8 +6,8 @@ using System.ServiceModel;
 using System.ServiceModel.Activation;
 using System.ServiceModel.Web;
 using System.Text;
-using Team10AD_Web.App_Code;
-using Team10AD_Web.App_Code.Model;
+using Team10AD_Web;
+using Team10AD_Web.Model;
 
 namespace Team10AD_Web.Service
 {
@@ -16,6 +16,53 @@ namespace Team10AD_Web.Service
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     public class Service : IService
     {
+
+        /////////Voucher
+        public string CreateVoucher(WCFVoucherDetail[] input)
+        {
+            try
+            {
+                List<StockAdjustmentVoucherDetail> detailList = new List<StockAdjustmentVoucherDetail>();
+                foreach (WCFVoucherDetail WCFdetail in input)
+                {
+                    StockAdjustmentVoucherDetail detail = new StockAdjustmentVoucherDetail();
+                    detail.ItemCode = WCFdetail.ItemCode;
+                    detail.QuantityAdjusted = Convert.ToInt32(WCFdetail.QuantityAdjusted);
+                    detail.Reason = WCFdetail.Reason;
+                    detailList.Add(detail);
+                }
+                Data.InsertVoucher(detailList, input[0].StoreStaffID);
+                return "OK";
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+        }
+
+        /////////Voucher & UpdateDisbursement
+        public string UpdateDisbursement(WCFDisbursementDetail[] input)
+        {
+            try
+            {
+                List<DisbursementDetail> detailList = new List<DisbursementDetail>();
+                foreach (WCFDisbursementDetail WCFdetail in input)
+                {
+                    DisbursementDetail detail = new DisbursementDetail();
+                    detail.ItemCode = WCFdetail.ItemCode;
+                    detail.QuantityRequested = Convert.ToInt32(WCFdetail.QuantityRequested);
+                    detail.QuantityCollected = Convert.ToInt32(WCFdetail.QuantityCollected);
+                    detail.Remarks = WCFdetail.Remarks;
+                    detailList.Add(detail);
+                }
+                Data.UpdateDisbursement(detailList);
+                return "OK";
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+        }
         /////////Test
         public Test TestM()
         {
@@ -29,7 +76,7 @@ namespace Team10AD_Web.Service
         public WCFCatalogue GetCatalogue(string itemCode)
         {
             Catalogue c = Data.GetCatalogue(itemCode);
-            return WCFCatalogue.Make(c.ItemCode, c.Description, c.Location, c.BalanceQuantity);
+            return WCFCatalogue.Make(c.ItemCode, c.Description, c.Location, c.BalanceQuantity, c.UnitOfMeasure);
         }
 
         public WCFCatalogue[] ListCatalogues()
@@ -37,7 +84,7 @@ namespace Team10AD_Web.Service
             List<WCFCatalogue> l = new List<WCFCatalogue>();
             foreach (Catalogue c in Data.ListCatalogues())
             {
-                WCFCatalogue w = WCFCatalogue.Make(c.ItemCode, c.Description, c.Location, c.BalanceQuantity);
+                WCFCatalogue w = WCFCatalogue.Make(c.ItemCode, c.Description, c.Location, c.BalanceQuantity, c.UnitOfMeasure);
                 l.Add(w);
             }
             return l.ToArray<WCFCatalogue>();
@@ -51,18 +98,18 @@ namespace Team10AD_Web.Service
 
             foreach (DisbursementDetail c in Data.GetDisbursementDetails(Convert.ToInt32(disbursementID)))
             {
-                WCFDisbursementDetail w = WCFDisbursementDetail.Make(disbursementID, c.Remarks, c.ItemCode, c.QuantityRequested.ToString(), c.QuantityCollected.ToString(), c.Catalogue.Description);
+                WCFDisbursementDetail w = WCFDisbursementDetail.Make(disbursementID, c.Remarks, c.ItemCode, c.QuantityRequested.ToString(), c.QuantityCollected.ToString(), c.Catalogue.Description, c.Catalogue.UnitOfMeasure);
                 l.Add(w);
             }
 
             return l.ToArray<WCFDisbursementDetail>();
         }
 
-        public WCFDisbursement[] ListDisbursements()
+        public WCFDisbursement[] ListDisbursements(String status)
         {
             List<WCFDisbursement> l = new List<WCFDisbursement>();
 
-            foreach (Disbursement d in Data.ListDisbursements())
+            foreach (Disbursement d in Data.ListDisbursements(status))
             {
                 WCFDisbursement w = WCFDisbursement.Make(d.DisbursementID.ToString(), d.CollectionDate.HasValue ? d.CollectionDate.Value.ToString("dd-MMM-yyyy") : null, d.CollectionPoint.PointName, d.Department.DepartmentName, d.Status, d.StoreStaffID.ToString());
                 l.Add(w);
@@ -122,8 +169,8 @@ namespace Team10AD_Web.Service
                 l.Add(r);
             }
             return Data.UpdateRetrievalDetails(l);
-            //return Data.UpdateRetrievalDetails();
         }
+
 
 
         ///////////////Receive & ReceiveDetail 

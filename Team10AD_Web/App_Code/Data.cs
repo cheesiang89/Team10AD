@@ -2,12 +2,57 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Team10AD_Web.App_Code.Model;
+using Team10AD_Web.Model;
+using Team10AD_Web;
 
-namespace Team10AD_Web.App_Code
+namespace Team10AD_Web
 {
     public class Data
     {
+        //////Voucher
+
+        public static void InsertVoucher(List<StockAdjustmentVoucherDetail> detailList, int storeStaffID)
+        {
+            using (Team10ADModel m = new Team10ADModel())
+            {
+                StockAdjustmentVoucher voucher = new StockAdjustmentVoucher();
+                voucher.StoreStaffID = storeStaffID;
+                voucher.DateIssue = DateTime.Now;
+                voucher.Status = "Pending";
+                m.StockAdjustmentVouchers.Add(voucher);
+                m.SaveChanges();
+
+                foreach (StockAdjustmentVoucherDetail detail in detailList)
+                {
+
+                    detail.VoucherID = voucher.VoucherID;
+                    m.StockAdjustmentVoucherDetails.Add(detail);
+                    m.SaveChanges();
+                }
+
+
+            }
+        }
+
+        ////////UpdateDisbursement
+        public static void UpdateDisbursement(List<DisbursementDetail> input)
+        {
+            using (Team10ADModel m = new Team10ADModel())
+            {
+                Disbursement disbursement = new Disbursement();
+                disbursement.DisbursementID = Convert.ToInt32(input[0].DisbursementID);
+                m.Disbursements.Attach(disbursement);
+                m.Entry(disbursement).Property(x => x.Status).IsModified = true;
+                m.SaveChanges();
+
+                //foreach (StockAdjustmentVoucherDetail detail in detailList)
+                //{
+                //    detail.VoucherID = voucher.VoucherID;
+                //    m.StockAdjustmentVoucherDetails.Add(detail);
+                //    m.SaveChanges();
+                //}
+            }
+        }
         /////////////Catalogue
         public static List<Catalogue> ListCatalogues()
         {
@@ -94,11 +139,11 @@ namespace Team10AD_Web.App_Code
 
 
         /////////////Disbursement & DisbursementDetail
-        public static List<Disbursement> ListDisbursements()
+        public static List<Disbursement> ListDisbursements(string status)
         {
             Team10ADModel m = new Team10ADModel();
 
-            return m.Disbursements.ToList<Disbursement>();
+            return m.Disbursements.Where(p => p.Status == status).ToList<Disbursement>();
         }
 
         public static List<DisbursementDetail> GetDisbursementDetails(int disbursementID)
@@ -164,8 +209,8 @@ namespace Team10AD_Web.App_Code
 
         public static List<Requisition> PendingRequisitionListByEmp(int id)
         {
-            Team10ADModel m = new Team10ADModel();
-            return m.Requisitions.Where(p => p.Status == "Pending" && p.RequestorID == id).ToList<Requisition>();
+            Team10ADModel context = new Team10ADModel();
+            return context.Requisitions.Where(p => p.Status == "Pending" && p.RequestorID == id).ToList<Requisition>();
 
         }
 

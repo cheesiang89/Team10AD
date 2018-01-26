@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Team10AD_Web.App_Code.Model;
-using Team10AD_Web.App_Code.DTO;
-namespace Team10AD_Web.App_Code
+using Team10AD_Web.Model;
+using Team10AD_Web.DTO;
+namespace Team10AD_Web
 {
     /// <summary>
     /// Summary description for BusinessLogic
@@ -63,21 +63,10 @@ namespace Team10AD_Web.App_Code
             }
 
         }
-        public static void CreatePO()
+       
+        public static bool SavePOInfo(List<POIntermediate> poList, int storeStaffID)
         {
-            //Get all data
-
-            //1. Find unique suppliers
-            //2. Create no of PO
-            //3. Create PODetail objects -> Create PO
-
-            //Create PO records
-
-            //Update Catalogue "Shorfall" status
-
-        }
-        public static void SavePOInfo(List<POIntermediate> poList, int storeStaffID)
-        {
+            bool result = false;
             //string test = "";
             HashSet<string> supSet = new HashSet<string>();
             //Save supplier names in HashSet
@@ -101,7 +90,8 @@ namespace Team10AD_Web.App_Code
                 {
                     List<PurchaseOrderDetail> poDetailList = new List<PurchaseOrderDetail>();
                     PurchaseOrder po = new PurchaseOrder();
-                    PurchaseOrderDetail pd = new PurchaseOrderDetail();
+                    PurchaseOrderDetail pd;
+                    int? minOrderQty;
                     //CreationDate
                     po.CreationDate = DateTime.Now;
                     //StoreStaffID 
@@ -109,16 +99,25 @@ namespace Team10AD_Web.App_Code
                     //Get from POIntermediate: SupplierCode, PODetails: ItemCode,Quantity, UnitPrice, Status
                     foreach (var poIntermediate in poList)
                     {
-                        if (supName == poIntermediate.SupplierName && poIntermediate.Quantity!="0")
+                        if (supName == poIntermediate.SupplierName && poIntermediate.Quantity!=0)
                         {
+                            pd= new PurchaseOrderDetail();
                             po.SupplierCode = poIntermediate.SupplierName;
                             pd.ItemCode = poIntermediate.ItemCode;
-                            pd.Quantity = Int32.Parse(poIntermediate.Quantity);
+                            pd.Quantity = poIntermediate.Quantity;
                             pd.UnitPrice = m.SupplierDetails
-                                .Where(x => x.ItemCode == pd.ItemCode && x.SupplierCode == po.SupplierCode)
+                                .Where(x => x.ItemCode == pd.ItemCode)
                                 .Select(x => x.Price).First();
+                            minOrderQty = m.Catalogues
+                                .Where(x => x.ItemCode == pd.ItemCode)
+                                .Select(x => x.MinimumOrderQuantity).First();
                             pd.Status = "Unreceived";
-                            poDetailList.Add(pd);
+                            //Only add if order qty >= Min order qty
+                            if (pd.Quantity>=minOrderQty)
+                            {
+                                poDetailList.Add(pd);
+                            }
+                           
                         }
 
                     }
@@ -129,15 +128,42 @@ namespace Team10AD_Web.App_Code
                     if (poDetailList.Count != 0)
                     {
                         m.PurchaseOrders.Add(po);
+                        foreach (PurchaseOrderDetail item in poDetailList)
+                        {
+                            Catalogue c = m.Catalogues.Where(x => x.ItemCode == item.ItemCode).Select(x => x).First();
+                           
+                            //Add pending delivery qty
+                            int? qty = m.Catalogues.Where(x => x.ItemCode == item.ItemCode).Select(x => x.PendingDeliveryQuantity).First();
+                            int? balanceQty = m.Catalogues.Where(x => x.ItemCode == item.ItemCode).Select(x => x.BalanceQuantity).First();
+                            int? reorderQty = m.Catalogues.Where(x => x.ItemCode == item.ItemCode).Select(x => x.ReorderLevel).First();
+                            qty += item.Quantity.GetValueOrDefault();
+                            c.PendingDeliveryQuantity = qty;
+                            if (qty>=(reorderQty-balanceQty))
+                            {
+                                //Set shortfall to false
+                                c.ShortfallStatus = "False";
+                            }
+                        }
+
                         m.SaveChanges();
+                        result = true;
                     }
                    
                 }
                 //return test;
-                //Update the "Shorfall" status
+               
             }
+            return result;
+        }
 
+        public static int? GetMinOrderQty(string itemCode)
+        {
+            int? minOrderQty = 0;
+            using (Team10ADModel m = new Team10ADModel())
+            {
+               minOrderQty  = m.Catalogues.Where(x => x.ItemCode == itemCode).Select(x => x.MinimumOrderQuantity).First();
+            }
+            return minOrderQty;
         }
     }
 }
-    
