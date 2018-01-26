@@ -86,5 +86,22 @@ namespace Team10AD_Web
             return result[0];
         }
 
+        public object ShowPurchaseOrders()
+        {
+            var qry = (from p in tm.PurchaseOrders orderby p.Status descending select new { p.POID, p.CreationDate, p.Supplier.SupplierName, p.Status }).ToList();
+            return qry;
+        }
+
+        public PurchaseOrder GetPurchaseOrder(int POID)
+        {
+            List<PurchaseOrder> result = tm.PurchaseOrders.Where(x => x.POID == POID).ToList();
+            return result[0];
+        }
+
+        public List<PurchaseOrderDetailsView> ShowPurchaseOrderDetail(int itemCode)
+        {
+            return tm.PurchaseOrderDetailsViews.Where(x=>x.ItemCode == itemCode.ToString()).ToList();
+        }
+
     }
 }

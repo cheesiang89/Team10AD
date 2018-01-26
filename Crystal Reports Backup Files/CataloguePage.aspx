@@ -5,8 +5,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
     <h2>Stationery Catalogue</h2>
-    <asp:TextBox ID="txtBoxSearch" runat="server">Search by category/desc</asp:TextBox>
-    <asp:Button ID="btnSearch" runat="server" Text="Search" />
+    <asp:TextBox ID="txtBoxSearch" runat="server" placeholder="Search by category/desc"></asp:TextBox>
+    <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" />
     <br />
 <%--    <asp:Label runat="server" ID="lblTest" Text="Test"></asp:Label>--%>
     <br />
