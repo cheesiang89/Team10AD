@@ -3,7 +3,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
       <h2>Disbursement Record</h2>
-    <asp:GridView ID="dgvDisbursementRecord" runat="server" AutoGenerateColumns="False" OnRowCommand="dgvDisbursementRecord_RowCommand">
+    <asp:GridView ID="dgvDisbursementRecord" runat="server" AllowPaging="True" OnPageIndexChanging="dgvDisbursementRecord_PageIndexChanging" AutoGenerateColumns="False" OnRowCommand="dgvDisbursementRecord_RowCommand">
         <Columns>
             <asp:BoundField DataField="DisbursementID" HeaderText="Disbursement List No." />
             <asp:BoundField DataField="CollectionDate" HeaderText="Collection Date" DataFormatString="{0:dd-MMM-yyyy}"/>

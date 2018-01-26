@@ -9,7 +9,7 @@ namespace Team10AD_Web.App_Code.DTO
     {
         public string ItemCode { get; set; }
         public string SupplierName { get; set; }
-        public string Quantity { get; set; }
+        public int Quantity { get; set; }
 
     }
 }

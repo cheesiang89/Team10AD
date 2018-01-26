@@ -21,7 +21,7 @@
     <asp:Label ID="lblEmpEmailAdd1" runat="server" Text="Employee Email Address:"></asp:Label>
     <asp:Label ID="lblEmpEmailAdd2" runat="server" ></asp:Label>
     <br />
-    <asp:GridView ID="dgvDisList" runat="server" AutoGenerateColumns="False">
+    <asp:GridView ID="dgvDisList" runat="server" AllowPaging="True" OnPageIndexChanging="dgvDisList_PageIndexChanging" AutoGenerateColumns="False">
         <Columns>
             <asp:BoundField DataField="ItemCode" HeaderText="Item Code" />
             <asp:BoundField DataField="Description" HeaderText="Description" />

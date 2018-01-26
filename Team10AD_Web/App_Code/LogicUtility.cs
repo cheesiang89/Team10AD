@@ -286,7 +286,7 @@ namespace Team10AD_Web.App_Code
                 //repEmail = "e0227390@u.nus.edu";
 
                 repName = m.Disbursements.Where(x => x.DisbursementID == disbursementID)
-                    .Select(x => x.Department).Select(x => x.Employee).Select(x => x.Name).First();
+                    .Select(x => x.Department).Select(x => x.Employee1).Select(x => x.Name).First();
                 repEmail = m.Employees.Where(x => x.Name == repName).Select(x => x.Email).First();
                 collectionPoint = m.Disbursements.Where(x => x.DisbursementID == disbursementID)
                     .Select(x => x.CollectionPoint).Select(x => x.PointName).First();
