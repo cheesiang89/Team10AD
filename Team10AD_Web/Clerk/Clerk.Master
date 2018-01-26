@@ -12,14 +12,14 @@
     <%-- For Header Icon --%>
     <link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <!-- Bootstrap Css -->
-    <link href="<%= Page.ResolveUrl("/Content/css/bootstrap.min.css") %>" type="text/css" rel="Stylesheet" />
-    <link rel="stylesheet" type="text/css" href="<%= Page.ResolveUrl("/Content/css/animate.css") %>" />
-    <link rel="stylesheet" type="text/css" href="<%= Page.ResolveUrl("/Content/css/style.css") %>" />
-    <link href="<%= Page.ResolveUrl("/Content/css/default.css") %>" rel="stylesheet" type="text/css" />
-    <link href="<%= Page.ResolveUrl("/Content/font-awesome/css/font-awesome.min.css") %>" rel="stylesheet" type="text/css" />
+    <link href="<%= Page.ResolveUrl("~/Content/css/bootstrap.min.css") %>" type="text/css" rel="Stylesheet" />
+    <link rel="stylesheet" type="text/css" href="<%= Page.ResolveUrl("~/Content/css/animate.css") %>" />
+    <link rel="stylesheet" type="text/css" href="<%= Page.ResolveUrl("~/Content/css/style.css") %>" />
+    <link href="<%= Page.ResolveUrl("~/Content/css/default.css") %>" rel="stylesheet" type="text/css" />
+    <link href="<%= Page.ResolveUrl("~/Content/font-awesome/css/font-awesome.min.css") %>" rel="stylesheet" type="text/css" />
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
         rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="<%= Page.ResolveUrl("/Content/css/site.css") %>" />
+    <link rel="stylesheet" type="text/css" href="<%= Page.ResolveUrl("~/Content/css/site.css") %>" />
     <%-- For Header Content in Child Pages --%>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
