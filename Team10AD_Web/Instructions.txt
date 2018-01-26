@@ -30,5 +30,6 @@ e.g.
                 type: 'POST',
                 url: 'http://localhost:3000/Service/CartService.svc/GetJSON',
 				...
-
+				become
+				url: 'http://localhost/Team10AD_Web/Service/CartService.svc'
 6. Website AJAX POST should be working
