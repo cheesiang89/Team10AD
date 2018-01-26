@@ -12,14 +12,19 @@ namespace Team10AD_Web.Clerk
 {
     public partial class Inventory : System.Web.UI.Page
     {
+        BusinessLogic b = new BusinessLogic();
+
         private Team10ADModel m = new Team10ADModel();
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                dgvCatalogue.DataSource = RayBizLogic.CatalogueList();
 
-            dgvCatalogue.DataSource = RayBizLogic.CatalogueList();
-
-            dgvCatalogue.DataBind();
-            dgvCatalogue.AllowPaging = true;
+                dgvCatalogue.DataBind();
+                dgvCatalogue.AllowPaging = true;
+            }
+           
         }
 
         protected void dgvCatalogue_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -46,5 +51,17 @@ namespace Team10AD_Web.Clerk
             dgvCatalogue.AllowPaging = true;
         }
 
+        protected void dgvCatalogue_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Details")
+            {
+                GridViewRow gvRow = (GridViewRow)(((Button)e.CommandSource).NamingContainer);
+                string itemCode = gvRow.Cells[0].Text;
+                Catalogue catalogue = b.GetCatalogue(itemCode);
+                Session["Catalogue"] = catalogue;
+                Response.Redirect("StockFlow.aspx");
+            }
+        }
+        
     }
 }

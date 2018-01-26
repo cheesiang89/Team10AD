@@ -14,7 +14,7 @@
             <asp:BoundField DataField="ItemCode" HeaderText="Item Code" />
             <asp:BoundField DataField="Description" HeaderText="Description" />
             <asp:BoundField DataField="RequestedQuantity" HeaderText="Quantity Requested" />
-            <asp:BoundField DataField="RetrievedQuantity" HeaderText="Quantity Requested" />
+            <asp:BoundField DataField="RetrievedQuantity" HeaderText="Retrieved Quantity" />
         </Columns>
     </asp:GridView>
 </asp:Content>
