@@ -112,7 +112,7 @@
                             <asp:ScriptReference Path="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/jquery-ui.js" />
                                <asp:ScriptReference Path="/Scripts/Template/dpNumberPicker-2.x.js" />
                              <asp:ScriptReference Path="/Scripts/Template/bootstrap-flash-alert.min.js" />
-                   
+
                                    <asp:ScriptReference Path="/Scripts/script.js" />
                         </Scripts>
                         <Services>

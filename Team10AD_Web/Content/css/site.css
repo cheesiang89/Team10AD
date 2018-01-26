@@ -34,3 +34,16 @@
 .hide{
         display:none;
 	}
+
+
+canvas {
+  border: 1px dotted red;
+}
+
+.chart-container {
+    position: relative;
+    margin: auto;
+    height: 500px;
+    width: 1200px;
+    
+}
