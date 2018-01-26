@@ -1,0 +1,34 @@
+﻿Instructions on deploying to IIS
+
+*****Master Pages and pages********
+1. Ensure all html path uses e.g. href="<%= Page.ResolveUrl("~/EmployeePage/RequisitionCart") %>"
+2. For "runat="server"" controls, in Code  Behind, use e.g. eqStatus.Attributes["href"] = "~/EmployeePage/RequisitionStatus", 
+do not set the "href" directly
+3. For e.g. <asp:ScriptReference Path="~/Scripts/Template/jquery.min.js" />, do not use "Page.Resolve"
+4. Register the WCF Services: e.g.
+ <Services>
+  <asp:ServiceReference Path="~/Service/Service.svc" />
+   <asp:ServiceReference Path="~/Service/CartService.svc" />
+  </Services>
+  
+
+  ***In IIS****
+  1. Copy and paste the folder from Github e.g. "Team10AD_Web" 
+  (NOT the whole folder including the .sln file+packages+.vs etc, JUST the folder will do)
+  2. In inetmgr, Sites-> Default Web Site -> Team10AD_Web ... Convert to Application
+
+****In Visual Studio****
+1. Run VS in administrator mode
+2. Open the folder in the wwwroot folder (File -> Open ->Web Site -> Local IIS)
+3. Go Service-> Cart Service.svc, right click "View in Browser"
+4. Get the path of the service e.g ."http://localhost/Team10AD_Web/Service/CartService.svc"
+5. With the URL, replace the URL in Scripts->cart.js line 98
+e.g. 
+  $.ajax({
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                type: 'POST',
+                url: 'http://localhost:3000/Service/CartService.svc/GetJSON',
+				...
+
+6. Website AJAX POST should be working

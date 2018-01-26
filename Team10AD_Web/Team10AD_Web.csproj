@@ -226,6 +226,7 @@
     <Content Include="EmployeePage\SelectCollection.aspx" />
     <Content Include="EmployeePage\Test.aspx" />
     <Content Include="Images\cart1.png" />
+    <Content Include="Instructions.txt" />
     <Content Include="Sample\About.aspx" />
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Manage.aspx" />
