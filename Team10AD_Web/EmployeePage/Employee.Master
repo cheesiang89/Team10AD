@@ -51,7 +51,8 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Requisition <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="/EmployeePage/RequisitionCart.aspx">Requisition Cart</a></li>
-                                <li><a href="/EmployeePage/RequisitionStatus.aspx">Requisition Status</a></li>
+                                <li><a href="/EmployeePage/RequisitionStatus.aspx" runat="server" id="reqStatus">Requisition Status</a></li>
+                                <li><a href="/EmployeePage/DepartmentRequisition.aspx" runat="server" id="deptReq">Department Requisition</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">

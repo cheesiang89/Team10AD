@@ -36,17 +36,17 @@ namespace Team10AD_Web
             Session["departmentdetail"] = "";
             Session["Supplier"] = "";
             //Stores employee id to pass to detail page
-            Session["employeeid"] = 78;
+            Session["employeeid"] = 114;
             //Stores clerk id to pass to detail page
             Session["clerkid"] = 10004;
             //Stores department id to pass to detail page
-            Session["departmentcode"] = "ARTS";
+            Session["departmentcode"] = "CHEM";
             //Stores requisition id to pass to requisition detail page
             Session["requisitiondetail"] = "";
             //Stores HOD ID
-            Session["HODID"] = 104;
+            Session["HODID"] = 114;
             //Stores Approver ID
-            Session["ApproverID"] = 0;
+            Session["ApproverID"] =114;
            //Store shortfall items
            Session["Shortfall"]= new List<Catalogue>();
             Session["Catalogue"] = "";

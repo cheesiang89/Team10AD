@@ -18,10 +18,10 @@ namespace Team10AD_Web.EmployeePage
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session["departmentid"] = "ARTS";
-            //this employee is the approver
-            Session["employeeid"] = 104;
-            Session["ApproverID"] = 104;
+            //Session["departmentid"] = "ARTS";
+            ////this employee is the approver
+            //Session["employeeid"] = 104;
+            //Session["ApproverID"] = 104;
             departmentCode = (string)Session["departmentid"];
             employeeID = (int)Session["employeeid"];
             approverID = (int)Session["ApproverID"];
