@@ -33,8 +33,8 @@
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                         <i class="fa fa-bars"></i>
                     </button>
-                    <a class="navbar-brand" href="#">
-                        <h1>Bootstrap</h1>
+                    <a class="navbar-brand" href="../Clerk/Main">
+                        <h1>Logic University</h1>
                     </a>
                 </div>
                 <%-- Menu --%>
@@ -45,15 +45,15 @@
                                     <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Catalogue <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="../Clerk/Inventory.aspx">Inventory</a></li>
+                                <li><a href="../Clerk/Inventory">Inventory</a></li>
                                <%-- <li><a href="../Clerk/StockCheck.aspx">Stock Check</a></li>--%>
                             </ul>
                         </li>
                               <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Requisition <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="../Clerk/RequisitionRecord.aspx">Requests Record</a></li>
-                                <li><a href="../Clerk/RetrievalList.aspx">Retrieval List</a></li>
+                                <li><a href="../Clerk/RequisitionRecord">Requests Record</a></li>
+                                <li><a href="../Clerk/RetrievalList">Retrieval List</a></li>
                                 <li><a href="../Clerk/DisbursementList">Disbursement Record</a></li>
                             </ul>
                         </li>
@@ -61,6 +61,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Ordering <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="../Clerk/PurchaseOrderPage">PO Record</a></li>
+                                <li><a href="../Clerk/GeneratePO">Generate PO</a></li>
                             </ul>
                         </li>
                       <li class="dropdown">

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Web;
 
-namespace Team10AD_Web.App_Code
+namespace Team10AD_Web
 {
        public class CartData
     {

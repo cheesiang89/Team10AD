@@ -19,7 +19,7 @@
     <br />
     <asp:Button ID="CancelButton" runat="server" Text="Cancel Requisition" Visible="false" OnClick="CancelButton_Click" />
     <br />
-    <asp:Label ID="lblRemarks" runat="server" Text="Remarks (Optional): "></asp:Label>&nbsp&nbsp<asp:TextBox ID="txtBoxRemarks" runat="server" TextMode="MultiLine" Height="51px" Width="201px" style = "resize:none"></asp:TextBox>
+    <asp:Label ID="lblRemarks" runat="server" Text="Remarks (Optional): "></asp:Label>&nbsp&nbsp<asp:TextBox ID="txtBoxRemarks" runat="server" TextMode="MultiLine" Height="51px" Width="201px" style = "resize:none" ReadOnly="True"></asp:TextBox>
     <br />
     <br />
     <asp:Button ID="btnApprove" runat="server" Text="Approve" Visible="false" OnClick="btnApprove_Click"/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<asp:Button ID="btnReject" runat="server" Text="Reject" Visible="false" OnClick="btnReject_Click"/>
