@@ -1,4 +1,4 @@
-namespace Team10AD_Web.App_Code.Model
+namespace Team10AD_Web.Model
 {
     using System;
     using System.Collections.Generic;

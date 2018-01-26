@@ -4,8 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Team10AD_Web.App_Code;
-using Team10AD_Web.App_Code.Model;
+using Team10AD_Web;
+using Team10AD_Web.Model;
 
 namespace Team10AD_Web.EmployeePage
 {
@@ -43,7 +43,7 @@ namespace Team10AD_Web.EmployeePage
                 dgvRequisitionDetail.DataBind();
                 dgvRequisitionDetail.AllowPaging = true;
 
-                App_Code.Model.Employee emp = context.Employees.Where(x => x.EmployeeID == req.RequestorID).First();
+                Model.Employee emp = context.Employees.Where(x => x.EmployeeID == req.RequestorID).First();
                 NameTextBox.Text = emp.Name;
                 StatusTextBox.Text = req.Status;
                 txtBoxRemarks.Text = req.Remarks;
