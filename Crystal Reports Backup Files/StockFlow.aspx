@@ -3,6 +3,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Stock Flow</h2>
+
     <asp:Label ID="lblItemCode1" runat="server" Text="Item Code:"></asp:Label>
     <asp:Label ID="lblItemCode2" runat="server"></asp:Label>
     <br />
