@@ -11,14 +11,16 @@ namespace Team10AD_Web.EmployeePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            reqStatus.Attributes["href"] = "~/EmployeePage/RequisitionStatus";
+            deptReq.Attributes["href"] = "~/EmployeePage/DepartmentRequisition";
             if (((int)Session["employeeid"])==((int)Session["ApproverID"]))
             {
-                reqStatus.Visible = false;
+                deptReq.Visible = true;
             }
             else
             {
                 reqStatus.Visible = true;
-                deptReq.Visible = false;
+               
             }
             
         }

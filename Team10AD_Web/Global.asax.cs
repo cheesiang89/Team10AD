@@ -36,7 +36,7 @@ namespace Team10AD_Web
             Session["departmentdetail"] = "";
             Session["Supplier"] = "";
             //Stores employee id to pass to detail page
-            Session["employeeid"] = 114;
+            Session["employeeid"] = 112;
             //Stores clerk id to pass to detail page
             Session["clerkid"] = 10004;
             //Stores department id to pass to detail page

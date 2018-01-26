@@ -89,7 +89,7 @@ function makeRequisition() {
         //Iterate through rows, create JSON
         if (qtyGotError() === false) {
             let jsonData = "{\"cart\": " + tableToJson() + " }";
-            //console.log("Json is " + jsonData);
+            console.log("Json is " + jsonData);
 
             $.ajax({
                 contentType: 'application/json; charset=utf-8',
