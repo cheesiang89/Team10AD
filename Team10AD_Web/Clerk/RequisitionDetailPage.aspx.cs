@@ -5,8 +5,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Team10AD_Web.App_Code;
-using Team10AD_Web.App_Code.Model;
+using Team10AD_Web;
+using Team10AD_Web.Model;
 
 namespace Team10AD_Web.Clerk
 {
@@ -26,8 +26,8 @@ namespace Team10AD_Web.Clerk
                 dgvRequisitionDetail.DataBind();
                 dgvRequisitionDetail.AllowPaging = true;
 
-                App_Code.Model.Employee emp = context.Employees.Where(x => x.EmployeeID == req.RequestorID).First();
-                App_Code.Model.Department dept = context.Departments.Where(x => x.DepartmentCode == emp.DepartmentCode).First();
+                Model.Employee emp = context.Employees.Where(x => x.EmployeeID == req.RequestorID).First();
+                Model.Department dept = context.Departments.Where(x => x.DepartmentCode == emp.DepartmentCode).First();
                 ReqIDTextBox.Text = req.RequisitionID.ToString();
                 StatusTextBox.Text = req.Status;
                 DeptNameTextBox.Text = dept.DepartmentName;

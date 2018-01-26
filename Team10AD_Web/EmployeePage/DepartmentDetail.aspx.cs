@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Team10AD_Web.App_Code.Model;
+using Team10AD_Web.Model;
 
 namespace Team10AD_Web.EmployeePage
 {

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Team10AD_Web.App_Code;
-using Team10AD_Web.App_Code.Model;
-using Team10AD_Web.App_Code.DTO;
+using Team10AD_Web;
+using Team10AD_Web.Model;
+using Team10AD_Web.DTO;
 
 namespace Team10AD_Web.Clerk
 {
@@ -19,12 +19,12 @@ namespace Team10AD_Web.Clerk
         {
            listSource = (List<Catalogue>)Session["Shortfall"];
             lblTag.Visible = false;
-                lblDescription.Visible = false;
-            btnAddItem.Visible = false;
-            
+             btnAddItem.Visible = false;
+            lblTest.Text = "";
+
             if (!IsPostBack)
             {
-                             
+                        
                 dataRefresh();
             }
         
@@ -46,10 +46,8 @@ namespace Team10AD_Web.Clerk
             {
                 if (!String.IsNullOrEmpty(description))
                 {
-                    lblTag.Text = "Description: ";
-                    lblDescription.Text = description;
+                    lblTag.Text = "Description: "+ description;
                     lblTag.Visible = true;
-                    lblDescription.Visible = true;
                     btnAddItem.Visible = true;
 
                 }
@@ -97,16 +95,29 @@ namespace Team10AD_Web.Clerk
 
         protected void btnGeneratePO_Click(object sender, EventArgs e)
         {
-            //Generate PO DTO
+            Page.Validate("Supplier1");
+            Page.Validate("Supplier2");
+            Page.Validate("Supplier3");
+            //Check all non-zero qty is above Min Order qty - Check done in iterateItems()
             List<POIntermediate> poList = iterateItems();
-            //Generate requisitions
 
-            //TEST
-            //string test = PurvaBizLogic.SavePOInfo(poList);
-            //lblTest.Text = test;
-            int storeStaffID = (int)Session["clerkid"];
-            PurvaBizLogic.SavePOInfo(poList,storeStaffID);
+            //Generate PO DTO
+            if (Page.IsValid)
+            {
+                
+                //Generate requisitions
+                             //TEST
+                //string test = PurvaBizLogic.SavePOInfo(poList);
+                //lblTest.Text = test;
+                int storeStaffID = (int)Session["clerkid"];
+                if (PurvaBizLogic.SavePOInfo(poList, storeStaffID))
+                {
+                    Response.Redirect("PurchaseOrderPage.aspx");
+                }
+            }
+
             
+
         }
         protected List<POIntermediate> iterateItems()
         {
@@ -116,68 +127,92 @@ namespace Team10AD_Web.Clerk
             string firstSupName = "";
             string secondSupName = "";
             string thirdSupName = "";
-            string firstSupQty = "";
-            string secondSupQty = "";
-            string thirdSupQty = "";
+            int firstSupQty = 0;
+            int secondSupQty =0;
+            int thirdSupQty = 0;
 
             foreach (RepeaterItem item in repeaterItems.Items)
             {
-                POIntermediate temp1 = new POIntermediate();
-                POIntermediate temp2 = new POIntermediate();
-                POIntermediate temp3 = new POIntermediate();
-
                 //Get Item Code
                 itemCode = ((Label)item.FindControl("lblItemCode")).Text;
-
-                //Get 1st supplier name
-                firstSupName = ((Label)item.FindControl("lblHeaderS1")).Text.Substring(9,4);
-
-                //Get 1st supplier quantity
-                firstSupQty = ((TextBox)item.FindControl("txtSupp1")).Text;
-                if (String.IsNullOrEmpty(firstSupQty))
+                
+                //Get 1st supplier quantity, show error msg if qty<minOrderQty'
+                
+                bool result1 = Int32.TryParse(((TextBox)item.FindControl("txtSupp1")).Text, out firstSupQty);
+                if (result1)
                 {
-                    firstSupQty = "0";
-                }
-                //Make 1st DTO
-                temp1.ItemCode = itemCode;
-                temp1.SupplierName = firstSupName;
-                temp1.Quantity = firstSupQty;
-         
-                //Get 2nd supplier name
-                secondSupName = ((Label)item.FindControl("lblHeaderS2")).Text.Substring(9, 4);
+                    if (checkAboveMinQty(itemCode, firstSupQty) && firstSupQty > 0)
+                    {
+                        POIntermediate temp1 = new POIntermediate();
+                        //Get 1st supplier name
+                        firstSupName = ((Label)item.FindControl("lblHeaderS1")).Text.Substring(9, 4);
 
+                        //Make 1st DTO
+                        temp1.ItemCode = itemCode;
+                        temp1.SupplierName = firstSupName;
+                        temp1.Quantity = firstSupQty;
+
+                        //Push to list
+                        poList.Add(temp1);
+                    }
+                    else
+                    {
+                        ((Label)item.FindControl("lblMinQty1")).Visible = true;
+                    }
+                }
+                
+               
                 //Get 2nd supplier quantity
-                secondSupQty = ((TextBox)item.FindControl("txtSupp2")).Text;
-                if (String.IsNullOrEmpty(secondSupQty))
+         
+                bool result2 = Int32.TryParse(((TextBox)item.FindControl("txtSupp2")).Text, out secondSupQty);
+                if (result2)
                 {
-                    secondSupQty = "0";
+                    POIntermediate temp2 = new POIntermediate();
+                    //Get 2nd supplier name
+                    secondSupName = ((Label)item.FindControl("lblHeaderS2")).Text.Substring(9, 4);
+
+                    if (checkAboveMinQty(itemCode, secondSupQty) && secondSupQty > 0)
+                    {
+                        //Make 2nd DTO
+                        temp2.ItemCode = itemCode;
+                        temp2.SupplierName = secondSupName;
+                        temp2.Quantity = secondSupQty;
+                        //Push to list
+                        poList.Add(temp2);
+                    }
+                    else
+                    {
+                        ((Label)item.FindControl("lblMinQty2")).Visible = true;
+                    }
                 }
-                //Make 2nd DTO
-                temp2.ItemCode = itemCode;
-                temp2.SupplierName = secondSupName;
-                temp2.Quantity = secondSupQty;
-
-                //Get 3rd supplier name
-                thirdSupName = ((Label)item.FindControl("lblHeaderS3")).Text.Substring(9, 4);
-
+                     
                 //Get 3rd supplier quantity
-                thirdSupQty = ((TextBox)item.FindControl("txtSupp3")).Text;
-                if (String.IsNullOrEmpty(thirdSupQty))
+            
+                bool result3 = Int32.TryParse(((TextBox)item.FindControl("txtSupp3")).Text, out thirdSupQty);
+                if (result3)
                 {
-                    thirdSupQty = "0";
-                }
-                //Make 3rd DTO
-                temp3.ItemCode = itemCode;
-                temp3.SupplierName = thirdSupName;
-                temp3.Quantity = thirdSupQty;
+                    POIntermediate temp3 = new POIntermediate();
 
-                //Push to list
-                poList.Add(temp1);
-                poList.Add(temp2);
-                poList.Add(temp3);
+                    //Get 3rd supplier name
+                    thirdSupName = ((Label)item.FindControl("lblHeaderS3")).Text.Substring(9, 4);
+
+                    if (checkAboveMinQty(itemCode, thirdSupQty) && thirdSupQty > 0)
+                    {
+                        //Make 3rd DTO
+                        temp3.ItemCode = itemCode;
+                        temp3.SupplierName = thirdSupName;
+                        temp3.Quantity = thirdSupQty;
+                        //Push to list
+                        poList.Add(temp3);
+                    }
+                    else
+                    {
+                        ((Label)item.FindControl("lblMinQty3")).Visible = true;
+                    }
+                }
 
             }
-            //lblTest.Text = String.Format("ItemCode: "+itemCode+"1stName: "+firstSupName+"1stQty"+firstSupQty+"2ndName:"+secondSupName+"2ndQty"+secondSupQty+"3rdName:"+thirdSupName+"3rdqty"+thirdSupQty) ;
+            //lblTest.Text += String.Format("ItemCode: "+itemCode+"1stName: "+firstSupName+"1stQty"+firstSupQty+"2ndName:"+secondSupName+"2ndQty"+secondSupQty+"3rdName:"+thirdSupName+"3rdqty"+thirdSupQty) ;
             return poList;
         }
         protected bool checkDuplicates(string itemCode)
@@ -193,5 +228,22 @@ namespace Team10AD_Web.Clerk
             }
             return isDuplicate;
         }
-    }
+        protected bool checkAboveMinQty(string itemCode,  int qty)
+        {
+            bool isAboveMin = true;
+            //int? minOrderQty = 0;
+            //minOrderQty = PurvaBizLogic.GetMinOrderQty(itemCode);
+            //if (qty<= minOrderQty )
+            //{
+            //    isAboveMin = false;
+            //    if (qty == 0)
+            //    {
+            //        isAboveMin = true;
+            //    }
+            //}
+            
+            return isAboveMin;
+        }
+
+           }
 }

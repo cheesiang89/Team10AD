@@ -10,7 +10,7 @@
             <asp:BoundField DataField="QuantityAdjusted" HeaderText="Quantity to Adjust" ReadOnly="True" />
             <asp:TemplateField HeaderText="Reason">
                 <ItemTemplate>
-                    <asp:TextBox ID="ReasonTextBox" runat="server" TextMode="MultiLine" MaxLength="200"></asp:TextBox>
+                    <asp:TextBox ID="ReasonTextBox" runat="server" TextMode="MultiLine" Width="350px" MaxLength="200"></asp:TextBox>
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>

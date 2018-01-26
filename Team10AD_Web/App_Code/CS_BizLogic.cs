@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Script.Serialization;
-using Team10AD_Web.App_Code.Model;
+using Team10AD_Web.Model;
 
 
-namespace Team10AD_Web.App_Code
+namespace Team10AD_Web
 {
     public static class CS_BizLogic
     {

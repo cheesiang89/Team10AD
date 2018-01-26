@@ -58,6 +58,15 @@ namespace Team10AD_Web.Clerk {
         protected global::System.Web.UI.WebControls.GridView dgvCategory;
         
         /// <summary>
+        /// lblCateValidation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCateValidation;
+        
+        /// <summary>
         /// lblMonth control.
         /// </summary>
         /// <remarks>
@@ -74,15 +83,6 @@ namespace Team10AD_Web.Clerk {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList dropMonth;
-        
-        /// <summary>
-        /// dgvDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView dgvDate;
         
         /// <summary>
         /// lblYear control.
@@ -110,6 +110,24 @@ namespace Team10AD_Web.Clerk {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnDateAdd;
+        
+        /// <summary>
+        /// dgvDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView dgvDate;
+        
+        /// <summary>
+        /// lblDateValidation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDateValidation;
         
         /// <summary>
         /// btnGenerate control.

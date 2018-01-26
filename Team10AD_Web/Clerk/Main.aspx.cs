@@ -4,8 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Team10AD_Web.App_Code;
-using Team10AD_Web.App_Code.Model;
+using Team10AD_Web;
+using Team10AD_Web.Model;
 
 namespace Team10AD_Web.Clerk
 {
@@ -17,7 +17,7 @@ namespace Team10AD_Web.Clerk
             {
                 string status = "True";
                 Team10ADModel context = new Team10ADModel();
-                var qry = from r in context.Catalogues where r.ShortfallStatus == status select new { r.ItemCode, r.Description,r.ReorderLevel,r.PendingRequestQuantity,r.BalanceQuantity};
+                var qry = from r in context.Catalogues where r.ShortfallStatus == status select new { r.ItemCode, r.Description,r.ReorderLevel,r.PendingRequestQuantity,r.PendingDeliveryQuantity,r.BalanceQuantity};
                 dgvAlertLowSto.DataSource = qry.ToList();
                 dgvAlertLowSto.DataBind();
 
@@ -27,9 +27,9 @@ namespace Team10AD_Web.Clerk
             }           
         }
 
-        protected string SuggestedOrderQty(int ReorderLevel,int PendingRequestQuantity, int BalanceQuantity)
+        protected string SuggestedOrderQty(int ReorderLevel,int PendingRequestQuantity, int BalanceQuantity,int PendingDeliveryQuantity)
         {
-            int suggestedQty = ReorderLevel + PendingRequestQuantity - BalanceQuantity;
+            int suggestedQty = ReorderLevel + PendingRequestQuantity - BalanceQuantity- PendingDeliveryQuantity;
             return suggestedQty.ToString();
         }
 
