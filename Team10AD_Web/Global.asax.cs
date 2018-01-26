@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Routing;
 using System.Web.Security;
 using Team10AD_Web;
-using Team10AD_Web.App_Code.Model;
+using Team10AD_Web.Model;
 
 namespace Team10AD_Web
 {

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Team10AD_Web.App_Code.Model;
-using Team10AD_Web.App_Code.DTO;
-namespace Team10AD_Web.App_Code
+using Team10AD_Web.Model;
+using Team10AD_Web.DTO;
+namespace Team10AD_Web
 {
     /// <summary>
     /// Summary description for BusinessLogic

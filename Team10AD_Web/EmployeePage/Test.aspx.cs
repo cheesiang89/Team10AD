@@ -6,7 +6,7 @@ using System.Net.Mail;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Team10AD_Web.App_Code;
+using Team10AD_Web;
 
 namespace Team10AD_Web.EmployeePage
 {
