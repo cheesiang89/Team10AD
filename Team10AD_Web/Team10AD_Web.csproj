@@ -396,7 +396,6 @@
     <Compile Include="App_Code\Model\Supplier.cs" />
     <Compile Include="App_Code\Model\SupplierDetail.cs" />
     <Compile Include="App_Code\Model\Team10ADModel.cs" />
-    <Compile Include="App_Code\PurchaseOrderBizLogic.cs" />
     <Compile Include="App_Code\PurvaBizLogic.cs" />
     <Compile Include="App_Code\LogicUtility.cs" />
     <Compile Include="App_Code\RayBizLogic.cs" />
@@ -811,10 +810,7 @@
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="AppCode\" />
-    <Folder Include="App_Code\App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Account\Web.config" />
     <Content Include="Old\Site.Master" />

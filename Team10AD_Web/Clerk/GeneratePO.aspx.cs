@@ -4,9 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Team10AD_Web.App_Code;
-using Team10AD_Web.App_Code.Model;
-using Team10AD_Web.App_Code.DTO;
+using Team10AD_Web;
+using Team10AD_Web.Model;
+using Team10AD_Web.DTO;
 
 namespace Team10AD_Web.Clerk
 {
@@ -110,10 +110,10 @@ namespace Team10AD_Web.Clerk
                 //string test = PurvaBizLogic.SavePOInfo(poList);
                 //lblTest.Text = test;
                 int storeStaffID = (int)Session["clerkid"];
-               // if (PurvaBizLogic.SavePOInfo(poList, storeStaffID))
-               // {
-                //    //Response.Redirect("PurchaseOrderPage.aspx");
-                //}
+                if (PurvaBizLogic.SavePOInfo(poList, storeStaffID))
+                {
+                    Response.Redirect("PurchaseOrderPage.aspx");
+                }
             }
 
             
@@ -230,13 +230,18 @@ namespace Team10AD_Web.Clerk
         }
         protected bool checkAboveMinQty(string itemCode,  int qty)
         {
-            bool isAboveMin = false;
-            int? minOrderQty = 0;
-            minOrderQty = PurvaBizLogic.GetMinOrderQty(itemCode);
-            if (qty>= minOrderQty)
-            {
-                isAboveMin = true;
-            }
+            bool isAboveMin = true;
+            //int? minOrderQty = 0;
+            //minOrderQty = PurvaBizLogic.GetMinOrderQty(itemCode);
+            //if (qty<= minOrderQty )
+            //{
+            //    isAboveMin = false;
+            //    if (qty == 0)
+            //    {
+            //        isAboveMin = true;
+            //    }
+            //}
+            
             return isAboveMin;
         }
 

@@ -5,10 +5,11 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Team10AD_Web;
-using Team10AD_Web.App_Code.Model;
+using Team10AD_Web.Model;
 using System.Data;
 using System.Text.RegularExpressions;
 using System.Text;
+
 
 namespace Team10AD_Web.EmployeePage
 {
@@ -50,6 +51,12 @@ namespace Team10AD_Web.EmployeePage
             //}
 
         }
-
+       
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            dgvCatalogue.DataSource = RayBizLogic.SearchCatalogue(txtBoxSearch.Text);
+            dgvCatalogue.DataBind();
+            dgvCatalogue.AllowPaging = true;
+        }
     }
 }
