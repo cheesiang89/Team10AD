@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
-using Team10AD_Web.App_Code.Model;
+using Team10AD_Web.Model;
 
-namespace Team10AD_Web.App_Code
+namespace Team10AD_Web
 {
     public static class RayBizLogic
     {
@@ -75,7 +75,7 @@ namespace Team10AD_Web.App_Code
         {
             using (Team10ADModel context = new Team10ADModel())
             {
-                App_Code.Model.Requisition req = context.Requisitions.Where(x => x.RequisitionID == reqid).First();
+                Model.Requisition req = context.Requisitions.Where(x => x.RequisitionID == reqid).First();
                 req.Status = "Cancelled";
                 context.SaveChanges();
             }

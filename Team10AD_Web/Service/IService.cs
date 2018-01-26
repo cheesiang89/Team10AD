@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
-using Team10AD_Web.App_Code.Model;
+using Team10AD_Web.Model;
 using System.Text;
 
 namespace Team10AD_Web.Service

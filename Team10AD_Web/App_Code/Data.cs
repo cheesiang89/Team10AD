@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Team10AD_Web.App_Code.Model;
+using Team10AD_Web.Model;
 using Team10AD_Web;
 
-namespace Team10AD_Web.App_Code
+namespace Team10AD_Web
 {
     public class Data
     {

@@ -4,8 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Team10AD_Web.App_Code.Model;
-using Team10AD_Web.App_Code;
+using Team10AD_Web.Model;
+using Team10AD_Web;
 
 namespace Team10AD_Web.EmployeePage
 {
@@ -47,7 +47,7 @@ namespace Team10AD_Web.EmployeePage
         protected Boolean IsRequestorAndPending(int empid, int reqid)
         {
             Team10ADModel context = new Team10ADModel();
-            App_Code.Model.Requisition req = context.Requisitions.Where(x => x.RequisitionID == reqid).First();
+            Model.Requisition req = context.Requisitions.Where(x => x.RequisitionID == reqid).First();
             int currentEmpId = (int)Session["employeeid"];
 
             Boolean reqAndPend;
