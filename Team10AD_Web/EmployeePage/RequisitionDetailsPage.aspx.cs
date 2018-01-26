@@ -21,8 +21,8 @@ namespace Team10AD_Web.EmployeePage
                 string requisitionid = (string)Session["requisitiondetail"];
                 reqid = Convert.ToInt32(requisitionid);
                 Requisition req = RayBizLogic.GetRequisitionById(requisitionid);
-                //int currentEmpId = (int)Session["employeeid"];
-                int currentEmpId = 104;
+                int currentEmpId = (int)Session["employeeid"];
+                //int currentEmpId = 104;
                 int approverID = (int)Session["ApproverID"];
 
                 if (currentEmpId == req.RequestorID && req.Status == "Pending")
