@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
-using Team10AD_Web.App_Code.Model;
+using Team10AD_Web.Model;
 using System.Text;
 
 namespace Team10AD_Web.Service
@@ -13,6 +13,22 @@ namespace Team10AD_Web.Service
     [ServiceContract]
     public interface IService
     {
+
+            /////////////Voucher
+    [OperationContract]
+    [WebInvoke(UriTemplate = "/CreateVoucher", Method = "POST",
+    RequestFormat = WebMessageFormat.Json,
+    ResponseFormat = WebMessageFormat.Json)]
+    string CreateVoucher(WCFVoucherDetail[] input);
+
+
+    ////////////Voucher & UpdateDisbursement
+    [OperationContract]
+    [WebInvoke(UriTemplate = "/UpdateDisbursement", Method = "POST",
+    RequestFormat = WebMessageFormat.Json,
+    ResponseFormat = WebMessageFormat.Json)]
+    string UpdateDisbursement(WCFDisbursementDetail[] input);
+
         /////////////Catalogue
         [OperationContract]
         [WebGet(UriTemplate = "/Catalogue/{itemCode}", ResponseFormat = WebMessageFormat.Json)]
@@ -22,14 +38,14 @@ namespace Team10AD_Web.Service
         [WebGet(UriTemplate = "/Catalogues", ResponseFormat = WebMessageFormat.Json)]
         WCFCatalogue[] ListCatalogues();
 
-        /////////////Disbursement & DisbursementDetail
-        //[OperationContract]
-        //[WebGet(UriTemplate = "/Disbursement/{disbursementID}", ResponseFormat = WebMessageFormat.Json)]
-        //WCFDisbursementDetail[] ListDisbursementDetail(string disbursementID);
+        ///////////Disbursement & DisbursementDetail
+        [OperationContract]
+        [WebGet(UriTemplate = "/Disbursement/{disbursementID}", ResponseFormat = WebMessageFormat.Json)]
+        WCFDisbursementDetail[] ListDisbursementDetail(string disbursementID);
 
-        //[OperationContract]
-        //[WebGet(UriTemplate = "/Disbursements", ResponseFormat = WebMessageFormat.Json)]
-        //WCFDisbursement[] ListDisbursements();
+        [OperationContract]
+        [WebGet(UriTemplate = "/Disbursements/{status}", ResponseFormat = WebMessageFormat.Json)]
+        WCFDisbursement[] ListDisbursements(string status);
 
         /////////////Retrieval & RetrievalDetail
         [OperationContract]
@@ -84,11 +100,6 @@ namespace Team10AD_Web.Service
         void UpdateApprover(WCFApprover a);
 
         [OperationContract]
-        [WebGet(UriTemplate = "/CheckRequisition/{employeeID}", ResponseFormat = WebMessageFormat.Json)]
-        WCFRequisition[] CheckRequisition(string employeeID);
-
-
-        [OperationContract]
         [WebGet(UriTemplate = "/Representative/{depCode}", ResponseFormat = WebMessageFormat.Json)]
         WCFRep[] ListRep(string depCode);
 
@@ -114,6 +125,7 @@ namespace Team10AD_Web.Service
         [WebGet(UriTemplate = "/ClerkLogIn", ResponseFormat = WebMessageFormat.Json)]
         WCFClerkLogIn[] ListClerkLogIn();
 
+        /////////////////Receving Goods
         [OperationContract]
         [WebGet(UriTemplate = "/ReceivingGoods/{poid}", ResponseFormat = WebMessageFormat.Json)]
         WCFReceivingGoodData[] ReceivingGoods(string poid);
@@ -132,18 +144,107 @@ namespace Team10AD_Web.Service
             ResponseFormat = WebMessageFormat.Json)]
         void SavingGoodsReceivedWCF(PostWCFReceivingGoodData[] goodwcflist);
 
+
+        ///////////////////////Requisition
         [OperationContract]
-        [WebGet(UriTemplate = "/ListDisbursementDetail/{disbursementID}", ResponseFormat = WebMessageFormat.Json)]
-        WCFDisbursementDetail[] ListDisbursementDetail(string disbursementID);
+        [WebGet(UriTemplate = "/PendingRequisitionList", ResponseFormat = WebMessageFormat.Json)]
+        WCFRequisition[] PendingRequisitionList();
 
         [OperationContract]
-        [WebGet(UriTemplate = "/ListDisbursement", ResponseFormat = WebMessageFormat.Json)]
-        WCFDisbursement[] ListDisbursements();
+        [WebGet(UriTemplate = "/PendingRequisitionListByEmp/{empid}", ResponseFormat = WebMessageFormat.Json)]
+        WCFRequisition[] PendingRequisitionListByEmp(string empid);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/WCFRequisitionDetail/{reqid}", ResponseFormat = WebMessageFormat.Json)]
+        WCFRequisitionDetail[] RequisitionDetailList(string reqid);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/WCFRequisitionApproval", Method = "POST",
+            RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json)]
+        void RequisitionApproval(WCFRequisitionApproval wcfReq);
+
+        //[OperationContract]
+        //[WebGet(UriTemplate = "/ListDisbursementDetail/{disbursementID}", ResponseFormat = WebMessageFormat.Json)]
+        //WCFDisbursementDetail[] ListDisbursementDetail(string disbursementID);
+
+        //[OperationContract]
+        //[WebGet(UriTemplate = "/ListDisbursementDetail/{disbursementID}", ResponseFormat = WebMessageFormat.Json)]
+        //WCFDisbursementDetail[] ListDisbursementDetail(string disbursementID);
+
+
+        //[OperationContract]
+        //[WebGet(UriTemplate = "/ListDisbursement", ResponseFormat = WebMessageFormat.Json)]
+        //WCFDisbursement[] ListDisbursements();
 
         /////////////Test
         [OperationContract]
         [WebGet(UriTemplate = "/Test", ResponseFormat = WebMessageFormat.Json)]
         Test TestM();
+    }
+    [DataContract]
+    public class WCFVoucherDetail
+    {
+        string itemCode;
+        string quantityAdjusted;
+        string reason;
+        int storeStaffID;
+
+        public static WCFVoucherDetail Make(string itemCode, string quantityAdjusted, string reason, int storeStaffID)
+        {
+            WCFVoucherDetail t = new WCFVoucherDetail();
+            t.itemCode = itemCode;
+            t.quantityAdjusted = quantityAdjusted;
+            t.reason = reason;
+            t.storeStaffID = storeStaffID;
+            return t;
+        }
+
+        [DataMember]
+        public string ItemCode
+        {
+            get { return itemCode; }
+            set { itemCode = value; }
+        }
+        [DataMember]
+        public string QuantityAdjusted
+        {
+            get
+            {
+                return quantityAdjusted;
+            }
+
+            set
+            {
+                quantityAdjusted = value;
+            }
+        }
+        [DataMember]
+        public string Reason
+        {
+            get
+            {
+                return reason;
+            }
+
+            set
+            {
+                reason = value;
+            }
+        }
+        [DataMember]
+        public int StoreStaffID
+        {
+            get
+            {
+                return storeStaffID;
+            }
+
+            set
+            {
+                storeStaffID = value;
+            }
+        }
     }
 
     [DataContract]
@@ -255,8 +356,10 @@ namespace Team10AD_Web.Service
         string quantityRequested;
         string quantityCollected;
         string description;//catalogue
+        string unitOfMeature;
+        string storeStaffID;
 
-        public static WCFDisbursementDetail Make(string disbursementID, string remarks, string itemCode, string quantityRequested, string quantityCollected, string description)
+        public static WCFDisbursementDetail Make(string disbursementID, string remarks, string itemCode, string quantityRequested, string quantityCollected, string description, string unitOfMeature)
         {
             WCFDisbursementDetail c = new WCFDisbursementDetail();
             c.DisbursementID = disbursementID;
@@ -265,6 +368,7 @@ namespace Team10AD_Web.Service
             c.QuantityRequested = quantityRequested;
             c.QuantityCollected = quantityCollected;
             c.Description = description;
+            c.unitOfMeature = unitOfMeature;
             return c;
         }
 
@@ -316,6 +420,33 @@ namespace Team10AD_Web.Service
 
             set { description = value; }
         }
+
+        [DataMember]
+        public string UnitOfMeature
+        {
+            get
+            {
+                return unitOfMeature;
+            }
+
+            set
+            {
+                unitOfMeature = value;
+            }
+        }
+        [DataMember]
+        public string StoreStaffID
+        {
+            get
+            {
+                return storeStaffID;
+            }
+
+            set
+            {
+                storeStaffID = value;
+            }
+        }
     }
 
 
@@ -327,14 +458,16 @@ namespace Team10AD_Web.Service
         string description;
         string location;
         int? balanceQuantity;
+        string unitOfMeature;
 
-        public static WCFCatalogue Make(string itemCode, string description, string location, int? balanceQuantity)
+        public static WCFCatalogue Make(string itemCode, string description, string location, int? balanceQuantity, string unitOfMeature)
         {
             WCFCatalogue c = new WCFCatalogue();
             c.itemCode = itemCode;
             c.description = description;
             c.location = location;
             c.balanceQuantity = balanceQuantity;
+            c.UnitOfMeature = unitOfMeature;
             return c;
         }
 
@@ -364,6 +497,19 @@ namespace Team10AD_Web.Service
         {
             get { return balanceQuantity; }
             set { balanceQuantity = value; }
+        }
+
+        public string UnitOfMeature
+        {
+            get
+            {
+                return unitOfMeature;
+            }
+
+            set
+            {
+                unitOfMeature = value;
+            }
         }
     }
 
@@ -900,81 +1046,6 @@ namespace Team10AD_Web.Service
     }
 
     [DataContract]
-    public class WCFRequisition
-    {
-        int requisitionID;
-        string requisitionDate;
-        string approvalDate;
-        int? requestorID;
-        string status;
-        string remark;
-        int? approverID;
-
-        public static WCFRequisition Make(int requisitionID, string requisitionDate, string approvalDate, int? requestorID, string status, string remark, int? approverID)
-        {
-            WCFRequisition c = new WCFRequisition();
-            c.requisitionID = requisitionID;
-            c.requisitionDate = requisitionDate;
-            c.approvalDate = approvalDate;
-            c.requestorID = requestorID;
-            c.status = status;
-            c.remark = remark;
-            c.approverID = approverID;
-            return c;
-        }
-
-        [DataMember]
-        public int RequisitionID
-        {
-            get { return requisitionID; }
-            set { requisitionID = value; }
-        }
-
-        [DataMember]
-        public string RequisitionDate
-        {
-            get { return requisitionDate; }
-            set { requisitionDate = value; }
-        }
-
-        [DataMember]
-        public string ApprovalDate
-        {
-            get { return approvalDate; }
-            set { approvalDate = value; }
-        }
-
-        [DataMember]
-        public int? RequestorID
-        {
-            get { return requestorID; }
-            set { requestorID = value; }
-        }
-
-        [DataMember]
-        public string Status
-        {
-            get { return status; }
-            set { status = value; }
-        }
-
-        [DataMember]
-        public string Remark
-        {
-            get { return remark; }
-            set { remark = value; }
-        }
-
-        [DataMember]
-        public int? ApproverID
-        {
-            get { return approverID; }
-            set { approverID = value; }
-        }
-
-    }
-
-    [DataContract]
     public class WCFReceivingGoodData
     {
         string creationDate;
@@ -1044,35 +1115,24 @@ namespace Team10AD_Web.Service
     [DataContract]
     public class PostWCFReceivingGoodData
     {
-        string creationDate;
         string poId;
         string itemCode;
         string quantity;
-        string description;
         string supplierName;
         string remark;
         string storeStaffID;
 
-        public static PostWCFReceivingGoodData Make(string creationDate, string poId, string itemCode, string quantity, string description, string supplierName, string remark, string storeStaffID)
+        public static PostWCFReceivingGoodData Make(string poId, string itemCode, string quantity, string supplierName, string remark, string storeStaffID)
         {
             PostWCFReceivingGoodData goods = new PostWCFReceivingGoodData();
-            goods.creationDate = creationDate;
             goods.poId = poId;
             goods.itemCode = itemCode;
             goods.quantity = quantity;
-            goods.description = description;
             goods.supplierName = supplierName;
             goods.remark = remark;
             goods.storeStaffID = storeStaffID;
 
             return goods;
-        }
-
-        [DataMember]
-        public string CreationDate
-        {
-            get { return creationDate; }
-            set { creationDate = value; }
         }
 
         [DataMember]
@@ -1094,13 +1154,6 @@ namespace Team10AD_Web.Service
         {
             get { return quantity; }
             set { quantity = value; }
-        }
-
-        [DataMember]
-        public string Description
-        {
-            get { return description; }
-            set { description = value; }
         }
 
         [DataMember]
@@ -1161,6 +1214,150 @@ namespace Team10AD_Web.Service
         {
             get { return supplierName; }
             set { supplierName = value; }
+        }
+    }
+
+    [DataContract]
+    public class WCFRequisition
+    {
+        string reqId;
+        string reqDate;
+        string name;
+        string empId;
+
+        public static WCFRequisition Make(string reqId, string reqDate, string name, string empId)
+        {
+            WCFRequisition wcfreq = new WCFRequisition();
+            wcfreq.reqId = reqId;
+            wcfreq.reqDate = reqDate;
+            wcfreq.name = name;
+            wcfreq.empId = empId;
+
+            return wcfreq;
+        }
+
+        [DataMember]
+        public string ReqId
+        {
+            get { return reqId; }
+            set { reqId = value; }
+        }
+
+        [DataMember]
+        public string ReqDate
+        {
+            get { return reqDate; }
+            set { reqDate = value; }
+        }
+
+        [DataMember]
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+
+        [DataMember]
+        public string EmpId
+        {
+            get { return empId; }
+            set { empId = value; }
+        }
+    }
+
+    [DataContract]
+    public class WCFRequisitionDetail
+    {
+        string reqId;
+        string itemCode;
+        string quantityRequested;
+        string description;
+
+        public static WCFRequisitionDetail Make(string reqId, string itemCode, string quantityRequested, string description)
+        {
+            WCFRequisitionDetail wcfreqdetail = new WCFRequisitionDetail();
+            wcfreqdetail.reqId = reqId;
+            wcfreqdetail.itemCode = itemCode;
+            wcfreqdetail.quantityRequested = quantityRequested;
+            wcfreqdetail.description = description;
+
+            return wcfreqdetail;
+        }
+
+        [DataMember]
+        public string ReqId
+        {
+            get { return reqId; }
+            set { reqId = value; }
+        }
+
+        [DataMember]
+        public string ItemCode
+        {
+            get { return itemCode; }
+            set { itemCode = value; }
+        }
+
+        [DataMember]
+        public string QuantityRequested
+        {
+            get { return quantityRequested; }
+            set { quantityRequested = value; }
+        }
+
+        [DataMember]
+        public string Description
+        {
+            get { return description; }
+            set { description = value; }
+        }
+    }
+
+    [DataContract]
+    public class WCFRequisitionApproval
+    {
+        string reqId;
+        string status;
+        string approverId;
+        string remark;
+
+        public static WCFRequisitionApproval Make(string reqId, string status, string approverId, string remark)
+        {
+            WCFRequisitionApproval req = new WCFRequisitionApproval();
+            req.reqId = reqId;
+            req.status = status;
+            req.approverId = approverId;
+            req.remark = remark;
+
+            return req;
+        }
+
+        [DataMember]
+        public string ReqId
+        {
+            get { return reqId; }
+            set { reqId = value; }
+        }
+
+        [DataMember]
+        public string Status
+        {
+            get { return status; }
+            set { status = value; }
+        }
+
+        [DataMember]
+        public string ApproverId
+        {
+            get { return approverId; }
+            set { approverId = value; }
+        }
+
+        [DataMember]
+        public string Remark
+        {
+            get { return remark; }
+            set { remark = value; }
         }
     }
 }

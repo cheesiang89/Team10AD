@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Team10AD_Web.App_Code.Model; 
+using Team10AD_Web.Model; 
 
 namespace Team10AD_Web.EmployeePage
 {
@@ -30,7 +30,7 @@ namespace Team10AD_Web.EmployeePage
                     lblSts2.CssClass = "text-danger";
                 }
                 lblColDate2.Text = (Convert.ToDateTime(disbursement.CollectionDate)).ToString("dd-MMM-yyyy");
-                Team10AD_Web.App_Code.Model.Employee emp = (Team10AD_Web.App_Code.Model.Employee)Session["Employee"];
+                Model.Employee emp = (Model.Employee)Session["Employee"];
                 lblEmpName2.Text = (emp.Name).ToString();
                 lblEmpEmailAdd2.Text = emp.Email;
                 lblDeptRepName2.Text = b.GetEmployeeName(disbursement.Department.RepresentativeID);

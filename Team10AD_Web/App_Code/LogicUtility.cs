@@ -5,9 +5,9 @@ using System.Net;
 using System.Net.Mail;
 using System.Text;
 using System.Web;
-using Team10AD_Web.App_Code.Model;
+using Team10AD_Web.Model;
 
-namespace Team10AD_Web.App_Code
+namespace Team10AD_Web
 {
     public class LogicUtility
     {
