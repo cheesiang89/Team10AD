@@ -112,7 +112,8 @@ namespace Team10AD_Web.Clerk
                 int storeStaffID = (int)Session["clerkid"];
                 if (PurvaBizLogic.SavePOInfo(poList, storeStaffID))
                 {
-                    Response.Redirect("PurchaseOrderPage.aspx");
+                    //Redirect triggers only if one of the items above min qty
+                    Response.Redirect("~/Clerk/PurchaseOrderPage.aspx");
                 }
             }
 
@@ -155,7 +156,7 @@ namespace Team10AD_Web.Clerk
                         //Push to list
                         poList.Add(temp1);
                     }
-                    else
+                    else if(firstSupQty!=0)
                     {
                         ((Label)item.FindControl("lblMinQty1")).Visible = true;
                     }
@@ -180,7 +181,7 @@ namespace Team10AD_Web.Clerk
                         //Push to list
                         poList.Add(temp2);
                     }
-                    else
+                    else if(secondSupQty!=0)
                     {
                         ((Label)item.FindControl("lblMinQty2")).Visible = true;
                     }
@@ -205,7 +206,7 @@ namespace Team10AD_Web.Clerk
                         //Push to list
                         poList.Add(temp3);
                     }
-                    else
+                    else if(thirdSupQty!=0)
                     {
                         ((Label)item.FindControl("lblMinQty3")).Visible = true;
                     }
@@ -231,19 +232,18 @@ namespace Team10AD_Web.Clerk
         protected bool checkAboveMinQty(string itemCode,  int qty)
         {
             bool isAboveMin = true;
-            //int? minOrderQty = 0;
-            //minOrderQty = PurvaBizLogic.GetMinOrderQty(itemCode);
-            //if (qty<= minOrderQty )
-            //{
-            //    isAboveMin = false;
-            //    if (qty == 0)
-            //    {
-            //        isAboveMin = true;
-            //    }
-            //}
-            
+            // Check item above min qty or 0 
+
+            int? minOrderQty = 0;
+            minOrderQty = PurvaBizLogic.GetMinOrderQty(itemCode);
+            if (qty <= minOrderQty)
+            {
+                isAboveMin = false;
+                
+            }
+
             return isAboveMin;
         }
 
-           }
+    }
 }

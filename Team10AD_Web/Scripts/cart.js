@@ -102,7 +102,7 @@ function makeRequisition() {
                     //Devare session data
                     deleteCartSession();
                     //Redirect if success
-                    window.location.href = "RequisitionStatus.aspx";
+                   // window.location.href = "RequisitionStatus.aspx";
                 },
                 error: function (r) {
                     console.log(r.responseText);
