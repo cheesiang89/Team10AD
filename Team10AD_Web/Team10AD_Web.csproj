@@ -385,6 +385,7 @@
     <Compile Include="App_Code\Model\GoodsReceivedRecordDetail.cs" />
     <Compile Include="App_Code\Model\PurchaseOrder.cs" />
     <Compile Include="App_Code\Model\PurchaseOrderDetail.cs" />
+    <Compile Include="App_Code\Model\PurchaseOrderDetailsView.cs" />
     <Compile Include="App_Code\Model\Requisition.cs" />
     <Compile Include="App_Code\Model\RequisitionDetail.cs" />
     <Compile Include="App_Code\Model\Retrieval.cs" />
