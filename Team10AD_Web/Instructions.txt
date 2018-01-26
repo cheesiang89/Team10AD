@@ -1,16 +1,16 @@
 ﻿Instructions on deploying to IIS
 
-*****Master Pages and pages********
+*****Master Pages and pages (FOR INFO Only, no action needed) ********
 1. Ensure all html path uses e.g. href="<%= Page.ResolveUrl("~/EmployeePage/RequisitionCart") %>"
 2. For "runat="server"" controls, in Code  Behind, use e.g. eqStatus.Attributes["href"] = "~/EmployeePage/RequisitionStatus", 
 do not set the "href" directly
 3. For e.g. <asp:ScriptReference Path="~/Scripts/Template/jquery.min.js" />, do not use "Page.Resolve"
-4. Register the WCF Services: e.g.
+4. Registering the WCF Services: e.g.
  <Services>
   <asp:ServiceReference Path="~/Service/Service.svc" />
    <asp:ServiceReference Path="~/Service/CartService.svc" />
   </Services>
-  
+
 
   ***In IIS****
   1. Copy and paste the folder from Github e.g. "Team10AD_Web" 
