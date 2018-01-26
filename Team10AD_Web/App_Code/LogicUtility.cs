@@ -5,23 +5,43 @@ using System.Net;
 using System.Net.Mail;
 using System.Text;
 using System.Web;
-using Team10AD_Web.App_Code.Model;
+using Team10AD_Web.Model;
 
-namespace Team10AD_Web.App_Code
+namespace Team10AD_Web
 {
     public class LogicUtility
     {
-        private static LogicUtility instance;
-        private LogicUtility() { }
+        //private static LogicUtility instance;
+        //private LogicUtility() { }
+
+        //public static LogicUtility Instance
+        //{
+        //    get
+        //    {
+        //        if (instance == null)
+        //        {
+        //            instance = new LogicUtility();
+        //        }
+        //        return instance;
+        //    }
+        //}
+
+        private static readonly LogicUtility instance = new LogicUtility();
+
+        // Explicit static constructor to tell C# compiler
+        // not to mark type as beforefieldinit
+        static LogicUtility()
+        {
+        }
+
+        private LogicUtility()
+        {
+        }
 
         public static LogicUtility Instance
         {
             get
             {
-                if (instance == null)
-                {
-                    instance = new LogicUtility();
-                }
                 return instance;
             }
         }
@@ -73,12 +93,11 @@ namespace Team10AD_Web.App_Code
         }
 
         //On UnAssign or Assign rep, notify (HOD-> Employee)
-        public string SendRepEmail(string departmentCode, string flag)
+        public string SendRepEmail(string repName, string flag)
         {
             string result = "ERROR";
 
             //Get email Details: 
-            string repName = BusinessLogic_Sam.checkCurrentRep(departmentCode);
             string repEmail = "";
             string body = "";
             string subject = "";
@@ -199,7 +218,7 @@ namespace Team10AD_Web.App_Code
         }
 
         //On Approve/reject requisition (Approver -> Employee) notify
-        public string SendRequisitionResponseEmail(int requisitionID, string requestorName, string remarks, string flag)
+        public string SendRequisitionResponseEmail(int requisitionID, string remarks, string flag)
         {
             string result = "ERROR";
             string requestorEmail = "";
@@ -207,13 +226,14 @@ namespace Team10AD_Web.App_Code
             string body = "";
             string subject = "";
             string fromEmailAddress = "logicuniversity2018@gmail.com";
-
+            string requestorName = "";
             using (Model.Team10ADModel m = new Model.Team10ADModel())
             {
                 //FOR TESTING-Hardcoded email
                 // requestorEmail = "e0227390@u.nus.edu";
-
-                requestorEmail = m.Employees.Where(x => x.Name == requestorName).Select(x => x.Email).First();
+                int? requestorID = m.Requisitions.Where(x => x.RequisitionID == requisitionID).Select(x => x.RequestorID).First();
+                requestorEmail = m.Employees.Where(x => x.EmployeeID == requestorID).Select(x => x.Email).First();
+                requestorName = m.Employees.Where(x => x.EmployeeID == requestorID).Select(x => x.Name).First();
                 requisitionDate = m.Requisitions.Where(x => x.RequisitionID == requisitionID).Select(x => x.RequisitionDate).First().ToString();
             }
 
@@ -266,7 +286,7 @@ namespace Team10AD_Web.App_Code
                 //repEmail = "e0227390@u.nus.edu";
 
                 repName = m.Disbursements.Where(x => x.DisbursementID == disbursementID)
-                    .Select(x => x.Department).Select(x => x.Employee).Select(x => x.Name).First();
+                    .Select(x => x.Department).Select(x => x.Employee1).Select(x => x.Name).First();
                 repEmail = m.Employees.Where(x => x.Name == repName).Select(x => x.Email).First();
                 collectionPoint = m.Disbursements.Where(x => x.DisbursementID == disbursementID)
                     .Select(x => x.CollectionPoint).Select(x => x.PointName).First();

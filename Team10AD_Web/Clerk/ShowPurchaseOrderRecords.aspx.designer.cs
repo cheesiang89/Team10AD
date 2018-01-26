@@ -11,7 +11,7 @@ namespace Team10AD_Web.Clerk
 {
 
 
-    public partial class OrderTrend
+    public partial class ShowPurchaseOrderRecords
     {
     }
 }

@@ -6,8 +6,8 @@ using System.ServiceModel;
 using System.ServiceModel.Activation;
 using System.ServiceModel.Web;
 using System.Text;
-using Team10AD_Web.App_Code;
-using Team10AD_Web.App_Code.Model;
+using Team10AD_Web;
+using Team10AD_Web.Model;
 namespace Team10AD_Web.Service
 {
     [ServiceContract(Namespace = "")]

@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Team10AD_Web.App_Code.Model;
+using Team10AD_Web.Model;
 using System.Web.Services;
 
-namespace Team10AD_Web.App_Code
+namespace Team10AD_Web
 {
 
     public class BusinessLogic_Sam
@@ -15,7 +15,7 @@ namespace Team10AD_Web.App_Code
         {
             using (Team10ADModel entities = new Team10ADModel())
             {
-                App_Code.Model.Employee emp = entities.Employees.Where(x => x.Name == approverName).First();
+                Model.Employee emp = entities.Employees.Where(x => x.Name == approverName).First();
                 int approverID = emp.EmployeeID;
                 return approverID;
             }
@@ -25,7 +25,7 @@ namespace Team10AD_Web.App_Code
         //Return EmployeeList excluding the HOD
         public static List<Employee> EmployeeList(string departmentCode, int hodID)
         {
-            using (App_Code.Model.Team10ADModel entities = new App_Code.Model.Team10ADModel())
+            using (Model.Team10ADModel entities = new Model.Team10ADModel())
             {
                 var deptEmp = (from x in entities.Employees where x.DepartmentCode == departmentCode && x.EmployeeID != hodID select x).ToList();
                 return deptEmp;
@@ -35,11 +35,11 @@ namespace Team10AD_Web.App_Code
 
         public static string checkCurrentApprover(string departmentCode)
         {
-            using (App_Code.Model.Team10ADModel entities = new App_Code.Model.Team10ADModel())
+            using (Model.Team10ADModel entities = new Model.Team10ADModel())
             {
                 var qry = entities.Departments.Where(x => x.DepartmentCode == departmentCode).Select(x => new { x.ApproverID }).First();
                 int? approverID = qry.ApproverID;
-                App_Code.Model.Employee currentApproverID = entities.Employees.Where(x => x.EmployeeID == approverID).First();
+                Model.Employee currentApproverID = entities.Employees.Where(x => x.EmployeeID == approverID).First();
                 string currentApproverName = currentApproverID.Name;
                 return currentApproverName;
             }
@@ -48,11 +48,11 @@ namespace Team10AD_Web.App_Code
 
         public static string checkCurrentRep(string departmentCode)
         {
-            using (App_Code.Model.Team10ADModel entities = new App_Code.Model.Team10ADModel())
+            using (Model.Team10ADModel entities = new Model.Team10ADModel())
             {
                 var qry = entities.Departments.Where(x => x.DepartmentCode == departmentCode).Select(x => new { x.RepresentativeID }).First();
                 int? repID = qry.RepresentativeID;
-                App_Code.Model.Employee currentRepID = entities.Employees.Where(x => x.EmployeeID == repID).First();
+                Model.Employee currentRepID = entities.Employees.Where(x => x.EmployeeID == repID).First();
                 string currentRepName = currentRepID.Name;
                 return currentRepName;
             }
@@ -60,7 +60,7 @@ namespace Team10AD_Web.App_Code
 
         public static int checkPendingRequisitionQuantity(string selectedApproverName)
         {
-            using (App_Code.Model.Team10ADModel entities = new App_Code.Model.Team10ADModel())
+            using (Model.Team10ADModel entities = new Model.Team10ADModel())
             {
                 int selectedApproverID = ((from x in entities.Employees where x.Name == selectedApproverName select new { x.EmployeeID }).First()).EmployeeID;
                 int pendingReqQty = (from x in entities.Requisitions where x.RequestorID == selectedApproverID && x.Status == "Pending" select x).Count();
@@ -73,7 +73,7 @@ namespace Team10AD_Web.App_Code
         {
             string status = "";
 
-            using (App_Code.Model.Team10ADModel entities = new App_Code.Model.Team10ADModel())
+            using (Model.Team10ADModel entities = new Model.Team10ADModel())
             {
 
                 Department deptApprover = entities.Departments.Where(p => p.DepartmentCode == departmentCode).First<Department>();
@@ -81,19 +81,24 @@ namespace Team10AD_Web.App_Code
                 deptApprover.ApprovingPeriodStart = startDate;
                 deptApprover.ApprovingPeriodEnd = endDate;
                 entities.SaveChanges();
+                //Send email
+                string selectedApproverName = entities.Employees.Where(x => x.EmployeeID == ApproverID).Select(x => x.Name).First();
+                LogicUtility.Instance.SendApproverEmail(selectedApproverName, startDate.ToShortTimeString(), endDate.ToShortTimeString());
                 status = "success";
             }
             return status;
         }
 
 
-        public static void assignNewRepresentative(string newRepName, string departmentCode)
+        public static void assignNewRepresentative(string oldRepName, string newRepName, string departmentCode)
         {
-            using (App_Code.Model.Team10ADModel entities = new App_Code.Model.Team10ADModel())
+            using (Model.Team10ADModel entities = new Model.Team10ADModel())
             {
                 int newRepID = ((from x in entities.Employees where x.Name == newRepName select new { x.EmployeeID }).First()).EmployeeID;
                 Department deptRepresentative = entities.Departments.Where(p => p.DepartmentCode == departmentCode).First<Department>();
                 deptRepresentative.RepresentativeID = newRepID;
+                LogicUtility.Instance.SendRepEmail(newRepName, "ASSIGN");
+                LogicUtility.Instance.SendRepEmail(oldRepName, "UNASSIGN");
                 entities.SaveChanges();
 
             }
@@ -103,7 +108,7 @@ namespace Team10AD_Web.App_Code
         public static object getDepartmentPendingRequisition(string departmentCode)
         {
             object empPendingReq = new object();
-            using (App_Code.Model.Team10ADModel entities = new App_Code.Model.Team10ADModel())
+            using (Model.Team10ADModel entities = new Model.Team10ADModel())
             {
 
                 var qry1 = from x in entities.Requisitions
@@ -119,7 +124,7 @@ namespace Team10AD_Web.App_Code
         public static object getDepartmentRequisitionList(string departmentCode)
         {
             object empDptReqList = new object();
-            using (App_Code.Model.Team10ADModel entities = new App_Code.Model.Team10ADModel())
+            using (Model.Team10ADModel entities = new Model.Team10ADModel())
             {
                 var qry2 = from x in entities.Requisitions
                            from y in entities.Employees
@@ -138,10 +143,13 @@ namespace Team10AD_Web.App_Code
                 Requisition req = entities.Requisitions.Where(p => p.RequisitionID == requisitionId).SingleOrDefault();
                 req.Status = "Approved";
                 req.Remarks = remarks;
-                req.ApprovalDate = DateTime.Today;
+                req.ApprovalDate = DateTime.Now;
                 req.ApproverID = Convert.ToInt32(approverID);
                 //RequisitionDetail reqDetails = entities.RequisitionDetails.Where()
                 entities.SaveChanges();
+                //Send email
+
+                LogicUtility.Instance.SendRequisitionResponseEmail(requisitionId, remarks, "APPROVED");
             }
 
         }
@@ -195,7 +203,9 @@ namespace Team10AD_Web.App_Code
                     req.Remarks = remarks;
                     entities.SaveChanges();
                 }
-            
+            //Send email
+
+            LogicUtility.Instance.SendRequisitionResponseEmail(requisitionId, remarks, "REJECTED");
         }
 
     }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Team10AD_Web.App_Code.Model;
+using Team10AD_Web.Model;
 
 namespace Team10AD_Web.Clerk
 {
@@ -15,7 +15,23 @@ namespace Team10AD_Web.Clerk
             Supplier supplier = (Supplier)Session["Supplier"];
             dvSupplierDetail.DataSource = new List<Supplier> { supplier };
             dvSupplierDetail.DataBind();
-          
+            //lblSupCode.Text = "Supplier Code";
+            //string supplierCode = txtBoxSupCode.Text;
+
+            //lblSupName.Text = "Supplier Name";
+            //string supplierName = txtBoxSupName.Text;
+
+            //lblConName.Text = "Contact Name";
+            //string contactName = txtBoxConName.Text;
+            //lblPhone.Text = "Phone No.";
+            //int phoneNumber = Convert.ToInt32(txtBoxConName.Text);
+
+
+            //lblFax.Text = "Fax No.";
+            //int faxNumber = Convert.ToInt32(txtBoxFax.Text);
+
+            //lblAddress.Text = "Address";
+            //string address = txtBoxAddress.Text;
 
 
         }

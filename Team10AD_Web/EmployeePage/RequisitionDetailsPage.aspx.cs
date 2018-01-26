@@ -4,8 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Team10AD_Web.App_Code;
-using Team10AD_Web.App_Code.Model;
+using Team10AD_Web;
+using Team10AD_Web.Model;
 
 namespace Team10AD_Web.EmployeePage
 {
@@ -21,12 +21,13 @@ namespace Team10AD_Web.EmployeePage
                 string requisitionid = (string)Session["requisitiondetail"];
                 reqid = Convert.ToInt32(requisitionid);
                 Requisition req = RayBizLogic.GetRequisitionById(requisitionid);
-                //int currentEmpId = (int)Session["employeeid"];
-                int currentEmpId = 104;
+                int currentEmpId = (int)Session["employeeid"];
+                //int currentEmpId = 104;
                 int approverID = (int)Session["ApproverID"];
 
                 if (currentEmpId == req.RequestorID && req.Status == "Pending")
                 {
+                    
                     CancelButton.Visible = true;
                 }
                 else if(currentEmpId == approverID && req.Status =="Pending")
@@ -35,6 +36,7 @@ namespace Team10AD_Web.EmployeePage
                     btnReject.Visible = true;
                     lblRemarks.Visible = true;
                     txtBoxRemarks.Visible = true;
+                    txtBoxRemarks.ReadOnly = false;
                 }
                 //if currentEmId = approverId, approve and reject buttons will show
 
@@ -43,7 +45,7 @@ namespace Team10AD_Web.EmployeePage
                 dgvRequisitionDetail.DataBind();
                 dgvRequisitionDetail.AllowPaging = true;
 
-                App_Code.Model.Employee emp = context.Employees.Where(x => x.EmployeeID == req.RequestorID).First();
+                Model.Employee emp = context.Employees.Where(x => x.EmployeeID == req.RequestorID).First();
                 NameTextBox.Text = emp.Name;
                 StatusTextBox.Text = req.Status;
                 txtBoxRemarks.Text = req.Remarks;
@@ -75,9 +77,9 @@ namespace Team10AD_Web.EmployeePage
             try
             {
                 reqid = Convert.ToInt32(requisitionid);
-                string approverID = (string)Session["ApproverID"];
+                int approverID = (int)Session["ApproverID"];
                 remarks = txtBoxRemarks.Text;
-                BusinessLogic_Sam.approveRequisition(reqid,remarks,approverID);
+                BusinessLogic_Sam.approveRequisition(reqid,remarks,approverID.ToString());
                 BusinessLogic_Sam.updateItemStockLevel(reqListItems);
                 Response.Redirect("DepartmentRequisition.aspx");
             }
