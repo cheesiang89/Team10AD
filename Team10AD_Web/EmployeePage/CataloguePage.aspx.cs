@@ -9,6 +9,7 @@ using Team10AD_Web.App_Code.Model;
 using System.Data;
 using System.Text.RegularExpressions;
 using System.Text;
+using Team10AD_Web.App_Code;
 
 namespace Team10AD_Web.EmployeePage
 {
@@ -50,6 +51,12 @@ namespace Team10AD_Web.EmployeePage
             //}
 
         }
-
+       
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            dgvCatalogue.DataSource = RayBizLogic.SearchCatalogue(txtBoxSearch.Text);
+            dgvCatalogue.DataBind();
+            dgvCatalogue.AllowPaging = true;
+        }
     }
 }

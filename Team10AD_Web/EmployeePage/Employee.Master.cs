@@ -11,7 +11,16 @@ namespace Team10AD_Web.EmployeePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (((int)Session["employeeid"])==((int)Session["ApproverID"]))
+            {
+                reqStatus.Visible = false;
+            }
+            else
+            {
+                reqStatus.Visible = true;
+                deptReq.Visible = false;
+            }
+            
         }
     }
 }

@@ -27,6 +27,7 @@ namespace Team10AD_Web.EmployeePage
 
                 if (currentEmpId == req.RequestorID && req.Status == "Pending")
                 {
+                    
                     CancelButton.Visible = true;
                 }
                 else if(currentEmpId == approverID && req.Status =="Pending")
@@ -35,6 +36,7 @@ namespace Team10AD_Web.EmployeePage
                     btnReject.Visible = true;
                     lblRemarks.Visible = true;
                     txtBoxRemarks.Visible = true;
+                    txtBoxRemarks.ReadOnly = false;
                 }
                 //if currentEmId = approverId, approve and reject buttons will show
 
