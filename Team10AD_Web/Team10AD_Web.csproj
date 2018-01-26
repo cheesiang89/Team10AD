@@ -159,6 +159,7 @@
     <Content Include="Clerk\RequisitionHistory.aspx" />
     <Content Include="Clerk\RequisitionRecord.aspx" />
     <Content Include="Clerk\RequisitionReportPage.aspx" />
+    <Content Include="Clerk\RequisitionTrendChart.aspx" />
     <Content Include="Clerk\RetrievalDetailPage.aspx" />
     <Content Include="Clerk\RetrievalList.aspx" />
     <Content Include="Clerk\ShowPurchaseOrderDetails.aspx" />
@@ -277,6 +278,7 @@
     </Content>
     <None Include="Scripts\Template\jquery-1.12.4.intellisense.js" />
     <Content Include="Scripts\catalogue.js" />
+    <Content Include="Scripts\chart.js" />
     <Content Include="Scripts\Template\bootstrap-flash-alert.min.js" />
     <Content Include="Scripts\cart.js" />
     <Content Include="Scripts\Template\jquery-1.12.4.js" />
@@ -547,6 +549,13 @@
     </Compile>
     <Compile Include="Clerk\RequisitionReportPage.aspx.designer.cs">
       <DependentUpon>RequisitionReportPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Clerk\RequisitionTrendChart.aspx.cs">
+      <DependentUpon>RequisitionTrendChart.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Clerk\RequisitionTrendChart.aspx.designer.cs">
+      <DependentUpon>RequisitionTrendChart.aspx</DependentUpon>
     </Compile>
     <Compile Include="Clerk\RetrievalDetailPage.aspx.cs">
       <DependentUpon>RetrievalDetailPage.aspx</DependentUpon>
