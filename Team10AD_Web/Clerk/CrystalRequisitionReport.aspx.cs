@@ -47,8 +47,24 @@ namespace Team10AD_Web.Clerk
                         dr = dt.NewRow();
                         index = dt.Rows.IndexOf(dr);
                         dr["Category"] = dropCategory.SelectedValue;
-                        dt.Rows.Add(dr);
-                    }
+                        bool status = true;
+                        for (int i = 0; i < dt.Rows.Count; i++)
+                        {
+                            if (dt.Rows[i]["Category"].Equals(dr["Category"]))
+                            {
+                                status = false;
+                                lblCateValidation.Text = "please choose different category";
+                                break;
+                            }
+                        }
+                        if (status == true)
+                        {
+                            dt.Rows.Add(dr);
+                            lblCateValidation.Text = "";
+                        }
+                }
+
+                        
                     dgvCategory.DataSource = dt;
                     dgvCategory.DataBind();
                 }
@@ -134,7 +150,22 @@ namespace Team10AD_Web.Clerk
                         dr = dt.NewRow();
                         index = dt.Rows.IndexOf(dr);
                         dr["Department"] = dropDept.SelectedValue;
-                        dt.Rows.Add(dr);
+                        bool status = true;
+                        for (int i = 0; i < dt.Rows.Count; i++)
+                        {
+                            if (dt.Rows[i]["Department"].Equals(dr["Department"]))
+                            {
+                                status = false;
+                                lblDeptValidation.Text = "Please choose different dipartment name";
+                                break;
+                            }
+                        }
+                        if (status == true)
+                        {
+                            dt.Rows.Add(dr);
+                            lblDeptValidation.Text = "";
+                        }
+                        
                     }
                     dgvDept.DataSource = dt;
                     dgvDept.DataBind();
@@ -284,7 +315,22 @@ namespace Team10AD_Web.Clerk
                         dr = dt.NewRow();
                         index = dt.Rows.IndexOf(dr);
                         dr["Date"] = dropMonth.SelectedValue + dropYear.SelectedValue;
-                        dt.Rows.Add(dr);
+                        bool status = true;
+                        for (int i = 0; i < dt.Rows.Count; i++)
+                        {
+                            if (dt.Rows[i]["Date"].Equals(dr["Date"]))
+                            {
+                                status = false;
+                                lblDateValidation.Text = "Please choose different date";
+                                break;
+                            }
+                        }
+                        if (status == true)
+                        {
+                            dt.Rows.Add(dr);
+                            lblDateValidation.Text = "";
+                        }
+                        
                     }
                     dgvDate.DataSource = dt;
                     dgvDate.DataBind();

@@ -142,6 +142,7 @@
     <Content Include="Clerk\DepartmentList.aspx" />
     <Content Include="Clerk\DisbursementDetailsPage.aspx" />
     <Content Include="Clerk\DisbursementList.aspx" />
+    <Content Include="Clerk\GeneratePO.aspx" />
     <Content Include="Clerk\Inventory.aspx" />
     <Content Include="Clerk\Main.aspx" />
     <Content Include="Clerk\OrderReportPage.aspx" />
@@ -471,6 +472,13 @@
     </Compile>
     <Compile Include="Clerk\DisbursementList.aspx.designer.cs">
       <DependentUpon>DisbursementList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Clerk\GeneratePO.aspx.cs">
+      <DependentUpon>GeneratePO.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Clerk\GeneratePO.aspx.designer.cs">
+      <DependentUpon>GeneratePO.aspx</DependentUpon>
     </Compile>
     <Compile Include="Clerk\Inventory.aspx.cs">
       <DependentUpon>Inventory.aspx</DependentUpon>
