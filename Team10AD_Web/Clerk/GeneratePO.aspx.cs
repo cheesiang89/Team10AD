@@ -15,7 +15,7 @@ namespace Team10AD_Web.Clerk
 
 
         List<Catalogue> listSource;
-        protected void Page_Load(object sender, EventArgs e)
+        public void Page_Load(object sender, EventArgs e)
         {
            listSource = (List<Catalogue>)Session["Shortfall"];
             lblTag.Visible = false;
@@ -30,12 +30,12 @@ namespace Team10AD_Web.Clerk
         
         }
 
-        protected void dataRefresh()
+        public void dataRefresh()
         {
             repeaterItems.DataSource = listSource;
             repeaterItems.DataBind();
         }
-        protected void btnSearch_Click(object sender, EventArgs e)
+        public void btnSearch_Click(object sender, EventArgs e)
         {
             //Show Label with Item Description
             string itemQuery = txtItemCode.Text.ToUpper();
@@ -67,7 +67,7 @@ namespace Team10AD_Web.Clerk
 
         }
 
-        protected void btnAddItem_Click(object sender, EventArgs e)
+        public void btnAddItem_Click(object sender, EventArgs e)
         {
             listSource.Add(PurvaBizLogic.GetItemByCode(txtItemCode.Text));
             Session["Shortfall"] = listSource;
@@ -75,9 +75,9 @@ namespace Team10AD_Web.Clerk
             txtItemCode.Text = "";
             dataRefresh();
         }
-      
 
-        protected void repeaterItems_ItemCommand(object source, RepeaterCommandEventArgs e)
+
+        public void repeaterItems_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             if (e.CommandName == "Delete")
             {
@@ -88,12 +88,12 @@ namespace Team10AD_Web.Clerk
 
         }
 
-        protected void btnCancel_Click(object sender, EventArgs e)
+        public void btnCancel_Click(object sender, EventArgs e)
         {
             Response.Redirect("Main.aspx");
         }
 
-        protected void btnGeneratePO_Click(object sender, EventArgs e)
+        public void btnGeneratePO_Click(object sender, EventArgs e)
         {
             Page.Validate("Supplier1");
             Page.Validate("Supplier2");
@@ -120,7 +120,7 @@ namespace Team10AD_Web.Clerk
             
 
         }
-        protected List<POIntermediate> iterateItems()
+        public List<POIntermediate> iterateItems()
         {
 
             List<POIntermediate> poList = new List<POIntermediate>();
@@ -216,7 +216,7 @@ namespace Team10AD_Web.Clerk
             //lblTest.Text += String.Format("ItemCode: "+itemCode+"1stName: "+firstSupName+"1stQty"+firstSupQty+"2ndName:"+secondSupName+"2ndQty"+secondSupQty+"3rdName:"+thirdSupName+"3rdqty"+thirdSupQty) ;
             return poList;
         }
-        protected bool checkDuplicates(string itemCode)
+        public bool checkDuplicates(string itemCode)
         {
             bool isDuplicate = false;
             //Iterate list in sessionState
@@ -229,7 +229,7 @@ namespace Team10AD_Web.Clerk
             }
             return isDuplicate;
         }
-        protected bool checkAboveMinQty(string itemCode,  int qty)
+        public bool checkAboveMinQty(string itemCode,  int qty)
         {
             bool isAboveMin = true;
             // Check item above min qty or 0 

@@ -6,7 +6,6 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Team10AD_Web;
 using Team10AD_Web.Model;
-using Team10AD_Web;
 using System.Web.Services;
 
 namespace Team10AD_Web.EmployeePage

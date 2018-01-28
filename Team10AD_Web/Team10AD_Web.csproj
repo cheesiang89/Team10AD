@@ -370,37 +370,99 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Code\BusinessLogic.cs" />
-    <Compile Include="App_Code\BusinessLogic_Sam.cs" />
-    <Compile Include="App_Code\CartData.cs" />
-    <Compile Include="App_Code\CS_BizLogic.cs" />
-    <Compile Include="App_Code\Data.cs" />
-    <Compile Include="App_Code\DTO\POIntermediate.cs" />
-    <Compile Include="App_Code\Model\Catalogue.cs" />
-    <Compile Include="App_Code\Model\CollectionPoint.cs" />
-    <Compile Include="App_Code\Model\Department.cs" />
-    <Compile Include="App_Code\Model\Disbursement.cs" />
-    <Compile Include="App_Code\Model\DisbursementDetail.cs" />
-    <Compile Include="App_Code\Model\Employee.cs" />
-    <Compile Include="App_Code\Model\GoodsReceivedRecord.cs" />
-    <Compile Include="App_Code\Model\GoodsReceivedRecordDetail.cs" />
-    <Compile Include="App_Code\Model\PurchaseOrder.cs" />
-    <Compile Include="App_Code\Model\PurchaseOrderDetail.cs" />
-    <Compile Include="App_Code\Model\Requisition.cs" />
-    <Compile Include="App_Code\Model\RequisitionDetail.cs" />
-    <Compile Include="App_Code\Model\Retrieval.cs" />
-    <Compile Include="App_Code\Model\RetrievalDetail.cs" />
-    <Compile Include="App_Code\Model\StockAdjustmentVoucher.cs" />
-    <Compile Include="App_Code\Model\StockAdjustmentVoucherDetail.cs" />
-    <Compile Include="App_Code\Model\StockFlow.cs" />
-    <Compile Include="App_Code\Model\StoreStaff.cs" />
-    <Compile Include="App_Code\Model\Supplier.cs" />
-    <Compile Include="App_Code\Model\SupplierDetail.cs" />
-    <Compile Include="App_Code\Model\Team10ADModel.cs" />
-    <Compile Include="App_Code\PurvaBizLogic.cs" />
-    <Compile Include="App_Code\LogicUtility.cs" />
-    <Compile Include="App_Code\RayBizLogic.cs" />
-    <Compile Include="App_Code\XPBizLogic.cs" />
+    <Compile Include="App_Code\BusinessLogic.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\BusinessLogic_Sam.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\CartData.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\CS_BizLogic.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\Data.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\DTO\POIntermediate.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\Model\Catalogue.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\Model\CollectionPoint.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\Model\Department.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\Model\Disbursement.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\Model\DisbursementDetail.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\Model\Employee.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\Model\GoodsReceivedRecord.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\Model\GoodsReceivedRecordDetail.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\Model\PurchaseOrder.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\Model\PurchaseOrderDetail.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\Model\Requisition.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\Model\RequisitionDetail.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\Model\Retrieval.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\Model\RetrievalDetail.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\Model\StockAdjustmentVoucher.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\Model\StockAdjustmentVoucherDetail.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\Model\StockFlow.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\Model\StoreStaff.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\Model\Supplier.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\Model\SupplierDetail.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\Model\Team10ADModel.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\PurvaBizLogic.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\LogicUtility.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\RayBizLogic.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\XPBizLogic.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Clerk\AdjustmentVoucherDetail.aspx.cs">

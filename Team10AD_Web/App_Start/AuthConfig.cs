@@ -6,7 +6,7 @@ using Microsoft.AspNet.Membership.OpenAuth;
 
 namespace Team10AD_Web
 {
-    internal static class AuthConfig
+    public static class AuthConfig
     {
         public static void RegisterOpenAuth()
         {

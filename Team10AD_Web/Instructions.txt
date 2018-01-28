@@ -20,9 +20,11 @@ do not set the "href" directly
 ****In Visual Studio****
 1. Run VS in administrator mode
 2. Open the folder in the wwwroot folder (File -> Open ->Web Site -> Local IIS)
-3. Go Service-> Cart Service.svc, right click "View in Browser"
-4. Get the path of the service e.g ."http://localhost/Team10AD_Web/Service/CartService.svc"
-5. With the URL, replace the URL in Scripts->cart.js line 98
+3. Press Ctrl+Shift+F and replace all "CodeBehind" keyword with "CodeFile". This is because WebApplication uses CodeBehind, WebSite uses CodeFile. 
+*Except for Services...still use "CodeBehind"
+4. Go Service-> Cart Service.svc, right click "View in Browser"
+5. Get the path of the service e.g ."http://localhost/Team10AD_Web/Service/CartService.svc"
+6. With the URL, replace the URL in Scripts->cart.js line 98
 e.g. 
   $.ajax({
                 contentType: 'application/json; charset=utf-8',
@@ -32,4 +34,4 @@ e.g.
 				...
 				become
 				url: 'http://localhost/Team10AD_Web/Service/CartService.svc'
-6. Website AJAX POST should be working
+7. Website AJAX POST should be working

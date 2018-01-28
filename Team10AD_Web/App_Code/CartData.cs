@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Team10AD_Web
 {
-       public class CartData
+    public class CartData
     {
         
         public string itemCode { get; set; }

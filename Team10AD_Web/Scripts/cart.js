@@ -48,7 +48,7 @@ function addRow(obj, index) {
        $('#txtInput' + index).val(obj.quantity);
     //Hide warning labels
        $('.lblError').hide();
-       console.log($('div').val());
+      // console.log($('div').val());
        //console.log('Quantity: ' + obj.quantity);
 
     //Add Button

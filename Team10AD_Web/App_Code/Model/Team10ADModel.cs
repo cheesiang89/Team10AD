@@ -5,7 +5,7 @@ namespace Team10AD_Web.Model
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
 
-    public partial class Team10ADModel : DbContext
+    public partial class Team10ADModel : DbContext,IDisposable
     {
         public Team10ADModel()
             : base("name=Team10ADModel")
@@ -372,5 +372,6 @@ namespace Team10AD_Web.Model
                 .Property(e => e.Entity)
                 .IsUnicode(false);
         }
-    }
+
+       }
 }
