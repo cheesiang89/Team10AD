@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Script.Serialization;
 using Team10AD_Web.Model;
-
+using Team10AD_Web.DTO;
 
 namespace Team10AD_Web
 {
@@ -75,7 +75,59 @@ namespace Team10AD_Web
             
             return requisitionList;
         }
+        public static List<RequisitionReportDTO> CreateChartData(List<string> listDept, List<string> listCategory, List<DateDTO> listDate)
+        {
+            List<RequisitionReportDTO> listDTO = new List<RequisitionReportDTO>();
+            RequisitionReportDTO dto;
+            using (Team10ADModel m = new Team10ADModel())
+            {
+                foreach (string dept in listDept)
+                {
+                    foreach (string category in listCategory)
+                    {
+                        foreach (DateDTO item in listDate)
+                        {
+                            dto = new RequisitionReportDTO();
+                            dto.Category = category;
+                            dto.DepartmentName = dept;
+                            dto.Month = item.Month;
+                            dto.Year = item.Year;
+                            //dto.Quantity;
+                        }
+                    }
+                }
 
-       
+            }
+        }
+        public static int GetQuantityRequested(string deptName, string category, int month, int year)
+        {
+            using (Team10ADModel m = new Team10ADModel())
+            {
+                //Get EmployeeIDs from Dept
+                string deptCode = m.Departments.Where(x => x.DepartmentName == deptName).Select(x => x.DepartmentCode).First();
+                List<int> employeeIDs = m.Employees.Where(x => x.DepartmentCode == deptCode).Select(x => x.EmployeeID).ToList();
+                List<int> employeeRequisitionList= new List<int>();
+                //Search the Requisitions with EmployeeIDs,RequisitonDates, Status = "Completed" to get RequisitionIDs
+                Requisition req; 
+                foreach (int employeeID in employeeIDs)
+                {
+                    req = m.Requisitions.
+                        Where(x => x.RequestorID == employeeID &&
+                        x.Status == "Completed" &&
+                        x.RequisitionDate.Value.Month == month &&
+                        x.RequisitionDate.Value.Year == year).Select(x => x).First();
+                    employeeRequisitionList.Add(req.RequisitionID);
+                }
+                //Search the RequisitionDetails with RequisitionIDs to get ItemCodes
+                foreach (int reqID in employeeRequisitionList)
+                {
+
+                }
+                //Search the Catalogue with ItemCodes where Category == category 
+            }
+
+
+
+        }
     }
 }

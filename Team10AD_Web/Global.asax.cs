@@ -6,7 +6,7 @@ using System.Web.Routing;
 using System.Web.Security;
 using Team10AD_Web;
 using Team10AD_Web.Model;
-
+using Team10AD_Web.DTO;
 namespace Team10AD_Web
 {
     public class Global : HttpApplication
@@ -50,6 +50,9 @@ namespace Team10AD_Web
            //Store shortfall items
            Session["Shortfall"]= new List<Catalogue>();
             Session["Catalogue"] = "";
+            Session["deptListReport"]=new List<string>();
+            Session["categoryListReport"]= new List<string>();
+             Session["dateListReport"] = new List<DateDTO>();
         }
     }
 }

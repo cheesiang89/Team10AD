@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
-
+using TestingConsole.Model;
 namespace TestingConsole
 {
     class Program
@@ -89,6 +89,24 @@ namespace TestingConsole
             }
 
             return newList;
+        }
+        public static string GetQuantityRequested(string deptName, string category, string month, string year)
+        {
+            int quantity = 0;
+            Team10ADModel m = new Team10ADModel()
+
+                //Get EmployeeIDs from Dept
+            string deptCode = m.Departments.Where(x => x.DepartmentName == deptName).Select(x => x.DepartmentCode).First();
+            return deptCode;
+                //Search the Requisitions with EmployeeIDs,RequisitonDates, Status = "Completed" to get RequisitionIDs
+
+                //Search the RequisitionDetails with RequisitionIDs to get ItemCodes
+
+                //Search the Catalogue with ItemCodes where Category == category
+            
+
+
+
         }
     }
 }

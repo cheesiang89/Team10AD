@@ -159,6 +159,7 @@
     <Content Include="Clerk\RequisitionHistory.aspx" />
     <Content Include="Clerk\RequisitionRecord.aspx" />
     <Content Include="Clerk\RequisitionReportPage.aspx" />
+    <Content Include="Clerk\RequistionReportFront.aspx" />
     <Content Include="Clerk\RetrievalDetailPage.aspx" />
     <Content Include="Clerk\RetrievalList.aspx" />
     <Content Include="Clerk\ShowPurchaseOrderDetails.aspx" />
@@ -385,9 +386,11 @@
     <Compile Include="App_Code\Data.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="App_Code\DTO\DateDTO.cs" />
     <Compile Include="App_Code\DTO\POIntermediate.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="App_Code\DTO\RequisitionReportDTO.cs" />
     <Compile Include="App_Code\Model\Catalogue.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
@@ -610,6 +613,13 @@
     </Compile>
     <Compile Include="Clerk\RequisitionReportPage.aspx.designer.cs">
       <DependentUpon>RequisitionReportPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Clerk\RequistionReportFront.aspx.cs">
+      <DependentUpon>RequistionReportFront.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Clerk\RequistionReportFront.aspx.designer.cs">
+      <DependentUpon>RequistionReportFront.aspx</DependentUpon>
     </Compile>
     <Compile Include="Clerk\RetrievalDetailPage.aspx.cs">
       <DependentUpon>RetrievalDetailPage.aspx</DependentUpon>
