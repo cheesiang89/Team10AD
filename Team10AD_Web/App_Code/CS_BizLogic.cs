@@ -6,6 +6,7 @@ using System.Web.Script.Serialization;
 using Team10AD_Web.Model;
 using Team10AD_Web.DTO;
 using System.Globalization;
+using System.Data;
 
 namespace Team10AD_Web
 {
@@ -151,6 +152,95 @@ namespace Team10AD_Web
             }
             return quantity;
         }
+        public static DataTable CreateDataTable(List<RequisitionReportDTO> reportData,List<DateDTO> listDate, List<string> deptOrCatList, string flag)
+        {
+            //Method caters for 2 scenarios:
+            //1. Fixed Department: User chooses 1 dept and up to 3 categories, with up to 3 dates
+            //2. Fixed Category: User chooses 1 category with up to 3 dept, with up to 3 dates
+            // User passes in the list of dates and category/dept depending on which scenario chosen
 
+              DataTable table = new DataTable();
+
+            //Sort reportData by date
+            reportData.Sort();
+
+            if (flag == "FIXEDDEPT")
+            {
+                //Create DataTable
+                //User passes in list of Date + list of Category
+                //Assumption:  all RequisitionReportDTO objects have same Dept (need add validation on page)
+
+                //Make columns: Month/Year, Qty1stCat, Qty2ndCat...
+                table.Columns.Add("MonthYear", typeof(string));
+
+                for (int i = 0; i < deptOrCatList.Count; i++)
+                {
+                    //Create column based on no of selected Categories
+                    table.Columns.Add("Quantity" + i, typeof(string));
+                }
+               
+                    DataRow dr = null;
+                foreach (DateDTO dateObj in listDate)
+                {
+                    //create new row
+                    dr = table.NewRow();
+                    foreach (RequisitionReportDTO item in reportData)
+                    {
+                      
+                        
+                        for (int j = 0; j < deptOrCatList.Count; j++)
+                        {
+                            //Iterate the Category list
+                            
+                            if (item.Month == dateObj.Month && item.Year == dateObj.Year)
+                            {
+                                
+                                string monthYear = item.Month + " " + item.Year;
+                                //Add data to 2nd column if 1stCat, 3rd column if 2ndCat...
+                                if (item.Category==deptOrCatList[j])
+                                {
+                                    dr["MonthYear"] = monthYear;
+                                    dr["Quantity" + j] = item.Quantity;
+                                }
+                                   
+                            }
+                           
+                         }
+                        //add the row to DataTable if all values filled
+                        
+                    }
+                    if (!AreAnyColumnsEmpty(dr))
+                    {
+                        table.Rows.Add(dr);
+                    }
+
+                }
+               
+               
+            }
+            else if (flag == "FIXEDCAT")
+            {
+                //DO SOMETHING
+            }
+
+            return table;
+        }
+        public static bool AreAnyColumnsEmpty(DataRow dr)
+        {
+            if (dr == null)
+            {
+                return true;
+            }
+            else
+            {
+
+                if (String.IsNullOrEmpty(dr[0].ToString()))
+                {
+                    return true;
+                }
+               
+                return false;
+            }
+        }
     }
 }

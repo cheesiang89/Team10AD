@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Clerk/Clerk.Master" AutoEventWireup="true" CodeBehind="RequistionReportFront.aspx.cs" Inherits="Team10AD_Web.Clerk.RequistionReportFront" %>
 
+<%@ Register assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" namespace="System.Web.UI.DataVisualization.Charting" tagprefix="asp" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -106,4 +108,16 @@
         </tr>
     </table>
     <asp:Button ID="btnMakeChart" runat="server" Text="Generate Report" OnClick="btnMakeChart_Click" />
+<asp:Chart ID="reqChart" runat="server">
+    <series>
+        <asp:Series Name="Series1">
+        </asp:Series>
+         <asp:Series Name="Series2">
+        </asp:Series>
+    </series>
+    <chartareas>
+        <asp:ChartArea Name="ChartArea1">
+        </asp:ChartArea>
+    </chartareas>
+</asp:Chart>
 </asp:Content>
