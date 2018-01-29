@@ -226,6 +226,8 @@ namespace Team10AD_Web.Clerk
         protected void btnMakeChart_Click(object sender, EventArgs e)
         {
             List<RequisitionReportDTO> report = CS_BizLogic.CreateChartData(listDept, listCategory, listDate);
+            Session["RequisitionReportDTOList"] = report;
+            Response.Redirect("ClerkReqReport.aspx");
         }
     }
 }

@@ -57,18 +57,17 @@
       <HintPath>..\packages\AspNet.ScriptManager.jQuery.1.12.4\lib\net45\AspNet.ScriptManager.jQuery.dll</HintPath>
     </Reference>
     <Reference Include="CrystalDecisions.CrystalReports.Engine">
-      <HintPath>c:\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
     </Reference>
     <Reference Include="CrystalDecisions.ReportSource">
-      <HintPath>c:\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.ReportSource.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.ReportSource.dll</HintPath>
     </Reference>
     <Reference Include="CrystalDecisions.Shared">
-      <HintPath>c:\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.Shared.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.Shared.dll</HintPath>
     </Reference>
     <Reference Include="CrystalDecisions.Web">
-      <HintPath>c:\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.Web.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.Web.dll</HintPath>
     </Reference>
-
     <Reference Include="DotNetOpenAuth.AspNet, Version=4.3.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
       <HintPath>..\packages\DotNetOpenAuth.AspNet.4.3.4.13329\lib\net45-full\DotNetOpenAuth.AspNet.dll</HintPath>
     </Reference>
@@ -160,6 +159,7 @@
     <Content Include="Clerk\RequisitionHistory.aspx" />
     <Content Include="Clerk\RequisitionRecord.aspx" />
     <Content Include="Clerk\RequisitionReportPage.aspx" />
+    <Content Include="Clerk\RequistionReportFront.aspx" />
     <Content Include="Clerk\RetrievalDetailPage.aspx" />
     <Content Include="Clerk\RetrievalList.aspx" />
     <Content Include="Clerk\ShowPurchaseOrderDetails.aspx" />
@@ -227,6 +227,7 @@
     <Content Include="EmployeePage\SelectCollection.aspx" />
     <Content Include="EmployeePage\Test.aspx" />
     <Content Include="Images\cart1.png" />
+    <Content Include="Instructions.txt" />
     <Content Include="Sample\About.aspx" />
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Manage.aspx" />
@@ -370,38 +371,101 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Code\BusinessLogic.cs" />
-    <Compile Include="App_Code\BusinessLogic_Sam.cs" />
-    <Compile Include="App_Code\CartData.cs" />
-    <Compile Include="App_Code\CS_BizLogic.cs" />
-    <Compile Include="App_Code\Data.cs" />
-    <Compile Include="App_Code\DTO\POIntermediate.cs" />
-    <Compile Include="App_Code\Model\Catalogue.cs" />
-    <Compile Include="App_Code\Model\CollectionPoint.cs" />
-    <Compile Include="App_Code\Model\Department.cs" />
-    <Compile Include="App_Code\Model\Disbursement.cs" />
-    <Compile Include="App_Code\Model\DisbursementDetail.cs" />
-    <Compile Include="App_Code\Model\Employee.cs" />
-    <Compile Include="App_Code\Model\GoodsReceivedRecord.cs" />
-    <Compile Include="App_Code\Model\GoodsReceivedRecordDetail.cs" />
-    <Compile Include="App_Code\Model\PurchaseOrder.cs" />
-    <Compile Include="App_Code\Model\PurchaseOrderDetail.cs" />
-    <Compile Include="App_Code\Model\Requisition.cs" />
-    <Compile Include="App_Code\Model\RequisitionDetail.cs" />
-    <Compile Include="App_Code\Model\Retrieval.cs" />
-    <Compile Include="App_Code\Model\RetrievalDetail.cs" />
-    <Compile Include="App_Code\Model\StockAdjustmentVoucher.cs" />
-    <Compile Include="App_Code\Model\StockAdjustmentVoucherDetail.cs" />
-    <Compile Include="App_Code\Model\StockFlow.cs" />
-    <Compile Include="App_Code\Model\StoreStaff.cs" />
-    <Compile Include="App_Code\Model\Supplier.cs" />
-    <Compile Include="App_Code\Model\SupplierDetail.cs" />
-    <Compile Include="App_Code\Model\Team10ADModel.cs" />
-    <Compile Include="App_Code\PurchaseOrderBizLogic.cs" />
-    <Compile Include="App_Code\PurvaBizLogic.cs" />
-    <Compile Include="App_Code\LogicUtility.cs" />
-    <Compile Include="App_Code\RayBizLogic.cs" />
-    <Compile Include="App_Code\XPBizLogic.cs" />
+    <Compile Include="App_Code\BusinessLogic.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\BusinessLogic_Sam.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\CartData.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\CS_BizLogic.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\Data.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\DTO\DateDTO.cs" />
+    <Compile Include="App_Code\DTO\POIntermediate.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\DTO\RequisitionReportDTO.cs" />
+    <Compile Include="App_Code\Model\Catalogue.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\Model\CollectionPoint.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\Model\Department.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\Model\Disbursement.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\Model\DisbursementDetail.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\Model\Employee.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\Model\GoodsReceivedRecord.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\Model\GoodsReceivedRecordDetail.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\Model\PurchaseOrder.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\Model\PurchaseOrderDetail.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\Model\Requisition.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\Model\RequisitionDetail.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\Model\Retrieval.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\Model\RetrievalDetail.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\Model\StockAdjustmentVoucher.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\Model\StockAdjustmentVoucherDetail.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\Model\StockFlow.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\Model\StoreStaff.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\Model\Supplier.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\Model\SupplierDetail.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\Model\Team10ADModel.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\PurvaBizLogic.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\LogicUtility.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\RayBizLogic.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\XPBizLogic.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Clerk\AdjustmentVoucherDetail.aspx.cs">
@@ -549,6 +613,13 @@
     </Compile>
     <Compile Include="Clerk\RequisitionReportPage.aspx.designer.cs">
       <DependentUpon>RequisitionReportPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Clerk\RequistionReportFront.aspx.cs">
+      <DependentUpon>RequistionReportFront.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Clerk\RequistionReportFront.aspx.designer.cs">
+      <DependentUpon>RequistionReportFront.aspx</DependentUpon>
     </Compile>
     <Compile Include="Clerk\RetrievalDetailPage.aspx.cs">
       <DependentUpon>RetrievalDetailPage.aspx</DependentUpon>
@@ -812,10 +883,7 @@
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="AppCode\" />
-    <Folder Include="App_Code\App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Account\Web.config" />
     <Content Include="Old\Site.Master" />

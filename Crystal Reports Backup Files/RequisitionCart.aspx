@@ -21,8 +21,8 @@
     <%--<asp:Button ID="btnEmptyCart" runat="server" Text="Empty Cart" />--%>
   <%--    <input id="btnTest" type="button" value="Test" />--%>
 <%--    <asp:Button ID="Test" runat="server" Text="Test" />--%>
-    <script type="text/javascript" src="<%= ResolveUrl ("~/Scripts/catalogue.js") %>"></script>
-<script type="text/javascript" src="<%= ResolveUrl ("~/Scripts/cart.js") %>"></script>
+    <script type="text/javascript" src="<%= Page.ResolveUrl ("~/Scripts/catalogue.js") %>"></script>
+<script type="text/javascript" src="<%= Page.ResolveUrl ("~/Scripts/cart.js") %>"></script>
     <asp:HiddenField ID="reqID" runat="server" />
 
 </asp:Content>

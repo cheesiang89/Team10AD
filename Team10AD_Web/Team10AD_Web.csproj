@@ -99,6 +99,7 @@
       <HintPath>..\packages\Microsoft.AspNet.Membership.OpenAuth.2.0.1\lib\net45\Microsoft.AspNet.Membership.OpenAuth.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -121,6 +122,7 @@
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.DataVisualization" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Extensions.Design" />
     <Reference Include="System.Xml" />
@@ -142,6 +144,7 @@
   <ItemGroup>
     <Content Include="Clerk\AdjustmentVoucherDetail.aspx" />
     <Content Include="Clerk\AdjustmentVoucherList.aspx" />
+    <Content Include="Clerk\ClerkReqReport.aspx" />
     <Content Include="Clerk\CompletedRetrievalDetailPage.aspx" />
     <Content Include="Clerk\CreateAdjustmentVoucher.aspx" />
     <Content Include="Clerk\CrystalOrderReport.aspx" />
@@ -488,6 +491,13 @@
     </Compile>
     <Compile Include="Clerk\Clerk.Master.designer.cs">
       <DependentUpon>Clerk.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Clerk\ClerkReqReport.aspx.cs">
+      <DependentUpon>ClerkReqReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Clerk\ClerkReqReport.aspx.designer.cs">
+      <DependentUpon>ClerkReqReport.aspx</DependentUpon>
     </Compile>
     <Compile Include="Clerk\CompletedRetrievalDetailPage.aspx.cs">
       <DependentUpon>CompletedRetrievalDetailPage.aspx</DependentUpon>

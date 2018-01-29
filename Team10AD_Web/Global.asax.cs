@@ -53,6 +53,7 @@ namespace Team10AD_Web
             Session["deptListReport"]=new List<string>();
             Session["categoryListReport"]= new List<string>();
              Session["dateListReport"] = new List<DateDTO>();
+            Session["RequisitionReportDTOList"] = new List<RequisitionReportDTO>();
         }
     }
 }
