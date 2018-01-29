@@ -98,10 +98,11 @@ namespace Team10AD_Web
             return result[0];
         }
 
-        public List<PurchaseOrderDetailsView> ShowPurchaseOrderDetail(int itemCode)
+        public List<PurchaseOrderDetailsView> ShowPurchaseOrderDetail(int POID)
         {
-            return tm.PurchaseOrderDetailsViews.Where(x=>x.ItemCode == itemCode.ToString()).ToList();
+            return tm.PurchaseOrderDetailsViews.Where(x => x.POID == POID).ToList();
         }
+
 
     }
 }

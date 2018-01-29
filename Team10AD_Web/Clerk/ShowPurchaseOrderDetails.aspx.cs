@@ -20,7 +20,7 @@ namespace Team10AD_Web.Clerk
                 lblpoid.Text = POID.ToString();
                 lblDate2.Text = (Convert.ToDateTime(po.CreationDate)).ToString();
                 lblSupplier2.Text = po.Supplier.SupplierName;   
-                dgvPODetails.DataSource = b.ShowPurchaseOrderDetail(po.PurchaseOrderDetails.);
+                dgvPODetails.DataSource = b.ShowPurchaseOrderDetail(POID);
                 dgvPODetails.DataBind();
                 dgvPODetails.AllowPaging = true;
             }
