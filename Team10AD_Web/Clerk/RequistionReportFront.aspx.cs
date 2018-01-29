@@ -21,10 +21,11 @@ namespace Team10AD_Web.Clerk
             listDept = (List<string>)Session["deptListReport"];
             listCategory = (List<string>)Session["categoryListReport"];
             listDate = (List<DateDTO>)Session["dateListReport"];
-           
+            reqChart.Visible = false;
+
             if (!IsPostBack)
             {
-                reqChart.Visible = false;
+                
                 Team10ADModel m = new Team10ADModel();
                 ddlDept.DataSource = m.Departments.Select(x => x.DepartmentName).ToList();
                 ddlCategory.DataSource= m.Catalogues.Select(x => x.Category).Distinct().ToList();
@@ -97,19 +98,17 @@ namespace Team10AD_Web.Clerk
             {
                 e.Row.Cells[0].Text = "Department";
             }
-            
+
 
         }
-
         protected void gridCategory_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.Header)
             {
                 e.Row.Cells[0].Text = "Category";
             }
-           
-        }
 
+        }
         protected void gridDate_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.Header)
@@ -228,10 +227,28 @@ namespace Team10AD_Web.Clerk
             List<RequisitionReportDTO> report = CS_BizLogic.CreateChartData(listDept, listCategory, listDate);
             
             reqChart.DataSource = CS_BizLogic.CreateDataTable(report, listDate, listCategory, "FIXEDDEPT");
+            //Hardcoded now, need to be dynamic
             reqChart.Series["Series1"].XValueMember = "MonthYear";
             reqChart.Series["Series1"].YValueMembers = "Quantity0";
             reqChart.Series["Series2"].XValueMember = "MonthYear";
             reqChart.Series["Series2"].YValueMembers = "Quantity1";
+            reqChart.Visible = true;
+        }
+
+        protected void rdoCatorDept_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //Multiple categories
+            if (rdoCatorDept.SelectedValue=="category")
+            {
+                lblDept.Text = "Category";
+            }
+            //Multiple departments
+            else if (rdoCatorDept.SelectedValue == "dept")
+            {
+                lblDept.Text = "Department";
+            }
+            //Show panel
+            pnlReportContent.Visible = true;
         }
     }
 }

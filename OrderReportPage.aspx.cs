@@ -4,8 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Team10AD_Web.DTO;
-using Team10AD_Web.Model;
+using Team10AD_Web.App_Code.DTO;
+using Team10AD_Web.App_Code.Model;
 
 namespace Team10AD_Web.Clerk
 {
@@ -46,7 +46,7 @@ namespace Team10AD_Web.Clerk
                 listCategory.Add(selectedCat);
                 Session["listOrderCategory"] = listCategory;
             }
-
+            
             BindGrid();
 
         }
