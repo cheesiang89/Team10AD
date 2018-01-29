@@ -67,18 +67,18 @@
             </td>
             <td>
                 <asp:DropDownList ID="ddlMonth" runat="server">
-                    <asp:ListItem>Janurary</asp:ListItem>
-                    <asp:ListItem>February</asp:ListItem>
-                    <asp:ListItem>March</asp:ListItem>
-                    <asp:ListItem>April</asp:ListItem>
+                    <asp:ListItem>Jan</asp:ListItem>
+                    <asp:ListItem>Feb</asp:ListItem>
+                    <asp:ListItem>Mar</asp:ListItem>
+                    <asp:ListItem>Apr</asp:ListItem>
                     <asp:ListItem>May</asp:ListItem>
-                    <asp:ListItem>June</asp:ListItem>
-                    <asp:ListItem>July</asp:ListItem>
-                    <asp:ListItem>August</asp:ListItem>
-                    <asp:ListItem>September</asp:ListItem>
-                    <asp:ListItem>October</asp:ListItem>
-                    <asp:ListItem>November</asp:ListItem>
-                    <asp:ListItem>December</asp:ListItem>
+                    <asp:ListItem>Jun</asp:ListItem>
+                    <asp:ListItem>Jul</asp:ListItem>
+                    <asp:ListItem>Aug</asp:ListItem>
+                    <asp:ListItem>Sep</asp:ListItem>
+                    <asp:ListItem>Oct</asp:ListItem>
+                    <asp:ListItem>Nov</asp:ListItem>
+                    <asp:ListItem>Dec</asp:ListItem>
                 </asp:DropDownList>
                 <asp:DropDownList ID="ddlYear" runat="server">
                     <asp:ListItem>2016</asp:ListItem>

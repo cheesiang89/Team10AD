@@ -11,7 +11,7 @@ namespace Team10AD_Web.DTO
         public string DepartmentName { get; set; }
         public string Month { get; set; }
         public string Year { get; set; }
-        public string Quantity { get; set; }
+        public int Quantity { get; set; }
 
     }
 }

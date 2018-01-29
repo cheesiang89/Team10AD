@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Script.Serialization;
 using Team10AD_Web.Model;
 using Team10AD_Web.DTO;
+using System.Globalization;
 
 namespace Team10AD_Web
 {
@@ -78,8 +79,7 @@ namespace Team10AD_Web
         public static List<RequisitionReportDTO> CreateChartData(List<string> listDept, List<string> listCategory, List<DateDTO> listDate)
         {
             List<RequisitionReportDTO> listDTO = new List<RequisitionReportDTO>();
-            RequisitionReportDTO dto;
-            using (Team10ADModel m = new Team10ADModel())
+           using (Team10ADModel m = new Team10ADModel())
             {
                 foreach (string dept in listDept)
                 {
@@ -87,20 +87,23 @@ namespace Team10AD_Web
                     {
                         foreach (DateDTO item in listDate)
                         {
-                            dto = new RequisitionReportDTO();
+                            RequisitionReportDTO dto = new RequisitionReportDTO();
                             dto.Category = category;
                             dto.DepartmentName = dept;
                             dto.Month = item.Month;
                             dto.Year = item.Year;
-                            //dto.Quantity;
+                            int monthInInt = DateTime.ParseExact(item.Month, "MMM", CultureInfo.InvariantCulture).Month;
+                            dto.Quantity = GetQuantityRequested(dept, category, monthInInt, Int32.Parse(item.Year));
+                            listDTO.Add(dto);
                         }
                     }
                 }
-
             }
+            return listDTO;
         }
         public static int GetQuantityRequested(string deptName, string category, int month, int year)
         {
+            int quantity = 0;
             using (Team10ADModel m = new Team10ADModel())
             {
                 //Get EmployeeIDs from Dept
@@ -108,26 +111,46 @@ namespace Team10AD_Web
                 List<int> employeeIDs = m.Employees.Where(x => x.DepartmentCode == deptCode).Select(x => x.EmployeeID).ToList();
                 List<int> employeeRequisitionList= new List<int>();
                 //Search the Requisitions with EmployeeIDs,RequisitonDates, Status = "Completed" to get RequisitionIDs
-                Requisition req; 
+             
                 foreach (int employeeID in employeeIDs)
                 {
-                    req = m.Requisitions.
+                    var req = m.Requisitions.
                         Where(x => x.RequestorID == employeeID &&
                         x.Status == "Completed" &&
                         x.RequisitionDate.Value.Month == month &&
-                        x.RequisitionDate.Value.Year == year).Select(x => x).First();
-                    employeeRequisitionList.Add(req.RequisitionID);
-                }
-                //Search the RequisitionDetails with RequisitionIDs to get ItemCodes
-                foreach (int reqID in employeeRequisitionList)
-                {
-
+                        x.RequisitionDate.Value.Year == year).Select(x => x.RequisitionID);
+                    if (req.Any())
+                    {
+                        foreach (int reqNo in req)
+                        {
+                            employeeRequisitionList.Add(reqNo);
+                        }
+                        
+                    }
+                   
                 }
                 //Search the Catalogue with ItemCodes where Category == category 
+                List<string> itemCodeList = m.Catalogues.Where(x => x.Category == category).Select(x => x.ItemCode).ToList();
+
+                //CheckQuantity is a variable to cater for null values
+                int? checkQuantity;
+
+                //Search the RequisitionDetails with RequisitionIDs to get ItemCodes
+                foreach (string itemCode in itemCodeList)
+                {
+                    foreach (int reqID in employeeRequisitionList)
+                    {
+                        checkQuantity = m.RequisitionDetails.Where(x => x.RequisitionID == reqID && x.ItemCode == itemCode).
+                            Select(x => x.QuantityRequested).FirstOrDefault();
+                        if (checkQuantity!=null)
+                        {
+                            quantity += checkQuantity.GetValueOrDefault();
+                        }
+                    }
+                }
             }
-
-
-
+            return quantity;
         }
+
     }
 }
