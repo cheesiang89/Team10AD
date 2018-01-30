@@ -42,17 +42,24 @@ namespace Team10AD_Web.Clerk
             //Use DataTable here as gridDate has 2 List -Month +Year
             // Combine Month+Year to a DTO and Add to List
           
-           
            gridDate.DataSource = listDate;
             gridDate.DataBind();
            
-
         }
 
 
         protected void btnAddDept_Click(object sender, EventArgs e)
         {
             string selectedDept = ddlDept.SelectedItem.Text;
+            //Multiple Categories
+            if (rdoCatorDept.SelectedValue == "category")
+            {
+                //Clear categories
+                listCategory
+                listDept.Add(selectedDept);
+                Session["deptListReport"] = listDept;
+                reqChart.DataSource = CS_BizLogic.CreateDataTable(report, listDate, listCategory, "FIXEDDEPT");
+            }
             if (!checkDuplicates(selectedDept, listDept))
             {
                 listDept.Add(selectedDept);
@@ -186,7 +193,6 @@ namespace Team10AD_Web.Clerk
                 if (item.Month== selectedMonth && item.Year==selectedYear)
                 {
                     listSource.Remove(item);
-
                 }
             }
             
@@ -225,8 +231,18 @@ namespace Team10AD_Web.Clerk
         protected void btnMakeChart_Click(object sender, EventArgs e)
         {
             List<RequisitionReportDTO> report = CS_BizLogic.CreateChartData(listDept, listCategory, listDate);
-            
-            reqChart.DataSource = CS_BizLogic.CreateDataTable(report, listDate, listCategory, "FIXEDDEPT");
+
+            //Multiple categories
+            if (rdoCatorDept.SelectedValue == "category")
+            {
+                reqChart.DataSource = CS_BizLogic.CreateDataTable(report, listDate, listCategory, "FIXEDDEPT");
+            }
+            //Multiple departments
+            else if (rdoCatorDept.SelectedValue == "dept")
+            {
+                reqChart.DataSource = CS_BizLogic.CreateDataTable(report, listDate, listCategory, "FIXEDCAT");
+            }
+           
             //Hardcoded now, need to be dynamic
             reqChart.Series["Series1"].XValueMember = "MonthYear";
             reqChart.Series["Series1"].YValueMembers = "Quantity0";
@@ -237,17 +253,7 @@ namespace Team10AD_Web.Clerk
 
         protected void rdoCatorDept_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //Multiple categories
-            if (rdoCatorDept.SelectedValue=="category")
-            {
-                lblDept.Text = "Category";
-            }
-            //Multiple departments
-            else if (rdoCatorDept.SelectedValue == "dept")
-            {
-                lblDept.Text = "Department";
-            }
-            //Show panel
+           //Show panel
             pnlReportContent.Visible = true;
         }
     }

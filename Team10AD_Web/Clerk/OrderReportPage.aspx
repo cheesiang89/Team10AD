@@ -1,11 +1,13 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Clerk/Clerk.Master" AutoEventWireup="true" CodeBehind="OrderReportPage.aspx.cs" Inherits="Team10AD_Web.Clerk.OrderReportPage" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <table style="width: 100%;">
         <tr>
             <td>
-                <asp:Label ID="lblCategory" runat="server" Text="Category:"></asp:Label>&nbsp;
+                <asp:Label ID="lblCategory" runat="server" Text="Category:"></asp:Label></td>
+            <td>    
                 <asp:DropDownList ID="ddlCat" runat="server"></asp:DropDownList>
             </td>
             <td>
@@ -16,7 +18,7 @@
                     <Columns>
                         <asp:TemplateField HeaderText="">
                             <ItemTemplate>
-                                <asp:Button ID="btnDeleteCat" runat="server" Text="Delete" OnClick="btnDeleteCat_Click"/>
+                                <asp:Button ID="btnDeleteCat" runat="server" Text="Delete" OnClick="btnDeleteCat_Click" />
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>
@@ -25,7 +27,8 @@
         </tr>
         <tr>
             <td>
-                <asp:Label ID="lblMonth" runat="server" Text="Month:"></asp:Label>&nbsp;
+                <asp:Label ID="lblMY" runat="server" Text="Month/Year:"></asp:Label></td>
+            <td>
             <asp:DropDownList ID="dropMonth" runat="server">
                 <asp:ListItem Value="1">January</asp:ListItem>
                 <asp:ListItem Value="2">February</asp:ListItem>
@@ -40,30 +43,15 @@
                 <asp:ListItem Value="11">November</asp:ListItem>
                 <asp:ListItem Value="12">December</asp:ListItem>
             </asp:DropDownList>
-            </td>
-            <td>
-                &nbsp;</td>
-            <td>
-            <td>&nbsp;</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-        </tr>
-        <tr>
-            <td class="auto-style1">
-                <asp:Label ID="lblYear" runat="server" Text="Year:"></asp:Label>&nbsp;
                 <asp:DropDownList ID="dropYear" runat="server">
                     <asp:ListItem Value="2016">2016</asp:ListItem>
                     <asp:ListItem Value="2017">2017</asp:ListItem>
                     <asp:ListItem Value="2018">2018</asp:ListItem>
                 </asp:DropDownList>
-            <td class="auto-style1">
-                <asp:Button ID="btnAddDate" runat="server" Text="Add" OnClick="btnAddDate_Click" />
-
             </td>
-       
-            <td class="auto-style1">
+            <td>
+                <asp:Button ID="btnAddDate" runat="server" Text="Add" OnClick="btnAddDate_Click" /></td>
+              <td>
                 <asp:GridView ID="dgvDate" runat="server" OnRowDataBound="gridDate_RowDataBound" OnRowCreated="gridDate_RowCreated">
                     <Columns></Columns>
                     <Columns></Columns>
@@ -78,13 +66,23 @@
             </td>
         </tr>
         <tr>
-           <td></td> 
-            <td>
-               &nbsp;&nbsp;&nbsp; <asp:Button ID="btnGenerateReport" runat="server" Text="Generate Order Report" />
+            <td></td>
+            <td><asp:Button ID="btnGenerateReport" runat="server" Text="Generate Order Report" OnClick="btnGenerateReport_Click" />
             </td>
-            <td colspan="2">
-                &nbsp;&nbsp;&nbsp;<asp:Button ID="btnClearSelection" runat="server" Text="Clear All Selections" />
+            <td colspan="2">&nbsp;&nbsp;&nbsp;<asp:Button ID="btnClearSelection" runat="server" Text="Clear All Selections" />
             </td>
         </tr>
     </table>
+    <asp:Chart ID="orderChart" runat="server">
+    <series>
+        <asp:Series Name="Series1">
+        </asp:Series>
+         <asp:Series Name="Series2">
+        </asp:Series>
+    </series>
+    <chartareas>
+        <asp:ChartArea Name="ChartArea1">
+        </asp:ChartArea>
+    </chartareas>
+        </asp:Chart>  
 </asp:Content>

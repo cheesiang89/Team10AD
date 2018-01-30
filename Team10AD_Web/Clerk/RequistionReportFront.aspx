@@ -60,8 +60,6 @@
                 <asp:DropDownList ID="ddlCategory" runat="server">
                 </asp:DropDownList>
 
-
-
             </td>
             <td>
                 <asp:Button ID="btnAddCategory" runat="server" Text="Add Category" OnClick="btnAddCategory_Click" /></td>

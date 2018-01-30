@@ -12,8 +12,6 @@ namespace Team10AD_Web.Clerk
     public partial class OrderReportPage : System.Web.UI.Page
     {
         List<string> listCategory;
-        //List<int> listMonth;
-        //List<int> listYear; 
         List<DateDTO> listDate;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -166,6 +164,11 @@ namespace Team10AD_Web.Clerk
                     listSource.Remove(item);
                 }
             }
+            BindGrid();
+        }
+
+        protected void btnGenerateReport_Click(object sender, EventArgs e)
+        {
 
         }
     }
