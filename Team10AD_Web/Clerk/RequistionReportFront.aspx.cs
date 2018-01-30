@@ -31,6 +31,12 @@ namespace Team10AD_Web.Clerk
                 ddlCategory.DataSource= m.Catalogues.Select(x => x.Category).Distinct().ToList();
                 ddlDept.DataBind();
                 ddlCategory.DataBind();
+
+                //Remove default set
+                ddlDept.Items.Insert(0, new ListItem(string.Empty, string.Empty));
+                ddlCategory.Items.Insert(0, new ListItem(string.Empty, string.Empty));
+                ddlDept.SelectedIndex = 0;
+                ddlCategory.SelectedIndex = 0;
             }
         }
         public void dataRefresh()
@@ -51,34 +57,52 @@ namespace Team10AD_Web.Clerk
         protected void btnAddDept_Click(object sender, EventArgs e)
         {
             string selectedDept = ddlDept.SelectedItem.Text;
-            //Multiple Categories
-            if (rdoCatorDept.SelectedValue == "category")
+            //Check not empty
+            if (!String.IsNullOrEmpty(selectedDept))
             {
-                //Clear categories
-                listCategory
-                listDept.Add(selectedDept);
-                Session["deptListReport"] = listDept;
-                reqChart.DataSource = CS_BizLogic.CreateDataTable(report, listDate, listCategory, "FIXEDDEPT");
+                //If Multiple Categories
+                if (rdoCatorDept.SelectedValue == "category")
+                {
+                    //Only allow 1 department
+                    listDept.Clear();
+                    listDept.Add(selectedDept);
+                    Session["deptListReport"] = listDept;
+                }
+                if (!checkDuplicates(selectedDept, listDept))
+                {
+                    listDept.Add(selectedDept);
+                    Session["deptListReport"] = listDept;
+                }
             }
-            if (!checkDuplicates(selectedDept, listDept))
-            {
-                listDept.Add(selectedDept);
-                Session["deptListReport"] = listDept;
-            }
+          
 
             dataRefresh();
         }
         protected void btnAddCategory_Click(object sender, EventArgs e)
         {
             string selectedCategory = ddlCategory.SelectedItem.Text;
-            if (!checkDuplicates(selectedCategory, listCategory))
+            //Check not empty
+            if (!String.IsNullOrEmpty(selectedCategory))
             {
-                listCategory.Add(selectedCategory);
-                Session["categoryListReport"] = listCategory;
+                //If Multiple Departments
+                if (rdoCatorDept.SelectedValue == "dept")
+                {
+                    //Only allow 1 Category
+                    listCategory.Clear();
+                    listCategory.Add(selectedCategory);
+                    Session["categoryListReport"] = listCategory;
 
+                }
+                if (!checkDuplicates(selectedCategory, listCategory))
+                {
+                    listCategory.Add(selectedCategory);
+                    Session["categoryListReport"] = listCategory;
+
+                }
+                dataRefresh();
             }
             
-            dataRefresh();
+            
 
         }
         
@@ -87,15 +111,19 @@ namespace Team10AD_Web.Clerk
             string selectedMonth = ddlMonth.SelectedItem.Text;
             string selectedYear = ddlYear.SelectedItem.Text;
             DateDTO dateDTO;
-            if (!checkDuplicateDate(selectedMonth,selectedYear,listDate))
+            //Check not empty
+            if (!String.IsNullOrEmpty(selectedMonth) && !String.IsNullOrEmpty(selectedYear))
             {
-                dateDTO= new DateDTO(selectedMonth, selectedYear);
-                listDate.Add(dateDTO);
-                Session["dateListReport"] = listDate;
-            }
-          
+                if (!checkDuplicateDate(selectedMonth, selectedYear, listDate))
+                {
+                    dateDTO = new DateDTO(selectedMonth, selectedYear);
+                    listDate.Add(dateDTO);
+                    Session["dateListReport"] = listDate;
+                }
 
-            dataRefresh();
+
+                dataRefresh();
+            }
 
         }
 
@@ -230,30 +258,40 @@ namespace Team10AD_Web.Clerk
 
         protected void btnMakeChart_Click(object sender, EventArgs e)
         {
-            List<RequisitionReportDTO> report = CS_BizLogic.CreateChartData(listDept, listCategory, listDate);
+            
+            //Ensure at least 1 dept, 1 category selected
+            if ((listCategory.Count>0) && (listDept.Count>0))
+            {
+                List<RequisitionReportDTO> report = CS_BizLogic.CreateChartData(listDept, listCategory, listDate);
 
-            //Multiple categories
-            if (rdoCatorDept.SelectedValue == "category")
-            {
-                reqChart.DataSource = CS_BizLogic.CreateDataTable(report, listDate, listCategory, "FIXEDDEPT");
-            }
-            //Multiple departments
-            else if (rdoCatorDept.SelectedValue == "dept")
-            {
-                reqChart.DataSource = CS_BizLogic.CreateDataTable(report, listDate, listCategory, "FIXEDCAT");
+                //Multiple categories
+                if (rdoCatorDept.SelectedValue == "category")
+                {
+                    reqChart.DataSource = CS_BizLogic.CreateDataTable(report, listDate, listCategory, "FIXEDDEPT");
+                }
+                //Multiple departments
+                else if (rdoCatorDept.SelectedValue == "dept")
+                {
+                    reqChart.DataSource = CS_BizLogic.CreateDataTable(report, listDate, listDept, "FIXEDCAT");
+                }
+
+                //Hardcoded now, need to be dynamic
+                reqChart.Series["Series1"].XValueMember = "MonthYear";
+                reqChart.Series["Series1"].YValueMembers = "Quantity0";
+                reqChart.Series["Series2"].XValueMember = "MonthYear";
+                reqChart.Series["Series2"].YValueMembers = "Quantity1";
+                reqChart.Visible = true;
             }
            
-            //Hardcoded now, need to be dynamic
-            reqChart.Series["Series1"].XValueMember = "MonthYear";
-            reqChart.Series["Series1"].YValueMembers = "Quantity0";
-            reqChart.Series["Series2"].XValueMember = "MonthYear";
-            reqChart.Series["Series2"].YValueMembers = "Quantity1";
-            reqChart.Visible = true;
         }
 
         protected void rdoCatorDept_SelectedIndexChanged(object sender, EventArgs e)
         {
-           //Show panel
+            //Show panel
+            listCategory.Clear();
+            listDept.Clear();
+            listDate.Clear();
+            dataRefresh();
             pnlReportContent.Visible = true;
         }
     }

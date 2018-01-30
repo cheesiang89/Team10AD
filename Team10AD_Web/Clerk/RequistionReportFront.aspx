@@ -84,6 +84,7 @@
             </td>
             <td>
                 <asp:DropDownList ID="ddlMonth" runat="server">
+                     <asp:ListItem></asp:ListItem>
                     <asp:ListItem>Jan</asp:ListItem>
                     <asp:ListItem>Feb</asp:ListItem>
                     <asp:ListItem>Mar</asp:ListItem>
@@ -98,7 +99,8 @@
                     <asp:ListItem>Dec</asp:ListItem>
                 </asp:DropDownList>
                 <asp:DropDownList ID="ddlYear" runat="server">
-                    <asp:ListItem>2018</asp:ListItem>
+                     <asp:ListItem></asp:ListItem>
+                   <asp:ListItem>2018</asp:ListItem>
                     <asp:ListItem>2017</asp:ListItem>
                     <asp:ListItem>2016</asp:ListItem>
                 </asp:DropDownList>

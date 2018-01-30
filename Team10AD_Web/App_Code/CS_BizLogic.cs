@@ -13,13 +13,14 @@ namespace Team10AD_Web
     public static class CS_BizLogic
     {
         private static int requestorID;
-         //Combine duplicates
+        //Combine duplicates
         public static List<CartData> CombineDuplicates(List<CartData> oldList)
         {
             List<CartData> newList = new List<CartData>();
-           
+
             var result = oldList.GroupBy(x => x.itemCode,
-             (key, values) => new {
+             (key, values) => new
+             {
                  itemCode = key,
                  quantity = values.Sum(x => Int32.Parse(x.quantity)),
 
@@ -45,7 +46,7 @@ namespace Team10AD_Web
 
             //Convert CartData to RequisitonDetail object
             List<RequisitionDetail> requisitionList = new List<RequisitionDetail>();
-            
+
 
             foreach (var item in cartList)
             {
@@ -55,7 +56,7 @@ namespace Team10AD_Web
                 requisitionList.Add(requisitionDTO);
 
             }
-           
+
             using (Team10ADModel context = new Team10ADModel())
             {
 
@@ -74,13 +75,13 @@ namespace Team10AD_Web
                 LogicUtility.Instance.SendRequisitionEmail(requisition.RequisitionID, requisition.RequestorID, requisition.RequisitionDate.ToString());
             }
 
-            
+
             return requisitionList;
         }
         public static List<RequisitionReportDTO> CreateChartData(List<string> listDept, List<string> listCategory, List<DateDTO> listDate)
         {
             List<RequisitionReportDTO> listDTO = new List<RequisitionReportDTO>();
-           using (Team10ADModel m = new Team10ADModel())
+            using (Team10ADModel m = new Team10ADModel())
             {
                 foreach (string dept in listDept)
                 {
@@ -110,9 +111,9 @@ namespace Team10AD_Web
                 //Get EmployeeIDs from Dept
                 string deptCode = m.Departments.Where(x => x.DepartmentName == deptName).Select(x => x.DepartmentCode).First();
                 List<int> employeeIDs = m.Employees.Where(x => x.DepartmentCode == deptCode).Select(x => x.EmployeeID).ToList();
-                List<int> employeeRequisitionList= new List<int>();
+                List<int> employeeRequisitionList = new List<int>();
                 //Search the Requisitions with EmployeeIDs,RequisitonDates, Status = "Completed" to get RequisitionIDs
-             
+
                 foreach (int employeeID in employeeIDs)
                 {
                     var req = m.Requisitions.
@@ -126,9 +127,9 @@ namespace Team10AD_Web
                         {
                             employeeRequisitionList.Add(reqNo);
                         }
-                        
+
                     }
-                   
+
                 }
                 //Search the Catalogue with ItemCodes where Category == category 
                 List<string> itemCodeList = m.Catalogues.Where(x => x.Category == category).Select(x => x.ItemCode).ToList();
@@ -143,7 +144,7 @@ namespace Team10AD_Web
                     {
                         checkQuantity = m.RequisitionDetails.Where(x => x.RequisitionID == reqID && x.ItemCode == itemCode).
                             Select(x => x.QuantityRequested).FirstOrDefault();
-                        if (checkQuantity!=null)
+                        if (checkQuantity != null)
                         {
                             quantity += checkQuantity.GetValueOrDefault();
                         }
@@ -152,79 +153,79 @@ namespace Team10AD_Web
             }
             return quantity;
         }
-        public static DataTable CreateDataTable(List<RequisitionReportDTO> reportData,List<DateDTO> listDate, List<string> deptOrCatList, string flag)
+        public static DataTable CreateDataTable(List<RequisitionReportDTO> reportData, List<DateDTO> listDate, List<string> deptOrCatList, string flag)
         {
             //Method caters for 2 scenarios:
             //1. Fixed Department: User chooses 1 dept and up to 3 categories, with up to 3 dates
             //2. Fixed Category: User chooses 1 category with up to 3 dept, with up to 3 dates
             // User passes in the list of dates and category/dept depending on which scenario chosen
 
-              DataTable table = new DataTable();
+            DataTable table = new DataTable();
 
             //Sort reportData by date
             reportData.Sort();
+            //Create DataTable
+            //User passes in list of Date + list of Dept
+            //Assumption:  all RequisitionReportDTO objects have same Cat (need add validation on page)
 
-            if (flag == "FIXEDDEPT")
+            //Make columns: Month/Year, Qty1stCat, Qty2ndCat...
+            table.Columns.Add("MonthYear", typeof(string));
+
+            for (int i = 0; i < deptOrCatList.Count; i++)
             {
-                //Create DataTable
-                //User passes in list of Date + list of Category
-                //Assumption:  all RequisitionReportDTO objects have same Dept (need add validation on page)
+                //Create column based on no of selected Categories
+                table.Columns.Add("Quantity" + i, typeof(string));
+            }
 
-                //Make columns: Month/Year, Qty1stCat, Qty2ndCat...
-                table.Columns.Add("MonthYear", typeof(string));
+            DataRow dr = null;
+            foreach (DateDTO dateObj in listDate)
+            {
+                //create new row
+                dr = table.NewRow();
+                foreach (RequisitionReportDTO item in reportData)
+                {
 
-                for (int i = 0; i < deptOrCatList.Count; i++)
-                {
-                    //Create column based on no of selected Categories
-                    table.Columns.Add("Quantity" + i, typeof(string));
-                }
-               
-                    DataRow dr = null;
-                foreach (DateDTO dateObj in listDate)
-                {
-                    //create new row
-                    dr = table.NewRow();
-                    foreach (RequisitionReportDTO item in reportData)
+                    for (int j = 0; j < deptOrCatList.Count; j++)
                     {
-                      
-                        
-                        for (int j = 0; j < deptOrCatList.Count; j++)
+                        if (item.Month == dateObj.Month && item.Year == dateObj.Year)
                         {
-                            //Iterate the Category list
-                            
-                            if (item.Month == dateObj.Month && item.Year == dateObj.Year)
+                            string monthYear = item.Month + " " + item.Year;
+                            if (flag == "FIXEDDEPT")
                             {
-                                
-                                string monthYear = item.Month + " " + item.Year;
+                                //Iterate the Category list
                                 //Add data to 2nd column if 1stCat, 3rd column if 2ndCat...
-                                if (item.Category==deptOrCatList[j])
+                                if (item.Category == deptOrCatList[j])
                                 {
                                     dr["MonthYear"] = monthYear;
                                     dr["Quantity" + j] = item.Quantity;
                                 }
-                                   
+
                             }
-                           
-                         }
-                        //add the row to DataTable if all values filled
-                        
+                            else if (flag == "FIXEDCAT")
+                            {
+                                //Iterate the Dept list
+                                //Add data to 2nd column if 1stDept, 3rd column if 2ndDept...
+                                if (item.DepartmentName == deptOrCatList[j])
+                                {
+                                    dr["MonthYear"] = monthYear;
+                                    dr["Quantity" + j] = item.Quantity;
+                                }
+                            }
+                        }
                     }
-                    if (!AreAnyColumnsEmpty(dr))
-                    {
-                        table.Rows.Add(dr);
-                    }
-
+                    //add the row to DataTable if all values filled
                 }
-               
-               
-            }
-            else if (flag == "FIXEDCAT")
-            {
-                //DO SOMETHING
-            }
+                if (!AreAnyColumnsEmpty(dr))
+                {
+                    table.Rows.Add(dr);
+                }
 
+            }
             return table;
+
         }
+
+
         public static bool AreAnyColumnsEmpty(DataRow dr)
         {
             if (dr == null)
@@ -233,12 +234,10 @@ namespace Team10AD_Web
             }
             else
             {
-
                 if (String.IsNullOrEmpty(dr[0].ToString()))
                 {
                     return true;
                 }
-               
                 return false;
             }
         }
