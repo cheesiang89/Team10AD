@@ -20,9 +20,7 @@
                 <asp:Label ID="lblMax1Dept" runat="server" Text="Max 1 Dept" Visible="false"></asp:Label>
                 <br />
                   <asp:Label ID="lblMax3Dept" runat="server" Text="Max 3 Dept" Visible="false"></asp:Label>
-                
-                
-                
+
             </td>
             <td>
                 <asp:DropDownList ID="ddlDept" runat="server">

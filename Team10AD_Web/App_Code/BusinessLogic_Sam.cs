@@ -260,9 +260,7 @@ namespace Team10AD_Web
                             quantity += orderedQty.GetValueOrDefault();
                         }
                     }
-                   
                 }
-
                 return quantity;
             }
         }

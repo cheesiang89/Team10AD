@@ -41,9 +41,9 @@ namespace Team10AD_Web.Clerk
         public void dataRefresh()
         {
             gridDept.DataSource = listDept;
-             gridDept.DataBind();
+            gridDept.DataBind();
             gridCategory.DataSource = listCategory;
-             gridCategory.DataBind();
+            gridCategory.DataBind();
             //Use DataTable here as gridDate has 2 List -Month +Year
             // Combine Month+Year to a DTO and Add to List
           
@@ -256,7 +256,6 @@ namespace Team10AD_Web.Clerk
 
         protected void btnMakeChart_Click(object sender, EventArgs e)
         {
-
             //Ensure at least 1 dept, 1 category selected
             if ((listCategory.Count > 0) && (listDept.Count > 0))
             {
@@ -266,18 +265,26 @@ namespace Team10AD_Web.Clerk
                 if (rdoCatorDept.SelectedValue == "category")
                 {
                    table = CS_BizLogic.CreateDataTable(report, listDate, listCategory, "FIXEDDEPT");
+                    Session["ReqRtpSeries1"] = gridCategory.Rows[0].Cells[0].Text;
+                    Session["ReqRtpSeries2"] = gridCategory.Rows[1].Cells[0].Text;
+                    Session["ReqRtpSeries3"] = gridCategory.Rows[2].Cells[0].Text;
+
                 }
                 //Multiple departments
                 else if (rdoCatorDept.SelectedValue == "dept")
                 {
                 table = CS_BizLogic.CreateDataTable(report, listDate, listDept, "FIXEDCAT");
+                    Session["ReqRtpSeries1"] = gridDept.Rows[0].Cells[0].Text;
+                    Session["ReqRtpSeries2"] = gridDept.Rows[1].Cells[0].Text;
+                    Session["ReqRtpSeries3"] = gridDept.Rows[2].Cells[0].Text;
+
                 }
                 //Setting session- Chart Type
                 checkChartType();
                 //Setting session, pass DataTable
                 Session["RequisitionReportDataTable"] = table;
                 Response.Redirect("~/Clerk/RequisitionReportPage");
-               
+                
             }
         }
         protected void rdoCatorDept_SelectedIndexChanged(object sender, EventArgs e)
