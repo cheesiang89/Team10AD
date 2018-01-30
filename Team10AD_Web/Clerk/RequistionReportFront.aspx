@@ -125,18 +125,6 @@
         </tr>
     </table>
     <asp:Button ID="btnMakeChart" runat="server" Text="Generate Report" OnClick="btnMakeChart_Click" />
-<asp:Chart ID="reqChart" runat="server">
-    <series>
-        <asp:Series Name="Series1">
-        </asp:Series>
-         <asp:Series Name="Series2">
-        </asp:Series>
-    </series>
-    <chartareas>
-        <asp:ChartArea Name="ChartArea1">
-        </asp:ChartArea>
-    </chartareas>
-</asp:Chart>  
         </asp:Panel>
     
 </asp:Content>

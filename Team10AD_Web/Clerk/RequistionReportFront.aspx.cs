@@ -261,32 +261,41 @@ namespace Team10AD_Web.Clerk
             if ((listCategory.Count > 0) && (listDept.Count > 0))
             {
                 List<RequisitionReportDTO> report = CS_BizLogic.CreateChartData(listDept, listCategory, listDate);
-
+                DataTable table= new DataTable();
                 //Multiple categories
                 if (rdoCatorDept.SelectedValue == "category")
                 {
-                    reqChart.DataSource = CS_BizLogic.CreateDataTable(report, listDate, listCategory, "FIXEDDEPT");
+                   table = CS_BizLogic.CreateDataTable(report, listDate, listCategory, "FIXEDDEPT");
                 }
                 //Multiple departments
                 else if (rdoCatorDept.SelectedValue == "dept")
                 {
-                    reqChart.DataSource = CS_BizLogic.CreateDataTable(report, listDate, listCategory, "FIXEDCAT");
+                table = CS_BizLogic.CreateDataTable(report, listDate, listDept, "FIXEDCAT");
                 }
-
-                //Hardcoded now, need to be dynamic
-                reqChart.Series["Series1"].XValueMember = "MonthYear";
-                reqChart.Series["Series1"].YValueMembers = "Quantity0";
-                reqChart.Series["Series2"].XValueMember = "MonthYear";
-                reqChart.Series["Series2"].YValueMembers = "Quantity1";
-                reqChart.Visible = true;
+                //Setting session- Chart Type
+                checkChartType();
+                //Setting session, pass DataTable
+                Session["RequisitionReportDataTable"] = table;
+                Response.Redirect("~/Clerk/RequisitionReportPage");
+               
             }
         }
         protected void rdoCatorDept_SelectedIndexChanged(object sender, EventArgs e)
         {
-           //Show panel
+            //Reset the gridviews and dropdownlist
+            listCategory.Clear();
+            listDept.Clear();
+            listDate.Clear();
+            dataRefresh();
+            ddlCategory.SelectedIndex = 0;
+            ddlDept.SelectedIndex = 0;
+            ddlMonth.SelectedIndex = 0;
+            ddlYear.SelectedIndex = 0;
+            //Show panel
             pnlReportContent.Visible = true;
+          
         }
-        protected string checkChartType(string chartType)
+        protected void checkChartType()
             {
                 //if rdoCatorDept selected value == category or dept
                 //set the Session["ChartType"] = category/dept
@@ -297,10 +306,10 @@ namespace Team10AD_Web.Clerk
                 }
                 else
                 {
-                    Session["CharType"] = "category";
+                    Session["ChartType"] = "category";
                 }
 
-                return (string)Session["CharType"];
+              
 
             }
     }
