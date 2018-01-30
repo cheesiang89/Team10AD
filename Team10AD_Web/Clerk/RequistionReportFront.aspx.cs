@@ -83,8 +83,7 @@ namespace Team10AD_Web.Clerk
                 dateDTO= new DateDTO(selectedMonth, selectedYear);
                 listDate.Add(dateDTO);
                 Session["dateListReport"] = listDate;
-            }
-          
+            }   
 
             dataRefresh();
 
@@ -96,8 +95,7 @@ namespace Team10AD_Web.Clerk
             {
                 e.Row.Cells[0].Text = "Department";
             }
-            
-
+           
         }
 
         protected void gridCategory_RowDataBound(object sender, GridViewRowEventArgs e)

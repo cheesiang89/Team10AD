@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Team10AD_Web.App_Code;
 using Team10AD_Web.DTO;
 using Team10AD_Web.Model;
 
@@ -13,6 +14,7 @@ namespace Team10AD_Web.Clerk
     {
         List<string> listCategory;
         List<DateDTO> listDate;
+      
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -62,6 +64,7 @@ namespace Team10AD_Web.Clerk
         {
             string selectedMonth = dropMonth.SelectedItem.Text;
             string selectedYear = dropYear.SelectedItem.Text;
+            int selectedMonthInt = Int32.Parse(dropMonth.SelectedValue);
             DateDTO dateDTO;
 
             if (!checkDateDuplication(selectedMonth, selectedYear, listDate))
@@ -83,8 +86,6 @@ namespace Team10AD_Web.Clerk
             deleteDateFromList(monthName, yearName, listDate);
 
         }
-
-
 
         protected void dgvCategory_RowCreated(object sender, GridViewRowEventArgs e)
         {
@@ -169,6 +170,7 @@ namespace Team10AD_Web.Clerk
 
         protected void btnGenerateReport_Click(object sender, EventArgs e)
         {
+            List<OrderReportDTO> orderReportDTOList = BusinessLogic_Sam.CreateChartData(listCategory,listDate);
 
         }
     }

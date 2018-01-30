@@ -30,18 +30,18 @@
                 <asp:Label ID="lblMY" runat="server" Text="Month/Year:"></asp:Label></td>
             <td>
             <asp:DropDownList ID="dropMonth" runat="server">
-                <asp:ListItem Value="1">January</asp:ListItem>
-                <asp:ListItem Value="2">February</asp:ListItem>
-                <asp:ListItem Value="3">March</asp:ListItem>
-                <asp:ListItem Value="4">April</asp:ListItem>
+                <asp:ListItem Value="1">Jan</asp:ListItem>
+                <asp:ListItem Value="2">Feb</asp:ListItem>
+                <asp:ListItem Value="3">Mar</asp:ListItem>
+                <asp:ListItem Value="4">Apr</asp:ListItem>
                 <asp:ListItem Value="5">May</asp:ListItem>
-                <asp:ListItem Value="6">June</asp:ListItem>
-                <asp:ListItem Value="7">July</asp:ListItem>
-                <asp:ListItem Value="8">August</asp:ListItem>
-                <asp:ListItem Value="9">September</asp:ListItem>
-                <asp:ListItem Value="10">October</asp:ListItem>
-                <asp:ListItem Value="11">November</asp:ListItem>
-                <asp:ListItem Value="12">December</asp:ListItem>
+                <asp:ListItem Value="6">Jun</asp:ListItem>
+                <asp:ListItem Value="7">Jul</asp:ListItem>
+                <asp:ListItem Value="8">Aug</asp:ListItem>
+                <asp:ListItem Value="9">Sep</asp:ListItem>
+                <asp:ListItem Value="10">Oct</asp:ListItem>
+                <asp:ListItem Value="11">Nov</asp:ListItem>
+                <asp:ListItem Value="12">Dec</asp:ListItem>
             </asp:DropDownList>
                 <asp:DropDownList ID="dropYear" runat="server">
                     <asp:ListItem Value="2016">2016</asp:ListItem>

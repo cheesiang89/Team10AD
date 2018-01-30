@@ -457,6 +457,7 @@
     <Compile Include="App_Code\Model\Team10ADModel.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="App_Code\DTO\OrderReportDTO.cs" />
     <Compile Include="App_Code\PurvaBizLogic.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>

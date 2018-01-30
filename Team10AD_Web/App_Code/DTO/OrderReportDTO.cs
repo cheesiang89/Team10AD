@@ -4,27 +4,26 @@ using System.Globalization;
 using System.Linq;
 using System.Web;
 
-namespace Team10AD_Web.DTO
+namespace Team10AD_Web.App_Code
 {
-    public class RequisitionReportDTO:IComparable
+    public class OrderReportDTO
     {
         public string Category { get; set; }
-        public string DepartmentName { get; set; }
+        public int OrderedQuantity { get; set; }
         public string Month { get; set; }
         public string Year { get; set; }
-        public int Quantity { get; set; }
 
         public int CompareTo(object obj)
         {
             int compareNo = 0;
-            RequisitionReportDTO otherObj = obj as RequisitionReportDTO;
+            OrderReportDTO otherObj = obj as OrderReportDTO;
             if (otherObj != null)
             {
-                if (Int32.Parse(this.Year)< Int32.Parse(otherObj.Year))
+                if (Int32.Parse(this.Year) < Int32.Parse(otherObj.Year))
                 {
                     //This instance is smaller
                     compareNo = -1;
-                   
+
                 }
                 else if (Int32.Parse(this.Year) > Int32.Parse(otherObj.Year))
                 {   //Year larger - this instance is larger
@@ -45,12 +44,11 @@ namespace Team10AD_Web.DTO
                         compareNo = 1;
                     }
                 }
-            }            
+            }
             else
                 throw new ArgumentException("Object is not a RequisitionReportDTO");
             return compareNo;
         }
-
 
     }
 }

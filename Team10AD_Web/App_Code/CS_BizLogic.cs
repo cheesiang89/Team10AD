@@ -102,6 +102,7 @@ namespace Team10AD_Web
             }
             return listDTO;
         }
+
         public static int GetQuantityRequested(string deptName, string category, int month, int year)
         {
             int quantity = 0;

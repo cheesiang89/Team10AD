@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using Team10AD_Web.Model;
 using System.Web.Services;
+using Team10AD_Web.App_Code;
+using Team10AD_Web.DTO;
+using System.Globalization;
 
 namespace Team10AD_Web
 {
@@ -218,143 +221,74 @@ namespace Team10AD_Web
 
         }
 
+        //Get Order Quantity based on Categories selection
+        public static int GetOrderedQuantity(string category, int month, int year)
+        {
+            int quantity = 0;
+            using (Team10ADModel entities = new Team10ADModel())
+            {
+                List<string> itemCodeList = new List<string>();
+                List<int> poItemQtyList = new List<int>();
+                List<string> itemCodeMatchCatList = new List<string>();
+                //get the list of PO ID from the selected months and years
+                List<int> listPOID = entities.PurchaseOrders.Where
+                    (x => x.CreationDate.Value.Month == month && x.CreationDate.Value.Year == year).Select
+                    (x => x.POID).ToList();
 
-        ////If user selected 1 category, 3 dates and 3 departments
-        //public static List<RequisitionReport> getReqReportByACatThDThDpt(string Category, List<int> Months, List<int> Years, List<string> DepartmentCode)
-        //{
-        //    using (Team10ADModel entities = new Team10ADModel())
-        //    {
-        //        int listMonthCount = Months.Count;
-        //        int listYearCount = Years.Count;
-        //        int listDptCount = DepartmentCode.Count;
+                //get the list of itemCodes from POdetails within the list of POIDs 
+                foreach (int POID in listPOID)
+                {
+                    itemCodeList = entities.PurchaseOrderDetails.Where(x => x.POID == POID).Select(x => x.ItemCode).ToList();
+                }
 
-        //        int month1 = Months[0]; int year1 = Years[0];
-        //        int month2 = Months[1]; int year2 = Years[1];
-        //        int month3 = Months[2]; int year3 = Years[2];
-        //        string dptCode1 = DepartmentCode[0];
-        //        string dptCode2 = DepartmentCode[1];
-        //        string dptCode3 = DepartmentCode[2];
+                //get the list of itemCode matching the category
+                foreach(string itemCode in itemCodeList)
+                {
+                    itemCodeMatchCatList = entities.Catalogues.Where(x => x.Category == category).Select(x => x.ItemCode).ToList();
+                }
 
-        //        var reqry = (from rd in entities.RequisitionDetails
-        //                     join req in entities.Requisitions on rd.RequisitionID equals req.RequisitionID
-        //                     join item in entities.Catalogues on rd.ItemCode equals item.ItemCode
-        //                     join emp in entities.Employees on req.RequestorID equals emp.EmployeeID
-        //                     join dept in entities.Departments on emp.DepartmentCode equals dept.DepartmentCode
-        //                     where (item.Category == Category && ((req.RequisitionDate.Value.Month == month1 && req.RequisitionDate.Value.Year == year1) ||
-        //                     (req.RequisitionDate.Value.Month == month2 && req.RequisitionDate.Value.Year == year2) ||
-        //                     (req.RequisitionDate.Value.Month == month3 && req.RequisitionDate.Value.Year == year3))
-        //                     && (emp.DepartmentCode == dptCode1 || emp.DepartmentCode == dptCode2) || emp.DepartmentCode == dptCode3)
-        //                     select new DTO.RequisitionReport
-        //                     {
-        //                         RequisitionID = req.RequisitionID,
-        //                         DepartmentCode = emp.DepartmentCode,
-        //                         RequestorID = (int)req.RequestorID,
-        //                         ReqDate = (DateTime)req.RequisitionDate,
-        //                         ItemCode = item.ItemCode,
-        //                         Category = item.Category,
-        //                         QtyRequested = (int)rd.QuantityRequested,
-        //                     }).ToList<RequisitionReport>();
+                int? orderedQty;
 
-        //        return reqry.ToList();
-        //    }
-        //}
+                //with the itemCodeMatchCatList, get the desired quantity of each item 
+                foreach (string itemCodeMatchCat in itemCodeMatchCatList)
+                {
+                    foreach(int POID in listPOID)
+                    {
+                       orderedQty = entities.PurchaseOrderDetails.Where(x => x.ItemCode == itemCodeMatchCat & x.POID == POID).Select(x => x.Quantity).FirstOrDefault();
+                        if (orderedQty!=null)
+                        {
+                            quantity += orderedQty.GetValueOrDefault();
+                        }
+                    }
+                   
+                }
 
-        ////If user selected 1 category, 2 dates and 2 departments
-        //public static List<RequisitionReport> getReqReportByACatTwoDTwoDpt(string Category, List<string> Date, List<string> DepartmentCode)
-        //{
-        //    using (Team10ADModel entities = new Team10ADModel())
-        //    {
-        //        int listDateCount = Date.Count;
-        //        int listDptCount = DepartmentCode.Count;
-
-        //        DateTime date1 = Convert.ToDateTime(Date[0]).Date;
-        //        string dptCode1 = DepartmentCode[0];
-        //        DateTime date2 = Convert.ToDateTime(Date[1]).Date;
-        //        string dptCode2 = DepartmentCode[1];
+                return quantity;
+            }
+        }
 
 
-        //        var reqry = (from rd in entities.RequisitionDetails
-        //                     join req in entities.Requisitions on rd.RequisitionID equals req.RequisitionID
-        //                     join item in entities.Catalogues on rd.ItemCode equals item.ItemCode
-        //                     join emp in entities.Employees on req.RequestorID equals emp.EmployeeID
-        //                     join dept in entities.Departments on emp.DepartmentCode equals dept.DepartmentCode
-        //                     where (item.Category == Category && (req.RequisitionDate == date1 || req.RequisitionDate == date2) && (emp.DepartmentCode == dptCode1 || emp.DepartmentCode == dptCode2))
-        //                     select new DTO.RequisitionReport
-        //                     {
-        //                         RequisitionID = req.RequisitionID,
-        //                         DepartmentCode = emp.DepartmentCode,
-        //                         RequestorID = (int)req.RequestorID,
-        //                         ReqDate = (DateTime)req.RequisitionDate,
-        //                         ItemCode = item.ItemCode,
-        //                         Category = item.Category,
-        //                         QtyRequested = (int)rd.QuantityRequested,
-        //                     }).ToList();
-
-        //        return reqry.ToList<RequisitionReport>();
-        //    }
-        //}
-
-
-        ////Doesn't allow user to choose 1 date, 1 dept and 1 cat
-
-        ////If user selected 1 Cat, 2 Date, 3 Dept
-        ////If user selected 1 Cat 1 Date, 3 Dept
-        ////If user selected 1 Cat, 1 Date, 2 Dept
-
-
-
-
-        ////Get Order Quantity based on Categories
-        //public static int GetOrderedQuantity(string category, int month, int year)
-        //{
-        //    using (Team10ADModel entities = new Team10ADModel())
-        //    {
-        //        List<string> itemCodeList = new List<string>();
-        //        List<int> poItemQtyList = new List<int>();
-        //        //get the list of PO ID from the selected months and years
-        //        List<int> listPOID = entities.PurchaseOrders.Where
-        //            (x => x.CreationDate.Value.Month == month && x.CreationDate.Value.Year == year).Select
-        //            (x => x.POID).ToList();
-
-        //        //filter the itemcode with condition that matches the category
-        //        //find the suppliers of the itemcode
-        //        //from the PO IDs get the itemCode matching category from PO details
-        //        //foreach (int POID in listPOID)
-        //        //{
-        //        //    //List<int> orderQty = entities.PurchaseOrderDetails.Where(x=>x.POID==POID )
-        //        //    var qry = from poitems in entities.PurchaseOrderDetails
-        //        //              join polist in entities.PurchaseOrders on poitems.POID equals polist.POID
-        //        //              join item in entities.Catalogues on poitems.ItemCode equals item.ItemCode
-        //        //              where(poitems.POID==POID)
-        //        //              select(poitems.ItemCode)
-
-        //        //}
-        //        //get the list of itemCode & qty requested from POdetails within the list of POIDs
-
-        //        //get the list of itemCodes from POdetails within the list of POIDs
-        //        foreach (int POID in listPOID)
-        //        {
-        //            itemCodeList = entities.PurchaseOrderDetails.Where(x => x.POID == POID).Select(x => x.ItemCode).ToList();
-        //        }
-
-        //        foreach (string itemCode in itemCodeList)
-        //        {
-        //            var qry = entities.PurchaseOrderDetails.Where(x => x.ItemCode == itemCode).Select(x => x.Quantity).ToList();
-        //            if (qry.Any())
-        //            {
-        //                foreach (int itemqty in qry)
-        //                {
-        //                    poItemQtyList.Add(itemqty);
-        //                }
-
-        //            }
-        //        }
-
-
-
-        //        //sum the quantity
-        //    }
-       // }
+        public static List<OrderReportDTO> CreateChartData(List<string> listCategory, List<DateDTO> listDate)
+        {
+            List<OrderReportDTO> listDTO = new List<OrderReportDTO>();
+            using (Team10ADModel m = new Team10ADModel())
+            {
+                 foreach (string category in listCategory)
+                    {
+                        foreach (DateDTO item in listDate)
+                        {
+                            OrderReportDTO dto = new OrderReportDTO();
+                            dto.Category = category;
+                            dto.Month = item.Month;
+                            dto.Year = item.Year;
+                            int monthInInt = DateTime.ParseExact(item.Month, "MMM", CultureInfo.InvariantCulture).Month;
+                            dto.OrderedQuantity = GetOrderedQuantity(category, monthInInt, Int32.Parse(item.Year));
+                            listDTO.Add(dto);
+                        }
+                    } 
+            }
+            return listDTO;
+        }
 
     }
 }
