@@ -24,7 +24,7 @@ namespace Team10AD_Web.Clerk
            
             if (!IsPostBack)
             {
-                reqChart.Visible = false;
+                //reqChart.Visible = false;
                 Team10ADModel m = new Team10ADModel();
                 ddlDept.DataSource = m.Departments.Select(x => x.DepartmentName).ToList();
                 ddlCategory.DataSource= m.Catalogues.Select(x => x.Category).Distinct().ToList();
@@ -45,7 +45,6 @@ namespace Team10AD_Web.Clerk
            gridDate.DataSource = listDate;
             gridDate.DataBind();
            
-
         }
 
 
@@ -211,14 +210,11 @@ namespace Team10AD_Web.Clerk
             bool isDuplicate = false;
             //Iterate list in sessionState
             foreach (DateDTO item in listSource)
-            {
-                
+            {             
                     if (selectedMonth == item.Month && selectedYear==item.Year)
                     {
                         isDuplicate = true;
                     }
-             
-                
             }
             return isDuplicate;
         }
@@ -226,12 +222,47 @@ namespace Team10AD_Web.Clerk
         protected void btnMakeChart_Click(object sender, EventArgs e)
         {
             List<RequisitionReportDTO> report = CS_BizLogic.CreateChartData(listDept, listCategory, listDate);
-            
-            reqChart.DataSource = CS_BizLogic.CreateDataTable(report, listDate, listCategory, "FIXEDDEPT");
-            reqChart.Series["Series1"].XValueMember = "MonthYear";
-            reqChart.Series["Series1"].YValueMembers = "Quantity0";
-            reqChart.Series["Series2"].XValueMember = "MonthYear";
-            reqChart.Series["Series2"].YValueMembers = "Quantity1";
+            Session["RequisitionReportDataTable"] = CS_BizLogic.CreateDataTable(report, listDate, listCategory, "FIXEDDEPT");
+            Response.Redirect("RequisitionReportPage.aspx");
+            //reqChart.DataSource = CS_BizLogic.CreateDataTable(report, listDate, listCategory, "FIXEDDEPT");
+            //reqChart.Series["Series1"].XValueMember = "MonthYear";
+            //reqChart.Series["Series1"].YValueMembers = "Quantity0";
+            //reqChart.Series["Series2"].XValueMember = "MonthYear";
+            //reqChart.Series["Series2"].YValueMembers = "Quantity1";
+
+
+
+            //if ((string)Session["ChartType"] == "dept")
+            //{
+            //    //reqChart.Titles.Add("NewTitle");
+            //    reqChart.Titles["Title1"].Text = "Requisition Reports with Department Comparison";
+
+            //}
+            //else
+            //{
+            //    //reqChart.Titles.Add("NewTitle");
+            //    reqChart.Titles["Title1"].Text = "Requisition Reports with Category Comparison";
+
+            //}
+
+        }
+
+        protected string checkChartType(string chartType)
+        {
+            //if rdoCatorDept selected value == category or dept
+            //set the Session["ChartType"] = category/dept
+            //chart title will be different.
+            if (rdoCatorDept.SelectedValue == "dept")
+            {
+                Session["ChartType"] = "dept";
+            }
+            else
+            {
+                Session["CharType"]="category";
+            }
+
+            return (string)Session["CharType"];
+
         }
     }
 }

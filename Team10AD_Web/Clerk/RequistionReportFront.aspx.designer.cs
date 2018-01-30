@@ -13,6 +13,15 @@ namespace Team10AD_Web.Clerk {
     public partial class RequistionReportFront {
         
         /// <summary>
+        /// rdoCatorDept control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rdoCatorDept;
+        
+        /// <summary>
         /// lblDept control.
         /// </summary>
         /// <remarks>
@@ -137,14 +146,5 @@ namespace Team10AD_Web.Clerk {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnMakeChart;
-        
-        /// <summary>
-        /// reqChart control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.DataVisualization.Charting.Chart reqChart;
     }
 }

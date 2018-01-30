@@ -5,6 +5,10 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <asp:RadioButtonList ID="rdoCatorDept" runat="server">
+        <asp:ListItem Value="category">Multiple Categories comparison</asp:ListItem>
+        <asp:ListItem Value="dept">Multiple Department comparison</asp:ListItem>
+    </asp:RadioButtonList>
     <table style="width: 100%;">
         <tr>
             <%-- Department --%>
@@ -42,9 +46,6 @@
             <td>
                 <asp:DropDownList ID="ddlCategory" runat="server">
                 </asp:DropDownList>
-
-
-
             </td>
             <td>
                 <asp:Button ID="btnAddCategory" runat="server" Text="Add Category" OnClick="btnAddCategory_Click" /></td>
@@ -108,16 +109,27 @@
         </tr>
     </table>
     <asp:Button ID="btnMakeChart" runat="server" Text="Generate Report" OnClick="btnMakeChart_Click" />
-<asp:Chart ID="reqChart" runat="server">
+<%--<asp:Chart ID="reqChart" runat="server" Width="480px">
+      
     <series>
         <asp:Series Name="Series1">
         </asp:Series>
          <asp:Series Name="Series2">
         </asp:Series>
+        <asp:Series Name="Series3">
+        </asp:Series>
     </series>
     <chartareas>
         <asp:ChartArea Name="ChartArea1">
+            <AxisY Title="Quantity Requested">
+            </AxisY>
+            <AxisX Title="Month, Year">
+            </AxisX>
         </asp:ChartArea>
     </chartareas>
-</asp:Chart>
+    <Titles>
+        <asp:Title Name="Title1">
+        </asp:Title>
+    </Titles>
+</asp:Chart>--%>
 </asp:Content>
