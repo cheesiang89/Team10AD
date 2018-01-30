@@ -29,11 +29,6 @@ namespace Team10AD_Web.Clerk
                 reqChart.Titles["Title1"].Text = "Requisition Reports with Category Comparison";
             }
         }
-
-
-
-
-
-
+        
     }
 }

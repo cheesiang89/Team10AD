@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using Team10AD_Web.Model;
 using System.Web.Services;
-using Team10AD_Web.App_Code;
+using Team10AD_Web;
 using Team10AD_Web.DTO;
 using System.Globalization;
 
@@ -268,27 +268,27 @@ namespace Team10AD_Web
         }
 
 
-        public static List<OrderReportDTO> CreateChartData(List<string> listCategory, List<DateDTO> listDate)
-        {
-            List<OrderReportDTO> listDTO = new List<OrderReportDTO>();
-            using (Team10ADModel m = new Team10ADModel())
-            {
-                 foreach (string category in listCategory)
-                    {
-                        foreach (DateDTO item in listDate)
-                        {
-                            OrderReportDTO dto = new OrderReportDTO();
-                            dto.Category = category;
-                            dto.Month = item.Month;
-                            dto.Year = item.Year;
-                            int monthInInt = DateTime.ParseExact(item.Month, "MMM", CultureInfo.InvariantCulture).Month;
-                            dto.OrderedQuantity = GetOrderedQuantity(category, monthInInt, Int32.Parse(item.Year));
-                            listDTO.Add(dto);
-                        }
-                    } 
-            }
-            return listDTO;
-        }
+        //public static List<OrderReportDTO> CreateChartData(List<string> listCategory, List<DateDTO> listDate)
+        //{
+        //    List<OrderReportDTO> listDTO = new List<OrderReportDTO>();
+        //    using (Team10ADModel m = new Team10ADModel())
+        //    {
+        //         foreach (string category in listCategory)
+        //            {
+        //                foreach (DateDTO item in listDate)
+        //                {
+        //                    OrderReportDTO dto = new OrderReportDTO();
+        //                    dto.Category = category;
+        //                    dto.Month = item.Month;
+        //                    dto.Year = item.Year;
+        //                    int monthInInt = DateTime.ParseExact(item.Month, "MMM", CultureInfo.InvariantCulture).Month;
+        //                    dto.OrderedQuantity = GetOrderedQuantity(category, monthInInt, Int32.Parse(item.Year));
+        //                    listDTO.Add(dto);
+        //                }
+        //            } 
+        //    }
+        //    return listDTO;
+        //}
 
     }
 }

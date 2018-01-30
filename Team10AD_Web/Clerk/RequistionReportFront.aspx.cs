@@ -258,9 +258,9 @@ namespace Team10AD_Web.Clerk
         {
 
             //Ensure at least 1 dept, 1 category selected
-            if ((listCategory.Count > 0) && (listDept.Count > 0))
+            if ((listCategory.Count > 0) && (listDept.Count > 0) && (listDate.Count>0))
             {
-                List<RequisitionReportDTO> report = CS_BizLogic.CreateChartData(listDept, listCategory, listDate);
+                List<ReportDTO> report = CS_BizLogic.CreateChartData(listDept, listCategory, listDate);
                 DataTable table= new DataTable();
                 //Multiple categories
                 if (rdoCatorDept.SelectedValue == "category")
