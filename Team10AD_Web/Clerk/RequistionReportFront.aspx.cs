@@ -102,8 +102,6 @@ namespace Team10AD_Web.Clerk
                 dataRefresh();
             }
             
-            
-
         }
         
         protected void btnAddDate_Click(object sender, EventArgs e)
