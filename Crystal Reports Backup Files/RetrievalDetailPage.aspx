@@ -21,7 +21,7 @@
                 <ItemTemplate>
                     <asp:TextBox ID="RetrieveQty" runat="server" Text='<%# QtyToRetrieve((int) Eval("BalanceQuantity"),(int) Eval("RequestedQuantity")) %>'></asp:TextBox>
                     <asp:CompareValidator ID="ReqQtyValidator" runat="server" controltovalidate="RetrieveQty" ValueToCompare='<%# (int) Eval("RequestedQuantity")%>' operator="LessThanEqual" type="Integer" ErrorMessage="Have to be equal or less than the quantity requested!" Font-Bold="True" ></asp:CompareValidator>
-                    <asp:CompareValidator ID="NegativeQtyValidator" runat="server" controltovalidate="RetrieveQty" ValueToCompare='0' operator="GreaterThanEqual" type="Integer" ErrorMessage="Cannot be negative!" Font-Bold="True" ></asp:CompareValidator>
+                    <asp:CompareValidator ID="NegativeQtyValidator" runat="server" controltovalidate="RetrieveQty" ValueToCompare='0' operator="GreaterThanEqual" type="Integer" ErrorMessage="Cannot be negative and must be a number!" Font-Bold="True" ></asp:CompareValidator>
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>

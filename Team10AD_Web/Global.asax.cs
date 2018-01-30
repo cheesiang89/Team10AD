@@ -55,6 +55,7 @@ namespace Team10AD_Web
              Session["dateListReport"] = new List<DateDTO>();
            Session["listOrderCategory"] = new List<string>();
             Session["listOrderDates"] = new List<DateDTO>();
+            Session["RequisitionReportDTOList"] = new List<RequisitionReportDTO>();
         }
     }
 }

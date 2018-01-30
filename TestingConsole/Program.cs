@@ -93,7 +93,7 @@ namespace TestingConsole
         public static string GetQuantityRequested(string deptName, string category, string month, string year)
         {
             int quantity = 0;
-            Team10ADModel m = new Team10ADModel()
+            Team10ADModel m = new Team10ADModel();
 
                 //Get EmployeeIDs from Dept
             string deptCode = m.Departments.Where(x => x.DepartmentName == deptName).Select(x => x.DepartmentCode).First();

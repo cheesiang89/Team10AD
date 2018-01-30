@@ -4,9 +4,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
     <h2>Supplier</h2>
-
     <asp:GridView ID="dgvSupList" runat="server" AllowPaging="True" OnPageIndexChanging="dgvSupList_PageIndexChanging" AutoGenerateColumns="False" OnRowCommand="dgvSupList_RowCommand">
-
         <Columns>
             <asp:BoundField DataField="SupplierCode" HeaderText="Supplier Code" />
             <asp:BoundField DataField="SupplierName" HeaderText="Supplier Name" />
