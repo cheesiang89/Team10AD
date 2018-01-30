@@ -15,26 +15,41 @@ namespace Team10AD_Web.Clerk
             reqChart.DataSource = (DataTable)Session["RequisitionReportDataTable"];
             reqChart.Series["Series1"].XValueMember = "MonthYear";
             reqChart.Series["Series1"].YValueMembers = "Quantity0";
-            reqChart.Series["Series2"].XValueMember = "MonthYear";
-            reqChart.Series["Series2"].YValueMembers = "Quantity1";
-            reqChart.Series["Series3"].XValueMember = "MonthYear";
-            reqChart.Series["Series3"].YValueMembers = "Quantity2";
-
             reqChart.Series["Series1"].LegendText = (string)Session["ReqRtpSeries1"].ToString();
-            reqChart.Series["Series2"].LegendText = (string)Session["ReqRtpSeries2"].ToString();
-            reqChart.Series["Series3"].LegendText = (string)Session["ReqRtpSeries3"].ToString();
 
-            if ((string)Session["ChartType"] == "dept")
+            //If 2 Series
+            string reqRtpSeries2 = (string)Session["ReqRtpSeries2"].ToString();
+            if (!string.IsNullOrEmpty(reqRtpSeries2))
             {
-                //reqChart.Titles.Add("NewTitle");
-                reqChart.Titles["Title1"].Text = "Requisition Reports with Department Comparison";
-                //reqChart.Titles["Title1"].TextStyle
-             
-
+                reqChart.Series["Series2"].XValueMember = "MonthYear";
+                reqChart.Series["Series2"].YValueMembers = "Quantity1";
+                reqChart.Series["Series2"].LegendText = reqRtpSeries2;
             }
             else
             {
-                //reqChart.Titles.Add("NewTitle");
+                reqChart.Series["Series2"].LegendText = "None";
+            }
+            //If 3 series
+            string reqRtpSeries3 = (string)Session["ReqRtpSeries3"].ToString();
+            if (!string.IsNullOrEmpty(reqRtpSeries3))
+            {
+                reqChart.Series["Series3"].XValueMember = "MonthYear";
+                reqChart.Series["Series3"].YValueMembers = "Quantity2";
+                reqChart.Series["Series3"].LegendText = reqRtpSeries3;
+            }
+            else
+            {
+                reqChart.Series["Series3"].LegendText ="None";
+            }
+            
+              if ((string)Session["ChartType"] == "dept")
+            {
+                reqChart.Titles["Title1"].Text = "Requisition Reports with Department Comparison";
+                //reqChart.Titles["Title1"].TextStyle
+             
+            }
+            else
+            {
                 reqChart.Titles["Title1"].Text = "Requisition Reports with Category Comparison";
             }
         }

@@ -265,9 +265,16 @@ namespace Team10AD_Web.Clerk
                 if (rdoCatorDept.SelectedValue == "category")
                 {
                    table = CS_BizLogic.CreateDataTable(report, listDate, listCategory, "FIXEDDEPT");
-                    Session["ReqRtpSeries1"] = gridCategory.Rows[0].Cells[0].Text;
-                    Session["ReqRtpSeries2"] = gridCategory.Rows[1].Cells[0].Text;
-                    Session["ReqRtpSeries3"] = gridCategory.Rows[2].Cells[0].Text;
+               
+                        Session["ReqRtpSeries1"] = gridCategory.Rows[0].Cells[0].Text;
+                    if (gridCategory.Rows.Count == 2)
+                    {
+                        Session["ReqRtpSeries2"] = gridCategory.Rows[1].Cells[0].Text;
+                    }
+                    else if (gridCategory.Rows.Count == 3)
+                    {
+                        Session["ReqRtpSeries3"] = gridCategory.Rows[2].Cells[0].Text;
+                    }
 
                 }
                 //Multiple departments
@@ -275,8 +282,16 @@ namespace Team10AD_Web.Clerk
                 {
                 table = CS_BizLogic.CreateDataTable(report, listDate, listDept, "FIXEDCAT");
                     Session["ReqRtpSeries1"] = gridDept.Rows[0].Cells[0].Text;
-                    Session["ReqRtpSeries2"] = gridDept.Rows[1].Cells[0].Text;
-                    Session["ReqRtpSeries3"] = gridDept.Rows[2].Cells[0].Text;
+                    if (gridDept.Rows.Count == 2)
+                    {
+                        Session["ReqRtpSeries2"] = gridDept.Rows[1].Cells[0].Text;
+                    }
+                    else if (gridDept.Rows.Count == 3)
+                    {
+                        Session["ReqRtpSeries3"] = gridDept.Rows[2].Cells[0].Text;
+
+                    }
+                 
 
                 }
                 //Setting session- Chart Type

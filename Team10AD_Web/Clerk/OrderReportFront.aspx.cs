@@ -208,6 +208,16 @@ namespace Team10AD_Web.Clerk
              
             //    Setting session, pass DataTable
                Session["OrderReportDataTable"] = table;
+                Session["OrderRtpSeries1"] = gridCategory.Rows[0].Cells[0].Text;
+                if (gridCategory.Rows.Count==2)
+                {
+                    Session["OrderRtpSeries2"] = gridCategory.Rows[1].Cells[0].Text;
+                }
+                else if (gridCategory.Rows.Count == 3)
+                {
+                    Session["OrderRtpSeries3"] = gridCategory.Rows[2].Cells[0].Text;
+                }
+                
                 Response.Redirect("~/Clerk/OrderReportPage");
 
             }

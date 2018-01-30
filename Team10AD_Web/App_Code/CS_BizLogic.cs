@@ -103,24 +103,24 @@ namespace Team10AD_Web
                 }
                 //If Requisition report
                 else {
-                foreach (string dept in listDept)
-                {
-                    foreach (string category in listCategory)
+                    foreach (string dept in listDept)
                     {
-                        foreach (DateDTO item in listDate)
+                        foreach (string category in listCategory)
                         {
-                            ReportDTO dto = new ReportDTO();
-                            dto.Category = category;
-                            dto.DepartmentName = dept;
-                            dto.Month = item.Month;
-                            dto.Year = item.Year;
-                            int monthInInt = DateTime.ParseExact(item.Month, "MMM", CultureInfo.InvariantCulture).Month;
+                            foreach (DateDTO item in listDate)
+                            {
+                                ReportDTO dto = new ReportDTO();
+                                dto.Category = category;
+                                dto.DepartmentName = dept;
+                                dto.Month = item.Month;
+                                dto.Year = item.Year;
+                                int monthInInt = DateTime.ParseExact(item.Month, "MMM", CultureInfo.InvariantCulture).Month;
                            
-                            dto.Quantity = GetQuantityRequested(dept, category, monthInInt, Int32.Parse(item.Year));
-                            listDTO.Add(dto);
+                                dto.Quantity = GetQuantityRequested(dept, category, monthInInt, Int32.Parse(item.Year));
+                                listDTO.Add(dto);
+                            }
                         }
                     }
-                }
                 }
             }
             return listDTO;

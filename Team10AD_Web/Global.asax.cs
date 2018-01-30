@@ -62,7 +62,9 @@ namespace Team10AD_Web
             Session["ReqRtpSeries1"] = "";
             Session["ReqRtpSeries2"] = "";
             Session["ReqRtpSeries3"] = "";
-
+            Session["OrderRtpSeries1"] = "";
+            Session["OrderRtpSeries2"] = "";
+            Session["OrderRtpSeries3"] = "";
 
         }
     }
