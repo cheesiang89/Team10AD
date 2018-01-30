@@ -256,37 +256,37 @@ namespace Team10AD_Web.Clerk
 
         protected void btnMakeChart_Click(object sender, EventArgs e)
         {
-            
+
             //Ensure at least 1 dept, 1 category selected
-            if ((listCategory.Count>0) && (listDept.Count>0))
+            if ((listCategory.Count > 0) && (listDept.Count > 0))
             {
                 List<RequisitionReportDTO> report = CS_BizLogic.CreateChartData(listDept, listCategory, listDate);
 
-            //Multiple categories
-            if (rdoCatorDept.SelectedValue == "category")
-            {
-                reqChart.DataSource = CS_BizLogic.CreateDataTable(report, listDate, listCategory, "FIXEDDEPT");
-            }
-            //Multiple departments
-            else if (rdoCatorDept.SelectedValue == "dept")
-            {
-                reqChart.DataSource = CS_BizLogic.CreateDataTable(report, listDate, listCategory, "FIXEDCAT");
-            }
-           
-            //Hardcoded now, need to be dynamic
-            reqChart.Series["Series1"].XValueMember = "MonthYear";
-            reqChart.Series["Series1"].YValueMembers = "Quantity0";
-            reqChart.Series["Series2"].XValueMember = "MonthYear";
-            reqChart.Series["Series2"].YValueMembers = "Quantity1";
-            reqChart.Visible = true;
-        }
+                //Multiple categories
+                if (rdoCatorDept.SelectedValue == "category")
+                {
+                    reqChart.DataSource = CS_BizLogic.CreateDataTable(report, listDate, listCategory, "FIXEDDEPT");
+                }
+                //Multiple departments
+                else if (rdoCatorDept.SelectedValue == "dept")
+                {
+                    reqChart.DataSource = CS_BizLogic.CreateDataTable(report, listDate, listCategory, "FIXEDCAT");
+                }
 
+                //Hardcoded now, need to be dynamic
+                reqChart.Series["Series1"].XValueMember = "MonthYear";
+                reqChart.Series["Series1"].YValueMembers = "Quantity0";
+                reqChart.Series["Series2"].XValueMember = "MonthYear";
+                reqChart.Series["Series2"].YValueMembers = "Quantity1";
+                reqChart.Visible = true;
+            }
+        }
         protected void rdoCatorDept_SelectedIndexChanged(object sender, EventArgs e)
         {
            //Show panel
             pnlReportContent.Visible = true;
         }
-            protected string checkChartType(string chartType)
+        protected string checkChartType(string chartType)
             {
                 //if rdoCatorDept selected value == category or dept
                 //set the Session["ChartType"] = category/dept
@@ -303,5 +303,5 @@ namespace Team10AD_Web.Clerk
                 return (string)Session["CharType"];
 
             }
-        }
+    }
 }
