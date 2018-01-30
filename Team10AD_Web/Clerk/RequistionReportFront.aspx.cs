@@ -30,6 +30,12 @@ namespace Team10AD_Web.Clerk
                 ddlCategory.DataSource= m.Catalogues.Select(x => x.Category).Distinct().ToList();
                 ddlDept.DataBind();
                 ddlCategory.DataBind();
+
+                //Remove default set
+                ddlDept.Items.Insert(0, new ListItem(string.Empty, string.Empty));
+                ddlCategory.Items.Insert(0, new ListItem(string.Empty, string.Empty));
+                ddlDept.SelectedIndex = 0;
+                ddlCategory.SelectedIndex = 0;
             }
         }
         public void dataRefresh()
@@ -51,26 +57,51 @@ namespace Team10AD_Web.Clerk
         protected void btnAddDept_Click(object sender, EventArgs e)
         {
             string selectedDept = ddlDept.SelectedItem.Text;
-            if (!checkDuplicates(selectedDept, listDept))
+            //Check not empty
+            if (!String.IsNullOrEmpty(selectedDept))
             {
-                listDept.Add(selectedDept);
-                Session["deptListReport"] = listDept;
+                //If Multiple Categories
+                if (rdoCatorDept.SelectedValue == "category")
+                {
+                    //Only allow 1 department
+                    listDept.Clear();
+                    listDept.Add(selectedDept);
+                    Session["deptListReport"] = listDept;
+                }
+                if (!checkDuplicates(selectedDept, listDept))
+                {
+                    listDept.Add(selectedDept);
+                    Session["deptListReport"] = listDept;
+                }
             }
+          
 
             dataRefresh();
         }
         protected void btnAddCategory_Click(object sender, EventArgs e)
         {
             string selectedCategory = ddlCategory.SelectedItem.Text;
-            if (!checkDuplicates(selectedCategory, listCategory))
+            //Check not empty
+            if (!String.IsNullOrEmpty(selectedCategory))
             {
-                listCategory.Add(selectedCategory);
-                Session["categoryListReport"] = listCategory;
+                //If Multiple Departments
+                if (rdoCatorDept.SelectedValue == "dept")
+                {
+                    //Only allow 1 Category
+                    listCategory.Clear();
+                    listCategory.Add(selectedCategory);
+                    Session["categoryListReport"] = listCategory;
 
+                }
+                if (!checkDuplicates(selectedCategory, listCategory))
+                {
+                    listCategory.Add(selectedCategory);
+                    Session["categoryListReport"] = listCategory;
+
+                }
+                dataRefresh();
             }
             
-            dataRefresh();
-
         }
         
         protected void btnAddDate_Click(object sender, EventArgs e)
@@ -78,14 +109,19 @@ namespace Team10AD_Web.Clerk
             string selectedMonth = ddlMonth.SelectedItem.Text;
             string selectedYear = ddlYear.SelectedItem.Text;
             DateDTO dateDTO;
-            if (!checkDuplicateDate(selectedMonth,selectedYear,listDate))
+            //Check not empty
+            if (!String.IsNullOrEmpty(selectedMonth) && !String.IsNullOrEmpty(selectedYear))
             {
-                dateDTO= new DateDTO(selectedMonth, selectedYear);
-                listDate.Add(dateDTO);
-                Session["dateListReport"] = listDate;
-            }   
+                if (!checkDuplicateDate(selectedMonth, selectedYear, listDate))
+                {
+                    dateDTO = new DateDTO(selectedMonth, selectedYear);
+                    listDate.Add(dateDTO);
+                    Session["dateListReport"] = listDate;
+                }
 
-            dataRefresh();
+
+                dataRefresh();
+            }
 
         }
 
@@ -95,7 +131,8 @@ namespace Team10AD_Web.Clerk
             {
                 e.Row.Cells[0].Text = "Department";
             }
-           
+            
+
         }
 
         protected void gridCategory_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -219,48 +256,61 @@ namespace Team10AD_Web.Clerk
 
         protected void btnMakeChart_Click(object sender, EventArgs e)
         {
-            List<RequisitionReportDTO> report = CS_BizLogic.CreateChartData(listDept, listCategory, listDate);
-            Session["RequisitionReportDataTable"] = CS_BizLogic.CreateDataTable(report, listDate, listCategory, "FIXEDDEPT");
-            Response.Redirect("RequisitionReportPage.aspx");
-            //reqChart.DataSource = CS_BizLogic.CreateDataTable(report, listDate, listCategory, "FIXEDDEPT");
-            //reqChart.Series["Series1"].XValueMember = "MonthYear";
-            //reqChart.Series["Series1"].YValueMembers = "Quantity0";
-            //reqChart.Series["Series2"].XValueMember = "MonthYear";
-            //reqChart.Series["Series2"].YValueMembers = "Quantity1";
 
-
-
-            //if ((string)Session["ChartType"] == "dept")
-            //{
-            //    //reqChart.Titles.Add("NewTitle");
-            //    reqChart.Titles["Title1"].Text = "Requisition Reports with Department Comparison";
-
-            //}
-            //else
-            //{
-            //    //reqChart.Titles.Add("NewTitle");
-            //    reqChart.Titles["Title1"].Text = "Requisition Reports with Category Comparison";
-
-            //}
-
+            //Ensure at least 1 dept, 1 category selected
+            if ((listCategory.Count > 0) && (listDept.Count > 0))
+            {
+                List<RequisitionReportDTO> report = CS_BizLogic.CreateChartData(listDept, listCategory, listDate);
+                DataTable table= new DataTable();
+                //Multiple categories
+                if (rdoCatorDept.SelectedValue == "category")
+                {
+                   table = CS_BizLogic.CreateDataTable(report, listDate, listCategory, "FIXEDDEPT");
+                }
+                //Multiple departments
+                else if (rdoCatorDept.SelectedValue == "dept")
+                {
+                table = CS_BizLogic.CreateDataTable(report, listDate, listDept, "FIXEDCAT");
+                }
+                //Setting session- Chart Type
+                checkChartType();
+                //Setting session, pass DataTable
+                Session["RequisitionReportDataTable"] = table;
+                Response.Redirect("~/Clerk/RequisitionReportPage");
+               
+            }
         }
-
-        protected string checkChartType(string chartType)
+        protected void rdoCatorDept_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //if rdoCatorDept selected value == category or dept
-            //set the Session["ChartType"] = category/dept
-            //chart title will be different.
-            if (rdoCatorDept.SelectedValue == "dept")
-            {
-                Session["ChartType"] = "dept";
-            }
-            else
-            {
-                Session["CharType"]="category";
-            }
-
-            return (string)Session["CharType"];
-
+            //Reset the gridviews and dropdownlist
+            listCategory.Clear();
+            listDept.Clear();
+            listDate.Clear();
+            dataRefresh();
+            ddlCategory.SelectedIndex = 0;
+            ddlDept.SelectedIndex = 0;
+            ddlMonth.SelectedIndex = 0;
+            ddlYear.SelectedIndex = 0;
+            //Show panel
+            pnlReportContent.Visible = true;
+          
         }
+        protected void checkChartType()
+            {
+                //if rdoCatorDept selected value == category or dept
+                //set the Session["ChartType"] = category/dept
+                //chart title will be different.
+                if (rdoCatorDept.SelectedValue == "dept")
+                {
+                    Session["ChartType"] = "dept";
+                }
+                else
+                {
+                    Session["ChartType"] = "category";
+                }
+
+              
+
+            }
     }
 }
