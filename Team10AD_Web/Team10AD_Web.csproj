@@ -144,7 +144,6 @@
   <ItemGroup>
     <Content Include="Clerk\AdjustmentVoucherDetail.aspx" />
     <Content Include="Clerk\AdjustmentVoucherList.aspx" />
-    <Content Include="Clerk\ClerkReqReport.aspx" />
     <Content Include="Clerk\CompletedRetrievalDetailPage.aspx" />
     <Content Include="Clerk\CreateAdjustmentVoucher.aspx" />
     <Content Include="Clerk\CrystalOrderReport.aspx" />
@@ -156,6 +155,7 @@
     <Content Include="Clerk\GeneratePO.aspx" />
     <Content Include="Clerk\Inventory.aspx" />
     <Content Include="Clerk\Main.aspx" />
+    <Content Include="Clerk\OrderReportFront.aspx" />
     <Content Include="Clerk\OrderReportPage.aspx" />
     <Content Include="Clerk\PurchaseOrderPage.aspx" />
     <Content Include="Clerk\RequisitionDetailPage.aspx" />
@@ -393,7 +393,7 @@
     <Compile Include="App_Code\DTO\POIntermediate.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="App_Code\DTO\RequisitionReportDTO.cs" />
+    <Compile Include="App_Code\DTO\ReportDTO.cs" />
     <Compile Include="App_Code\Model\Catalogue.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
@@ -457,7 +457,6 @@
     <Compile Include="App_Code\Model\Team10ADModel.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="App_Code\DTO\OrderReportDTO.cs" />
     <Compile Include="App_Code\PurvaBizLogic.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
@@ -492,13 +491,6 @@
     </Compile>
     <Compile Include="Clerk\Clerk.Master.designer.cs">
       <DependentUpon>Clerk.Master</DependentUpon>
-    </Compile>
-    <Compile Include="Clerk\ClerkReqReport.aspx.cs">
-      <DependentUpon>ClerkReqReport.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Clerk\ClerkReqReport.aspx.designer.cs">
-      <DependentUpon>ClerkReqReport.aspx</DependentUpon>
     </Compile>
     <Compile Include="Clerk\CompletedRetrievalDetailPage.aspx.cs">
       <DependentUpon>CompletedRetrievalDetailPage.aspx</DependentUpon>
@@ -576,6 +568,13 @@
     </Compile>
     <Compile Include="Clerk\Main.aspx.designer.cs">
       <DependentUpon>Main.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Clerk\OrderReportFront.aspx.cs">
+      <DependentUpon>OrderReportFront.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Clerk\OrderReportFront.aspx.designer.cs">
+      <DependentUpon>OrderReportFront.aspx</DependentUpon>
     </Compile>
     <Compile Include="Clerk\OrderReportPage.aspx.cs">
       <DependentUpon>OrderReportPage.aspx</DependentUpon>

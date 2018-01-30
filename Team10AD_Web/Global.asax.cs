@@ -48,22 +48,18 @@ namespace Team10AD_Web
             //Stores Approver ID
             Session["ApproverID"] =114;
            //Store shortfall items
-            Session["Shortfall"]= new List<Catalogue>();
+           Session["Shortfall"]= new List<Catalogue>();
             Session["Catalogue"] = "";
             Session["deptListReport"]=new List<string>();
             Session["categoryListReport"]= new List<string>();
-            Session["dateListReport"] = new List<DateDTO>();
-            Session["listOrderCategory"] = new List<string>();
+             Session["dateListReport"] = new List<DateDTO>();
+           Session["listOrderCategory"] = new List<string>();
             Session["listOrderDates"] = new List<DateDTO>();
-            Session["RequisitionReportDTOList"] = new List<RequisitionDTO>();
+            Session["RequisitionReportDTOList"] = new List<ReportDTO>();
             Session["ChartType"] = "";
             Session["RequisitionReportDataTable"] = "";
-            Session["ReqRtpSeries1"] = "";
-            Session["ReqRtpSeries2"] = "";
-            Session["ReqRtpSeries3"] = "";
+            Session["OrderReportDataTable"] = "";
 
-
-        
         }
     }
 }
