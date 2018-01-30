@@ -59,6 +59,10 @@ namespace Team10AD_Web
             Session["ChartType"] = "";
             Session["RequisitionReportDataTable"] = "";
             Session["OrderReportDataTable"] = "";
+            Session["ReqRtpSeries1"] = "";
+            Session["ReqRtpSeries2"] = "";
+            Session["ReqRtpSeries3"] = "";
+
 
         }
     }
