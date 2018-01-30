@@ -5,15 +5,24 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <asp:RadioButtonList ID="rdoCatorDept" runat="server">
-        <asp:ListItem Value="category">Multiple Categories comparison</asp:ListItem>
-        <asp:ListItem Value="dept">Multiple Department comparison</asp:ListItem>
-    </asp:RadioButtonList>
-    <table style="width: 100%;">
+    <asp:RadioButtonList ID="rdoCatorDept" runat="server" onclick="chooseReqReport();" OnSelectedIndexChanged="rdoCatorDept_SelectedIndexChanged" AutoPostBack="True">
+        <asp:ListItem Value="category" Text="Multiple Categories comparison"></asp:ListItem>
+        <asp:ListItem Value="dept" Text="Multiple Department comparison"></asp:ListItem>
+
+                </asp:RadioButtonList>
+    <asp:Panel ID="pnlReportContent" runat="server" Visible="false">
+             <table style="width: 100%;">
         <tr>
             <%-- Department --%>
             <td>
                 <asp:Label ID="lblDept" runat="server" Text="Department: "></asp:Label>
+                <br />
+                <asp:Label ID="lblMax1Dept" runat="server" Text="Max 1 Dept" Visible="false"></asp:Label>
+                <br />
+                  <asp:Label ID="lblMax3Dept" runat="server" Text="Max 3 Dept" Visible="false"></asp:Label>
+                
+                
+                
             </td>
             <td>
                 <asp:DropDownList ID="ddlDept" runat="server">
@@ -41,11 +50,16 @@
             <%-- Category --%>
             <td>
                 <asp:Label ID="lblCategory" runat="server" Text="Category: "></asp:Label>
+                      <br />
+                <asp:Label ID="lblMax1Cat" runat="server" Text="Max 1 Category" Visible="false"></asp:Label>
+                <br />
+                  <asp:Label ID="lblMax3Cat" runat="server" Text="Max 3 Category" Visible="false"></asp:Label>
 
             </td>
             <td>
                 <asp:DropDownList ID="ddlCategory" runat="server">
                 </asp:DropDownList>
+
             </td>
             <td>
                 <asp:Button ID="btnAddCategory" runat="server" Text="Add Category" OnClick="btnAddCategory_Click" /></td>
@@ -84,9 +98,9 @@
                     <asp:ListItem>Dec</asp:ListItem>
                 </asp:DropDownList>
                 <asp:DropDownList ID="ddlYear" runat="server">
-                    <asp:ListItem>2016</asp:ListItem>
-                    <asp:ListItem>2017</asp:ListItem>
                     <asp:ListItem>2018</asp:ListItem>
+                    <asp:ListItem>2017</asp:ListItem>
+                    <asp:ListItem>2016</asp:ListItem>
                 </asp:DropDownList>
                 
             </td>
@@ -109,27 +123,18 @@
         </tr>
     </table>
     <asp:Button ID="btnMakeChart" runat="server" Text="Generate Report" OnClick="btnMakeChart_Click" />
-<%--<asp:Chart ID="reqChart" runat="server" Width="480px">
-      
+<asp:Chart ID="reqChart" runat="server">
     <series>
         <asp:Series Name="Series1">
         </asp:Series>
          <asp:Series Name="Series2">
         </asp:Series>
-        <asp:Series Name="Series3">
-        </asp:Series>
     </series>
     <chartareas>
         <asp:ChartArea Name="ChartArea1">
-            <AxisY Title="Quantity Requested">
-            </AxisY>
-            <AxisX Title="Month, Year">
-            </AxisX>
         </asp:ChartArea>
     </chartareas>
-    <Titles>
-        <asp:Title Name="Title1">
-        </asp:Title>
-    </Titles>
-</asp:Chart>--%>
+</asp:Chart>  
+        </asp:Panel>
+    
 </asp:Content>

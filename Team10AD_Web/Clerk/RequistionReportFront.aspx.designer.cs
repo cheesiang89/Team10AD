@@ -22,6 +22,15 @@ namespace Team10AD_Web.Clerk {
         protected global::System.Web.UI.WebControls.RadioButtonList rdoCatorDept;
         
         /// <summary>
+        /// pnlReportContent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlReportContent;
+        
+        /// <summary>
         /// lblDept control.
         /// </summary>
         /// <remarks>
@@ -29,6 +38,24 @@ namespace Team10AD_Web.Clerk {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblDept;
+        
+        /// <summary>
+        /// lblMax1Dept control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMax1Dept;
+        
+        /// <summary>
+        /// lblMax3Dept control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMax3Dept;
         
         /// <summary>
         /// ddlDept control.
@@ -65,6 +92,24 @@ namespace Team10AD_Web.Clerk {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblCategory;
+        
+        /// <summary>
+        /// lblMax1Cat control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMax1Cat;
+        
+        /// <summary>
+        /// lblMax3Cat control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMax3Cat;
         
         /// <summary>
         /// ddlCategory control.
@@ -146,5 +191,14 @@ namespace Team10AD_Web.Clerk {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnMakeChart;
+        
+        /// <summary>
+        /// reqChart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.DataVisualization.Charting.Chart reqChart;
     }
 }
