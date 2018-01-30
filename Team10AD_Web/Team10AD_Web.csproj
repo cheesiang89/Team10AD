@@ -520,12 +520,6 @@
     <Compile Include="Clerk\CrystalOrderReport.aspx.designer.cs">
       <DependentUpon>CrystalOrderReport.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Clerk\CrystalReportReuisition.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CrystalReportReuisition.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Clerk\CrystalRequisitionReport.aspx.cs">
       <DependentUpon>CrystalRequisitionReport.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -901,12 +895,6 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Clerk\CrystalReportReuisition.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>CrystalReportReuisition.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
